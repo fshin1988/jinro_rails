@@ -15,5 +15,7 @@ module JinroRails
       g.template_engine = :slim
       g.test_framework :rspec, view_specs: false, routing_specs: false
     end
+    config.i18n.default_locale = :ja
+    config.time_zone = 'Tokyo'
   end
 end
