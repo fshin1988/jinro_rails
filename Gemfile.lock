@@ -107,6 +107,9 @@ GEM
     globalid (0.4.0)
       activesupport (>= 4.2.0)
     hashie (3.5.6)
+    hpricot (0.8.6)
+    html2slim (0.2.0)
+      hpricot
     i18n (0.8.6)
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
@@ -275,6 +278,7 @@ DEPENDENCIES
   devise
   factory_girl_rails
   font-awesome-rails
+  html2slim
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)
