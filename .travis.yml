@@ -1,0 +1,19 @@
+language: ruby
+
+rvm: 
+ - 2.4.1
+
+services:
+  - mysql
+
+bundler_args: "--without development --deployment"
+
+cache: bundler
+
+before_script:
+  - cp config/database.travis.yml config/database.yml
+  - bundle exec rake db:create
+  - bundle exec rake db:migrate
+
+script:
+  - bundle exec rspec spec
