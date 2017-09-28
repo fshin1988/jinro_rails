@@ -48,12 +48,18 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'awesome_print'
   gem 'bullet'
-  gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'rspec-rails'
+end
+
+group :test do
+  gem 'database_cleaner'
   gem 'shoulda-matchers'
+  gem 'capybara'
+  gem 'poltergeist'
+  gem 'launchy'
 end
 
 group :development do
