@@ -4,21 +4,39 @@ html
     title
       | JinroRails
     meta charset="utf-8"
-    meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    meta http-equiv="X-UA-Compatible" content="IE=edge"
+    meta name="viewport" content="width=device-width, initial-scale=1"
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
-    header
-      nav
-        - if user_signed_in?
-          = link_to 'プロフィール変更', edit_user_registration_path
-          = link_to 'ログアウト', destroy_user_session_path, method: :delete
-        - else
-          = link_to 'サインアップ', new_user_registration_path
-          = link_to 'ログイン', new_user_session_path
+    nav class="navbar navbar-inverse navbar-fixed-top"
+      .container
+        .navbar-header
+          button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"
+            span class="sr-only"
+              | Toggle navigation
+            span class="icon-bar"
+            span class="icon-bar"
+            span class="icon-bar"
+          = link_to 'Home', root_path, class: "navbar-brand"
+        #navbar class="collapse navbar-collapse"
+          ul class="nav navbar-nav"
+            - if user_signed_in?
+              li
+                = link_to 'プロフィール変更', edit_user_registration_path
+              li
+                = link_to 'ログアウト', destroy_user_session_path, method: :delete
+            - else
+              li
+                = link_to 'サインアップ', new_user_registration_path
+              li
+                = link_to 'ログイン', new_user_session_path
+
     p.notice
       = notice
     p.alert
       = alert
-    = yield
+    .container
+      .starter-template
+        = yield
