@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-describe 'User', type: :feature do
+feature 'User', type: :feature do
   subject { page }
 
   context 'when not logged in' do
-    it 'sign up' do
+    scenario 'sign up', js: true do
       expect {
         visit root_path
         click_on 'サインアップ'
