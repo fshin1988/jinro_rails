@@ -21,6 +21,7 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'rails-i18n'
 gem 'devise'
+gem 'webpacker', '~> 3.0'
 
 group :development, :test do
   gem 'byebug', platform: :mri
