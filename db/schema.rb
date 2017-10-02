@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171002124907) do
+ActiveRecord::Schema.define(version: 20171002125451) do
 
   create_table "players", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "user_id", null: false
@@ -31,6 +31,18 @@ ActiveRecord::Schema.define(version: 20171002124907) do
     t.datetime "updated_at", null: false
     t.index ["player_id"], name: "index_posts_on_player_id"
     t.index ["room_id"], name: "index_posts_on_room_id"
+  end
+
+  create_table "records", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "player_id", null: false
+    t.integer "day", null: false
+    t.bigint "vote_target", null: false
+    t.bigint "attack_target"
+    t.bigint "divine_target"
+    t.bigint "guard_target"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["player_id"], name: "index_records_on_player_id"
   end
 
   create_table "rooms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
