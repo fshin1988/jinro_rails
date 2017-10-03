@@ -1,5 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Room, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:room) { create(:room) }
+  it 'has a valid factory' do
+    expect(room).to be_valid
+  end
 end
