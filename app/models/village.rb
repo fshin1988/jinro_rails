@@ -13,4 +13,9 @@
 #
 
 class Village < ApplicationRecord
+  enum status: {
+    not_started: 0,
+    in_play: 1,
+    ended: 2
+  }
 end
