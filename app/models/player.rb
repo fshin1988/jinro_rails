@@ -17,4 +17,20 @@
 #
 
 class Player < ApplicationRecord
+  enum role: {
+    villager: 0,
+    werewolf: 1,
+    fortune_teller: 2,
+    psychic: 3,
+    bodyguard: 4,
+    madman: 5
+  }
+
+  enum status: {
+    alive: 0,
+    dead: 1
+  }
+
+  belongs_to :user
+  belongs_to :village
 end

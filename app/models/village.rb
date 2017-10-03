@@ -18,4 +18,7 @@ class Village < ApplicationRecord
     in_play: 1,
     ended: 2
   }
+
+  has_many :rooms
+  has_many :players
 end
