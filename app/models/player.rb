@@ -33,4 +33,5 @@ class Player < ApplicationRecord
 
   belongs_to :user
   belongs_to :village
+  has_many :posts
 end

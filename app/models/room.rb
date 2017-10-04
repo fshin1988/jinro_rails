@@ -20,4 +20,5 @@ class Room < ApplicationRecord
   }
 
   belongs_to :village
+  has_many :posts
 end
