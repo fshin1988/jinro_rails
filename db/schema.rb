@@ -36,10 +36,10 @@ ActiveRecord::Schema.define(version: 20171002125451) do
   create_table "records", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "player_id", null: false
     t.integer "day", null: false
-    t.bigint "vote_target", null: false
-    t.bigint "attack_target"
-    t.bigint "divine_target"
-    t.bigint "guard_target"
+    t.bigint "vote_target_id", null: false
+    t.bigint "attack_target_id"
+    t.bigint "divine_target_id"
+    t.bigint "guard_target_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["player_id"], name: "index_records_on_player_id"
