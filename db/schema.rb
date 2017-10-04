@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20171002125451) do
   end
 
   create_table "records", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "village_id", null: false
     t.bigint "player_id", null: false
     t.integer "day", null: false
     t.bigint "vote_target_id", null: false
@@ -43,6 +44,7 @@ ActiveRecord::Schema.define(version: 20171002125451) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["player_id"], name: "index_records_on_player_id"
+    t.index ["village_id"], name: "index_records_on_village_id"
   end
 
   create_table "rooms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

@@ -21,4 +21,5 @@ class Village < ApplicationRecord
 
   has_many :rooms
   has_many :players
+  has_many :records
 end

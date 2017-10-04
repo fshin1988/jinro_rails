@@ -3,6 +3,7 @@
 # Table name: records
 #
 #  id               :integer          not null, primary key
+#  village_id       :integer          not null
 #  player_id        :integer          not null
 #  day              :integer          not null
 #  vote_target_id   :integer          not null
@@ -14,10 +15,12 @@
 #
 # Indexes
 #
-#  index_records_on_player_id  (player_id)
+#  index_records_on_player_id   (player_id)
+#  index_records_on_village_id  (village_id)
 #
 
 class Record < ApplicationRecord
+  belongs_to :village
   belongs_to :player
   belongs_to :vote_target, class_name: 'Player'
   belongs_to :attack_target, class_name: 'Player', optional: true
