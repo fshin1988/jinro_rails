@@ -21,4 +21,7 @@ class Room < ApplicationRecord
 
   belongs_to :village
   has_many :posts
+
+  validates :village_id, presence: true
+  validates :room_type, presence: true
 end

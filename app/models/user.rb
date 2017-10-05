@@ -35,7 +35,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable
 
-  validates :username, presence: true
-
   has_many :players
+
+  validates :username, presence: true, length: { in: 1..20 }, uniqueness: true
 end

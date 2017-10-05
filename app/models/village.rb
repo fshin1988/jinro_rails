@@ -22,4 +22,10 @@ class Village < ApplicationRecord
   has_many :rooms
   has_many :players
   has_many :records
+
+  validates :name, presence: true, length: { maximum: 50 }
+  validates :player_num, presence: true, length: { in: 4..16 }
+  validates :start_time, presence: true
+  validates :discussion_time, presence: true, length: { maximum: 1440 }
+  validates :status, presence: true
 end

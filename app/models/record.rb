@@ -22,8 +22,12 @@
 class Record < ApplicationRecord
   belongs_to :village
   belongs_to :player
-  belongs_to :vote_target, class_name: 'Player'
+  belongs_to :vote_target, class_name: 'Player', optional: true
   belongs_to :attack_target, class_name: 'Player', optional: true
   belongs_to :divine_target, class_name: 'Player', optional: true
   belongs_to :guard_target, class_name: 'Player', optional: true
+
+  validates :village_id, presence: true
+  validates :player_id, presence: true
+  validates :day, presence: true
 end

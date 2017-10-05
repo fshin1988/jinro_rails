@@ -35,4 +35,9 @@ class Player < ApplicationRecord
   belongs_to :village
   has_many :posts
   has_many :records
+
+  validates :user_id, presence: true
+  validates :village_id, presence: true
+  validates :role, presence: true
+  validates :status, presence: true
 end
