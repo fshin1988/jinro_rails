@@ -6,7 +6,7 @@
 #  village_id       :integer          not null
 #  player_id        :integer          not null
 #  day              :integer          not null
-#  vote_target_id   :integer          not null
+#  vote_target_id   :integer
 #  attack_target_id :integer
 #  divine_target_id :integer
 #  guard_target_id  :integer

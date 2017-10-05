@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 20171002125451) do
     t.bigint "village_id", null: false
     t.bigint "player_id", null: false
     t.integer "day", null: false
-    t.bigint "vote_target_id", null: false
+    t.bigint "vote_target_id"
     t.bigint "attack_target_id"
     t.bigint "divine_target_id"
     t.bigint "guard_target_id"
