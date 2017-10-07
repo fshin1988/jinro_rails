@@ -32,29 +32,10 @@ class Village < ApplicationRecord
   validates :status, presence: true
 
   def assign_role
-    roles = role_list.shuffle
+    roles = Settings.role_list[player_num].shuffle
     players.each do |p|
-      role = roles.pop
-      p.update(role: role)
-    end
-  end
-
-  def role_list
-    case player_num
-    when 10
-      [['villager']*6, ['werewolf']*2, ['fortune_teller']*1, ['psychic']*1].flatten
-    when 11
-      [['villager']*5, ['werewolf']*2, ['fortune_teller']*1, ['psychic']*1, ['bodyguard']*1, ['madman']*1].flatten
-    when 12
-      [['villager']*6, ['werewolf']*2, ['fortune_teller']*1, ['psychic']*1, ['bodyguard']*1, ['madman']*1].flatten
-    when 13
-      [['villager']*6, ['werewolf']*3, ['fortune_teller']*1, ['psychic']*1, ['bodyguard']*1, ['madman']*1].flatten
-    when 14
-      [['villager']*7, ['werewolf']*3, ['fortune_teller']*1, ['psychic']*1, ['bodyguard']*1, ['madman']*1].flatten
-    when 15
-      [['villager']*8, ['werewolf']*3, ['fortune_teller']*1, ['psychic']*1, ['bodyguard']*1, ['madman']*1].flatten
-    when 16
-      [['villager']*9, ['werewolf']*3, ['fortune_teller']*1, ['psychic']*1, ['bodyguard']*1, ['madman']*1].flatten
+      r = roles.pop
+      p.update(role: r)
     end
   end
 end
