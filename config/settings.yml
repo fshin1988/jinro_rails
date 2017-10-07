@@ -1,0 +1,8 @@
+role_list:
+  10: <%= [['villager']*6, ['werewolf']*2, ['fortune_teller']*1, ['psychic']*1].flatten %>
+  11: <%= [['villager']*5, ['werewolf']*2, ['fortune_teller']*1, ['psychic']*1, ['bodyguard']*1, ['madman']*1].flatten %>
+  12: <%= [['villager']*6, ['werewolf']*2, ['fortune_teller']*1, ['psychic']*1, ['bodyguard']*1, ['madman']*1].flatten %>
+  13: <%= [['villager']*6, ['werewolf']*3, ['fortune_teller']*1, ['psychic']*1, ['bodyguard']*1, ['madman']*1].flatten %>
+  14: <%= [['villager']*7, ['werewolf']*3, ['fortune_teller']*1, ['psychic']*1, ['bodyguard']*1, ['madman']*1].flatten %>
+  15: <%= [['villager']*8, ['werewolf']*3, ['fortune_teller']*1, ['psychic']*1, ['bodyguard']*1, ['madman']*1].flatten %>
+  16: <%= [['villager']*9, ['werewolf']*3, ['fortune_teller']*1, ['psychic']*1, ['bodyguard']*1, ['madman']*1].flatten %>
