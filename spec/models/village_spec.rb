@@ -6,15 +6,15 @@ RSpec.describe Village, type: :model do
     expect(village).to be_valid
   end
 
-  context 'when player_num is 10(minimum)' do
+  context 'when player_num is 5(minimum)' do
     it 'assign role to players' do
-      village = create(:village, player_num: 10)
-      10.times do |i|
+      village = create(:village, player_num: 5)
+      5.times do |i|
         create(:player, village: village)
       end
 
       village.assign_role
-      roles = Settings.role_list[10]
+      roles = Settings.role_list[5]
       expect(village.players.map(&:role)).to match_array roles
     end
   end

@@ -25,7 +25,7 @@ class Village < ApplicationRecord
 
   validates :name, presence: true, length: {maximum: 50}
   validates :player_num, presence: true,
-                         numericality: {only_integer: true, greater_than_or_equal_to: 10, less_than_or_equal_to: 16}
+                         numericality: {only_integer: true, greater_than_or_equal_to: 5, less_than_or_equal_to: 16}
   validates :start_time, presence: true
   validates :discussion_time, presence: true,
                               numericality: {only_integer: true, less_than_or_equal_to: 1440}
