@@ -40,12 +40,12 @@ class Village < ApplicationRecord
   end
 
   def lynch
-    voted_players = records.map(&:vote_target)
+    voted_players = records.map(&:vote_target).compact
     exclude(voted_players)
   end
 
   def attack
-    attacked_players = records.map(&:attack_target)
+    attacked_players = records.map(&:attack_target).compact
     exclude(attacked_players)
   end
 
