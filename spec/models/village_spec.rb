@@ -8,10 +8,7 @@ RSpec.describe Village, type: :model do
 
   context 'when player_num is 5(minimum)' do
     it 'assign role to players' do
-      village = create(:village, player_num: 5)
-      5.times do |i|
-        create(:player, village: village)
-      end
+      village = create(:village_with_player, player_num: 5)
 
       village.assign_role
       roles = Settings.role_list[5]
@@ -21,10 +18,7 @@ RSpec.describe Village, type: :model do
 
   context 'when player_num is 16(maximum)' do
     it 'assign role to players' do
-      village = create(:village, player_num: 16)
-      16.times do |i|
-        create(:player, village: village)
-      end
+      village = create(:village_with_player, player_num: 16)
 
       village.assign_role
       roles = Settings.role_list[16]
