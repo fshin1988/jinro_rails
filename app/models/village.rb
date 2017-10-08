@@ -41,15 +41,20 @@ class Village < ApplicationRecord
 
   def lynch
     voted_players = records.map(&:vote_target)
-    count = Hash.new(0)
+    count_by_id = Hash.new(0)
     voted_players.each do |p|
-      count[p.id] += 1
+      count_by_id[p.id] += 1
     end
-    max_value = count.sort_by { |k, v| v }.reverse.first[1]
-    most_voted_list = count.select { |k, v| v == max_value }
-    target_id = most_voted_list.to_a.sample[0]
-    target_player = Player.find target_id
+    exclude_player(count_by_id)
+  end
 
-    target_player.update(status: 'dead')
+  private
+
+  def exclude_player(count_by_id)
+    max = count_by_id.values.max
+    targets = count_by_id.select { |_k, v| v == max }
+    # if there are multiple players to exclude, choose one player randomly
+    exclude_id = targets.to_a.sample[0]
+    Player.find(exclude_id).update(status: 'dead')
   end
 end
