@@ -48,4 +48,21 @@ RSpec.describe Village, type: :model do
     attacked_player.reload
     expect(attacked_player.status).to eq 'dead'
   end
+
+  context 'if attacked player is same with guarded player' do
+    it 'does not exclude the most attacked player' do
+      village = create(:village_with_player, player_num: 13)
+      village.assign_role
+      attacked_player = village.players.villager.first
+      village.players.werewolf.each do |w|
+        create(:record, village: village, player: w, attack_target: attacked_player)
+      end
+      bodyguard = village.players.bodyguard.first
+      create(:record, village: village, player: bodyguard, guard_target: attacked_player)
+
+      village.attack
+      attacked_player.reload
+      expect(attacked_player.status).to eq 'alive'
+    end
+  end
 end

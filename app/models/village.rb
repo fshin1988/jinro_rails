@@ -46,12 +46,13 @@ class Village < ApplicationRecord
 
   def attack
     attacked_players = records.map(&:attack_target).compact
-    exclude(attacked_players)
+    guarded_player = records.map(&:guard_target).compact.first
+    exclude(attacked_players, guarded_player)
   end
 
   private
 
-  def exclude(players)
+  def exclude(players, guarded_player = nil)
     count_by_id = Hash.new(0)
     players.each do |p|
       count_by_id[p.id] += 1
@@ -60,6 +61,7 @@ class Village < ApplicationRecord
     targets = count_by_id.select { |_k, v| v == max }
     # if there are multiple players to exclude, choose one player randomly
     exclude_id = targets.to_a.sample[0]
+    return if exclude_id == guarded_player&.id
     Player.find(exclude_id).update(status: 'dead')
   end
 end
