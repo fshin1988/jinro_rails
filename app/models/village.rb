@@ -38,4 +38,18 @@ class Village < ApplicationRecord
       p.update(role: r)
     end
   end
+
+  def lynch
+    voted_players = records.map(&:vote_target)
+    count = Hash.new(0)
+    voted_players.each do |p|
+      count[p.id] += 1
+    end
+    max_value = count.sort_by { |k, v| v }.reverse.first[1]
+    most_voted_list = count.select { |k, v| v == max_value }
+    target_id = most_voted_list.to_a.sample[0]
+    target_player = Player.find target_id
+
+    target_player.update(status: 'dead')
+  end
 end
