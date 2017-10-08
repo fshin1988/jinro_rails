@@ -35,4 +35,17 @@ RSpec.describe Village, type: :model do
     voted_player.reload
     expect(voted_player.status).to eq 'dead'
   end
+
+  it 'excludes the most attacked player' do
+    village = create(:village_with_player, player_num: 13)
+    village.assign_role
+    attacked_player = village.players.villager.first
+    village.players.werewolf.each do |w|
+      create(:record, village: village, player: w, attack_target: attacked_player)
+    end
+
+    village.attack
+    attacked_player.reload
+    expect(attacked_player.status).to eq 'dead'
+  end
 end

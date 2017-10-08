@@ -41,16 +41,21 @@ class Village < ApplicationRecord
 
   def lynch
     voted_players = records.map(&:vote_target)
-    count_by_id = Hash.new(0)
-    voted_players.each do |p|
-      count_by_id[p.id] += 1
-    end
-    exclude_player(count_by_id)
+    exclude(voted_players)
+  end
+
+  def attack
+    attacked_players = records.map(&:attack_target)
+    exclude(attacked_players)
   end
 
   private
 
-  def exclude_player(count_by_id)
+  def exclude(players)
+    count_by_id = Hash.new(0)
+    players.each do |p|
+      count_by_id[p.id] += 1
+    end
     max = count_by_id.values.max
     targets = count_by_id.select { |_k, v| v == max }
     # if there are multiple players to exclude, choose one player randomly
