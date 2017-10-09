@@ -42,19 +42,19 @@ class Village < ApplicationRecord
   end
 
   def lynch
-    voted_players = records_by_day(:vote_target)
+    voted_players = players_from_records(:vote_target)
     exclude(voted_players)
   end
 
   def attack
-    attacked_players = records_by_day(:attack_target)
-    guarded_player = records_by_day(:guard_target).first
+    attacked_players = players_from_records(:attack_target)
+    guarded_player = players_from_records(:guard_target).first
     exclude(attacked_players, guarded_player)
   end
 
   private
 
-  def records_by_day(target)
+  def players_from_records(target)
     records.select { |r| r.day == day }.map(&target).compact
   end
 
