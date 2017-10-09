@@ -5,6 +5,7 @@
 #  id              :integer          not null, primary key
 #  name            :string(255)      not null
 #  player_num      :integer          not null
+#  day             :integer          not null
 #  start_time      :datetime         not null
 #  discussion_time :integer          not null
 #  status          :integer          not null
@@ -26,6 +27,7 @@ class Village < ApplicationRecord
   validates :name, presence: true, length: {maximum: 50}
   validates :player_num, presence: true,
                          numericality: {only_integer: true, greater_than_or_equal_to: 5, less_than_or_equal_to: 16}
+  validates :day, presence: true
   validates :start_time, presence: true
   validates :discussion_time, presence: true,
                               numericality: {only_integer: true, less_than_or_equal_to: 1440}
@@ -40,17 +42,21 @@ class Village < ApplicationRecord
   end
 
   def lynch
-    voted_players = records.map(&:vote_target).compact
+    voted_players = records_by_day(:vote_target)
     exclude(voted_players)
   end
 
   def attack
-    attacked_players = records.map(&:attack_target).compact
-    guarded_player = records.map(&:guard_target).compact.first
+    attacked_players = records_by_day(:attack_target)
+    guarded_player = records_by_day(:guard_target).first
     exclude(attacked_players, guarded_player)
   end
 
   private
+
+  def records_by_day(target)
+    records.select { |r| r.day == day }.map(&target).compact
+  end
 
   def exclude(players, guarded_player = nil)
     count_by_id = Hash.new(0)
