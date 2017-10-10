@@ -65,4 +65,52 @@ RSpec.describe Village, type: :model do
       expect(attacked_player.status).to eq 'alive'
     end
   end
+
+  context 'when the number of villagers is larger than the number of werewolves' do
+    it 'returns 0' do
+      village = create(:village_with_player, player_num: 8, day: 1)
+      village.assign_role #villager:5, werewolf:2, fortune_teller:1
+      village.players.select(&:human?).sample(3).each do |p|
+        p.update(status: 'dead')
+      end
+
+      expect(village.judge_end).to eq 0
+    end
+  end
+
+  context 'when all werewolves are dead' do
+    it 'returns 1' do
+      village = create(:village_with_player, player_num: 8, day: 1)
+      village.assign_role #villager:5, werewolf:2, fortune_teller:1
+      village.players.werewolf.each do |p|
+        p.update(status: 'dead')
+      end
+
+      expect(village.judge_end).to eq 1
+    end
+  end
+
+  context 'when the number of villagers is same with the number of werewolves' do
+    it 'returns 2' do
+      village = create(:village_with_player, player_num: 8, day: 1)
+      village.assign_role #villager:5, werewolf:2, fortune_teller:1
+      village.players.select(&:human?).sample(4).each do |p|
+        p.update(status: 'dead')
+      end
+
+      expect(village.judge_end).to eq 2
+    end
+  end
+
+  context 'when the number of villagers is less than the number of werewolves' do
+    it 'returns 2' do
+      village = create(:village_with_player, player_num: 8, day: 1)
+      village.assign_role #villager:5, werewolf:2, fortune_teller:1
+      village.players.select(&:human?).sample(5).each do |p|
+        p.update(status: 'dead')
+      end
+
+      expect(village.judge_end).to be 2
+    end
+  end
 end

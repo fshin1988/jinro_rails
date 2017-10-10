@@ -52,6 +52,19 @@ class Village < ApplicationRecord
     exclude(attacked_players, guarded_player)
   end
 
+  def judge_end
+    human_count = players.alive.select(&:human?).count
+    wolf_count = players.alive.werewolf.count
+
+    if human_count <= wolf_count
+      2
+    elsif wolf_count.zero?
+      1
+    else
+      0
+    end
+  end
+
   private
 
   def players_from_records(target)
