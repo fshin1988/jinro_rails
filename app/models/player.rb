@@ -40,4 +40,8 @@ class Player < ApplicationRecord
   validates :village_id, presence: true
   validates :role, presence: true
   validates :status, presence: true
+
+  def human?
+    villager? || fortune_teller? || psychic? || bodyguard? || madman?
+  end
 end
