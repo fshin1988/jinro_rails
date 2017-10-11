@@ -4,6 +4,7 @@ class CreatePosts < ActiveRecord::Migration[5.1]
       t.references :player, null: false
       t.references :room, null: false
       t.text :content, null: false
+      t.integer :day, null: false
 
       t.timestamps
     end

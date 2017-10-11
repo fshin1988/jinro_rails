@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20171002125451) do
     t.bigint "player_id", null: false
     t.bigint "room_id", null: false
     t.text "content", null: false
+    t.integer "day", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["player_id"], name: "index_posts_on_player_id"

@@ -6,6 +6,7 @@
 #  player_id  :integer          not null
 #  room_id    :integer          not null
 #  content    :text(65535)      not null
+#  day        :integer          not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
@@ -22,4 +23,5 @@ class Post < ApplicationRecord
   validates :player_id, presence: true
   validates :room_id, presence: true
   validates :content, presence: true, length: { maximum: 280 }
+  validates :day, presence: true
 end
