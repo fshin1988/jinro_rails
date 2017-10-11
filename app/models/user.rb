@@ -5,6 +5,7 @@
 #  id                     :integer          not null, primary key
 #  email                  :string(255)      default(""), not null
 #  username               :string(255)      not null
+#  role                   :integer          default("normal"), not null
 #  encrypted_password     :string(255)      default(""), not null
 #  reset_password_token   :string(255)
 #  reset_password_sent_at :datetime
@@ -35,7 +36,13 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable
 
+  enum role: {
+    normal: 0,
+    admin: 1
+  }
+
   has_many :players
 
   validates :username, presence: true, length: { in: 1..20 }, uniqueness: true
+  validates :role, presence: true
 end

@@ -4,6 +4,7 @@ FactoryGirl.define do
     sequence(:username) { |n| "user#{n}" }
     password 'test1234'
     password_confirmation 'test1234'
+    role :normal
 
     factory :confirmed_user do
       after(:create, &:confirm)
