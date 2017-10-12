@@ -83,10 +83,10 @@ ActiveRecord::Schema.define(version: 20171011141119) do
   create_table "villages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", null: false
     t.integer "player_num", null: false
-    t.integer "day", null: false
+    t.integer "day", default: 0, null: false
     t.datetime "start_time", null: false
     t.integer "discussion_time", null: false
-    t.integer "status", null: false
+    t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

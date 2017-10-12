@@ -5,10 +5,10 @@
 #  id              :integer          not null, primary key
 #  name            :string(255)      not null
 #  player_num      :integer          not null
-#  day             :integer          not null
+#  day             :integer          default(0), not null
 #  start_time      :datetime         not null
 #  discussion_time :integer          not null
-#  status          :integer          not null
+#  status          :integer          default("not_started"), not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #
