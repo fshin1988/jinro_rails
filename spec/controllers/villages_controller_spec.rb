@@ -4,9 +4,7 @@ RSpec.describe VillagesController, type: :controller do
 
   let(:valid_attributes) { attributes_for(:village) }
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
+  let(:invalid_attributes) { attributes_for(:invalid_village) }
 
   let(:valid_session) { {} }
 
@@ -66,14 +64,14 @@ RSpec.describe VillagesController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {discussion_time: 20}
       }
 
       it "updates the requested village" do
         village = Village.create! valid_attributes
         put :update, params: {id: village.to_param, village: new_attributes}, session: valid_session
         village.reload
-        skip("Add assertions for updated state")
+        expect(village.discussion_time).to be 20
       end
 
       it "redirects to the village" do
