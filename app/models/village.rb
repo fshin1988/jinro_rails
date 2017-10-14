@@ -3,6 +3,7 @@
 # Table name: villages
 #
 #  id              :integer          not null, primary key
+#  user_id         :integer          not null
 #  name            :string(255)      not null
 #  player_num      :integer          not null
 #  day             :integer          default(0), not null
@@ -12,6 +13,10 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #
+# Indexes
+#
+#  index_villages_on_user_id  (user_id)
+#
 
 class Village < ApplicationRecord
   enum status: {
@@ -20,10 +25,12 @@ class Village < ApplicationRecord
     ended: 2
   }
 
+  belongs_to :user
   has_many :rooms
   has_many :players
   has_many :records
 
+  validates :user_id, presence: true
   validates :name, presence: true, length: {maximum: 50}
   validates :player_num, presence: true,
                          numericality: {only_integer: true, greater_than_or_equal_to: 5, less_than_or_equal_to: 16}

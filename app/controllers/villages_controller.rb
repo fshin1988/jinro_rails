@@ -47,6 +47,6 @@ class VillagesController < ApplicationController
   end
 
   def village_params
-    params.require(:village).permit(:name, :player_num, :start_time, :discussion_time)
+    params.require(:village).permit(:user_id, :name, :player_num, :start_time, :discussion_time)
   end
 end

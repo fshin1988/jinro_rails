@@ -1,6 +1,7 @@
 class CreateVillages < ActiveRecord::Migration[5.1]
   def change
     create_table :villages do |t|
+      t.references :user, null: false
       t.string :name, null: false
       t.integer :player_num, null: false
       t.integer :day, default: 0, null: false

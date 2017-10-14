@@ -1,5 +1,6 @@
 FactoryGirl.define do
   factory :village do
+    association :user
     name '初心者村'
     player_num 13
     day 1

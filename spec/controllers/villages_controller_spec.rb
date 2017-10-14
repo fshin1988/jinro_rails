@@ -1,11 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe VillagesController, type: :controller do
-
-  let(:valid_attributes) { attributes_for(:village) }
-
-  let(:invalid_attributes) { attributes_for(:invalid_village) }
-
+  let(:user) { create(:confirmed_user) }
+  let(:valid_attributes) { attributes_for(:village).merge(user_id: user.to_param) }
+  let(:invalid_attributes) { attributes_for(:invalid_village).merge(user_id: user.to_param) }
   let(:valid_session) { {} }
 
   describe "GET #index" do
