@@ -23,6 +23,7 @@ gem 'rails-i18n'
 gem 'devise'
 gem 'webpacker', '~> 3.0'
 gem 'config'
+gem 'pundit'
 
 group :development, :test do
   gem 'byebug', platform: :mri
