@@ -1,6 +1,7 @@
 class VillagesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_village, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_village, only: [:index, :new, :create]
 
   def index
     @villages = Village.all
@@ -43,6 +44,11 @@ class VillagesController < ApplicationController
 
   def set_village
     @village = Village.find(params[:id])
+    authorize @village
+  end
+
+  def authorize_village
+    authorize Village
   end
 
   def village_params
