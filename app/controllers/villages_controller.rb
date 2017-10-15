@@ -1,4 +1,5 @@
 class VillagesController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_village, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -33,8 +34,6 @@ class VillagesController < ApplicationController
     end
   end
 
-  # DELETE /villages/1
-  # DELETE /villages/1.json
   def destroy
     @village.destroy
     redirect_to villages_url, notice: 'Village was successfully destroyed.'
