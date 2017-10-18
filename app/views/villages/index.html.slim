@@ -1,19 +1,18 @@
-h1 Listing villages
+h1 村を探す
 
 table
   thead
     tr
-      th
-      th
-      th
+      th 村名
+      th 人数
+      th 開始時刻
+      th 状態
 
   tbody
     - @villages.each do |village|
       tr
-        td = link_to 'Show', village
-        td = link_to 'Edit', edit_village_path(village)
-        td = link_to 'Destroy', village, data: { confirm: 'Are you sure?' }, method: :delete
+        td = link_to village.name, village
+        td = village.player_num
+        td = village.start_time.strftime('%Y/%m/%d %H:%M:%S')
+        td = village.status
 
-br
-
-= link_to 'New Village', new_village_path
