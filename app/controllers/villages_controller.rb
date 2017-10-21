@@ -18,7 +18,7 @@ class VillagesController < ApplicationController
   end
 
   def create
-    @village = Village.new(village_params)
+    @village = current_user.villages.new(village_params)
 
     if @village.save
       redirect_to @village, notice: 'Village was successfully created.'
@@ -52,6 +52,6 @@ class VillagesController < ApplicationController
   end
 
   def village_params
-    params.require(:village).permit(:user_id, :name, :player_num, :start_time, :discussion_time)
+    params.require(:village).permit(:name, :player_num, :start_time, :discussion_time)
   end
 end

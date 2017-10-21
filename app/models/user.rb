@@ -41,6 +41,7 @@ class User < ApplicationRecord
     admin: 1
   }
 
+  has_many :villages
   has_many :players
 
   validates :username, presence: true, length: { in: 1..20 }, uniqueness: true
