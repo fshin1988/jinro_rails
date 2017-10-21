@@ -12,6 +12,7 @@ class VillagesController < ApplicationController
 
   def new
     @village = Village.new
+    @village.start_time = Time.now.strftime('%H:%M')
   end
 
   def edit
