@@ -35,6 +35,7 @@ class Village < ApplicationRecord
                          numericality: {only_integer: true, greater_than_or_equal_to: 5, less_than_or_equal_to: 16}
   validates :day, presence: true
   validates :start_time, presence: true
+  validate :start_time_cannot_be_in_the_past
   validates :discussion_time, presence: true,
                               numericality: {only_integer: true, less_than_or_equal_to: 1440}
   validates :status, presence: true
@@ -88,5 +89,11 @@ class Village < ApplicationRecord
     exclude_id = targets.to_a.sample[0]
     return if exclude_id == guarded_player&.id
     Player.find(exclude_id).update(status: 'dead')
+  end
+
+  def start_time_cannot_be_in_the_past
+    if start_time.present? && start_time < Time.now
+      errors.add(:start_time, 'は過去の日時を使用できません')
+    end
   end
 end

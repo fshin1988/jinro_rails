@@ -4,7 +4,7 @@ FactoryGirl.define do
     name '初心者村'
     player_num 13
     day 1
-    start_time Time.now
+    start_time Time.now + 1.hours
     discussion_time 10
     status :in_play
 
