@@ -1,6 +1,6 @@
 h1 村を探す
 
-table
+table class="table table-striped"
   thead
     tr
       th 村名
@@ -13,6 +13,6 @@ table
       tr
         td = link_to village.name, village
         td = village.player_num
-        td = village.start_time.strftime('%Y/%m/%d %H:%M:%S')
+        td = village.start_time.strftime('%Y/%m/%d %H:%M')
         td = village.status
 

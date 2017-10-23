@@ -5,21 +5,17 @@
       ul
         - @village.errors.full_messages.each do |message|
           li = message
-  .field
+  .form-group
     = f.label :name
-    br
-    = f.text_field :name, autofocus: true
-  .field
+    = f.text_field :name, autofocus: true, class: 'form-control'
+  .form-group
     = f.label :player_num
-    br
-    = f.number_field :player_num
-  .field
+    = f.number_field :player_num, class: 'form-control'
+  .form-group
     = f.label :start_time
-    br
-    = f.datetime_field :start_time
-  .field
+    = f.datetime_field :start_time, class: 'form-control'
+  .form-group
     = f.label :discussion_time
-    br
-    = f.number_field :discussion_time
+    = f.number_field :discussion_time, class: 'form-control'
 
   .actions = f.submit

@@ -3,39 +3,21 @@ h2
   = resource_name.to_s.humanize
 = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
   = devise_error_messages!
-  .field
+  .form-group
     = f.label :email
-    br
-    = f.email_field :email, autofocus: true
-  .field
+    = f.email_field :email, autofocus: true, class: 'form-control'
+  .form-group
     = f.label :username
-    br
-    = f.text_field :username
-  - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-    div
-      | Currently waiting confirmation for: 
-      = resource.unconfirmed_email
-  .field
+    = f.text_field :username, class: 'form-control'
+  .form-group
     = f.label :password
-    i
-      | (leave blank if you don't want to change it)
-    br
-    = f.password_field :password, autocomplete: "off"
-    - if @minimum_password_length
-      br
-      em
-        = @minimum_password_length
-        |  characters minimum
-  .field
+    = f.password_field :password, autocomplete: "off", class: 'form-control'
+  .form-group
     = f.label :password_confirmation
-    br
-    = f.password_field :password_confirmation, autocomplete: "off"
-  .field
+    = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control'
+  .form-group
     = f.label :current_password
-    i
-      | (we need your current password to confirm your changes)
-    br
-    = f.password_field :current_password, autocomplete: "off"
+    = f.password_field :current_password, autocomplete: "off", class: 'form-control'
   .actions
     = f.submit "Update"
 h3
