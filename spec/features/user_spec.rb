@@ -8,10 +8,10 @@ feature 'User', type: :feature do
       expect {
         visit root_path
         click_on 'サインアップ'
-        fill_in 'Email', with: 'test@example.co.jp'
-        fill_in 'Username', with: 'test_user'
-        fill_in 'Password', with: 'test1234'
-        fill_in 'Password confirmation', with: 'test1234'
+        fill_in 'メールアドレス', with: 'test@example.co.jp'
+        fill_in 'ユーザーネーム', with: 'test_user'
+        fill_in 'パスワード', with: 'test1234'
+        fill_in '確認用パスワード', with: 'test1234'
         click_on 'Sign up'
       }.to change(User, :count).by(1)
 
@@ -26,8 +26,8 @@ feature 'User', type: :feature do
       scenario 'login', js: true do
         visit root_path
         click_on 'ログイン'
-        fill_in 'Email', with: 'test@example.co.jp'
-        fill_in 'Password', with: 'test1234'
+        fill_in 'メールアドレス', with: 'test@example.co.jp'
+        fill_in 'パスワード', with: 'test1234'
         click_on 'Log in'
 
         expect(current_path).to eq root_path
