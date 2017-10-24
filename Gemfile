@@ -24,6 +24,7 @@ gem 'devise'
 gem 'webpacker', '~> 3.0'
 gem 'config'
 gem 'pundit'
+gem 'active_model_serializers'
 
 group :development, :test do
   gem 'byebug', platform: :mri
