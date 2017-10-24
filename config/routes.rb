@@ -4,4 +4,9 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :villages
+  namespace :api, format: 'json' do
+    namespace :v1 do
+      resources :rooms, only: [:index, :show]
+    end
+  end
 end
