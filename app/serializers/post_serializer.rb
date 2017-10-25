@@ -1,3 +1,3 @@
 class PostSerializer < ActiveModel::Serializer
-  attributes :content
+  attributes :id, :player_id, :content, :created_at
 end
