@@ -1,0 +1,13 @@
+h1 = "#{@room.village.name}(#{@room.room_type})"
+
+ul#message-list
+  - @room.posts.each do |post|
+    li = post.content
+br
+form
+  label Say something:
+  br
+  input type="text" data-behavior="room_speaker"
+
+br
+= link_to 'Back', villages_path

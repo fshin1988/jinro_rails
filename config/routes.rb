@@ -3,7 +3,9 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :villages
+  resources :villages do
+    resources :rooms, only: [:show]
+  end
   namespace :api, format: 'json' do
     namespace :v1 do
       resources :rooms, only: [:index, :show]

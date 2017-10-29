@@ -11,7 +11,7 @@ table class="table table-striped"
   tbody
     - @villages.each do |village|
       tr
-        td = link_to village.name, village
+        td = link_to village.name, village_room_path(village.id, village.rooms.for_all.first.id)
         td = village.player_num
         td = village.start_time.strftime('%Y/%m/%d %H:%M')
         td = village.status
