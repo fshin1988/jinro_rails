@@ -6,4 +6,15 @@ App.post = App.cable.subscriptions.create "PostChannel",
     # Called when the subscription has been terminated by the server
 
   received: (data) ->
-    # Called when there's incoming data on the websocket for this channel
+    li = document.createElement('li')
+    li.textContent = data
+    $('#message-list').append li
+
+  put_message: (msg) ->
+    @perform('put_message', { message: msg })
+
+$(document).on 'keypress', '[data-behavior~=room_speaker]', (event) ->
+  if event.keyCode is 13 # return = send
+    App.post.put_message(event.target.value)
+    event.target.value = ''
+    event.preventDefault()

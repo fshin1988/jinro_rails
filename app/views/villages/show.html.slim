@@ -5,12 +5,15 @@ p#notice = notice
   - @village.rooms.each do |room|
     button v-on:click="getPosts(#{room.id})"
       = room.room_type
-  ul v-show='postsDisplay'
+  ul#message-list v-show='postsDisplay'
     li v-for="post in posts"
       = "{{ post.content }}"
 
-= javascript_pack_tag 'rooms/index'
+  #post-form v-show='postsDisplay'
+    form
+      label Say something:
+      br
+      input type="text" data-behavior="room_speaker"
 
-= link_to 'Edit', edit_village_path(@village)
-'  |
+= javascript_pack_tag 'rooms/index'
 = link_to 'Back', villages_path
