@@ -1,8 +1,15 @@
 h1 = @village.name
 p#notice = notice
 
-#hello
-  p = "{{message}}"
+.js-roomsIndex
+  - @village.rooms.each do |room|
+    button v-on:click="getPosts(#{room.id})"
+      = room.room_type
+  ul v-show='postsDisplay'
+    li v-for="post in posts"
+      = "{{ post.content }}"
+
+= javascript_pack_tag 'rooms/index'
 
 = link_to 'Edit', edit_village_path(@village)
 '  |
