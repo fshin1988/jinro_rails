@@ -8,11 +8,11 @@ App.post = App.cable.subscriptions.create "PostChannel",
   received: (data) ->
     $('#message-list').append data['message']
 
-  put_message: (msg) ->
-    @perform('put_message', { message: msg })
+  speak: (message) ->
+    @perform('speak', message: message)
 
 $(document).on 'keypress', '[data-behavior~=room_speaker]', (event) ->
   if event.keyCode is 13 # return = send
-    App.post.put_message(event.target.value)
+    App.post.speak event.target.value
     event.target.value = ''
     event.preventDefault()

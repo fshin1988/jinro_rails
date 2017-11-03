@@ -1,15 +1,15 @@
 class PostChannel < ApplicationCable::Channel
   def subscribed
-    stream_from 'post:message'
+    stream_from 'post:post_channel'
   end
 
   def unsubscribed
     # Any cleanup needed when channel is unsubscribed
   end
 
-  def put_message(data)
+  def speak(data)
     post = Post.create!(player_id: 1, room_id: 1, content: data['message'], day: 0)
-    PostChannel.broadcast_to('message', message: render_post(post))
+    PostChannel.broadcast_to('post_channel', message: render_post(post))
   end
 
   private
