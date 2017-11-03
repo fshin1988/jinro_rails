@@ -6,23 +6,11 @@ h1 = "#{@room.village.name}(#{@room.room_type})"
       .panel-body
         ul#message-list.chat
           - @room.posts.each do |post|
-            li.left.clearfix
-              span.chat-img.pull-left
-                img.img-circle[src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar"]
-              .chat-body.clearfix
-                .header
-                  strong.primary-font
-                    | TestUser
-                  small.pull-right.text-muted
-                    span.glyphicon.glyphicon-time
-                    | 12 mins ago
-                p = post.content
+            = render partial: 'posts/post', locals: {post: post}
       .panel-footer
         .input-group
           input#btn-input.form-control.input-sm[type="text" placeholder="Type your message here..." data-behavior="room_speaker"]
           span.input-group-btn
             button#btn-chat.btn.btn-warning.btn-sm[type="submit"]
               |  Send
-
-br
 = link_to 'Back', villages_path
