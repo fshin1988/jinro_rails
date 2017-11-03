@@ -6,9 +6,7 @@ App.post = App.cable.subscriptions.create "PostChannel",
     # Called when the subscription has been terminated by the server
 
   received: (data) ->
-    li = document.createElement('li')
-    li.textContent = data
-    $('#message-list').append li
+    $('#message-list').append data['message']
 
   put_message: (msg) ->
     @perform('put_message', { message: msg })
