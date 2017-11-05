@@ -4,8 +4,8 @@ li.left.clearfix
   .chat-body.clearfix
     .header
       strong.primary-font
-        | TestUser
+        = post.player.user.username
       small.pull-right.text-muted
         span.glyphicon.glyphicon-time
-        | 12 mins ago
+        = post.created_at.strftime('%Y-%m-%d %H:%M:%S')
     p = post.content
