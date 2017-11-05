@@ -72,6 +72,10 @@ class Village < ApplicationRecord
     end
   end
 
+  def player_from_user(user)
+    players.includes(:user).find { |p| p.user == user }
+  end
+
   private
 
   def players_from_records(target)

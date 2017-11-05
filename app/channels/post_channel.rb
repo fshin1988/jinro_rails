@@ -8,7 +8,9 @@ class PostChannel < ApplicationCable::Channel
   end
 
   def speak(data)
-    post = Post.create!(player_id: 1, room_id: 1, content: data['message'], day: 0)
+    player = Player.find(data['player_id'].to_i)
+    room = Room.find(data['room_id'].to_i)
+    post = Post.create!(player: player, room: room, content: data['message'], day: room.village.day)
     PostChannel.broadcast_to('post_channel', message: render_post(post))
   end
 

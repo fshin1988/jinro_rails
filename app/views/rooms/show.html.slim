@@ -7,10 +7,12 @@ h1 = "#{@room.village.name}(#{@room.room_type})"
         ul#message-list.chat
           - @room.posts.each do |post|
             = render partial: 'posts/post', locals: {post: post}
-      - if user_signed_in? && current_user.players.select { |p| p.village == @room.village }.present?
+      - if user_signed_in? && current_user.players.includes(:village).select { |p| p.village == @room.village }.present?
         .panel-footer
           .input-group
             input#btn-input.form-control.input-sm[type="text" placeholder="Type your message here..." data-behavior="room_speaker"]
+            input#room_id[type="hidden" value="#{@room.id}"]
+            input#player_id[type="hidden" value="#{@room.village.player_from_user(current_user).id}"]
             span.input-group-btn
               button#btn-chat.btn.btn-warning.btn-sm[type="submit"]
                 |  Send
