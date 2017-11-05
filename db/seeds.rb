@@ -11,7 +11,7 @@ room_for_wolf = FactoryGirl.create(:room, village: village, room_type: :for_wolf
 
 # Normal User
 13.times do
-  user = FactoryGirl.create(:user)
+  user = FactoryGirl.create(:confirmed_user)
   player = FactoryGirl.create(:player, user: user, village: village)
   # Post
   # FactoryGirl.create(:post, player: player, room: room_for_all, content: "Hello, I'm #{user.username}", day: 0)

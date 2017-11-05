@@ -7,10 +7,11 @@ h1 = "#{@room.village.name}(#{@room.room_type})"
         ul#message-list.chat
           - @room.posts.each do |post|
             = render partial: 'posts/post', locals: {post: post}
-      .panel-footer
-        .input-group
-          input#btn-input.form-control.input-sm[type="text" placeholder="Type your message here..." data-behavior="room_speaker"]
-          span.input-group-btn
-            button#btn-chat.btn.btn-warning.btn-sm[type="submit"]
-              |  Send
+      - if user_signed_in? && current_user.players.select { |p| p.village == @room.village }.present?
+        .panel-footer
+          .input-group
+            input#btn-input.form-control.input-sm[type="text" placeholder="Type your message here..." data-behavior="room_speaker"]
+            span.input-group-btn
+              button#btn-chat.btn.btn-warning.btn-sm[type="submit"]
+                |  Send
 = link_to 'Back', villages_path
