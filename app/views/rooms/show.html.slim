@@ -4,12 +4,12 @@ h1 = "#{@room.village.name}(#{@room.room_type})"
   .col-md-10
     .panel.panel-primary
       .panel-body
-        ul#message-list.chat[data-room_id="#{@room.id}" data-player_id="#{@room.village.player_from_user(current_user).id}"]
+        ul#message-list.chat[data-room_id="#{@room.id}"]
           = render @room.posts.includes(player: :user)
-      - if user_signed_in? && current_user.players.includes(:village).select { |p| p.village == @room.village }.present?
+      - if user_signed_in? && @room.village.player_from_user(current_user).present?
         .panel-footer
           .input-group
-            input#btn-input.form-control.input-sm[type="text" placeholder="Type your message here..." data-behavior="room_speaker"]
+            input#btn-input.form-control.input-sm[type="text" placeholder="Type your message here..." data-behavior="room_speaker" data-player_id="#{@room.village.player_from_user(current_user).id}"]
             span.input-group-btn
               button#btn-chat.btn.btn-warning.btn-sm[type="submit"]
                 |  Send
