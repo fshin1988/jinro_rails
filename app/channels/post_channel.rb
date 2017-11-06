@@ -1,6 +1,8 @@
 class PostChannel < ApplicationCable::Channel
   def subscribed
-    stream_from "post:post_channel_#{params['room_id']}"
+    stream_from "post:post_channel_#{params[:room_id]}"
+    @room = Room.find params[:room_id]
+    @player = Player.find params[:player_id]
   end
 
   def unsubscribed
@@ -8,10 +10,8 @@ class PostChannel < ApplicationCable::Channel
   end
 
   def speak(data)
-    room = Room.find(params['room_id'])
-    player = Player.find(data['player_id'].to_i)
-    post = Post.create!(player: player, room: room, content: data['message'], day: room.village.day)
-    PostChannel.broadcast_to("post_channel_#{params['room_id']}", message: render_post(post))
+    post = Post.create!(player: @player, room: @room, content: data['message'], day: @room.village.day)
+    PostChannel.broadcast_to("post_channel_#{params[:room_id]}", message: render_post(post))
   end
 
   private
