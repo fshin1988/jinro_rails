@@ -1,6 +1,6 @@
 class VillagesController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
-  before_action :set_village, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :join, :exit]
+  before_action :set_village, only: [:show, :edit, :update, :destroy, :join, :exit]
   before_action :authorize_village, only: [:index, :new, :create]
 
   def index
@@ -41,6 +41,12 @@ class VillagesController < ApplicationController
   def destroy
     @village.destroy
     redirect_to villages_url, notice: 'Village was successfully destroyed.'
+  end
+
+  def join
+    @village.players.create(user: current_user, role: :villager, status: :alive)
+    room_path = village_room_path(@village.id, @village.rooms.for_all.first.id)
+    redirect_to room_path, notice: 'You joined the village.'
   end
 
   private

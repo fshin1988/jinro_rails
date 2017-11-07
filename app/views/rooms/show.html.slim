@@ -14,3 +14,6 @@ h1 = "#{@room.village.name}(#{@room.room_type})"
               button#btn-chat.btn.btn-warning.btn-sm[type="submit"]
                 |  Send
 = link_to 'Back', villages_path
+br
+- if user_signed_in? && @room.village.player_from_user(current_user).blank?
+  = link_to 'Join', join_village_path(@room.village)

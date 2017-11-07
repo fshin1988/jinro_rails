@@ -4,6 +4,10 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :villages do
+    member do
+      get 'join'
+      get 'exit'
+    end
     resources :rooms, only: [:show]
   end
   namespace :api, format: 'json' do

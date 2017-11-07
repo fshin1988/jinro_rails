@@ -34,4 +34,12 @@ class VillagePolicy < ApplicationPolicy
       record.user_id == user.id
     end
   end
+
+  def join?
+    if record.status == 'not_started'
+      true
+    else
+      false
+    end
+  end
 end
