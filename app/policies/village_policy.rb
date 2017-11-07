@@ -42,4 +42,12 @@ class VillagePolicy < ApplicationPolicy
       false
     end
   end
+
+  def exit?
+    if record.status == 'not_started'
+      true
+    else
+      false
+    end
+  end
 end

@@ -17,3 +17,5 @@ h1 = "#{@room.village.name}(#{@room.room_type})"
 br
 - if user_signed_in? && @room.village.player_from_user(current_user).blank?
   = link_to 'Join', join_village_path(@room.village)
+- if user_signed_in? && @room.village.player_from_user(current_user).present?
+  = link_to 'Exit', exit_village_path(@room.village)

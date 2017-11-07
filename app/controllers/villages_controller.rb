@@ -44,9 +44,14 @@ class VillagesController < ApplicationController
   end
 
   def join
-    @village.players.create(user: current_user, role: :villager, status: :alive)
-    room_path = village_room_path(@village.id, @village.rooms.for_all.first.id)
-    redirect_to room_path, notice: 'You joined the village.'
+    @village.players.create!(user: current_user, role: :villager, status: :alive)
+    redirect_to villages_path, notice: 'You joined the village.'
+  end
+
+  def exit
+    player = @village.players.find_by(user: current_user)
+    player.update(village_id: 0)
+    redirect_to villages_path, notice: 'You exited from the village.'
   end
 
   private

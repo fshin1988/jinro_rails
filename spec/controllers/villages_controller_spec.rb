@@ -73,7 +73,7 @@ RSpec.describe VillagesController, type: :controller do
 
       it "redirects to the created village" do
         post :create, params: {village: valid_attributes}
-        expect(response).to redirect_to(Village.last)
+        expect(response).to redirect_to(villages_path)
       end
     end
 
@@ -106,7 +106,7 @@ RSpec.describe VillagesController, type: :controller do
         it "redirects to the village" do
           village = Village.create! valid_attributes
           put :update, params: {id: village.to_param, village: valid_attributes}
-          expect(response).to redirect_to(village)
+          expect(response).to redirect_to(villages_path)
         end
       end
 
