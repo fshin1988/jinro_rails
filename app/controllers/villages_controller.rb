@@ -22,7 +22,9 @@ class VillagesController < ApplicationController
     @village = current_user.villages.new(village_params)
 
     if @village.save
-      redirect_to @village, notice: 'Village was successfully created.'
+      @village.rooms.create(room_type: :for_all)
+      @village.rooms.create(room_type: :for_wolf)
+      redirect_to villages_path, notice: 'Village was successfully created.'
     else
       render :new
     end
@@ -30,7 +32,7 @@ class VillagesController < ApplicationController
 
   def update
     if @village.update(village_params)
-      redirect_to @village, notice: 'Village was successfully updated.'
+      redirect_to villages_path, notice: 'Village was successfully updated.'
     else
       render :edit
     end
