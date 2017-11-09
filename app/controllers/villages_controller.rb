@@ -1,5 +1,5 @@
 class VillagesController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :join, :exit]
+  before_action :authenticate_user!
   before_action :set_village, only: [:show, :edit, :update, :destroy, :join, :exit]
   before_action :authorize_village, only: [:index, :new, :create]
 
