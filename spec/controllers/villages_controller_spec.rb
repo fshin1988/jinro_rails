@@ -2,11 +2,15 @@ require 'rails_helper'
 
 RSpec.describe VillagesController, type: :controller do
   let(:user) { create(:confirmed_user) }
-  let(:invalid_user) { create(:confirmed_user) }
+  let(:other_user) { create(:confirmed_user) }
   let(:valid_attributes) { attributes_for(:village).merge(user_id: user.to_param) }
   let(:invalid_attributes) { attributes_for(:invalid_village).merge(user_id: user.to_param) }
 
   describe "GET #index" do
+    before do
+      sign_in(user)
+    end
+
     it "returns a success response" do
       village = Village.create! valid_attributes
       get :index, params: {}
@@ -15,6 +19,10 @@ RSpec.describe VillagesController, type: :controller do
   end
 
   describe "GET #show" do
+    before do
+      sign_in(user)
+    end
+
     it "returns a success response" do
       village = Village.create! valid_attributes
       get :show, params: {id: village.to_param}
@@ -46,9 +54,9 @@ RSpec.describe VillagesController, type: :controller do
       end
     end
 
-    context 'with invalid user' do
+    context 'with a user who does not have the village' do
       before do
-        sign_in(invalid_user)
+        sign_in(other_user)
       end
 
       it "redirects to root" do
@@ -119,9 +127,9 @@ RSpec.describe VillagesController, type: :controller do
       end
     end
 
-    context 'with invalid user' do
+    context 'with a user who does not have the village' do
       before do
-        sign_in(invalid_user)
+        sign_in(other_user)
       end
 
       it "redirects to root" do
@@ -152,9 +160,9 @@ RSpec.describe VillagesController, type: :controller do
       end
     end
 
-    context 'with invalid user' do
+    context 'with a user who does not have the village' do
       before do
-        sign_in(invalid_user)
+        sign_in(other_user)
       end
 
       it "redirects to root" do

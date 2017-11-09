@@ -1,10 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::RoomsController, type: :controller do
-
+  let(:user) { create(:confirmed_user) }
   let(:village) { create(:village) }
   let(:valid_attributes) { attributes_for(:room).merge(village_id: village.to_param) }
   let(:valid_session) { {} }
+
+  before do
+    sign_in(user)
+  end
 
   describe "GET #index" do
     it "returns a success response" do
