@@ -21,8 +21,6 @@ class VillagesController < ApplicationController
     @village = current_user.villages.new(village_params)
 
     if @village.save
-      @village.rooms.create(room_type: :for_all)
-      @village.rooms.create(room_type: :for_wolf)
       redirect_to villages_path, notice: 'Village was successfully created.'
     else
       render :new

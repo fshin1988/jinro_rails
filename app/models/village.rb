@@ -19,6 +19,8 @@
 #
 
 class Village < ApplicationRecord
+  after_create :create_rooms
+
   enum status: {
     not_started: 0,
     in_play: 1,
@@ -99,5 +101,10 @@ class Village < ApplicationRecord
     if start_time.present? && start_time < Time.now
       errors.add(:start_time, 'は過去の日時を使用できません')
     end
+  end
+
+  def create_rooms
+    rooms.create!(room_type: :for_all)
+    rooms.create!(room_type: :for_wolf)
   end
 end
