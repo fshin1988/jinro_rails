@@ -41,7 +41,7 @@ class VillagesController < ApplicationController
   end
 
   def join
-    @village.players.create!(user: current_user, role: :villager, status: :alive)
+    @village.create_player(current_user)
     redirect_to villages_path, notice: 'You joined the village.'
   end
 

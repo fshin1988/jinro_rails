@@ -78,6 +78,10 @@ class Village < ApplicationRecord
     players.includes(:user).find { |p| p.user == user }
   end
 
+  def create_player(user)
+    players.create!(user: user, role: :villager, status: :alive)
+  end
+
   private
 
   def players_from_records(target)

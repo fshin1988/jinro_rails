@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Village, type: :model do
   let(:village) { create(:village) }
+
   it 'has a valid factory' do
     expect(village).to be_valid
   end
@@ -143,6 +144,14 @@ RSpec.describe Village, type: :model do
       village = build(:village)
       village.save
       expect(village.rooms.count).to be 2
+    end
+  end
+
+  describe '#create_player' do
+    it 'creates a player' do
+      user = create(:user)
+      village.create_player(user)
+      expect(user.players.where(village: village)).not_to be_nil
     end
   end
 end
