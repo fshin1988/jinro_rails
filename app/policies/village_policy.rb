@@ -36,7 +36,7 @@ class VillagePolicy < ApplicationPolicy
   end
 
   def join?
-    if record.status == 'not_started'
+    if record.status == 'not_started' && record.player_from_user(user).nil?
       true
     else
       false
@@ -44,7 +44,7 @@ class VillagePolicy < ApplicationPolicy
   end
 
   def exit?
-    if record.status == 'not_started'
+    if record.status == 'not_started' && record.player_from_user(user).present?
       true
     else
       false
