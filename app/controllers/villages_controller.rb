@@ -46,8 +46,7 @@ class VillagesController < ApplicationController
   end
 
   def exit
-    player = @village.players.find_by(user: current_user)
-    player.update(village_id: 0)
+    @village.exclude_player(current_user)
     redirect_to villages_path, notice: 'You exited from the village.'
   end
 

@@ -148,10 +148,19 @@ RSpec.describe Village, type: :model do
   end
 
   describe '#create_player' do
-    it 'creates a player' do
+    it 'creates a player of user' do
       user = create(:user)
       village.create_player(user)
       expect(user.players.where(village: village)).not_to be_nil
+    end
+  end
+
+  describe '#exclude_player' do
+    it 'excludes a player of user' do
+      user = create(:user)
+      village.create_player(user)
+      village.exclude_player(user)
+      expect(village.players.where(user: user)).to be_empty
     end
   end
 end
