@@ -14,9 +14,9 @@ jQuery(document).on 'turbolinks:load', ->
       speak: (message, player_id) ->
         @perform('speak', {message: message, player_id: player_id})
 
-    $(document).on 'keypress', '[data-behavior~=room_speaker]', (event) ->
-      if event.keyCode is 13 # return = send
-        player_id = $('#btn-input').data('player_id')
-        App.post.speak(event.target.value, player_id)
-        event.target.value = ''
-        event.preventDefault()
+    $(document).on 'click', '[data-behavior~=room_speaker]', ->
+      input = $('#btn-input')
+      if input.val() != ''
+        player_id = input.data('player_id')
+        App.post.speak(input.val(), player_id)
+        input.val('')

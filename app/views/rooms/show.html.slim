@@ -9,9 +9,9 @@ h1 = "#{@room.village.name}(#{@room.room_type})"
       - if user_signed_in? && @room.village.player_from_user(current_user).present?
         .panel-footer
           .input-group
-            input#btn-input.form-control.input-sm[type="text" placeholder="Type your message here..." data-behavior="room_speaker" data-player_id="#{@room.village.player_from_user(current_user).id}"]
+            input#btn-input.form-control.input-sm[type="text" placeholder="Type your message here..." data-player_id="#{@room.village.player_from_user(current_user).id}"]
             span.input-group-btn
-              button#btn-chat.btn.btn-warning.btn-sm[type="submit"]
+              button#btn-chat.btn.btn-warning.btn-sm[type="submit" data-behavior="room_speaker"]
                 |  Send
 = link_to 'Back', villages_path
 br
