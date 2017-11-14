@@ -42,7 +42,7 @@ class VillagesController < ApplicationController
 
   def join
     @village.create_player(current_user)
-    redirect_to villages_path, notice: 'You joined the village.'
+    redirect_to village_room_path(@village, @village.rooms.for_all.first), notice: 'You joined the village.'
   end
 
   def exit
