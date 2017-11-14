@@ -9,7 +9,7 @@ html
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-  body
+  body style="padding-top: 50px"
     nav class="navbar navbar-inverse navbar-fixed-top"
       .container
         .navbar-header
@@ -33,10 +33,10 @@ html
               li
                 = link_to 'ログイン', new_user_session_path
 
-    p.notice
-      = notice
-    p.alert
-      = alert
     .container
+      - if notice
+        p.notice = notice
+      - if alert
+        p.alert = alert
       .starter-template
         = yield
