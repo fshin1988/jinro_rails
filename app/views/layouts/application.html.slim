@@ -9,7 +9,7 @@ html
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-  body style="padding-top: 50px"
+  body style="padding-top: 60px"
     nav class="navbar navbar-inverse navbar-fixed-top"
       .container
         .navbar-header
@@ -35,8 +35,14 @@ html
 
     .container
       - if notice
-        p.notice = notice
+        .alert.alert-success
+          button[type="button" class="close" data-dismiss="alert" aria-label="Close"]
+            span[aria-hidden="true"] &times;
+          = notice
       - if alert
-        p.alert = alert
+        .alert.alert-danger
+          button[type="button" class="close" data-dismiss="alert" aria-label="Close"]
+            span[aria-hidden="true"] &times;
+          = alert
       .starter-template
         = yield
