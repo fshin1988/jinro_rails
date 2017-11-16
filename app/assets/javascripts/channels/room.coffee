@@ -1,4 +1,4 @@
-App.post = null
+App.room = null
 
 current_room_id = ->
   $('#message-list').data('room_id')
@@ -6,17 +6,17 @@ current_room_id = ->
 current_room_ch = ->
   id = current_room_id()
   if id?
-    return {channel: 'PostChannel', room_id: id}
+    return {channel: 'RoomChannel', room_id: id}
   else
     return null
 
-document.addEventListener 'turbolinks:request-start', ->
+$(document).on 'turbolinks:request-start', ->
   if current_room_ch()?
-    App.post.unsubscribe()
+    App.room.unsubscribe()
 
-jQuery(document).on 'turbolinks:load', ->
+$(document).on 'turbolinks:load', ->
   if current_room_ch()?
-    App.post = App.cable.subscriptions.create current_room_ch(),
+    App.room = App.cable.subscriptions.create current_room_ch(),
       received: (data) ->
         $('#message-list').append data['message']
       speak: (message, player_id) ->
@@ -26,5 +26,5 @@ $(document).on 'click', '[data-behavior~=room_speaker]', ->
   input = $('#btn-input')
   if input.val() != ''
     player_id = input.data('player_id')
-    App.post.speak(input.val(), player_id)
+    App.room.speak(input.val(), player_id)
     input.val('')
