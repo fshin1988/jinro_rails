@@ -3,7 +3,7 @@ admin = FactoryGirl.create(:confirmed_user, role: :admin, email: 'admin@example.
 
 # Village
 village = FactoryGirl.create(:village, user: admin, player_num: 13,
-                                       day: 0, start_time: Time.now + 1.hours, status: :not_started)
+                                       day: 0, status: :not_started)
 
 # Normal User
 13.times do

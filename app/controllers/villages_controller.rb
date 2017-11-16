@@ -11,7 +11,6 @@ class VillagesController < ApplicationController
 
   def new
     @village = Village.new
-    @village.start_time = Time.now.strftime('%H:%M')
   end
 
   def edit
@@ -62,6 +61,6 @@ class VillagesController < ApplicationController
   end
 
   def village_params
-    params.require(:village).permit(:name, :player_num, :start_time, :discussion_time)
+    params.require(:village).permit(:name, :player_num, :discussion_time)
   end
 end

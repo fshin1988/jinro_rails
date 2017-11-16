@@ -119,26 +119,6 @@ RSpec.describe Village, type: :model do
     end
   end
 
-  context 'when start_time is after the current time' do
-    it 'is valid' do
-      now = Time.now
-      Timecop.freeze(now) do
-        village = build(:village, start_time: now + 1.seconds)
-        expect(village).to be_valid
-      end
-    end
-  end
-
-  context 'when start_time is after the current time' do
-    it 'is invalid' do
-      now = Time.now
-      Timecop.freeze(now) do
-        village = build(:village, start_time: now - 1.seconds)
-        expect(village).to be_invalid
-      end
-    end
-  end
-
   context 'after create' do
     it 'creates two rooms' do
       village = build(:village)

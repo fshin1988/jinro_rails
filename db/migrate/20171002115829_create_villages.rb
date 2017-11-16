@@ -5,7 +5,7 @@ class CreateVillages < ActiveRecord::Migration[5.1]
       t.string :name, null: false
       t.integer :player_num, null: false
       t.integer :day, default: 0, null: false
-      t.datetime :start_time, null: false
+      t.datetime :next_update_time
       t.integer :discussion_time, null: false
       t.integer :status, default: 0, null: false
 

@@ -5,7 +5,6 @@ table class="table table-striped"
     tr
       th 村名
       th 人数
-      th 開始時刻
       th 状態
 
   tbody
@@ -13,6 +12,5 @@ table class="table table-striped"
       tr
         td = link_to village.name, village_room_path(village.id, village.rooms.for_all.first.id)
         td = village.player_num
-        td = village.start_time.strftime('%Y/%m/%d %H:%M')
         td = village.status
 
