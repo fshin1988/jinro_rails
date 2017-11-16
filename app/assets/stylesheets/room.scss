@@ -57,3 +57,20 @@
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
     background-color: #555;
 }
+
+#btn-input {
+  &.form-control {
+    max-width: none;
+  }
+}
+
+#btn-chat.btn {
+  float: right;
+  margin-bottom: 5px;
+}
+
+.panel-footer {
+  &.chat-area {
+    padding: 5px 15px 1px;
+  }
+}
