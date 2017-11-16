@@ -8,4 +8,4 @@ li.left.clearfix
       small.pull-right.text-muted
         span.glyphicon.glyphicon-time
         = post.created_at.strftime('%Y-%m-%d %H:%M:%S')
-    p = post.content
+    p = simple_format(h(post.content))
