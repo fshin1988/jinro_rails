@@ -1,9 +1,9 @@
-h1 = "#{@room.village.name}(#{@room.room_type})"
+h3 = "#{@room.village.name}(#{@room.room_type})"
 
 .row
   .col-md-10
     .panel.panel-primary
-      .panel-body
+      .panel-body.chat-body
         ul#message-list.chat[data-room_id="#{@room.id}"]
           = render @room.posts.includes(player: :user)
       - if user_signed_in? && @room.village.player_from_user(current_user).present?
@@ -12,9 +12,3 @@ h1 = "#{@room.village.name}(#{@room.room_type})"
             |  Send
           .form-group
             textarea#btn-input.form-control.input-sm[rows="3" data-player_id="#{@room.village.player_from_user(current_user).id}"]
-= link_to 'Back', villages_path
-br
-- if user_signed_in? && @room.village.player_from_user(current_user).blank?
-  = link_to 'Join', join_village_path(@room.village)
-- if user_signed_in? && @room.village.player_from_user(current_user).present?
-  = link_to 'Exit', exit_village_path(@room.village)

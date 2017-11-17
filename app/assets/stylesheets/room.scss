@@ -7,7 +7,7 @@
 
 .chat li
 {
-    margin-bottom: 10px;
+    margin-top: 5px;
     padding-bottom: 5px;
     border-bottom: 1px dotted #B3A9A9;
 }
@@ -36,8 +36,11 @@
 
 .panel-body
 {
+    &.chat-body {
+      padding: 0 15px 0;
+    }
     overflow-y: scroll;
-    height: 500px;
+    height: 400px;
 }
 
 ::-webkit-scrollbar-track

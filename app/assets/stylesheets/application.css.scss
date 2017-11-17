@@ -18,6 +18,14 @@
 @import "bootstrap";
 @import "font-awesome";
 
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+}
+
 .form-control {
   max-width: 500px;
 }
