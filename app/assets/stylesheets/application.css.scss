@@ -18,12 +18,31 @@
 @import "bootstrap";
 @import "font-awesome";
 
-html {
+html,body {
   height: 100%;
 }
 
-body {
+.wrapper {
   height: 100%;
+}
+
+.container {
+  &.flex-col {
+    height: 100%;
+  }
+}
+
+.room_name {
+  font-size: 20px;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar {
+  margin-bottom: 0;
 }
 
 .form-control {
