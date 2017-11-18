@@ -15,7 +15,7 @@ feature 'User', type: :feature do
         click_on 'Sign up'
       }.to change(User, :count).by(1)
 
-      expect(current_path).to eq root_path
+      expect(current_path).to eq new_user_session_path
     end
 
     context 'there is a confirmed user' do
@@ -25,12 +25,11 @@ feature 'User', type: :feature do
 
       scenario 'login', js: true do
         visit root_path
-        click_on 'ログイン'
         fill_in 'メールアドレス', with: 'test@example.co.jp'
         fill_in 'パスワード', with: 'test1234'
         click_on 'Log in'
 
-        expect(current_path).to eq root_path
+        expect(current_path).to eq villages_path
       end
     end
   end

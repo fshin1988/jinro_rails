@@ -27,10 +27,10 @@ html
           #navbar class="collapse navbar-collapse" aria-expanded="false"
             ul class="nav navbar-nav"
               - if controller_name == 'rooms'
-                - if user_signed_in? && @room.village.player_from_user(current_user).blank?
+                - if user_signed_in? && @room.village.not_started? && @room.village.player_from_user(current_user).blank?
                   li
                     = link_to 'Join', join_village_path(@room.village)
-                - if user_signed_in? && @room.village.player_from_user(current_user).present?
+                - if user_signed_in? && @room.village.not_started? && @room.village.player_from_user(current_user).present?
                   li
                     = link_to 'Exit', exit_village_path(@room.village)
               - else
@@ -42,8 +42,6 @@ html
                 - else
                   li
                     = link_to 'サインアップ', new_user_registration_path
-                  li
-                    = link_to 'ログイン', new_user_session_path
 
       .container.flex-col
         - if notice
