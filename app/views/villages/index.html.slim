@@ -13,3 +13,7 @@ table class="table table-striped"
         td = link_to village.name, village_room_path(village.id, village.rooms.for_all.first.id)
         td = village.player_num
         td = t("activerecord.attributes.village.status.#{village.status}")
+
+.village-footer
+  .pull-right
+    = button_to "新規作成", new_village_path, method: :get, class: 'btn btn-primary'
