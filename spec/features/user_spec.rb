@@ -4,7 +4,7 @@ feature 'User', type: :feature do
   subject { page }
 
   context 'when not logged in' do
-    scenario 'sign up', js: true do
+    scenario 'sign up' do
       expect {
         visit root_path
         click_on 'サインアップ'
@@ -23,7 +23,7 @@ feature 'User', type: :feature do
         create(:confirmed_user, email: 'test@example.co.jp', password: 'test1234', password_confirmation: 'test1234')
       end
 
-      scenario 'login', js: true do
+      scenario 'login' do
         visit root_path
         fill_in 'メールアドレス', with: 'test@example.co.jp'
         fill_in 'パスワード', with: 'test1234'
