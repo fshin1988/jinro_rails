@@ -64,6 +64,7 @@
 #btn-input {
   &.form-control {
     max-width: none;
+    border: 2px solid gray;
   }
 }
 
@@ -74,6 +75,7 @@
 
 .panel-footer {
   &.chat-area {
+    background-color: transparent;
     padding: 5px 15px 1px;
   }
 }

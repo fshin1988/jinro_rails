@@ -48,6 +48,33 @@ body {
 
 .navbar {
   margin-bottom: 0;
+  background-color: firebrick;
+  border-color: firebrick;
+}
+
+.navbar-inverse {
+  .navbar-brand {
+    color: #cdddeb;
+  }
+
+  .navbar-nav {
+    li {
+      a {
+        color: #cdddeb;
+      }
+    }
+  }
+
+  .navbar-toggle {
+    border-color: transparent;
+    &:hover {
+      background-color: transparent;
+    }
+  }
+
+  .navbar-collapse {
+    border-color: darkred;
+  }
 }
 
 .form-control {
