@@ -11,33 +11,39 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
     .wrapper.flex-col
-      nav class="navbar navbar-inverse"
-        #navbar class="collapse navbar-collapse"
-          ul class="nav navbar-nav"
+      nav class="navbar navbar-inverse navbar-fixed-top"
+        .container
+          .navbar-header
+            button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"
+              span class="sr-only"
+                | Toggle navigation
+              span class="icon-bar"
+              span class="icon-bar"
+              span class="icon-bar"
             - if controller_name == 'rooms'
-              li
-                = link_to 'Back', villages_path, class: "navbar-brand"
-              - if user_signed_in? && @room.village.player_from_user(current_user).blank?
-                li
-                  = link_to 'Join', join_village_path(@room.village)
-              - if user_signed_in? && @room.village.player_from_user(current_user).present?
-                li
-                  = link_to 'Exit', exit_village_path(@room.village)
-              li.room_name
-                = link_to "#{@room.village.name}(#{@room.room_type})", root_path
+              = link_to 'Back', villages_path, class: "navbar-brand"
             - else
-              li
-                = link_to 'Home', root_path, class: "navbar-brand"
-              - if user_signed_in?
-                li
-                  = link_to 'プロフィール変更', edit_user_registration_path
-                li
-                  = link_to 'ログアウト', destroy_user_session_path, method: :delete
+              = link_to 'Home', root_path, class: "navbar-brand"
+          #navbar class="collapse navbar-collapse" aria-expanded="false"
+            ul class="nav navbar-nav"
+              - if controller_name == 'rooms'
+                - if user_signed_in? && @room.village.player_from_user(current_user).blank?
+                  li
+                    = link_to 'Join', join_village_path(@room.village)
+                - if user_signed_in? && @room.village.player_from_user(current_user).present?
+                  li
+                    = link_to 'Exit', exit_village_path(@room.village)
               - else
-                li
-                  = link_to 'サインアップ', new_user_registration_path
-                li
-                  = link_to 'ログイン', new_user_session_path
+                - if user_signed_in?
+                  li
+                    = link_to 'プロフィール変更', edit_user_registration_path
+                  li
+                    = link_to 'ログアウト', destroy_user_session_path, method: :delete
+                - else
+                  li
+                    = link_to 'サインアップ', new_user_registration_path
+                  li
+                    = link_to 'ログイン', new_user_session_path
 
       .container.flex-col
         - if notice
