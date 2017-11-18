@@ -13,3 +13,7 @@ ja:
         name: 村名
         player_num: 人数
         discussion_time: 議論時間
+        status:
+          not_started: 募集中
+          in_play: 進行中
+          ended: 終了

@@ -20,7 +20,7 @@ class VillagesController < ApplicationController
     @village = current_user.villages.new(village_params)
 
     if @village.save
-      redirect_to villages_path, notice: 'Village was successfully created.'
+      redirect_to villages_path, notice: "#{@village.name} が作成されました"
     else
       render :new
     end
@@ -28,7 +28,7 @@ class VillagesController < ApplicationController
 
   def update
     if @village.update(village_params)
-      redirect_to villages_path, notice: 'Village was successfully updated.'
+      redirect_to villages_path, notice: "#{@village.name} が更新されました"
     else
       render :edit
     end
@@ -36,17 +36,17 @@ class VillagesController < ApplicationController
 
   def destroy
     @village.destroy
-    redirect_to villages_url, notice: 'Village was successfully destroyed.'
+    redirect_to villages_url, notice: "#{@village.name} が削除されました"
   end
 
   def join
     @village.create_player(current_user)
-    redirect_to village_room_path(@village, @village.rooms.for_all.first), notice: 'You joined the village.'
+    redirect_to village_room_path(@village, @village.rooms.for_all.first), notice: "#{@village.name} に参加しました"
   end
 
   def exit
     @village.exclude_player(current_user)
-    redirect_to villages_path, notice: 'You exited from the village.'
+    redirect_to villages_path, notice: "#{@village.name} から退出しました"
   end
 
   private
