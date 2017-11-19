@@ -1,6 +1,6 @@
 class VillagesController < ApplicationController
-  before_action :set_village, only: [:show, :edit, :update, :destroy, :join, :exit]
-  before_action :authorize_village, only: [:index, :new, :create]
+  before_action :set_village, only: %i[show edit update destroy join exit start]
+  before_action :authorize_village, only: %i[index new create]
 
   def index
     @villages = Village.all
@@ -47,6 +47,12 @@ class VillagesController < ApplicationController
   def exit
     @village.exclude_player(current_user)
     redirect_to villages_path, notice: "#{@village.name} から退出しました"
+  end
+
+  def start
+    @village.update!(status: :in_play, next_update_time: Time.now + @village.discussion_time.minutes)
+    @village.assign_role
+    redirect_to village_room_path(@village, @village.rooms.for_all.first), notice: "#{@village.name} を開始しました"
   end
 
   private
