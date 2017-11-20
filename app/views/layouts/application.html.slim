@@ -27,15 +27,11 @@ html lang="ja"
           #navbar class="collapse navbar-collapse" aria-expanded="false"
             ul class="nav navbar-nav"
               - if controller_name == 'rooms'
-                - if user_signed_in? && @room.village.not_started? \
-                                     && @room.village.player_from_user(current_user).blank? \
-                                     && @room.village.players.count < @room.village.player_num
+                - if policy(@room.village).join?
                   li = link_to '村に入る', join_village_path(@room.village)
-                - if user_signed_in? && @room.village.not_started? \
-                                     && @room.village.player_from_user(current_user).present?
+                - if policy(@room.village).exit?
                   li = link_to '村から出る', exit_village_path(@room.village)
-                - if @room.village.user == current_user && @room.village.not_started? \
-                                     && @room.village.players.count == @room.village.player_num
+                - if policy(@room.village).start?
                   li = link_to 'ゲーム開始', start_village_path(@room.village)
               - else
                 - if user_signed_in?
