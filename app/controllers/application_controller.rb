@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :color_of_navbar
 
   protected
 
@@ -14,5 +15,11 @@ class ApplicationController < ActionController::Base
 
   def redirect_to_root
     redirect_to root_url, alert: 'リクエストしたページは存在しません'
+  end
+
+  private
+
+  def color_of_navbar
+    @color_of_navbar = 'red'
   end
 end

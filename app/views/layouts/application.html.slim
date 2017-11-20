@@ -11,7 +11,7 @@ html lang="ja"
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
     .wrapper.flex-col
-      nav class="navbar navbar-inverse navbar-fixed-top"
+      nav class="navbar navbar-inverse navbar-fixed-top navbar-bg-#{@color_of_navbar}"
         .container
           .navbar-header
             button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"
@@ -24,7 +24,7 @@ html lang="ja"
               = link_to '戻る', villages_path, class: "navbar-brand"
             - else
               = link_to 'ホーム', root_path, class: "navbar-brand"
-          #navbar class="collapse navbar-collapse" aria-expanded="false"
+          #navbar class="collapse navbar-collapse navbar-collapse-#{@color_of_navbar}" aria-expanded="false"
             ul class="nav navbar-nav"
               - if controller_name == 'rooms'
                 - if policy(@room.village).join?

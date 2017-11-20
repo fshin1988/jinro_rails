@@ -48,8 +48,17 @@ body {
 
 .navbar {
   margin-bottom: 0;
+}
+
+.navbar-bg-red {
   background-color: firebrick;
   border-color: firebrick;
+}
+
+.navbar-bg-black {
+  background-image: -webkit-linear-gradient(top,#3c3c3c 0,#222 100%);
+  background-color: #222;
+  border-color: #080808;
 }
 
 .navbar-inverse {
@@ -73,7 +82,13 @@ body {
   }
 
   .navbar-collapse {
-    border-color: darkred;
+    &.navbar-collapse-red {
+      border-color: darkred;
+    }
+
+    &.navbar-collapse-black {
+      border-color: black;
+    }
   }
 }
 
