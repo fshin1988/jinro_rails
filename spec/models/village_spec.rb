@@ -143,4 +143,14 @@ RSpec.describe Village, type: :model do
       expect(village.players.where(user: user)).to be_empty
     end
   end
+
+  describe '#prepare_records' do
+    it 'creates reocrds for each players' do
+      village = create(:village_with_player, player_num: 13, day: 1)
+      village.assign_role # villager:6, werewolf:3, fortune_teller:1, psychic:1, bodyguard:1, madman:1
+      village.prepare_records
+
+      expect(village.records.count).to be 13
+    end
+  end
 end

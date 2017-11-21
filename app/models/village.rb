@@ -85,6 +85,12 @@ class Village < ApplicationRecord
     player.update!(village_id: 0)
   end
 
+  def prepare_records
+    players.each do |p|
+      records.create!(player: p, day: day)
+    end
+  end
+
   private
 
   def players_from_records(target)
