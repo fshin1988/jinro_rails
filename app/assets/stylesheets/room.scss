@@ -1,4 +1,6 @@
 .room-title {
+  color: #2c2d30;
+  font-weight: 600;
   margin-top: 5px;
   margin-bottom: 8px;
   margin-left: 10px;
@@ -20,7 +22,7 @@
 
 .chat li.left .chat-body
 {
-    margin-left: 60px;
+    margin-left: 50px;
 }
 
 .chat li.right .chat-body
@@ -32,7 +34,8 @@
 .chat li .chat-body p
 {
     margin: 0;
-    color: #777777;
+    color: #2c2d30;
+    line-height: 22px;
 }
 
 .panel .slidedown .glyphicon, .chat .glyphicon
@@ -47,6 +50,11 @@
       padding: 0 15px 0;
     }
     overflow-y: scroll;
+}
+
+.chat-username {
+  color: #2c2d30;
+  font-weight: 900;
 }
 
 ::-webkit-scrollbar-track
