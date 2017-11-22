@@ -2,7 +2,7 @@ h4.room-title = room_title(@room.village)
 .panel-body.chat-body.flex-col
   ul#message-list.chat.flex-col[data-room_id="#{@room.id}"]
     = render @room.posts.includes(player: :user)
-- if user_signed_in? && @room.village.player_from_user(current_user).present?
+- if user_signed_in? && @room.village.player_from_user(current_user)&.alive?
   .panel-footer.chat-area
     button#btn-chat.btn.btn-warning.btn-sm[type="submit" data-behavior="room_speaker"]
       |  送信
