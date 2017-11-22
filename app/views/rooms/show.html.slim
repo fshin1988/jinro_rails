@@ -1,3 +1,4 @@
+h4.room-title = room_title(@room.village)
 .panel-body.chat-body.flex-col
   ul#message-list.chat.flex-col[data-room_id="#{@room.id}"]
     = render @room.posts.includes(player: :user)
