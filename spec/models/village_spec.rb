@@ -135,6 +135,15 @@ RSpec.describe Village, type: :model do
     end
   end
 
+  describe '#player_from_user' do
+    it 'returns a player of the user' do
+      user = create(:user)
+      village.create_player(user)
+
+      expect(village.player_from_user(user)).to eq village.players.find_by(user: user)
+    end
+  end
+
   describe '#exclude_player' do
     it 'excludes a player of user' do
       user = create(:user)
