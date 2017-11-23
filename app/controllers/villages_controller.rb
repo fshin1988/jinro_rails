@@ -41,7 +41,7 @@ class VillagesController < ApplicationController
 
   def join
     @village.create_player(current_user)
-    redirect_to village_room_path(@village, @village.rooms.for_all.first), notice: "#{@village.name} に参加しました"
+    redirect_to village_room_path(@village, @village.room_for_all), notice: "#{@village.name} に参加しました"
   end
 
   def exit
@@ -53,7 +53,7 @@ class VillagesController < ApplicationController
     @village.update!(day: 1, status: :in_play, next_update_time: Time.now + @village.discussion_time.minutes)
     @village.assign_role
     @village.prepare_records
-    redirect_to village_room_path(@village, @village.rooms.for_all.first), notice: "#{@village.name} を開始しました"
+    redirect_to village_room_path(@village, @village.room_for_all), notice: "#{@village.name} を開始しました"
   end
 
   private
