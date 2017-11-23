@@ -153,4 +153,20 @@ RSpec.describe Village, type: :model do
       expect(village.records.count).to be 13
     end
   end
+
+  describe '#room_for_all' do
+    it 'returns a room for all' do
+      village = build(:village)
+      village.save
+      expect(village.room_for_all).to eq village.rooms.for_all.first
+    end
+  end
+
+  describe '#room_for_wolf' do
+    it 'returns a room for wolf' do
+      village = build(:village)
+      village.save
+      expect(village.room_for_wolf).to eq village.rooms.for_wolf.first
+    end
+  end
 end

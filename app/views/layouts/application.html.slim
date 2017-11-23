@@ -33,12 +33,10 @@ html lang="ja"
                   li = link_to '村から出る', exit_village_path(@room.village)
                 - if policy(@room.village).start?
                   li = link_to 'ゲーム開始', start_village_path(@room.village)
-                - if user_signed_in? && @room.village.in_play? && @room.for_all? \
-                                     && @room.village.player_from_user(current_user)&.werewolf?
-                  li = link_to '人狼ルームへ', village_room_path(@room.village.id, @room.village.rooms.for_wolf.first.id)
-                - if user_signed_in? && @room.village.in_play? && @room.for_wolf? \
-                                     && @room.village.player_from_user(current_user)&.werewolf?
-                  li = link_to 'ルームへ', village_room_path(@room.village.id, @room.village.rooms.for_all.first.id)
+                - if @room.for_all? && policy(@room.village.room_for_wolf).show?
+                  li = link_to '人狼ルームへ', village_room_path(@room.village, @room.village.room_for_wolf)
+                - if @room.for_wolf?
+                  li = link_to 'ルームへ', village_room_path(@room.village, @room.village.room_for_all)
               - else
                 - if user_signed_in?
                   li = link_to '設定変更', edit_user_registration_path

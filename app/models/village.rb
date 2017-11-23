@@ -91,6 +91,14 @@ class Village < ApplicationRecord
     end
   end
 
+  def room_for_all
+    rooms.for_all.first
+  end
+
+  def room_for_wolf
+    rooms.for_wolf.first
+  end
+
   private
 
   def players_from_records(target)
