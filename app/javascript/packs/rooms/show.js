@@ -3,6 +3,15 @@ import axios from 'axios';
 
 const URL_BASE = 'http://localhost:3000/api/v1/records/';
 
+var switchComponent = Vue.extend({
+    template: '<button v-on:click="emitSwitch">切り替え</button>',
+    methods: {
+      emitSwitch: function() {
+        this.$emit('switch')
+      }
+    }
+});
+
 new Vue({
   el: '#panel-footer',
   data: {
@@ -18,5 +27,8 @@ new Vue({
     switchArea: function() {
       this.chatDisplay = !this.chatDisplay
     }
+  },
+  components: {
+    'switch-component': switchComponent
   }
 });

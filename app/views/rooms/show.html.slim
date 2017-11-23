@@ -4,15 +4,15 @@ h4.room-title = room_title(@room.village)
     = render @room.posts.includes(player: :user)
 - if user_signed_in? && @room.village.player_from_user(current_user)&.alive?
   #panel-footer
-    button[v-on:click="switchArea"]
-      | 切り替え
     template[v-if="chatDisplay"]
       .panel-footer.chat-area
+        switch-component[v-on:switch="switchArea"]
         button#btn-chat.btn.btn-warning.btn-sm[type="submit" data-behavior="room_speaker"]
           |  送信
         .form-group
           textarea#btn-input.form-control.input-sm[rows="3" data-player_id="#{@room.village.player_from_user(current_user).id}"]
     template[v-else]
+      switch-component[v-on:switch="switchArea"]
       .form-group
         label[for="vote-target"] 投票先
         input[type="text" name="vote" id="vote-target"]
