@@ -3,8 +3,18 @@ h4.room-title = room_title(@room.village)
   ul#message-list.chat.flex-col[data-room_id="#{@room.id}"]
     = render @room.posts.includes(player: :user)
 - if user_signed_in? && @room.village.player_from_user(current_user)&.alive?
-  .panel-footer.chat-area
-    button#btn-chat.btn.btn-warning.btn-sm[type="submit" data-behavior="room_speaker"]
-      |  送信
-    .form-group
-      textarea#btn-input.form-control.input-sm[rows="3" data-player_id="#{@room.village.player_from_user(current_user).id}"]
+  #panel-footer
+    button[v-on:click="switchArea"]
+      | 切り替え
+    template[v-if="chatDisplay"]
+      .panel-footer.chat-area
+        button#btn-chat.btn.btn-warning.btn-sm[type="submit" data-behavior="room_speaker"]
+          |  送信
+        .form-group
+          textarea#btn-input.form-control.input-sm[rows="3" data-player_id="#{@room.village.player_from_user(current_user).id}"]
+    template[v-else]
+      .form-group
+        label[for="vote-target"] 投票先
+        input[type="text" name="vote" id="vote-target"]
+
+= javascript_pack_tag 'rooms/show'
