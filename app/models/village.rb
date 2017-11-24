@@ -99,6 +99,10 @@ class Village < ApplicationRecord
     rooms.for_wolf.first
   end
 
+  def record_from_user(user)
+    records.where(player: player_from_user(user), day: day).first
+  end
+
   private
 
   def players_from_records(target)
