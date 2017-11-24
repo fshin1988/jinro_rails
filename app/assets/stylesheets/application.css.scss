@@ -27,16 +27,6 @@ body {
   padding-bottom: 10px;
 }
 
-.wrapper {
-  height: 100%;
-}
-
-.container {
-  &.flex-col {
-    height: 100%;
-  }
-}
-
 .room_name {
   font-size: 20px;
 }
@@ -44,6 +34,7 @@ body {
 .flex-col {
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 .navbar {
