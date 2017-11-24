@@ -13,9 +13,13 @@ var switchComponent = Vue.extend({
 });
 
 new Vue({
-  el: '#panel-footer',
+  el: '#room-root',
   data: {
-    chatDisplay: true
+    chatDisplay: true,
+    voteSelected: ""
+  },
+  created: function() {
+    this.setInitialValue()
   },
   methods: {
     updateRecord(id) {
@@ -26,6 +30,9 @@ new Vue({
     },
     switchArea: function() {
       this.chatDisplay = !this.chatDisplay
+    },
+    setInitialValue: function() {
+      this.voteSelected = document.getElementById('vote-initial').getAttribute('initial')
     }
   },
   components: {
