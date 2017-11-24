@@ -10,6 +10,7 @@ class RoomsController < ApplicationController
   def set_room
     @room = Room.find(params[:id])
     authorize @room
+    @village = @room.village
   end
 
   def color_of_navbar

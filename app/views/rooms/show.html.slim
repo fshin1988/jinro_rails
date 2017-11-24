@@ -1,24 +1,24 @@
 #room-root.flex-col
-  h4.room-title = room_title(@room.village)
-  input type="hidden" id="vote-initial" initial="#{@room.village.record_from_user(current_user)&.vote_target_id || @room.village.player_from_user(current_user)&.id}"
+  h4.room-title = room_title(@village)
+  input type="hidden" id="vote-initial" initial="#{@village.record_from_user(current_user)&.vote_target_id || @village.player_from_user(current_user)&.id}"
   .panel-body.chat-body.flex-col
     ul#message-list.chat.flex-col[data-room_id="#{@room.id}"]
       = render @room.posts.includes(player: :user)
-  - if user_signed_in? && @room.village.player_from_user(current_user)&.alive?
+  - if user_signed_in? && @village.player_from_user(current_user)&.alive?
     template[v-if="chatDisplay"]
       .panel-footer.chat-area
         switch-component[v-on:switch="switchArea"]
         button#btn-chat.btn.btn-warning.btn-sm[type="submit" data-behavior="room_speaker"]
           |  送信
         .form-group
-          textarea#btn-input.form-control.input-sm[rows="3" data-player_id="#{@room.village.player_from_user(current_user).id}"]
+          textarea#btn-input.form-control.input-sm[rows="3" data-player_id="#{@village.player_from_user(current_user).id}"]
     template[v-else]
       .skill-area
         switch-component[v-on:switch="switchArea"]
         .form-group
           label 投票先：
           select[v-model="voteSelected"]
-            - @room.village.players.alive.each do |p|
+            - @village.players.alive.each do |p|
               option[value="#{p.id}"] = p.user.username
 
 = javascript_pack_tag 'rooms/show'

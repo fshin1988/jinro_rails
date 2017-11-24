@@ -27,16 +27,16 @@ html lang="ja"
           #navbar class="collapse navbar-collapse navbar-collapse-#{@color_of_navbar}" aria-expanded="false"
             ul class="nav navbar-nav"
               - if controller_name == 'rooms'
-                - if policy(@room.village).join?
-                  li = link_to '村に入る', join_village_path(@room.village)
-                - if policy(@room.village).exit?
-                  li = link_to '村から出る', exit_village_path(@room.village)
-                - if policy(@room.village).start?
-                  li = link_to 'ゲーム開始', start_village_path(@room.village)
-                - if @room.for_all? && policy(@room.village.room_for_wolf).show?
-                  li = link_to '人狼ルームへ', village_room_path(@room.village, @room.village.room_for_wolf)
+                - if policy(@village).join?
+                  li = link_to '村に入る', join_village_path(@village)
+                - if policy(@village).exit?
+                  li = link_to '村から出る', exit_village_path(@village)
+                - if policy(@village).start?
+                  li = link_to 'ゲーム開始', start_village_path(@village)
+                - if @room.for_all? && policy(@village.room_for_wolf).show?
+                  li = link_to '人狼ルームへ', village_room_path(@village, @village.room_for_wolf)
                 - if @room.for_wolf?
-                  li = link_to 'ルームへ', village_room_path(@room.village, @room.village.room_for_all)
+                  li = link_to 'ルームへ', village_room_path(@village, @village.room_for_all)
               - else
                 - if user_signed_in?
                   li = link_to '設定変更', edit_user_registration_path
