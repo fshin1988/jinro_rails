@@ -1,7 +1,6 @@
 import Vue from 'vue/dist/vue.esm';
 import axios from 'axios';
-
-const URL_BASE = 'http://localhost:3000/api/v1/records/';
+axios.defaults.headers['X-CSRF-TOKEN'] = $('meta[name=csrf-token]').attr('content')
 
 var switchComponent = Vue.extend({
     template: '<button v-on:click="emitSwitch">切り替え</button>',
@@ -22,8 +21,8 @@ new Vue({
     this.setInitialValue()
   },
   methods: {
-    updateRecord(id) {
-      axios.put(URL_BASE + id, { record: { vote_target_id: 1 } })
+    setVoteTarget(id) {
+      axios.put('/api/v1/records/' + id, { record: { vote_target_id: this.voteSelected } })
         .then(res => {
           console.log(res.data)
         });
