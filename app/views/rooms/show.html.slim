@@ -1,6 +1,7 @@
-#room-root.flex-col
-  notice-component[v-if="noticeDisplay" v-on:reset="resetNotice" v-bind:notice-message="noticeMessage"]
-  alert-component[v-if="alertDisplay" v-on:reset="resetAlert" v-bind:alert-message="alertMessage"]
+#room-root.flex-col[v-on:click="resetMessage"]
+  transition[name="api-message"]
+    notice-component[v-if="noticeDisplay" v-bind:notice-message="noticeMessage"]
+    alert-component[v-if="alertDisplay" v-bind:alert-message="alertMessage"]
   h4.room-title = room_title(@village)
   input type="hidden" id="vote-initial" initial="#{@village.record_from_user(current_user)&.vote_target_id || ''}"
   input type="hidden" id="attack-initial" initial="#{@village.record_from_user(current_user)&.attack_target_id || ''}"

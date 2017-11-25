@@ -15,34 +15,18 @@ var noticeComponent = Vue.extend({
     props: ['noticeMessage'],
     template: '\
       <div class="alert alert-success">\
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close" v-on:click="emitReset">\
-          <span aria-hidden="true">&times;</span>\
-        </button>\
         {{noticeMessage}}\
       </div>\
-    ',
-    methods: {
-      emitReset: function() {
-        this.$emit('reset')
-      }
-    }
+    '
 });
 
 var alertComponent = Vue.extend({
     props: ['alertMessage'],
     template: '\
       <div class="alert alert-danger">\
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close" v-on:click="emitReset">\
-          <span aria-hidden="true">&times;</span>\
-        </button>\
         {{alertMessage}}\
       </div>\
-    ',
-    methods: {
-      emitReset: function() {
-        this.$emit('reset')
-      }
-    }
+    '
 });
 
 new Vue({
@@ -97,19 +81,17 @@ new Vue({
     switchArea: function() {
       this.chatDisplay = !this.chatDisplay
     },
-    resetNotice: function() {
-      this.noticeDisplay = false
-    },
     setNotice: function(message) {
       this.noticeDisplay = true
       this.noticeMessage = message
     },
-    resetAlert: function() {
-      this.alertDisplay = false
-    },
     setAlert: function(message) {
       this.alertDisplay = true
       this.alertMessage = message
+    },
+    resetMessage: function() {
+      this.noticeDisplay = false
+      this.alertDisplay = false
     },
     setInitialValue: function() {
       this.voteSelected = document.getElementById('vote-initial').getAttribute('initial')
