@@ -1,5 +1,5 @@
 #room-root.flex-col
-  alert-component[v-if="alertDisplay" v-on:reset="resetAlert"]
+  alert-component[v-if="alertDisplay" v-on:reset="resetAlert" v-bind:alert-message="alertMessage"]
   h4.room-title = room_title(@village)
   input type="hidden" id="vote-initial" initial="#{@village.record_from_user(current_user)&.vote_target_id || ''}"
   input type="hidden" id="attack-initial" initial="#{@village.record_from_user(current_user)&.attack_target_id || ''}"

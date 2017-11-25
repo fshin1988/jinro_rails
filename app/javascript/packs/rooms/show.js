@@ -12,12 +12,13 @@ var switchComponent = Vue.extend({
 });
 
 var alertComponent = Vue.extend({
+    props: ['alertMessage'],
     template: '\
       <div class="alert alert-success">\
         <button type="button" class="close" data-dismiss="alert" aria-label="Close" v-on:click="emitReset">\
           <span aria-hidden="true">&times;</span>\
         </button>\
-        セット完了しました\
+        {{alertMessage}}\
       </div>\
     ',
     methods: {
@@ -32,6 +33,7 @@ new Vue({
   data: {
     chatDisplay: true,
     alertDisplay: false,
+    alertMessage: "",
     voteSelected: "",
     attackSelected: "",
     divineSelected: "",
@@ -44,25 +46,25 @@ new Vue({
     setVoteTarget(id) {
       axios.put('/api/v1/records/' + id, { record: { vote_target_id: this.voteSelected } })
         .then(res => {
-          this.alertDisplay = true
+          this.setAlert("投票先をセットしました")
         });
     },
     setAttackTarget(id) {
       axios.put('/api/v1/records/' + id, { record: { attack_target_id: this.attackSelected } })
         .then(res => {
-          this.alertDisplay = true
+          this.setAlert("襲撃先をセットしました")
         });
     },
     setDivineTarget(id) {
       axios.put('/api/v1/records/' + id, { record: { divine_target_id: this.divineSelected } })
         .then(res => {
-          this.alertDisplay = true
+          this.setAlert("占い先をセットしました")
         });
     },
     setGuardTarget(id) {
       axios.put('/api/v1/records/' + id, { record: { guard_target_id: this.guardSelected } })
         .then(res => {
-          this.alertDisplay = true
+          this.setAlert("護衛先をセットしました")
         });
     },
     switchArea: function() {
@@ -70,6 +72,10 @@ new Vue({
     },
     resetAlert: function() {
       this.alertDisplay = false
+    },
+    setAlert: function(message) {
+      this.alertDisplay = true
+      this.alertMessage = message
     },
     setInitialValue: function() {
       this.voteSelected = document.getElementById('vote-initial').getAttribute('initial')
