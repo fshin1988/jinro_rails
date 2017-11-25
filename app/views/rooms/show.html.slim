@@ -16,6 +16,8 @@
     template[v-else]
       .skill-area
         switch-component[v-on:switch="switchArea"]
+        p
+          = "役職：" + t("activerecord.attributes.player.role_enums.#{@village.player_from_user(current_user)&.role}")
         .form-group
           label 投票先：
           select[v-model="voteSelected"]

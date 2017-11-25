@@ -17,3 +17,11 @@ ja:
           not_started: 募集中
           in_play: 進行中
           ended: 終了
+      player:
+        role_enums:
+          villager: 村人
+          werewolf: 人狼
+          fortune_teller: 占い師
+          psychic: 霊媒師
+          bodyguard: 騎士
+          madman: 狂人
