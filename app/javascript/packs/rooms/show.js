@@ -15,7 +15,8 @@ new Vue({
   el: '#room-root',
   data: {
     chatDisplay: true,
-    voteSelected: ""
+    voteSelected: "",
+    attackSelected: ""
   },
   created: function() {
     this.setInitialValue()
@@ -27,11 +28,18 @@ new Vue({
           console.log(res.data)
         });
     },
+    setAttackTarget(id) {
+      axios.put('/api/v1/records/' + id, { record: { attack_target_id: this.attackSelected } })
+        .then(res => {
+          console.log(res.data)
+        });
+    },
     switchArea: function() {
       this.chatDisplay = !this.chatDisplay
     },
     setInitialValue: function() {
       this.voteSelected = document.getElementById('vote-initial').getAttribute('initial')
+      this.attackSelected = document.getElementById('attack-initial').getAttribute('initial')
     }
   },
   components: {

@@ -1,6 +1,7 @@
 #room-root.flex-col
   h4.room-title = room_title(@village)
   input type="hidden" id="vote-initial" initial="#{@village.record_from_user(current_user)&.vote_target_id || ''}"
+  input type="hidden" id="attack-initial" initial="#{@village.record_from_user(current_user)&.attack_target_id || ''}"
   .panel-body.chat-body.flex-col
     ul#message-list.chat.flex-col[data-room_id="#{@room.id}"]
       = render @room.posts.includes(player: :user)
@@ -26,5 +27,14 @@
               option[value="#{p.id}"] = p.user.username
           button#btn-vote.btn.btn-warning.btn-sm[v-on:click="setVoteTarget(#{@village.record_from_user(current_user)&.id})"]
             | セット
+        - if @village.player_from_user(current_user)&.werewolf?
+          .form-group
+            label 襲撃先：
+            select[v-model="attackSelected"]
+              option[disabled value=""] 襲撃先を選択
+              - @village.players.alive.select(&:human?).each do |p|
+                option[value="#{p.id}"] = p.user.username
+            button#btn-attack.btn.btn-warning.btn-sm[v-on:click="setAttackTarget(#{@village.record_from_user(current_user)&.id})"]
+              | セット
 
 = javascript_pack_tag 'rooms/show'
