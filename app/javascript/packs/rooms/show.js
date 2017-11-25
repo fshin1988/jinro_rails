@@ -11,10 +11,27 @@ var switchComponent = Vue.extend({
     }
 });
 
+var alertComponent = Vue.extend({
+    template: '\
+      <div class="alert alert-success">\
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" v-on:click="emitReset">\
+          <span aria-hidden="true">&times;</span>\
+        </button>\
+        セット完了しました\
+      </div>\
+    ',
+    methods: {
+      emitReset: function() {
+        this.$emit('reset')
+      }
+    }
+});
+
 new Vue({
   el: '#room-root',
   data: {
     chatDisplay: true,
+    alertDisplay: false,
     voteSelected: "",
     attackSelected: "",
     divineSelected: "",
@@ -27,29 +44,32 @@ new Vue({
     setVoteTarget(id) {
       axios.put('/api/v1/records/' + id, { record: { vote_target_id: this.voteSelected } })
         .then(res => {
-          console.log(res.data)
+          this.alertDisplay = true
         });
     },
     setAttackTarget(id) {
       axios.put('/api/v1/records/' + id, { record: { attack_target_id: this.attackSelected } })
         .then(res => {
-          console.log(res.data)
+          this.alertDisplay = true
         });
     },
     setDivineTarget(id) {
       axios.put('/api/v1/records/' + id, { record: { divine_target_id: this.divineSelected } })
         .then(res => {
-          console.log(res.data)
+          this.alertDisplay = true
         });
     },
     setGuardTarget(id) {
       axios.put('/api/v1/records/' + id, { record: { guard_target_id: this.guardSelected } })
         .then(res => {
-          console.log(res.data)
+          this.alertDisplay = true
         });
     },
     switchArea: function() {
       this.chatDisplay = !this.chatDisplay
+    },
+    resetAlert: function() {
+      this.alertDisplay = false
     },
     setInitialValue: function() {
       this.voteSelected = document.getElementById('vote-initial').getAttribute('initial')
@@ -59,6 +79,7 @@ new Vue({
     }
   },
   components: {
-    'switch-component': switchComponent
+    'switch-component': switchComponent,
+    'alert-component': alertComponent
   }
 });
