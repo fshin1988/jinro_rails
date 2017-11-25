@@ -16,7 +16,9 @@ new Vue({
   data: {
     chatDisplay: true,
     voteSelected: "",
-    attackSelected: ""
+    attackSelected: "",
+    divineSelected: "",
+    guardSelected: ""
   },
   created: function() {
     this.setInitialValue()
@@ -34,12 +36,26 @@ new Vue({
           console.log(res.data)
         });
     },
+    setDivineTarget(id) {
+      axios.put('/api/v1/records/' + id, { record: { divine_target_id: this.divineSelected } })
+        .then(res => {
+          console.log(res.data)
+        });
+    },
+    setGuardTarget(id) {
+      axios.put('/api/v1/records/' + id, { record: { guard_target_id: this.guardSelected } })
+        .then(res => {
+          console.log(res.data)
+        });
+    },
     switchArea: function() {
       this.chatDisplay = !this.chatDisplay
     },
     setInitialValue: function() {
       this.voteSelected = document.getElementById('vote-initial').getAttribute('initial')
       this.attackSelected = document.getElementById('attack-initial').getAttribute('initial')
+      this.divineSelected = document.getElementById('divine-initial').getAttribute('initial')
+      this.guardSelected = document.getElementById('guard-initial').getAttribute('initial')
     }
   },
   components: {

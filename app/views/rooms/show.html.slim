@@ -2,6 +2,8 @@
   h4.room-title = room_title(@village)
   input type="hidden" id="vote-initial" initial="#{@village.record_from_user(current_user)&.vote_target_id || ''}"
   input type="hidden" id="attack-initial" initial="#{@village.record_from_user(current_user)&.attack_target_id || ''}"
+  input type="hidden" id="divine-initial" initial="#{@village.record_from_user(current_user)&.divine_target_id || ''}"
+  input type="hidden" id="guard-initial" initial="#{@village.record_from_user(current_user)&.guard_target_id || ''}"
   .panel-body.chat-body.flex-col
     ul#message-list.chat.flex-col[data-room_id="#{@room.id}"]
       = render @room.posts.includes(player: :user)
@@ -35,6 +37,24 @@
               - @village.players.alive.select(&:human?).each do |p|
                 option[value="#{p.id}"] = p.user.username
             button#btn-attack.btn.btn-warning.btn-sm[v-on:click="setAttackTarget(#{@village.record_from_user(current_user)&.id})"]
+              | セット
+        - if @village.player_from_user(current_user)&.fortune_teller?
+          .form-group
+            label 占い先：
+            select[v-model="divineSelected"]
+              option[disabled value=""] 占い先を選択
+              - @village.players.alive.each do |p|
+                option[value="#{p.id}"] = p.user.username
+            button#btn-divine.btn.btn-warning.btn-sm[v-on:click="setDivineTarget(#{@village.record_from_user(current_user)&.id})"]
+              | セット
+        - if @village.player_from_user(current_user)&.bodyguard?
+          .form-group
+            label 護衛先：
+            select[v-model="guardSelected"]
+              option[disabled value=""] 護衛先を選択
+              - @village.players.alive.each do |p|
+                option[value="#{p.id}"] = p.user.username
+            button#btn-guard.btn.btn-warning.btn-sm[v-on:click="setGuardTarget(#{@village.record_from_user(current_user)&.id})"]
               | セット
 
 = javascript_pack_tag 'rooms/show'
