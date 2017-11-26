@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :villages do
+  resources :villages, except: :show do
     member do
       get 'join'
       get 'exit'

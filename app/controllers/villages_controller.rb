@@ -1,12 +1,9 @@
 class VillagesController < ApplicationController
-  before_action :set_village, only: %i[show edit update destroy join exit start]
+  before_action :set_village, only: %i[edit update destroy join exit start]
   before_action :authorize_village, only: %i[index new create]
 
   def index
     @villages = Village.all
-  end
-
-  def show
   end
 
   def new

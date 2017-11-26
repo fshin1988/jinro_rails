@@ -18,18 +18,6 @@ RSpec.describe VillagesController, type: :controller do
     end
   end
 
-  describe "GET #show" do
-    before do
-      sign_in(user)
-    end
-
-    it "returns a success response" do
-      village = Village.create! valid_attributes
-      get :show, params: {id: village.to_param}
-      expect(response).to be_success
-    end
-  end
-
   describe "GET #new" do
     before do
       sign_in(user)
