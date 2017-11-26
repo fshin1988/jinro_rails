@@ -15,6 +15,12 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :rooms, only: [:index, :show]
       resources :records, only: [:index, :update]
+      resources :villages, only: [:show] do
+        member do
+          get 'remaining_time'
+          get 'go_next_day'
+        end
+      end
     end
   end
 end
