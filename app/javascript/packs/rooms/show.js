@@ -37,13 +37,12 @@ new Vue({
     noticeMessage: "",
     alertDisplay: false,
     alertMessage: "",
-    voteSelected: "",
-    attackSelected: "",
-    divineSelected: "",
-    guardSelected: ""
+    voteSelected: voteInitial,
+    attackSelected: attackInitial,
+    divineSelected: divineInitial,
+    guardSelected: guardInitial
   },
   created: function() {
-    this.setInitialValue()
   },
   methods: {
     setVoteTarget(id) {
@@ -92,12 +91,6 @@ new Vue({
     resetMessage: function() {
       this.noticeDisplay = false
       this.alertDisplay = false
-    },
-    setInitialValue: function() {
-      this.voteSelected = document.getElementById('vote-initial').getAttribute('initial')
-      this.attackSelected = document.getElementById('attack-initial').getAttribute('initial')
-      this.divineSelected = document.getElementById('divine-initial').getAttribute('initial')
-      this.guardSelected = document.getElementById('guard-initial').getAttribute('initial')
     }
   },
   components: {

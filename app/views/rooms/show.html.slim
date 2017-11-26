@@ -4,10 +4,6 @@
     alert-component[v-if="alertDisplay" v-bind:alert-message="alertMessage"]
   #title-area
     span.room-title = room_title(@village)
-  input type="hidden" id="vote-initial" initial="#{@village.record_from_user(current_user)&.vote_target_id || ''}"
-  input type="hidden" id="attack-initial" initial="#{@village.record_from_user(current_user)&.attack_target_id || ''}"
-  input type="hidden" id="divine-initial" initial="#{@village.record_from_user(current_user)&.divine_target_id || ''}"
-  input type="hidden" id="guard-initial" initial="#{@village.record_from_user(current_user)&.guard_target_id || ''}"
   .panel-body.chat-body.flex-col
     ul#message-list.chat.flex-col[data-room_id="#{@room.id}"]
       = render @room.posts.includes(player: :user)
@@ -60,5 +56,11 @@
                 option[value="#{p.id}"] = p.user.username
             button#btn-guard.btn.btn-warning.btn-sm[v-on:click="setGuardTarget(#{@village.record_from_user(current_user)&.id})"]
               | セット
+
+javascript:
+  var voteInitial = #{@village.record_from_user(current_user)&.vote_target_id || "null"}
+  var attackInitial = #{@village.record_from_user(current_user)&.attack_target_id || "null"}
+  var divineInitial = #{@village.record_from_user(current_user)&.divine_target_id || "null"}
+  var guardInitial = #{@village.record_from_user(current_user)&.guard_target_id || "null"}
 
 = javascript_pack_tag 'rooms/show'
