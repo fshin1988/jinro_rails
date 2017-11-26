@@ -27,7 +27,7 @@
             option[disabled value=""] 投票先を選択
             - @village.players.alive.each do |p|
               option[value="#{p.id}"] = p.user.username
-          button#btn-vote.btn.btn-warning.btn-sm[v-on:click="setVoteTarget(#{@village.record_from_user(current_user)&.id})"]
+          button#btn-vote.btn.btn-warning.btn-sm[v-on:click="setVoteTarget"]
             | セット
         - if @village.player_from_user(current_user)&.werewolf?
           .form-group
@@ -36,7 +36,7 @@
               option[disabled value=""] 襲撃先を選択
               - @village.players.alive.select(&:human?).each do |p|
                 option[value="#{p.id}"] = p.user.username
-            button#btn-attack.btn.btn-warning.btn-sm[v-on:click="setAttackTarget(#{@village.record_from_user(current_user)&.id})"]
+            button#btn-attack.btn.btn-warning.btn-sm[v-on:click="setAttackTarget"]
               | セット
         - if @village.player_from_user(current_user)&.fortune_teller?
           .form-group
@@ -45,7 +45,7 @@
               option[disabled value=""] 占い先を選択
               - @village.players.alive.each do |p|
                 option[value="#{p.id}"] = p.user.username
-            button#btn-divine.btn.btn-warning.btn-sm[v-on:click="setDivineTarget(#{@village.record_from_user(current_user)&.id})"]
+            button#btn-divine.btn.btn-warning.btn-sm[v-on:click="setDivineTarget"]
               | セット
         - if @village.player_from_user(current_user)&.bodyguard?
           .form-group
@@ -54,7 +54,7 @@
               option[disabled value=""] 護衛先を選択
               - @village.players.alive.each do |p|
                 option[value="#{p.id}"] = p.user.username
-            button#btn-guard.btn.btn-warning.btn-sm[v-on:click="setGuardTarget(#{@village.record_from_user(current_user)&.id})"]
+            button#btn-guard.btn.btn-warning.btn-sm[v-on:click="setGuardTarget"]
               | セット
 
 javascript:

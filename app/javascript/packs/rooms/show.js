@@ -37,6 +37,7 @@ new Vue({
     noticeMessage: "",
     alertDisplay: false,
     alertMessage: "",
+    recordId: record ? record.id : "",
     voteSelected: record ? record.vote_target_id : "",
     attackSelected: record ? record.attack_target_id : "",
     divineSelected: record ? record.divine_target_id : "",
@@ -45,32 +46,32 @@ new Vue({
   created: function() {
   },
   methods: {
-    setVoteTarget(id) {
-      axios.put('/api/v1/records/' + id, { record: { vote_target_id: this.voteSelected } })
+    setVoteTarget: function() {
+      axios.put('/api/v1/records/' + this.recordId, { record: { vote_target_id: this.voteSelected } })
         .then(res => {
           this.setNotice("投票先をセットしました")
         }, (error) => {
           this.setAlert("エラーが発生しました")
         });
     },
-    setAttackTarget(id) {
-      axios.put('/api/v1/records/' + id, { record: { attack_target_id: this.attackSelected } })
+    setAttackTarget: function() {
+      axios.put('/api/v1/records/' + this.recordId, { record: { attack_target_id: this.attackSelected } })
         .then(res => {
           this.setNotice("襲撃先をセットしました")
         }, (error) => {
           this.setAlert("エラーが発生しました")
         });
     },
-    setDivineTarget(id) {
-      axios.put('/api/v1/records/' + id, { record: { divine_target_id: this.divineSelected } })
+    setDivineTarget: function() {
+      axios.put('/api/v1/records/' + this.recordId, { record: { divine_target_id: this.divineSelected } })
         .then(res => {
           this.setNotice("占い先をセットしました")
         }, (error) => {
           this.setAlert("エラーが発生しました")
         });
     },
-    setGuardTarget(id) {
-      axios.put('/api/v1/records/' + id, { record: { guard_target_id: this.guardSelected } })
+    setGuardTarget: function() {
+      axios.put('/api/v1/records/' + this.recordId, { record: { guard_target_id: this.guardSelected } })
         .then(res => {
           this.setNotice("護衛先をセットしました")
         }, (error) => {
