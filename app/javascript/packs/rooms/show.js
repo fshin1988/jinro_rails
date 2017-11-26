@@ -69,6 +69,9 @@ new Vue({
     resetMessage: function() {
       this.noticeDisplay = false
       this.alertDisplay = false
+    },
+    goNextDay: function() {
+      console.log("it's next day!!")
     }
   },
   components: {

@@ -11,7 +11,11 @@ export default {
   data: function() {
     return {
       remainingTime: this.initialRemainingTime,
+      timerId: 0
     }
+  },
+  created: function() {
+    this.startTimer()
   },
   computed: {
     remainingMin: function() {
@@ -19,6 +23,21 @@ export default {
     },
     remainingSec: function() {
       return this.remainingTime % 60
+    }
+  },
+  methods: {
+    startTimer: function() {
+      this.timerId = setInterval(this.countDown, 1000)
+    },
+    countDown: function() {
+      this.remainingTime = this.remainingTime - 1
+      if(this.remainingTime <= 0) {
+        clearInterval(this.timerId)
+        this.emitFinish()
+      }
+    },
+    emitFinish: function() {
+      this.$emit('finish')
     }
   }
 }
