@@ -25,10 +25,6 @@ new Vue({
   created: function() {
     this.setInitialRemainingTime()
   },
-  mounted: function() {
-    console.log("parent initialRemainingTime is " + this.initialRemainingTime)
-    this.$refs.timer.startTimer()
-  },
   methods: {
     setVoteTarget: function() {
       axios.put('/api/v1/records/' + this.recordId, { record: { vote_target_id: this.voteSelected } })
@@ -78,10 +74,8 @@ new Vue({
       this.alertDisplay = false
     },
     setInitialRemainingTime: function() {
-      console.log("start api")
       axios.get('/api/v1/villages/' + this.villageId + '/remaining_time')
         .then(res => {
-          console.log(res.data)
           this.initialRemainingTime = res.data.remaining_time
         });
     },

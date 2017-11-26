@@ -10,8 +10,14 @@ export default {
   props: ['initialRemainingTime'],
   data: function() {
     return {
-      remainingTime: this.initialRemainingTime,
+      remainingTime: 0,
       timerId: 0
+    }
+  },
+  watch: {
+    initialRemainingTime: function() {
+      this.remainingTime = this.initialRemainingTime
+      this.startTimer()
     }
   },
   computed: {
@@ -24,8 +30,6 @@ export default {
   },
   methods: {
     startTimer: function() {
-      console.log("start timer")
-      console.log("child initialRemainingTime is " + this.initialRemainingTime)
       this.timerId = setInterval(this.countDown, 1000)
     },
     countDown: function() {
