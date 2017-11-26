@@ -1,33 +1,9 @@
 import Vue from 'vue/dist/vue.esm';
 import axios from 'axios';
 axios.defaults.headers['X-CSRF-TOKEN'] = $('meta[name=csrf-token]').attr('content')
-
-var switchComponent = Vue.extend({
-    template: '<button v-on:click="emitSwitch">切り替え</button>',
-    methods: {
-      emitSwitch: function() {
-        this.$emit('switch')
-      }
-    }
-});
-
-var noticeComponent = Vue.extend({
-    props: ['noticeMessage'],
-    template: '\
-      <div class="alert alert-success">\
-        {{noticeMessage}}\
-      </div>\
-    '
-});
-
-var alertComponent = Vue.extend({
-    props: ['alertMessage'],
-    template: '\
-      <div class="alert alert-danger">\
-        {{alertMessage}}\
-      </div>\
-    '
-});
+import Switch from '../components/switch.vue';
+import Notice from '../components/notice.vue';
+import Alert from '../components/alert.vue';
 
 new Vue({
   el: '#room-root',
@@ -95,8 +71,8 @@ new Vue({
     }
   },
   components: {
-    'switch-component': switchComponent,
-    'notice-component': noticeComponent,
-    'alert-component': alertComponent
+    'switch-component': Switch,
+    'notice-component': Notice,
+    'alert-component': Alert
   }
 });
