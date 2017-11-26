@@ -4,6 +4,7 @@ axios.defaults.headers['X-CSRF-TOKEN'] = $('meta[name=csrf-token]').attr('conten
 import Switch from '../components/switch.vue';
 import Notice from '../components/notice.vue';
 import Alert from '../components/alert.vue';
+import Timer from '../components/timer.vue';
 
 new Vue({
   el: '#room-root',
@@ -73,6 +74,7 @@ new Vue({
   components: {
     'switch-component': Switch,
     'notice-component': Notice,
-    'alert-component': Alert
+    'alert-component': Alert,
+    'timer-component': Timer
   }
 });

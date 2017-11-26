@@ -4,6 +4,7 @@
     alert-component[v-if="alertDisplay" v-bind:alert-message="alertMessage"]
   #title-area
     span.room-title = room_title(@village)
+    timer-component[initial-remaining-time="85"]
   .panel-body.chat-body.flex-col
     ul#message-list.chat.flex-col[data-room_id="#{@room.id}"]
       = render @room.posts.includes(player: :user)
