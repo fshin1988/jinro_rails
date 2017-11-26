@@ -37,10 +37,10 @@ new Vue({
     noticeMessage: "",
     alertDisplay: false,
     alertMessage: "",
-    voteSelected: voteInitial,
-    attackSelected: attackInitial,
-    divineSelected: divineInitial,
-    guardSelected: guardInitial
+    voteSelected: record ? record.vote_target_id : "",
+    attackSelected: record ? record.attack_target_id : "",
+    divineSelected: record ? record.divine_target_id : "",
+    guardSelected: record ? record.guard_target_id : ""
   },
   created: function() {
   },

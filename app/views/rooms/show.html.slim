@@ -58,9 +58,6 @@
               | セット
 
 javascript:
-  var voteInitial = #{@village.record_from_user(current_user)&.vote_target_id || "null"}
-  var attackInitial = #{@village.record_from_user(current_user)&.attack_target_id || "null"}
-  var divineInitial = #{@village.record_from_user(current_user)&.divine_target_id || "null"}
-  var guardInitial = #{@village.record_from_user(current_user)&.guard_target_id || "null"}
+  var record = #{@village.record_from_user(current_user).to_json.html_safe}
 
 = javascript_pack_tag 'rooms/show'
