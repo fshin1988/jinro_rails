@@ -61,6 +61,6 @@
 
 javascript:
   var record = #{@village.record_from_user(current_user).to_json.html_safe}
-  var villageId = #{@village.id}
+  var village = #{@village.to_json.html_safe}
 
 = javascript_pack_tag 'rooms/show'

@@ -14,7 +14,8 @@ new Vue({
     noticeMessage: "",
     alertDisplay: false,
     alertMessage: "",
-    villageId: villageId,
+    villageId: village.id,
+    villageStatus: village.status,
     initialRemainingTime: 5,
     recordId: record ? record.id : "",
     voteSelected: record ? record.vote_target_id : "",
@@ -23,7 +24,9 @@ new Vue({
     guardSelected: record ? record.guard_target_id : ""
   },
   created: function() {
-    this.setInitialRemainingTime()
+    if(this.villageStatus === "in_play") {
+      this.setInitialRemainingTime()
+    }
   },
   methods: {
     setVoteTarget: function() {
