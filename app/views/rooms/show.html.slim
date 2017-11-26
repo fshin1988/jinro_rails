@@ -5,7 +5,7 @@
   #title-area
     span.room-title = room_title(@village)
     - if @village.in_play?
-      timer-component[initial-remaining-time="20" v-on:finish="goNextDay"]
+      timer-component[ref="timer" v-bind:initial-remaining-time="initialRemainingTime" v-on:finish="goNextDay"]
   .panel-body.chat-body.flex-col
     ul#message-list.chat.flex-col[data-room_id="#{@room.id}"]
       = render @room.posts.includes(player: :user)
@@ -61,5 +61,6 @@
 
 javascript:
   var record = #{@village.record_from_user(current_user).to_json.html_safe}
+  var villageId = #{@village.id}
 
 = javascript_pack_tag 'rooms/show'

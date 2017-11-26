@@ -14,9 +14,6 @@ export default {
       timerId: 0
     }
   },
-  created: function() {
-    this.startTimer()
-  },
   computed: {
     remainingMin: function() {
       return Math.floor(this.remainingTime / 60)
@@ -27,18 +24,21 @@ export default {
   },
   methods: {
     startTimer: function() {
+      console.log("start timer")
+      console.log("child initialRemainingTime is " + this.initialRemainingTime)
       this.timerId = setInterval(this.countDown, 1000)
     },
     countDown: function() {
-      this.remainingTime = this.remainingTime - 1
       if(this.remainingTime <= 0) {
         clearInterval(this.timerId)
         this.emitFinish()
+      } else {
+        this.remainingTime = this.remainingTime - 1
       }
     },
     emitFinish: function() {
       this.$emit('finish')
-    }
+    },
   }
 }
 </script>

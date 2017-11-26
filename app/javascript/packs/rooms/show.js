@@ -14,6 +14,8 @@ new Vue({
     noticeMessage: "",
     alertDisplay: false,
     alertMessage: "",
+    villageId: villageId,
+    initialRemainingTime: 5,
     recordId: record ? record.id : "",
     voteSelected: record ? record.vote_target_id : "",
     attackSelected: record ? record.attack_target_id : "",
@@ -21,6 +23,11 @@ new Vue({
     guardSelected: record ? record.guard_target_id : ""
   },
   created: function() {
+    this.setInitialRemainingTime()
+  },
+  mounted: function() {
+    console.log("parent initialRemainingTime is " + this.initialRemainingTime)
+    this.$refs.timer.startTimer()
   },
   methods: {
     setVoteTarget: function() {
@@ -69,6 +76,14 @@ new Vue({
     resetMessage: function() {
       this.noticeDisplay = false
       this.alertDisplay = false
+    },
+    setInitialRemainingTime: function() {
+      console.log("start api")
+      axios.get('/api/v1/villages/' + this.villageId + '/remaining_time')
+        .then(res => {
+          console.log(res.data)
+          this.initialRemainingTime = res.data.remaining_time
+        });
     },
     goNextDay: function() {
       console.log("it's next day!!")
