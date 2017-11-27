@@ -7,14 +7,8 @@ class Api::V1::VillagesController < ApplicationController
 
   def go_next_day
     if @village.next_update_time <= Time.now
-      @village.lynch
-      if @village.judge_end == 0
-        @village.attack
-        @village.judge_end
-        if @village.judge_end == 0
-          @village.update!(day: @village.day + 1, next_update_time: Time.now + @village.discussion_time.minutes)
-        end
-      end
+      noon_process
+      night_process
       head :ok
     else
       head :unauthorized
@@ -22,6 +16,32 @@ class Api::V1::VillagesController < ApplicationController
   end
 
   private
+
+  def noon_process
+    @village.lynch
+    case @village.judge_end
+    when 2
+      @village.update!(status: :ended)
+    when 1
+      @village.update!(status: :ended)
+    else
+      false
+    end
+  end
+
+  def night_process
+    return if @village.ended?
+    @village.attack
+    case @village.judge_end
+    when 2
+      @village.update!(status: :ended)
+    when 1
+      @village.update!(status: :ended)
+    else
+      @village.update!(day: @village.day + 1, next_update_time: Time.now + @village.discussion_time.minutes)
+      @village.prepare_records
+    end
+  end
 
   def set_village
     @village = Village.find(params[:id])
