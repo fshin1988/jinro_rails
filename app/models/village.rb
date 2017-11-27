@@ -76,8 +76,6 @@ class Village < ApplicationRecord
       self.status = :ended
       return 1
     else
-      self.day = day + 1
-      self.next_update_time = Time.now + discussion_time.minutes
       return 0
     end
   end

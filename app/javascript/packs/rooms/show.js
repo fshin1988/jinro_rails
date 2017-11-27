@@ -83,7 +83,7 @@ new Vue({
         });
     },
     goNextDay: function() {
-      console.log("it's next day!!")
+      axios.get('/api/v1/villages/' + this.villageId + '/go_next_day')
     }
   },
   components: {

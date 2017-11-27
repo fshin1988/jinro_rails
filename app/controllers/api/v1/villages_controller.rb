@@ -6,12 +6,19 @@ class Api::V1::VillagesController < ApplicationController
   end
 
   def go_next_day
-    @village.lynch
-    if @village.judge_end == 0
-      @village.attack
-      @village.judge_end
+    if @village.next_update_time <= Time.now
+      @village.lynch
+      if @village.judge_end == 0
+        @village.attack
+        @village.judge_end
+        if @village.judge_end == 0
+          @village.update!(day: @village.day + 1, next_update_time: Time.now + @village.discussion_time.minutes)
+        end
+      end
+      head :ok
+    else
+      head :unauthorized
     end
-    head :ok
   end
 
   private
