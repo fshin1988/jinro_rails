@@ -70,11 +70,15 @@ class Village < ApplicationRecord
     wolf_count = players.alive.werewolf.count
 
     if human_count <= wolf_count
-      2
+      self.status = :ended
+      return 2
     elsif wolf_count.zero?
-      1
+      self.status = :ended
+      return 1
     else
-      0
+      self.day = day + 1
+      self.next_update_time = Time.now + discussion_time.minutes
+      return 0
     end
   end
 
