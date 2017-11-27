@@ -39,6 +39,18 @@ RSpec.describe Village, type: :model do
     expect(voted_player.status).to eq 'dead'
   end
 
+  context 'if all vote_target are not setted' do
+    it 'excludes one player randomly' do
+      village = create(:village_with_player, player_num: 13, day: 1)
+      village.players.each do |p|
+        create(:record, village: village, player: p, day: 1, vote_target: nil)
+      end
+
+      village.lynch
+      expect(village.players.alive.count).to eq 12
+    end
+  end
+
   it 'excludes the most attacked player' do
     village = create(:village_with_player, player_num: 13, day: 1)
     village.assign_role
@@ -50,6 +62,19 @@ RSpec.describe Village, type: :model do
     village.attack
     attacked_player.reload
     expect(attacked_player.status).to eq 'dead'
+  end
+
+  context 'if all attack_target are not setted' do
+    it 'excludes one human randomly' do
+      village = create(:village_with_player, player_num: 13, day: 1)
+      village.assign_role # villager:6, werewolf:3, fortune_teller:1, psychic:1, bodyguard:1, madman:1
+      village.players.werewolf.each do |w|
+        create(:record, village: village, player: w, day: 1, attack_target: nil)
+      end
+
+      village.attack
+      expect(village.players.alive.select(&:human?).count).to eq 9
+    end
   end
 
   context 'if attacked player is same with guarded player' do

@@ -50,11 +50,17 @@ class Village < ApplicationRecord
 
   def lynch
     voted_players = players_from_records(:vote_target)
+    if voted_players.blank?
+      voted_players = players
+    end
     exclude(voted_players)
   end
 
   def attack
     attacked_players = players_from_records(:attack_target)
+    if attacked_players.blank?
+      attacked_players = players.select(&:human?)
+    end
     guarded_player = players_from_records(:guard_target).first
     exclude(attacked_players, guarded_player)
   end
