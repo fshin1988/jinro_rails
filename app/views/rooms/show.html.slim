@@ -9,7 +9,8 @@
   .panel-body.chat-body.flex-col
     ul#message-list.chat.flex-col[data-room_id="#{@room.id}"]
       = render @room.posts.includes(player: :user)
-  - if user_signed_in? && @village.player_from_user(current_user)&.alive?
+  - if user_signed_in? && (@village.player_from_user(current_user)&.alive? || \
+                           (@village.ended? && @village.player_from_user(current_user)))
     template[v-if="chatDisplay"]
       .panel-footer.chat-area
         - if @village.in_play?
