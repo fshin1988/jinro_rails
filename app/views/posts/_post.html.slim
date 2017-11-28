@@ -4,7 +4,7 @@ li.left.clearfix
   .chat-body.clearfix
     .header
       strong.chat-username
-        = post.player.user.username
+        = post.player.username
       small.pull-right.text-muted
         = post.created_at.strftime('%H:%M:%S')
     = simple_format(h(post.content))

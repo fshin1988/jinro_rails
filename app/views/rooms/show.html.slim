@@ -8,7 +8,7 @@
       timer-component[v-bind:initial-remaining-time="initialRemainingTime" v-on:finish="goNextDay"]
   .panel-body.chat-body.flex-col
     ul#message-list.chat.flex-col[data-room_id="#{@room.id}"]
-      = render @room.posts.includes(player: :user)
+      = render @room.posts.includes(:player)
   - if user_signed_in? && (@village.player_from_user(current_user)&.alive? || \
                            (@village.ended? && @village.player_from_user(current_user)))
     template[v-if="chatDisplay"]
@@ -29,7 +29,7 @@
           select[v-model="voteSelected"]
             option[disabled value=""] 投票先を選択
             - @village.players.alive.each do |p|
-              option[value="#{p.id}"] = p.user.username
+              option[value="#{p.id}"] = p.username
           button#btn-vote.btn.btn-warning.btn-sm[v-on:click="setVoteTarget"]
             | セット
         - if @village.player_from_user(current_user)&.werewolf?
@@ -38,7 +38,7 @@
             select[v-model="attackSelected"]
               option[disabled value=""] 襲撃先を選択
               - @village.players.alive.select(&:human?).each do |p|
-                option[value="#{p.id}"] = p.user.username
+                option[value="#{p.id}"] = p.username
             button#btn-attack.btn.btn-warning.btn-sm[v-on:click="setAttackTarget"]
               | セット
         - if @village.player_from_user(current_user)&.fortune_teller?
@@ -47,7 +47,7 @@
             select[v-model="divineSelected"]
               option[disabled value=""] 占い先を選択
               - @village.players.alive.each do |p|
-                option[value="#{p.id}"] = p.user.username
+                option[value="#{p.id}"] = p.username
             button#btn-divine.btn.btn-warning.btn-sm[v-on:click="setDivineTarget"]
               | セット
         - if @village.player_from_user(current_user)&.bodyguard?
@@ -56,7 +56,7 @@
             select[v-model="guardSelected"]
               option[disabled value=""] 護衛先を選択
               - @village.players.alive.each do |p|
-                option[value="#{p.id}"] = p.user.username
+                option[value="#{p.id}"] = p.username
             button#btn-guard.btn.btn-warning.btn-sm[v-on:click="setGuardTarget"]
               | セット
 
