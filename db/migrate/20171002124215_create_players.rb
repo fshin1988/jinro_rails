@@ -5,6 +5,7 @@ class CreatePlayers < ActiveRecord::Migration[5.1]
       t.references :village, null: false
       t.integer :role, null: false
       t.integer :status, null: false
+      t.string :username, null: false
 
       t.timestamps
     end

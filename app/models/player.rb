@@ -7,6 +7,7 @@
 #  village_id :integer          not null
 #  role       :integer          not null
 #  status     :integer          not null
+#  username   :string(255)      not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
@@ -17,6 +18,8 @@
 #
 
 class Player < ApplicationRecord
+  before_validation :set_username, on: :create
+
   enum role: {
     villager: 0,
     werewolf: 1,
@@ -41,5 +44,12 @@ class Player < ApplicationRecord
 
   def human?
     villager? || fortune_teller? || psychic? || bodyguard? || madman?
+  end
+
+  private
+
+  # player have username because user can be destroyed and user.username can be changed
+  def set_username
+    self.username = user.username
   end
 end
