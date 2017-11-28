@@ -19,6 +19,8 @@ Rails.application.routes.draw do
         member do
           get 'remaining_time'
           get 'go_next_day'
+          get 'divine'
+          get 'see_soul'
         end
       end
     end
