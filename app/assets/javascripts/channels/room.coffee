@@ -18,7 +18,10 @@ $(document).on 'turbolinks:load', ->
   if current_room_ch()?
     App.room = App.cable.subscriptions.create current_room_ch(),
       received: (data) ->
-        $('#message-list').append data['message']
+        if data['reload']
+          location.reload(true)
+        else if data['message']
+          $('#message-list').append data['message']
       speak: (message, player_id) ->
         @perform('speak', {message: message, player_id: player_id})
 

@@ -9,6 +9,8 @@ class Api::V1::VillagesController < ApplicationController
     if @village.next_update_time <= Time.now
       noon_process
       night_process
+      ActionCable.server.broadcast "room:room_channel_#{@village.room_for_all.id}", reload: true
+      ActionCable.server.broadcast "room:room_channel_#{@village.room_for_wolf.id}", reload: true
       head :ok
     else
       head :unauthorized
