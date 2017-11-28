@@ -17,6 +17,12 @@ class Api::V1::VillagesController < ApplicationController
     end
   end
 
+  def divine
+  end
+
+  def see_soul
+  end
+
   private
 
   def noon_process
