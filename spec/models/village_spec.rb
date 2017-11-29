@@ -206,14 +206,41 @@ RSpec.describe Village, type: :model do
 
   describe '#divine_results' do
     context 'when divined player is human' do
-      it 'returns usernames of divine_target_id' do
-        village = create(:village_with_player, player_num: 13, day: 1)
+      it 'returns username of divine_target_id and true' do
+        village = create(:village_with_player, player_num: 13, day: 2)
         village.assign_role # villager:6, werewolf:3, fortune_teller:1, psychic:1, bodyguard:1, madman:1
         divined_player = village.players.villager.first
         fortune_teller = village.players.fortune_teller.first
         create(:record, village: village, player: fortune_teller, day: 1, divine_target: divined_player)
 
-        expect(village.divine_results(fortune_teller.user)).to eq [{"#{divined_player.username}" => true}]
+        expect(village.divine_results(fortune_teller.user)).to eq [{divined_player.username => true}]
+      end
+    end
+
+    context 'when divined player is werewolf' do
+      it 'returns username of divine_target_id and false' do
+        village = create(:village_with_player, player_num: 13, day: 2)
+        village.assign_role # villager:6, werewolf:3, fortune_teller:1, psychic:1, bodyguard:1, madman:1
+        divined_player = village.players.werewolf.first
+        fortune_teller = village.players.fortune_teller.first
+        create(:record, village: village, player: fortune_teller, day: 1, divine_target: divined_player)
+
+        expect(village.divine_results(fortune_teller.user)).to eq [{divined_player.username => false}]
+      end
+    end
+
+    context 'when divined player is multiple' do
+      it 'returns multiple divine results' do
+        village = create(:village_with_player, player_num: 13, day: 3)
+        village.assign_role # villager:6, werewolf:3, fortune_teller:1, psychic:1, bodyguard:1, madman:1
+        divined_player_human = village.players.villager.first
+        divined_player_wolf = village.players.werewolf.first
+        fortune_teller = village.players.fortune_teller.first
+        create(:record, village: village, player: fortune_teller, day: 1, divine_target: divined_player_human)
+        create(:record, village: village, player: fortune_teller, day: 2, divine_target: divined_player_wolf)
+
+        result = [{divined_player_human.username => true}, {divined_player_wolf.username => false}]
+        expect(village.divine_results(fortune_teller.user)).to eq result
       end
     end
   end

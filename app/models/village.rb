@@ -118,7 +118,9 @@ class Village < ApplicationRecord
   end
 
   def divine_results(user)
-    records.where(player: player_from_user(user))
+    return if day < 2
+    yesterday = day - 1
+    records.where(player: player_from_user(user)).where(day: 1..yesterday)
            .pluck(:divine_target_id).compact.map { |id| {Player.find(id).username => Player.find(id).human?} }
   end
 
