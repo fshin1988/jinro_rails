@@ -243,6 +243,17 @@ RSpec.describe Village, type: :model do
         expect(village.divine_results(fortune_teller.user)).to eq result
       end
     end
+
+    context 'when divine_target is nil' do
+      it 'returns empty array' do
+        village = create(:village_with_player, player_num: 13, day: 2)
+        village.assign_role # villager:6, werewolf:3, fortune_teller:1, psychic:1, bodyguard:1, madman:1
+        fortune_teller = village.players.fortune_teller.first
+        create(:record, village: village, player: fortune_teller, day: 1, divine_target: nil)
+
+        expect(village.divine_results(fortune_teller.user)).to eq []
+      end
+    end
   end
 
 end
