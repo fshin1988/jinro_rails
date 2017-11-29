@@ -117,6 +117,11 @@ class Village < ApplicationRecord
     time > 0 ? time : 0
   end
 
+  def divine_results(user)
+    records.where(player: player_from_user(user))
+           .pluck(:divine_target_id).compact.map { |id| {Player.find(id).username => Player.find(id).human?} }
+  end
+
   private
 
   def players_from_records(target)

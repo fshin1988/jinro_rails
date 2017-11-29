@@ -203,4 +203,19 @@ RSpec.describe Village, type: :model do
       expect(village.room_for_wolf).to eq village.rooms.for_wolf.first
     end
   end
+
+  describe '#divine_results' do
+    context 'when divined player is human' do
+      it 'returns usernames of divine_target_id' do
+        village = create(:village_with_player, player_num: 13, day: 1)
+        village.assign_role # villager:6, werewolf:3, fortune_teller:1, psychic:1, bodyguard:1, madman:1
+        divined_player = village.players.villager.first
+        fortune_teller = village.players.fortune_teller.first
+        create(:record, village: village, player: fortune_teller, day: 1, divine_target: divined_player)
+
+        expect(village.divine_results(fortune_teller.user)).to eq [{"#{divined_player.username}" => true}]
+      end
+    end
+  end
+
 end
