@@ -155,10 +155,10 @@ class Village < ApplicationRecord
     max = count_by_id.values.max
     targets = count_by_id.select { |_k, v| v == max }
     # if there are multiple players to exclude, choose one player randomly
-    exclude_id = targets.to_a.sample[0]
-    return nil if exclude_id == guarded_player&.id
-    Player.find(exclude_id).update(status: 'dead')
-    Player.find(exclude_id)
+    player = Player.find(targets.to_a.sample[0])
+    return nil if player == guarded_player
+    player.update(status: 'dead')
+    player
   end
 
   def create_rooms
