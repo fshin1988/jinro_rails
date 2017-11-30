@@ -200,6 +200,15 @@ RSpec.describe Village, type: :model do
     end
   end
 
+  describe '#prepare_result' do
+    it 'preapre result record' do
+      village = create(:village_with_player, player_num: 13, day: 1)
+      village.prepare_result
+
+      expect(village.results.where(day: 1)).not_to be_nil
+    end
+  end
+
   describe '#room_for_all' do
     it 'returns a room for all' do
       village = build(:village)

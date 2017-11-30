@@ -31,6 +31,7 @@ class Village < ApplicationRecord
   has_many :rooms
   has_many :players
   has_many :records
+  has_many :results
 
   validates :name, presence: true, length: {maximum: 50}
   validates :player_num, presence: true,
@@ -97,6 +98,10 @@ class Village < ApplicationRecord
     players.alive.each do |p|
       records.create!(player: p, day: day)
     end
+  end
+
+  def prepare_result
+    results.create!(day: day)
   end
 
   def room_for_all
