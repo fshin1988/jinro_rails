@@ -30,9 +30,9 @@ class Api::V1::VillagesController < ApplicationController
     @village.update_divined_player_of_result
     @village.update_guarded_player_of_result
     case @village.judge_end
-    when 2
+    when :werewolf_win
       @village.update!(status: :ended)
-    when 1
+    when :human_win
       @village.update!(status: :ended)
     end
   end
@@ -42,9 +42,9 @@ class Api::V1::VillagesController < ApplicationController
     excluded_player = @village.attack
     @village.results.find_by(day: @village.day).update(attacked_player: excluded_player)
     case @village.judge_end
-    when 2
+    when :werewolf_win
       @village.update!(status: :ended)
-    when 1
+    when :human_win
       @village.update!(status: :ended)
     else
       @village.update!(day: @village.day + 1, next_update_time: Time.now + @village.discussion_time.minutes)
