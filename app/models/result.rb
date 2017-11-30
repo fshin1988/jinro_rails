@@ -18,4 +18,11 @@
 #
 
 class Result < ApplicationRecord
+  belongs_to :village
+  belongs_to :voted_player, class_name: 'Player', optional: true
+  belongs_to :attacked_player, class_name: 'Player', optional: true
+  belongs_to :divined_player, class_name: 'Player', optional: true
+  belongs_to :guarded_player, class_name: 'Player', optional: true
+
+  validates :day, presence: true
 end
