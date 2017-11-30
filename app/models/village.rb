@@ -71,13 +71,11 @@ class Village < ApplicationRecord
     wolf_count = players.alive.werewolf.count
 
     if human_count <= wolf_count
-      self.status = :ended
-      return 2
+      2
     elsif wolf_count.zero?
-      self.status = :ended
-      return 1
+      1
     else
-      return 0
+      0
     end
   end
 

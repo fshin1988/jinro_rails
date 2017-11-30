@@ -34,8 +34,6 @@ class Api::V1::VillagesController < ApplicationController
       @village.update!(status: :ended)
     when 1
       @village.update!(status: :ended)
-    else
-      false
     end
   end
 
