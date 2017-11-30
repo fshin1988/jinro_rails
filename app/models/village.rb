@@ -147,15 +147,13 @@ class Village < ApplicationRecord
     records.select { |r| r.day == day }.map(&target).compact
   end
 
-  def exclude(players, guarded_player = nil)
+  def exclude(target_players, guarded_player = nil)
     count_by_id = Hash.new(0)
-    players.each do |p|
-      count_by_id[p.id] += 1
-    end
+    target_players.each { |p| count_by_id[p.id] += 1 }
     max = count_by_id.values.max
-    targets = count_by_id.select { |_k, v| v == max }
-    # if there are multiple players to exclude, choose one player randomly
-    player = Player.find(targets.to_a.sample[0])
+    players_of_max_number = count_by_id.select { |_k, v| v == max }
+    # if there are multiple players who are voted maximum number, choose one player randomly
+    player = Player.find(players_of_max_number.to_a.sample[0])
     return nil if player == guarded_player
     player.update(status: 'dead')
     player
