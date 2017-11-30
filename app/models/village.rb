@@ -119,7 +119,11 @@ class Village < ApplicationRecord
 
   def divine_results(user)
     return if day < 2
-    yesterday_records(user).pluck(:divine_target_id).compact.map { |id| {Player.find(id).username => Player.find(id).human?} }
+    results = {}
+    yesterday_records(user).pluck(:divine_target_id).compact.each do |id|
+      results[Player.find(id).username] = Player.find(id).human?
+    end
+    results
   end
 
   private

@@ -213,7 +213,7 @@ RSpec.describe Village, type: :model do
         fortune_teller = village.players.fortune_teller.first
         create(:record, village: village, player: fortune_teller, day: 1, divine_target: divined_player)
 
-        expect(village.divine_results(fortune_teller.user)).to eq [{divined_player.username => true}]
+        expect(village.divine_results(fortune_teller.user)).to eq(divined_player.username => true)
       end
     end
 
@@ -225,7 +225,7 @@ RSpec.describe Village, type: :model do
         fortune_teller = village.players.fortune_teller.first
         create(:record, village: village, player: fortune_teller, day: 1, divine_target: divined_player)
 
-        expect(village.divine_results(fortune_teller.user)).to eq [{divined_player.username => false}]
+        expect(village.divine_results(fortune_teller.user)).to eq(divined_player.username => false)
       end
     end
 
@@ -239,19 +239,19 @@ RSpec.describe Village, type: :model do
         create(:record, village: village, player: fortune_teller, day: 1, divine_target: divined_player_human)
         create(:record, village: village, player: fortune_teller, day: 2, divine_target: divined_player_wolf)
 
-        result = [{divined_player_human.username => true}, {divined_player_wolf.username => false}]
+        result = {divined_player_human.username => true, divined_player_wolf.username => false}
         expect(village.divine_results(fortune_teller.user)).to eq result
       end
     end
 
     context 'when divine_target is nil' do
-      it 'returns empty array' do
+      it 'returns empty hash' do
         village = create(:village_with_player, player_num: 13, day: 2)
         village.assign_role # villager:6, werewolf:3, fortune_teller:1, psychic:1, bodyguard:1, madman:1
         fortune_teller = village.players.fortune_teller.first
         create(:record, village: village, player: fortune_teller, day: 1, divine_target: nil)
 
-        expect(village.divine_results(fortune_teller.user)).to eq []
+        expect(village.divine_results(fortune_teller.user)).to eq({})
       end
     end
   end
