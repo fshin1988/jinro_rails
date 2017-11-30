@@ -55,7 +55,7 @@ class Village < ApplicationRecord
       voted_players = players.alive
     end
     excluded_player = exclude(voted_players)
-    results.find_by(day: day).update!(voted_player: excluded_player)
+    results_of_today.update!(voted_player: excluded_player)
   end
 
   def attack
@@ -65,7 +65,7 @@ class Village < ApplicationRecord
     end
     guarded_player = players_from_records(:guard_target).first
     excluded_player = exclude(attacked_players, guarded_player)
-    results.find_by(day: day).update!(attacked_player: excluded_player)
+    results_of_today.update!(attacked_player: excluded_player)
   end
 
   def judge_end
@@ -106,12 +106,12 @@ class Village < ApplicationRecord
 
   def update_divined_player_of_result
     divined_player_id = players.fortune_teller.first.records.find_by(day: day)&.divine_target_id
-    results.find_by(day: day).update!(divined_player_id: divined_player_id)
+    results_of_today.update!(divined_player_id: divined_player_id)
   end
 
   def update_guarded_player_of_result
     guarded_player_id = players.bodyguard.first.records.find_by(day: day)&.guard_target_id
-    results.find_by(day: day).update(guarded_player_id: guarded_player_id)
+    results_of_today.update(guarded_player_id: guarded_player_id)
   end
 
   def room_for_all
@@ -167,5 +167,9 @@ class Village < ApplicationRecord
   def records_until_yesterday(user)
     yesterday = day - 1
     records.where(player: player_from_user(user)).where(day: 1..yesterday)
+  end
+
+  def results_of_today
+    results.find_by(day: day)
   end
 end
