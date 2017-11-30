@@ -186,6 +186,18 @@ RSpec.describe Village, type: :model do
 
       expect(village.records.count).to be 13
     end
+
+    context 'when there is dead player' do
+      it 'creates records except dead player' do
+        village = create(:village_with_player, player_num: 13, day: 1)
+        village.assign_role # villager:6, werewolf:3, fortune_teller:1, psychic:1, bodyguard:1, madman:1
+        dead_player = village.players.first
+        dead_player.update(status: :dead)
+        village.prepare_records
+
+        expect(village.records.count).to be 12
+      end
+    end
   end
 
   describe '#room_for_all' do

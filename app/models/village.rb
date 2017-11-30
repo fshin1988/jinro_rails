@@ -94,7 +94,7 @@ class Village < ApplicationRecord
   end
 
   def prepare_records
-    players.each do |p|
+    players.alive.each do |p|
       records.create!(player: p, day: day)
     end
   end
