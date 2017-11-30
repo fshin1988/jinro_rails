@@ -50,6 +50,7 @@ class VillagesController < ApplicationController
     @village.update!(day: 1, status: :in_play, next_update_time: Time.now + @village.discussion_time.minutes)
     @village.assign_role
     @village.prepare_records
+    @village.prepare_result
     ActionCable.server.broadcast "room:room_channel_#{@village.room_for_all.id}", reload: true
     redirect_to village_room_path(@village, @village.room_for_all), notice: "#{@village.name} を開始しました"
   end
