@@ -25,8 +25,7 @@ class Api::V1::VillagesController < ApplicationController
   private
 
   def noon_process
-    excluded_player = @village.lynch
-    @village.results.find_by(day: @village.day).update(voted_player: excluded_player)
+    @village.lynch
     @village.update_divined_player_of_result
     @village.update_guarded_player_of_result
     case @village.judge_end
@@ -39,8 +38,7 @@ class Api::V1::VillagesController < ApplicationController
 
   def night_process
     return if @village.ended?
-    excluded_player = @village.attack
-    @village.results.find_by(day: @village.day).update(attacked_player: excluded_player)
+    @village.attack
     case @village.judge_end
     when :werewolf_win
       @village.update!(status: :ended)

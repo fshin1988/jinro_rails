@@ -27,70 +27,83 @@ RSpec.describe Village, type: :model do
     end
   end
 
-  it 'excludes the most voted player' do
-    village = create(:village_with_player, player_num: 13, day: 1)
-    voted_player = village.players.first
-    village.players.each do |p|
-      create(:record, village: village, player: p, day: 1, vote_target: voted_player)
-    end
-
-    village.lynch
-    voted_player.reload
-    expect(voted_player.status).to eq 'dead'
-  end
-
-  context 'if all vote_target are not setted' do
-    it 'excludes one player randomly' do
+  describe 'lynch' do
+    it 'excludes the most voted player' do
       village = create(:village_with_player, player_num: 13, day: 1)
+      village.assign_role
+      village.prepare_result
+      voted_player = village.players.first
       village.players.each do |p|
-        create(:record, village: village, player: p, day: 1, vote_target: nil)
+        create(:record, village: village, player: p, day: 1, vote_target: voted_player)
       end
 
       village.lynch
-      expect(village.players.alive.count).to eq 12
-    end
-  end
-
-  it 'excludes the most attacked player' do
-    village = create(:village_with_player, player_num: 13, day: 1)
-    village.assign_role
-    attacked_player = village.players.villager.first
-    village.players.werewolf.each do |w|
-      create(:record, village: village, player: w, day: 1, attack_target: attacked_player)
+      voted_player.reload
+      expect(voted_player.status).to eq 'dead'
+      expect(village.results.find_by(day: 1).voted_player).to eq voted_player
     end
 
-    village.attack
-    attacked_player.reload
-    expect(attacked_player.status).to eq 'dead'
-  end
+    context 'if all vote_target are not setted' do
+      it 'excludes one player randomly' do
+        village = create(:village_with_player, player_num: 13, day: 1)
+        village.assign_role
+        village.prepare_result
+        village.players.each do |p|
+          create(:record, village: village, player: p, day: 1, vote_target: nil)
+        end
 
-  context 'if all attack_target are not setted' do
-    it 'excludes one human randomly' do
-      village = create(:village_with_player, player_num: 13, day: 1)
-      village.assign_role # villager:6, werewolf:3, fortune_teller:1, psychic:1, bodyguard:1, madman:1
-      village.players.werewolf.each do |w|
-        create(:record, village: village, player: w, day: 1, attack_target: nil)
+        village.lynch
+        expect(village.players.alive.count).to eq 12
       end
-
-      village.attack
-      expect(village.players.alive.select(&:human?).count).to eq 9
     end
   end
 
-  context 'if attacked player is same with guarded player' do
-    it 'does not exclude the most attacked player' do
+  describe 'attack' do
+    it 'excludes the most attacked player' do
       village = create(:village_with_player, player_num: 13, day: 1)
       village.assign_role
+      village.prepare_result
       attacked_player = village.players.villager.first
       village.players.werewolf.each do |w|
         create(:record, village: village, player: w, day: 1, attack_target: attacked_player)
       end
-      bodyguard = village.players.bodyguard.first
-      create(:record, village: village, player: bodyguard, day: 1, guard_target: attacked_player)
 
       village.attack
       attacked_player.reload
-      expect(attacked_player.status).to eq 'alive'
+      expect(attacked_player.status).to eq 'dead'
+      expect(village.results.find_by(day: 1).attacked_player).to eq attacked_player
+    end
+
+    context 'if all attack_target are not setted' do
+      it 'excludes one human randomly' do
+        village = create(:village_with_player, player_num: 13, day: 1)
+        village.assign_role
+        village.prepare_result
+        village.players.werewolf.each do |w|
+          create(:record, village: village, player: w, day: 1, attack_target: nil)
+        end
+
+        village.attack
+        expect(village.players.alive.select(&:human?).count).to eq 9
+      end
+    end
+
+    context 'if attacked player is same with guarded player' do
+      it 'does not exclude the most attacked player' do
+        village = create(:village_with_player, player_num: 13, day: 1)
+        village.assign_role
+        village.prepare_result
+        attacked_player = village.players.villager.first
+        village.players.werewolf.each do |w|
+          create(:record, village: village, player: w, day: 1, attack_target: attacked_player)
+        end
+        bodyguard = village.players.bodyguard.first
+        create(:record, village: village, player: bodyguard, day: 1, guard_target: attacked_player)
+
+        village.attack
+        attacked_player.reload
+        expect(attacked_player.status).to eq 'alive'
+      end
     end
   end
 

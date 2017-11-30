@@ -54,7 +54,8 @@ class Village < ApplicationRecord
     if voted_players.blank?
       voted_players = players.alive
     end
-    exclude(voted_players)
+    excluded_player = exclude(voted_players)
+    results.find_by(day: day).update!(voted_player: excluded_player)
   end
 
   def attack
@@ -63,7 +64,8 @@ class Village < ApplicationRecord
       attacked_players = players.alive.select(&:human?)
     end
     guarded_player = players_from_records(:guard_target).first
-    exclude(attacked_players, guarded_player)
+    excluded_player = exclude(attacked_players, guarded_player)
+    results.find_by(day: day).update!(attacked_player: excluded_player)
   end
 
   def judge_end
