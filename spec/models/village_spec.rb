@@ -209,6 +209,34 @@ RSpec.describe Village, type: :model do
     end
   end
 
+  describe '#update_divined_player_of_result' do
+    it 'updates divined_player of result' do
+      village = create(:village_with_player, player_num: 13, day: 1)
+      village.assign_role # villager:6, werewolf:3, fortune_teller:1, psychic:1, bodyguard:1, madman:1
+      village.prepare_result
+      divined_player = village.players.villager.first
+      fortune_teller = village.players.fortune_teller.first
+      create(:record, village: village, player: fortune_teller, day: 1, divine_target: divined_player)
+      village.update_divined_player_of_result
+
+      expect(village.results.find_by(day: 1).divined_player).to eq divined_player
+    end
+  end
+
+  describe '#update_guarded_player_of_result' do
+    it 'updates guarded_player of result' do
+      village = create(:village_with_player, player_num: 13, day: 1)
+      village.assign_role # villager:6, werewolf:3, fortune_teller:1, psychic:1, bodyguard:1, madman:1
+      village.prepare_result
+      guarded_player = village.players.villager.first
+      bodyguard = village.players.bodyguard.first
+      create(:record, village: village, player: bodyguard, day: 1, guard_target: guarded_player)
+      village.update_guarded_player_of_result
+
+      expect(village.results.find_by(day: 1).guarded_player).to eq guarded_player
+    end
+  end
+
   describe '#room_for_all' do
     it 'returns a room for all' do
       village = build(:village)
@@ -276,5 +304,4 @@ RSpec.describe Village, type: :model do
       end
     end
   end
-
 end

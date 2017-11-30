@@ -104,6 +104,16 @@ class Village < ApplicationRecord
     results.create!(day: day)
   end
 
+  def update_divined_player_of_result
+    divined_player_id = players.fortune_teller.first.records.find_by(day: day)&.divine_target_id
+    results.find_by(day: day).update!(divined_player_id: divined_player_id)
+  end
+
+  def update_guarded_player_of_result
+    guarded_player_id = players.bodyguard.first.records.find_by(day: day)&.guard_target_id
+    results.find_by(day: day).update(guarded_player_id: guarded_player_id)
+  end
+
   def room_for_all
     rooms.for_all.first
   end

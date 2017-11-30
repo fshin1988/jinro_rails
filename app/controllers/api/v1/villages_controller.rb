@@ -27,8 +27,8 @@ class Api::V1::VillagesController < ApplicationController
   def noon_process
     excluded_player = @village.lynch
     @village.results.find_by(day: @village.day).update(voted_player: excluded_player)
-    update_divined_player_of_result
-    update_guarded_player_of_result
+    @village.update_divined_player_of_result
+    @village.update_guarded_player_of_result
     case @village.judge_end
     when 2
       @village.update!(status: :ended)
@@ -53,16 +53,6 @@ class Api::V1::VillagesController < ApplicationController
       @village.prepare_records
       @village.prepare_result
     end
-  end
-
-  def update_divined_player_of_result
-    divined_player_id = @village.players.fortune_teller.first.records.find_by(day: @village.day)&.divine_target_id
-    @village.results.find_by(day: @village.day).update(divined_player_id: divined_player_id)
-  end
-
-  def update_guarded_player_of_result
-    guarded_player_id = @village.players.bodyguard.first.records.find_by(day: @village.day)&.guard_target_id
-    @village.results.find_by(day: @village.day).update(guarded_player_id: guarded_player_id)
   end
 
   def set_village
