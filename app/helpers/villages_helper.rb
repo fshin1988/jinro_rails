@@ -1,10 +1,11 @@
 module VillagesHelper
-  def divine_message(divine_results)
-    message = ""
+  def divine_messages(divine_results)
+    return [] unless divine_results
+    messages = []
     divine_results.each do |k, v|
-      message << "#{k}は#{human_or_werewolf(v)}です\n"
+      messages << "#{k}は#{human_or_werewolf(v)}です"
     end
-    simple_format(message.strip)
+    messages
   end
 
   private

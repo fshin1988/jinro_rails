@@ -18,7 +18,7 @@ class Api::V1::VillagesController < ApplicationController
   end
 
   def divine
-    render json: {message: view_context.divine_message(@village.divine_results(current_user))}, status: 200
+    render json: {messages: view_context.divine_messages(@village.divine_results(current_user))}, status: 200
   end
 
   def see_soul

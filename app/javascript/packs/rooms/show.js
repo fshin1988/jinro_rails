@@ -4,6 +4,7 @@ axios.defaults.headers['X-CSRF-TOKEN'] = $('meta[name=csrf-token]').attr('conten
 import Switch from '../components/switch.vue';
 import Notice from '../components/notice.vue';
 import Alert from '../components/alert.vue';
+import Info from '../components/info.vue';
 import Timer from '../components/timer.vue';
 
 new Vue({
@@ -14,6 +15,8 @@ new Vue({
     noticeMessage: "",
     alertDisplay: false,
     alertMessage: "",
+    infoDisplay: false,
+    infoMessages: [],
     villageId: village.id,
     villageStatus: village.status,
     initialRemainingTime: 5,
@@ -72,9 +75,14 @@ new Vue({
       this.alertDisplay = true
       this.alertMessage = message
     },
+    setInfo: function(messages) {
+      this.infoDisplay = true
+      this.infoMessages = messages
+    },
     resetMessage: function() {
       this.noticeDisplay = false
       this.alertDisplay = false
+      this.infoDisplay = false
     },
     setInitialRemainingTime: function() {
       axios.get('/api/v1/villages/' + this.villageId + '/remaining_time')
@@ -84,11 +92,20 @@ new Vue({
     },
     goNextDay: function() {
       axios.get('/api/v1/villages/' + this.villageId + '/go_next_day')
-    }
+    },
+    showDivineResult: function() {
+      axios.get('/api/v1/villages/' + this.villageId + '/divine')
+        .then(res => {
+          this.setInfo(res.data.messages)
+        }, (error) => {
+          this.setAlert("エラーが発生しました")
+        });
+    },
   },
   components: {
     'switch-component': Switch,
     'notice-component': Notice,
+    'info-component': Info,
     'alert-component': Alert,
     'timer-component': Timer
   }
