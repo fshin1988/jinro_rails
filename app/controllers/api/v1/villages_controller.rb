@@ -11,10 +11,8 @@ class Api::V1::VillagesController < ApplicationController
       night_process
       ActionCable.server.broadcast "room:room_channel_#{@village.room_for_all.id}", reload: true
       ActionCable.server.broadcast "room:room_channel_#{@village.room_for_wolf.id}", reload: true
-      head :ok
-    else
-      head :ok
     end
+    head :ok
   end
 
   def divine
