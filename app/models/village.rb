@@ -119,9 +119,7 @@ class Village < ApplicationRecord
 
   def divine_results(user)
     return if day < 2
-    yesterday = day - 1
-    records.where(player: player_from_user(user)).where(day: 1..yesterday)
-           .pluck(:divine_target_id).compact.map { |id| {Player.find(id).username => Player.find(id).human?} }
+    yesterday_records(user).pluck(:divine_target_id).compact.map { |id| {Player.find(id).username => Player.find(id).human?} }
   end
 
   private
@@ -146,5 +144,10 @@ class Village < ApplicationRecord
   def create_rooms
     rooms.create!(room_type: :for_all)
     rooms.create!(room_type: :for_wolf)
+  end
+
+  def yesterday_records(user)
+    yesterday = day - 1
+    records.where(player: player_from_user(user)).where(day: 1..yesterday)
   end
 end
