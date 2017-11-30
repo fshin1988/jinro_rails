@@ -13,7 +13,7 @@ class Api::V1::VillagesController < ApplicationController
       ActionCable.server.broadcast "room:room_channel_#{@village.room_for_wolf.id}", reload: true
       head :ok
     else
-      head :unauthorized
+      head :ok
     end
   end
 
