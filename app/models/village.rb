@@ -89,7 +89,7 @@ class Village < ApplicationRecord
     players.create!(user: user, role: :villager, status: :alive)
   end
 
-  def exclude_player(user)
+  def make_player_exit(user)
     player = players.find_by(user: user)
     player.update!(village_id: 0)
   end

@@ -42,7 +42,7 @@ class VillagesController < ApplicationController
   end
 
   def exit
-    @village.exclude_player(current_user)
+    @village.make_player_exit(current_user)
     redirect_to villages_path, notice: "#{@village.name} から退出しました"
   end
 

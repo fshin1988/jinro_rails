@@ -169,11 +169,11 @@ RSpec.describe Village, type: :model do
     end
   end
 
-  describe '#exclude_player' do
+  describe '#make_player_exit' do
     it 'excludes a player of user' do
       user = create(:user)
       village.create_player(user)
-      village.exclude_player(user)
+      village.make_player_exit(user)
       expect(village.players.where(user: user)).to be_empty
     end
   end
