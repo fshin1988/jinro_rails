@@ -52,7 +52,7 @@ class Village < ApplicationRecord
   def lynch
     voted_players = players_from_records(:vote_target)
     if voted_players.blank?
-      voted_players = players
+      voted_players = players.alive
     end
     exclude(voted_players)
   end
@@ -60,7 +60,7 @@ class Village < ApplicationRecord
   def attack
     attacked_players = players_from_records(:attack_target)
     if attacked_players.blank?
-      attacked_players = players.select(&:human?)
+      attacked_players = players.alive.select(&:human?)
     end
     guarded_player = players_from_records(:guard_target).first
     exclude(attacked_players, guarded_player)
@@ -146,8 +146,9 @@ class Village < ApplicationRecord
     targets = count_by_id.select { |_k, v| v == max }
     # if there are multiple players to exclude, choose one player randomly
     exclude_id = targets.to_a.sample[0]
-    return if exclude_id == guarded_player&.id
+    return nil if exclude_id == guarded_player&.id
     Player.find(exclude_id).update(status: 'dead')
+    Player.find(exclude_id)
   end
 
   def create_rooms
