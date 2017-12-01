@@ -330,4 +330,36 @@ RSpec.describe Village, type: :model do
       end
     end
   end
+
+  describe '#vote_results' do
+    context 'when voted player is human' do
+      it 'returns username and true' do
+        village = create(:village_with_player, player_num: 13, day: 1)
+        village.assign_role # villager:6, werewolf:3, fortune_teller:1, psychic:1, bodyguard:1, madman:1
+        village.prepare_result
+        voted_player = village.players.first
+        village.players.each do |p|
+          create(:record, village: village, player: p, day: 1, vote_target: voted_player)
+        end
+        village.lynch
+
+        expect(village.vote_results).to eq(voted_player.username => true)
+      end
+    end
+
+    context 'when voted player is werewolf' do
+      it 'returns username and false' do
+        village = create(:village_with_player, player_num: 13, day: 1)
+        village.assign_role # villager:6, werewolf:3, fortune_teller:1, psychic:1, bodyguard:1, madman:1
+        village.prepare_result
+        voted_player = village.players.werewolf.first
+        village.players.each do |p|
+          create(:record, village: village, player: p, day: 1, vote_target: voted_player)
+        end
+        village.lynch
+
+        expect(village.vote_results).to eq(voted_player.username => false)
+      end
+    end
+  end
 end

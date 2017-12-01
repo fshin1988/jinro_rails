@@ -140,6 +140,14 @@ class Village < ApplicationRecord
     hash
   end
 
+  def vote_results
+    hash = {}
+    results.pluck(:voted_player_id).compact.each do |id|
+      hash[Player.find(id).username] = Player.find(id).human?
+    end
+    hash
+  end
+
   private
 
   def players_from_records(target)
