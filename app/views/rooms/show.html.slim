@@ -55,6 +55,11 @@
             .form-group
               button.btn.btn-warning.btn-sm[v-on:click="showDivineResult"]
                 | 占い結果
+        - if @village.player_from_user(current_user)&.psychic?
+          - if @village.day > 1
+            .form-group
+              button.btn.btn-warning.btn-sm[v-on:click="showVoteResult"]
+                | 霊媒結果
         - if @village.player_from_user(current_user)&.bodyguard?
           .form-group
             label 護衛先：

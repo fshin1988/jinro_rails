@@ -101,6 +101,14 @@ new Vue({
           this.setAlert("エラーが発生しました")
         });
     },
+    showVoteResult: function() {
+      axios.get('/api/v1/villages/' + this.villageId + '/see_soul')
+        .then(res => {
+          this.setInfo(res.data.messages)
+        }, (error) => {
+          this.setAlert("エラーが発生しました")
+        });
+    },
   },
   components: {
     'switch-component': Switch,
