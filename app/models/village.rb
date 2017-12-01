@@ -132,13 +132,12 @@ class Village < ApplicationRecord
     time > 0 ? time : 0
   end
 
-  def divine_results(user)
-    return if day < 2
-    results = {}
-    records_until_yesterday(user).pluck(:divine_target_id).compact.each do |id|
-      results[Player.find(id).username] = Player.find(id).human?
+  def divine_results
+    hash = {}
+    results.pluck(:divined_player_id).compact.each do |id|
+      hash[Player.find(id).username] = Player.find(id).human?
     end
-    results
+    hash
   end
 
   private
@@ -162,11 +161,6 @@ class Village < ApplicationRecord
   def create_rooms
     rooms.create!(room_type: :for_all)
     rooms.create!(room_type: :for_wolf)
-  end
-
-  def records_until_yesterday(user)
-    yesterday = day - 1
-    records.where(player: player_from_user(user)).where(day: 1..yesterday)
   end
 
   def results_of_today

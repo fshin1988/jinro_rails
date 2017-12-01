@@ -269,51 +269,64 @@ RSpec.describe Village, type: :model do
   describe '#divine_results' do
     context 'when divined player is human' do
       it 'returns username of divine_target_id and true' do
-        village = create(:village_with_player, player_num: 13, day: 2)
+        village = create(:village_with_player, player_num: 13, day: 1)
         village.assign_role # villager:6, werewolf:3, fortune_teller:1, psychic:1, bodyguard:1, madman:1
+        village.prepare_result
         divined_player = village.players.villager.first
         fortune_teller = village.players.fortune_teller.first
         create(:record, village: village, player: fortune_teller, day: 1, divine_target: divined_player)
+        village.update_divined_player_of_result
 
-        expect(village.divine_results(fortune_teller.user)).to eq(divined_player.username => true)
+        expect(village.divine_results).to eq(divined_player.username => true)
       end
     end
 
     context 'when divined player is werewolf' do
       it 'returns username of divine_target_id and false' do
-        village = create(:village_with_player, player_num: 13, day: 2)
+        village = create(:village_with_player, player_num: 13, day: 1)
         village.assign_role # villager:6, werewolf:3, fortune_teller:1, psychic:1, bodyguard:1, madman:1
+        village.prepare_result
         divined_player = village.players.werewolf.first
         fortune_teller = village.players.fortune_teller.first
         create(:record, village: village, player: fortune_teller, day: 1, divine_target: divined_player)
+        village.update_divined_player_of_result
 
-        expect(village.divine_results(fortune_teller.user)).to eq(divined_player.username => false)
+        expect(village.divine_results).to eq(divined_player.username => false)
       end
     end
 
     context 'when divined player is multiple' do
       it 'returns multiple divine results' do
-        village = create(:village_with_player, player_num: 13, day: 3)
+        # first day
+        village = create(:village_with_player, player_num: 13, day: 1)
         village.assign_role # villager:6, werewolf:3, fortune_teller:1, psychic:1, bodyguard:1, madman:1
+        village.prepare_result
         divined_player_human = village.players.villager.first
-        divined_player_wolf = village.players.werewolf.first
         fortune_teller = village.players.fortune_teller.first
         create(:record, village: village, player: fortune_teller, day: 1, divine_target: divined_player_human)
+        village.update_divined_player_of_result
+        # second day
+        village.update(day: 2)
+        village.prepare_result
+        divined_player_wolf = village.players.werewolf.first
         create(:record, village: village, player: fortune_teller, day: 2, divine_target: divined_player_wolf)
+        village.update_divined_player_of_result
 
         result = {divined_player_human.username => true, divined_player_wolf.username => false}
-        expect(village.divine_results(fortune_teller.user)).to eq result
+        expect(village.divine_results).to eq result
       end
     end
 
     context 'when divine_target is nil' do
       it 'returns empty hash' do
-        village = create(:village_with_player, player_num: 13, day: 2)
+        village = create(:village_with_player, player_num: 13, day: 1)
         village.assign_role # villager:6, werewolf:3, fortune_teller:1, psychic:1, bodyguard:1, madman:1
+        village.prepare_result
         fortune_teller = village.players.fortune_teller.first
         create(:record, village: village, player: fortune_teller, day: 1, divine_target: nil)
+        village.update_divined_player_of_result
 
-        expect(village.divine_results(fortune_teller.user)).to eq({})
+        expect(village.divine_results).to eq({})
       end
     end
   end
