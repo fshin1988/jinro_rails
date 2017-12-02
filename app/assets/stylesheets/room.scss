@@ -24,6 +24,20 @@
     border-bottom: 1px dotted #B3A9A9;
 }
 
+.chat li.system
+{
+  border-bottom: none;
+  border: 1px solid firebrick;
+}
+
+.chat li.system .chat-body
+{
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
 .chat li.left .chat-body
 {
     margin-left: 50px;
@@ -33,7 +47,6 @@
 {
     margin-right: 60px;
 }
-
 
 .chat li .chat-body p
 {

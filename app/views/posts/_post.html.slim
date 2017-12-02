@@ -1,10 +1,15 @@
-li.left.clearfix
-  span.chat-img.pull-left
-    img.img-circle[src="http://placehold.it/40/b0c4de/fff&text=U"]
-  .chat-body.clearfix
-    .header
-      strong.chat-username
-        = post.player.username
-      small.pull-right.text-muted
-        = post.created_at.strftime('%H:%M:%S')
-    = simple_format(h(post.content))
+- if post.player?
+  li.left.clearfix
+    span.chat-img.pull-left
+      img.img-circle[src="http://placehold.it/40/b0c4de/fff&text=U"]
+    .chat-body.clearfix
+      .header
+        strong.chat-username
+          = post.player.username
+        small.pull-right.text-muted
+          = post.created_at.strftime('%H:%M:%S')
+      = simple_format(h(post.content))
+- else
+  li.system.clearfix
+    .chat-body.clearfix
+      = simple_format(h(post.content))
