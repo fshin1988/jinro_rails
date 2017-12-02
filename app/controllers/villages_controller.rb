@@ -1,4 +1,6 @@
 class VillagesController < ApplicationController
+  include VillagesHelper
+
   before_action :set_village, only: %i[edit update destroy join exit start]
   before_action :authorize_village, only: %i[index new create]
 
@@ -38,13 +40,13 @@ class VillagesController < ApplicationController
 
   def join
     player = @village.create_player(current_user)
-    @village.room_for_all.posts.create!(content: "#{@village.players.count}人目、#{player.username}が参加しました", day: @village.day, owner: :system)
+    @village.room_for_all.posts.create!(content: join_message(@village, player), day: @village.day, owner: :system)
     redirect_to village_room_path(@village, @village.room_for_all), notice: "#{@village.name} に参加しました"
   end
 
   def exit
     player = @village.make_player_exit(current_user)
-    @village.room_for_all.posts.create!(content: "#{player.username}が退出しました", day: @village.day, owner: :system)
+    @village.room_for_all.posts.create!(content: exit_message(player), day: @village.day, owner: :system)
     redirect_to villages_path, notice: "#{@village.name} から退出しました"
   end
 

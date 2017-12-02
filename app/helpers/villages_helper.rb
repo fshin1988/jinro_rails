@@ -8,6 +8,14 @@ module VillagesHelper
     messages
   end
 
+  def join_message(village, player)
+    "#{village.players.count}人目、#{player.username}が参加しました"
+  end
+
+  def exit_message(player)
+    "#{player.username}が退出しました"
+  end
+
   private
 
   def human_or_werewolf(bool)
