@@ -37,12 +37,14 @@ class VillagesController < ApplicationController
   end
 
   def join
-    @village.create_player(current_user)
+    player = @village.create_player(current_user)
+    @village.room_for_all.posts.create!(content: "#{@village.players.count}人目、#{player.username}が参加しました", day: @village.day, owner: :system)
     redirect_to village_room_path(@village, @village.room_for_all), notice: "#{@village.name} に参加しました"
   end
 
   def exit
-    @village.make_player_exit(current_user)
+    player = @village.make_player_exit(current_user)
+    @village.room_for_all.posts.create!(content: "#{player.username}が退出しました", day: @village.day, owner: :system)
     redirect_to villages_path, notice: "#{@village.name} から退出しました"
   end
 

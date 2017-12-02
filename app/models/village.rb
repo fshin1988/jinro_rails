@@ -86,12 +86,14 @@ class Village < ApplicationRecord
   end
 
   def create_player(user)
-    players.create!(user: user, role: :villager, status: :alive)
+    player = players.create!(user: user, role: :villager, status: :alive)
+    player
   end
 
   def make_player_exit(user)
     player = players.find_by(user: user)
     player.update!(village_id: 0)
+    player
   end
 
   def prepare_records
