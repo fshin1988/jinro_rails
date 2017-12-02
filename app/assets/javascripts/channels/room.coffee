@@ -31,3 +31,13 @@ $(document).on 'click', '[data-behavior~=room_speaker]', ->
     player_id = input.data('player_id')
     App.room.speak(input.val(), player_id)
     input.val('')
+
+$(document).on 'keydown', '#btn-input', (event) ->
+  if event.shiftKey
+    if event.keyCode is 13
+      input = $('#btn-input')
+      if input.val() != ''
+        player_id = input.data('player_id')
+        App.room.speak(input.val(), player_id)
+        input.val('')
+        event.preventDefault()
