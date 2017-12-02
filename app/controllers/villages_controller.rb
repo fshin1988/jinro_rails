@@ -55,6 +55,7 @@ class VillagesController < ApplicationController
     @village.assign_role
     @village.prepare_records
     @village.prepare_result
+    @village.room_for_all.posts.create!(content: start_message(@village), day: @village.day, owner: :system)
     ReloadBroadcastJob.perform_later(@village)
     redirect_to village_room_path(@village, @village.room_for_all), notice: "#{@village.name} を開始しました"
   end

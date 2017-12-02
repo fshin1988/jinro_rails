@@ -16,10 +16,26 @@ module VillagesHelper
     "#{player.username}が退出しました"
   end
 
+  def start_message(village)
+    message = ""
+    message << "この中には"
+    Player.roles.keys.each do |role|
+      count = role_count(village, role)
+      next if count == 0
+      message << "、#{I18n.t("activerecord.attributes.player.role_enums.#{role}")}が#{count}名"
+    end
+    message << "います\n"
+    message << "それでは今から、人狼を見つけるために話し合ってください"
+  end
+
   private
 
   def human_or_werewolf(bool)
     return "人間" if bool
     "人狼"
+  end
+
+  def role_count(village, role)
+    Settings.role_list[village.player_num].count(role)
   end
 end
