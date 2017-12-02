@@ -6,7 +6,7 @@
   #title-area
     span.room-title = room_title(@village)
     - if @village.in_play?
-      timer-component[v-bind:initial-remaining-time="initialRemainingTime" v-on:finish="goNextDay"]
+      timer-component[v-bind:initial-remaining-time="initialRemainingTime" v-on:finish="proceed"]
   .panel-body.chat-body.flex-col
     ul#message-list.chat.flex-col[data-room_id="#{@room.id}"]
       = render @room.posts.includes(:player)

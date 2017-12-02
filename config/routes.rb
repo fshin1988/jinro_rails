@@ -18,7 +18,7 @@ Rails.application.routes.draw do
       resources :villages, only: [:show] do
         member do
           get 'remaining_time'
-          get 'go_next_day'
+          get 'proceed'
           get 'divine'
           get 'see_soul'
         end

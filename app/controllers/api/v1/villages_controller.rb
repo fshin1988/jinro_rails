@@ -5,7 +5,7 @@ class Api::V1::VillagesController < ApplicationController
     render json: {remaining_time: @village.remaining_time}, status: 200
   end
 
-  def go_next_day
+  def proceed
     if @village.next_update_time <= Time.now
       noon_process
       night_process

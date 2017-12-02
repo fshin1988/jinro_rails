@@ -90,8 +90,8 @@ new Vue({
           this.initialRemainingTime = res.data.remaining_time
         });
     },
-    goNextDay: function() {
-      axios.get('/api/v1/villages/' + this.villageId + '/go_next_day')
+    proceed: function() {
+      axios.get('/api/v1/villages/' + this.villageId + '/proceed')
     },
     showDivineResult: function() {
       axios.get('/api/v1/villages/' + this.villageId + '/divine')
