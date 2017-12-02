@@ -18,6 +18,8 @@
 #
 
 class Post < ApplicationRecord
+  after_create_commit { MessageBroadcastJob.perform_later self }
+
   enum owner: {
     player: 0,
     system: 1

@@ -11,12 +11,5 @@ class RoomChannel < ApplicationCable::Channel
   def speak(data)
     player = Player.find data['player_id'].to_i
     post = Post.create!(player: player, room: @room, content: data['message'], day: @room.village.day)
-    RoomChannel.broadcast_to("room_channel_#{params[:room_id]}", message: render_post(post))
-  end
-
-  private
-
-  def render_post(post)
-    ApplicationController.renderer.render(partial: 'posts/post', locals: {post: post})
   end
 end
