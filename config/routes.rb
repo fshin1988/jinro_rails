@@ -13,7 +13,6 @@ Rails.application.routes.draw do
   end
   namespace :api, format: 'json' do
     namespace :v1 do
-      resources :rooms, only: [:index, :show]
       resources :records, only: [:index, :update]
       resources :villages, only: [:show] do
         member do
