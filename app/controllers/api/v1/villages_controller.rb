@@ -1,4 +1,6 @@
 class Api::V1::VillagesController < ApplicationController
+  include VillagesHelper
+
   before_action :set_village
 
   def remaining_time
@@ -15,11 +17,11 @@ class Api::V1::VillagesController < ApplicationController
   end
 
   def divine
-    render json: {messages: view_context.messages_of_result(@village.divine_results)}, status: 200
+    render json: {messages: messages_of_result(@village.divine_results)}, status: 200
   end
 
   def see_soul
-    render json: {messages: view_context.messages_of_result(@village.vote_results)}, status: 200
+    render json: {messages: messages_of_result(@village.vote_results)}, status: 200
   end
 
   private
