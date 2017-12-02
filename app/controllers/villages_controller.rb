@@ -51,7 +51,7 @@ class VillagesController < ApplicationController
     @village.assign_role
     @village.prepare_records
     @village.prepare_result
-    ActionCable.server.broadcast "room:room_channel_#{@village.room_for_all.id}", reload: true
+    ReloadBroadcastJob.perform_later(@village)
     redirect_to village_room_path(@village, @village.room_for_all), notice: "#{@village.name} を開始しました"
   end
 
