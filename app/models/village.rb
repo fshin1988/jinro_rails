@@ -150,6 +150,10 @@ class Village < ApplicationRecord
     hash
   end
 
+  def results_of_today
+    results.find_by(day: day)
+  end
+
   private
 
   def players_from_records(target)
@@ -171,9 +175,5 @@ class Village < ApplicationRecord
   def create_rooms
     rooms.create!(room_type: :for_all)
     rooms.create!(room_type: :for_wolf)
-  end
-
-  def results_of_today
-    results.find_by(day: day)
   end
 end

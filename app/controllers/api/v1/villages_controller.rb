@@ -30,6 +30,7 @@ class Api::V1::VillagesController < ApplicationController
     @village.lynch
     @village.update_divined_player_of_result
     @village.update_guarded_player_of_result
+    @village.room_for_all.posts.create!(content: noon_message(@village), day: @village.day, owner: :system)
     case @village.judge_end
     when :werewolf_win
       @village.update!(status: :ended)

@@ -28,6 +28,18 @@ module VillagesHelper
     message << "それでは今から、人狼を見つけるために話し合ってください"
   end
 
+  def noon_message(village)
+    message = ""
+    village.records.where(day: village.day).each do |record|
+      if record.vote_target
+        message << "#{record.player.username}は #{record.vote_target.username} に投票した\n"
+      else
+        message << "#{record.player.username}は投票しなかった\n"
+      end
+    end
+    message << "投票の結果、#{village.results_of_today.voted_player.username}は処刑された"
+  end
+
   private
 
   def human_or_werewolf(bool)
