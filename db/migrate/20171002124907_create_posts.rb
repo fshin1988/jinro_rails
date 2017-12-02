@@ -5,6 +5,7 @@ class CreatePosts < ActiveRecord::Migration[5.1]
       t.references :room, null: false
       t.text :content, null: false
       t.integer :day, null: false
+      t.integer :owner, default: 0, null: false
 
       t.timestamps
     end

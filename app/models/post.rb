@@ -7,6 +7,7 @@
 #  room_id    :integer          not null
 #  content    :text(65535)      not null
 #  day        :integer          not null
+#  owner      :integer          default("player"), not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
@@ -17,9 +18,14 @@
 #
 
 class Post < ApplicationRecord
+  enum owner: {
+    player: 0,
+    system: 1
+  }
+
   belongs_to :player
   belongs_to :room
 
-  validates :content, presence: true, length: { maximum: 280 }
+  validates :content, presence: true
   validates :day, presence: true
 end
