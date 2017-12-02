@@ -17,7 +17,8 @@ scroll_down = ->
   $('.chat-body').scrollTop(scroll_available())
 
 $(document).ready ->
-  scroll_down()
+  if $('.chat-body').length > 0
+    scroll_down()
 
 $(document).on 'turbolinks:request-start', ->
   if current_room_ch()?
