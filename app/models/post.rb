@@ -3,7 +3,7 @@
 # Table name: posts
 #
 #  id         :integer          not null, primary key
-#  player_id  :integer          not null
+#  player_id  :integer
 #  room_id    :integer          not null
 #  content    :text(65535)      not null
 #  day        :integer          not null
@@ -25,9 +25,10 @@ class Post < ApplicationRecord
     system: 1
   }
 
-  belongs_to :player
+  belongs_to :player, optional: true
   belongs_to :room
 
+  validates :player_id, presence: true, if: :player?
   validates :content, presence: true
   validates :day, presence: true
 end

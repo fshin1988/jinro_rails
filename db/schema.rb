@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20171130104625) do
   end
 
   create_table "posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "player_id", null: false
+    t.bigint "player_id"
     t.bigint "room_id", null: false
     t.text "content", null: false
     t.integer "day", null: false
