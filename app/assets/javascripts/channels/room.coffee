@@ -10,6 +10,15 @@ current_room_ch = ->
   else
     return null
 
+scroll_available = ->
+  $('.chat-body').get(0).scrollHeight - $('.chat-body').outerHeight()
+
+scroll_down = ->
+  $('.chat-body').scrollTop(scroll_available())
+
+$(document).ready ->
+  scroll_down()
+
 $(document).on 'turbolinks:request-start', ->
   if current_room_ch()?
     App.room.unsubscribe()
@@ -21,7 +30,15 @@ $(document).on 'turbolinks:load', ->
         if data['reload']
           location.reload(true)
         else if data['message']
+          scroll_position = $('.chat-body').scrollTop()
+          # If the current scroll position is at the bottom, scroll down
+          if scroll_position is scroll_available()
+            scroll_flag = true
+          else
+            scroll_flag = false
           $('#message-list').append data['message']
+          if scroll_flag
+            scroll_down()
       speak: (message, player_id) ->
         @perform('speak', {message: message, player_id: player_id})
 
