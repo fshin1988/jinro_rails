@@ -167,7 +167,7 @@ class Village < ApplicationRecord
     players_of_max_number = count_by_id.select { |_k, v| v == max }
     # if there are multiple players who are voted maximum number, choose one player randomly
     player = Player.find(players_of_max_number.to_a.sample[0])
-    return nil if player == guarded_player
+    return nil if player == guarded_player || player.dead?
     player.update(status: 'dead')
     player
   end

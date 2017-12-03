@@ -17,8 +17,7 @@ module VillagesHelper
   end
 
   def start_message(village)
-    message = ""
-    message << "この中には"
+    message = "この中には"
     Player.roles.keys.each do |role|
       count = role_count(village, role)
       next if count == 0
@@ -38,6 +37,23 @@ module VillagesHelper
       end
     end
     message << "投票の結果、#{village.results_of_today.voted_player.username}は処刑された"
+  end
+
+  def night_message(village)
+    message = "夜が明けた\n"
+    if village.results_of_today.attacked_player
+      message << "昨晩の犠牲者は #{village.results_of_today.attacked_player.username} だった"
+    else
+      message << "昨晩は犠牲者がいなかったようだ"
+    end
+  end
+
+  def morning_message(village)
+    message = "現在の生存者は"
+    village.players.alive.each do |player|
+      message << "、#{player.username}"
+    end
+    message << "の#{village.players.alive.count}名だ"
   end
 
   private

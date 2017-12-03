@@ -42,6 +42,7 @@ class Api::V1::VillagesController < ApplicationController
   def night_process
     return if @village.ended?
     @village.attack
+    @village.room_for_all.posts.create!(content: night_message(@village), day: @village.day, owner: :system)
     case @village.judge_end
     when :werewolf_win
       @village.update!(status: :ended)
@@ -51,6 +52,7 @@ class Api::V1::VillagesController < ApplicationController
       @village.update!(day: @village.day + 1, next_update_time: Time.now + @village.discussion_time.minutes)
       @village.prepare_records
       @village.prepare_result
+      @village.room_for_all.posts.create!(content: morning_message(@village), day: @village.day, owner: :system)
     end
   end
 
