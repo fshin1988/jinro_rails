@@ -8,10 +8,12 @@ class Api::V1::VillagesController < ApplicationController
   end
 
   def proceed
-    if @village.next_update_time <= Time.now
-      noon_process
-      night_process
-      ReloadBroadcastJob.perform_later(@village)
+    @village.with_lock do
+      if @village.next_update_time <= Time.now
+        noon_process
+        night_process
+        ReloadBroadcastJob.perform_later(@village)
+      end
     end
     head :ok
   end
