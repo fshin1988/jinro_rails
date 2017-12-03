@@ -1,5 +1,5 @@
 <template>
-  <button v-on:click="emitSwitch">切り替え</button>
+  <i class="fa fa-exchange fa-switch" v-on:click="emitSwitch"></i>
 </template>
 
 <script>

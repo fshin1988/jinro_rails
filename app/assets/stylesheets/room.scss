@@ -111,6 +111,9 @@
     background-color: transparent;
     padding: 5px 15px 1px;
   }
+  &.skill-area {
+    padding: 5px 15px 1px;
+  }
 }
 
 .api-message-enter-active, .api-message-leave-active {
@@ -123,4 +126,23 @@
 #timer {
   float: right;
   color: red;
+}
+
+.fa.fa-switch {
+  font-size: 23px;
+  margin-top: 3px;
+}
+
+.role {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.form-control.select-player {
+  max-width: 200px;
+}
+
+button.btn-set {
+  margin-top: 10px;
 }
