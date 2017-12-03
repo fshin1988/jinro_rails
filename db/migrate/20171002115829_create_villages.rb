@@ -8,6 +8,7 @@ class CreateVillages < ActiveRecord::Migration[5.1]
       t.datetime :next_update_time
       t.integer :discussion_time, null: false
       t.integer :status, default: 0, null: false
+      t.integer :winner
 
       t.timestamps null: false
     end

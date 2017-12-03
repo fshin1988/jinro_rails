@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(version: 20171130104625) do
     t.datetime "next_update_time"
     t.integer "discussion_time", null: false
     t.integer "status", default: 0, null: false
+    t.integer "winner"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_villages_on_user_id"

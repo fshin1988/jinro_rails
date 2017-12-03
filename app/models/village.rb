@@ -10,6 +10,7 @@
 #  next_update_time :datetime
 #  discussion_time  :integer          not null
 #  status           :integer          default("not_started"), not null
+#  winner           :integer
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #
@@ -25,6 +26,11 @@ class Village < ApplicationRecord
     not_started: 0,
     in_play: 1,
     ended: 2
+  }
+
+  enum winner: {
+    human: 0,
+    werewolf: 1
   }
 
   belongs_to :user
