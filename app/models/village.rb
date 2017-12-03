@@ -29,8 +29,8 @@ class Village < ApplicationRecord
   }
 
   enum winner: {
-    human: 0,
-    werewolf: 1
+    human_win: 0,
+    werewolf_win: 1
   }
 
   belongs_to :user
@@ -118,6 +118,7 @@ class Village < ApplicationRecord
   end
 
   def update_guarded_player_of_result
+    return unless players.bodyguard.first
     guarded_player_id = players.bodyguard.first.records.find_by(day: day)&.guard_target_id
     results_of_today.update(guarded_player_id: guarded_player_id)
   end

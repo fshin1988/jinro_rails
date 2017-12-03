@@ -56,6 +56,25 @@ module VillagesHelper
     message << "の#{village.players.alive.count}名だ"
   end
 
+  def end_message(village)
+    message = ""
+    if village.werewolf_win?
+      message << "もう人狼に抵抗できるほど村人は残っていない\n"
+      message << "人狼は残った村人を全て食らい、村を去っていった"
+    elsif village.human_win?
+      message << "全ての人狼は息絶えた\n"
+      message << "村人は人狼との戦いに勝利したのだ"
+    end
+  end
+
+  def reveal_message(village)
+    message = "プレイヤーの役職は以下の通りでした\n"
+    village.players.each do |player|
+      message << "#{player.username} : #{I18n.t("activerecord.attributes.player.role_enums.#{player.role}")}\n"
+    end
+    message
+  end
+
   private
 
   def human_or_werewolf(bool)
