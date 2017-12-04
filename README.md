@@ -1,24 +1,34 @@
-# README
+# Jinro Rails
+Jinro Rails is the open source werewolf game application.
+You can play the werewolf game with chat.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Screenshots
+![](docs/screenshot_01.png)
+![](docs/screenshot_02.png)
 
-Things you may want to cover:
+## Built with
+Jinro Rails is built with following libraries.
 
-* Ruby version
+- Ruby
+- Ruby on Rails
+- Vue.js
+- MySQL
 
-* System dependencies
+## Development
+To develop Jinro Rails, you should run servers of Ruby on Rails and Webpack.
 
-* Configuration
+```
+$ git clone https://github.com/fshin1988/jinro_rails.git
+$ cd jinro_rails
+$ bin/setup
+$ bin/rails s
+$ bin/webpack-dev-server
+```
 
-* Database creation
+To update the application you just run `bin/update`.
 
-* Database initialization
+## Contributing
+Bug reports and pull requests are welcome on GitHub at https://github.com/fshin1988/jinro_rails
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## License
+The application is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
