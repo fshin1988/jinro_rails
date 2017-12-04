@@ -7,7 +7,7 @@
   color: #2c2d30;
   font-weight: 600;
   margin-left: 10px;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .chat
@@ -125,7 +125,7 @@
 
 #timer {
   float: right;
-  color: red;
+  color: crimson;
 }
 
 .fa.fa-switch {
@@ -134,14 +134,14 @@
 }
 
 .role {
-  color: red;
+  color: crimson;
   font-weight: bold;
   margin-top: 10px;
 }
 
 .row.select-player {
   margin-right: 0;
-  max-width: 500px;
+  max-width: 300px;
 }
 
 .fa.default-user-icon {
@@ -151,4 +151,8 @@
 
 .fa.hourglass-with-timer {
   margin-right: 3px;
+}
+
+.col-xs-9.col-select-box {
+  padding-right: 10px;
 }

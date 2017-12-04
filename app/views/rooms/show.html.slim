@@ -27,7 +27,7 @@
           = "役職：" + t("activerecord.attributes.player.role_enums.#{@village.player_from_user(current_user)&.role}")
         label 投票先
         .row.select-player
-          .col-xs-9
+          .col-xs-9.col-select-box
             .form-group
               select.form-control[v-model="voteSelected"]
                 option[disabled value=""] 投票先を選択
@@ -40,7 +40,7 @@
           .form-group
             label 襲撃先
             .row.select-player
-              .col-xs-9
+              .col-xs-9.col-select-box
                 select.form-control.select-player[v-model="attackSelected"]
                   option[disabled value=""] 襲撃先を選択
                   - @village.players.alive.select(&:human?).each do |p|
@@ -52,7 +52,7 @@
           .form-group
             label 占い先
             .row.select-player
-              .col-xs-9
+              .col-xs-9.col-select-box
                 select.form-control.select-player[v-model="divineSelected"]
                   option[disabled value=""] 占い先を選択
                   - @village.players.alive.each do |p|
@@ -74,7 +74,7 @@
           .form-group
             label 護衛先
             .row.select-player
-              .col-xs-9
+              .col-xs-9.col-select-box
                 select.form-control.select-player[v-model="guardSelected"]
                   option[disabled value=""] 護衛先を選択
                   - @village.players.alive.each do |p|
