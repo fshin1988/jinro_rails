@@ -1,5 +1,6 @@
 <template>
   <span id="timer">
+    <i class="fa fa-hourglass-2 hourglass-with-timer"></i>
     <span>{{ remainingMin }}分</span>
     <span>{{ remainingSec }}秒</span>
   </span>
