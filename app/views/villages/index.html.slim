@@ -6,7 +6,7 @@ table class="table table-striped"
       th 村名
       th 人数
       th 状態
-      th.text-center[width="200px"] 操作
+      th.text-center 操作
 
   tbody
     - @villages.each do |village|
@@ -14,10 +14,11 @@ table class="table table-striped"
         td = link_to village.name, village_room_path(village, village.room_for_all), data: {turbolinks: "false"}
         td = village.player_num
         td = t("activerecord.attributes.village.status.#{village.status}")
-        td.pull-right
-          = button_to '編集', edit_village_path(village), method: :get
-        td.pull-right
-           = button_to '削除', village, method: :delete, data: { confirm: '本当に削除しますか？' }
+        td.text-center
+          - if policy(village).edit?
+            = link_to '編集', edit_village_path(village), method: :get
+          - else
+            = "-"
 
 .village-footer
   .pull-right

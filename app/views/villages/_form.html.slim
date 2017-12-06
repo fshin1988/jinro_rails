@@ -17,5 +17,8 @@
 
   - if @village.persisted?
     .actions = f.submit "更新", class: 'btn btn-primary'
+    br
+    - if policy(@village).destroy?
+      = button_to '削除', @village, method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger'
   - else
     .actions = f.submit "作成", class: 'btn btn-primary'
