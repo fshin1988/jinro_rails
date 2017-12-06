@@ -12,6 +12,7 @@ class VillagePolicy < ApplicationPolicy
   end
 
   def update?
+    return false unless record.not_started?
     if user.admin?
       true
     else
@@ -24,6 +25,7 @@ class VillagePolicy < ApplicationPolicy
   end
 
   def destroy?
+    return false unless record.not_started?
     if user.admin?
       true
     else

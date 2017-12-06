@@ -15,4 +15,7 @@
     = f.label :discussion_time
     = f.number_field :discussion_time, class: 'form-control'
 
-  .actions = f.submit "作成", class: 'btn btn-primary'
+  - if @village.persisted?
+    .actions = f.submit "更新", class: 'btn btn-primary'
+  - else
+    .actions = f.submit "作成", class: 'btn btn-primary'
