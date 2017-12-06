@@ -34,8 +34,8 @@ class Village < ApplicationRecord
   }
 
   belongs_to :user
-  has_many :rooms
-  has_many :players
+  has_many :rooms, dependent: :destroy
+  has_many :players, dependent: :destroy
   has_many :records
   has_many :results
 
