@@ -44,7 +44,7 @@ class Village < ApplicationRecord
                          numericality: {only_integer: true, greater_than_or_equal_to: 5, less_than_or_equal_to: 16}
   validates :day, presence: true
   validates :discussion_time, presence: true,
-                              numericality: {only_integer: true, less_than_or_equal_to: 1440}
+                              numericality: {only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 60}
   validates :status, presence: true
 
   def assign_role
