@@ -42,6 +42,7 @@ class Village < ApplicationRecord
   validates :name, presence: true, length: {maximum: 50}
   validates :player_num, presence: true,
                          numericality: {only_integer: true, greater_than_or_equal_to: 5, less_than_or_equal_to: 16}
+  validate :player_num_must_be_greater_than_current_num, on: :update
   validates :day, presence: true
   validates :discussion_time, presence: true,
                               numericality: {only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 60}
@@ -182,5 +183,11 @@ class Village < ApplicationRecord
   def create_rooms
     rooms.create!(room_type: :for_all)
     rooms.create!(room_type: :for_wolf)
+  end
+
+  def player_num_must_be_greater_than_current_num
+    if player_num < players.count
+      errors.add(:player_num, "は現在のプレイヤー数(#{players.count})以上に設定してください")
+    end
   end
 end
