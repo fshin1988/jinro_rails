@@ -9,16 +9,16 @@
     = f.label :name
     = f.text_field :name, autofocus: true, class: 'form-control'
   .form-group
-    = f.label :player_num
+    = f.label :player_num, "人数 (5~16人)"
     = f.number_field :player_num, class: 'form-control'
   .form-group
-    = f.label :discussion_time
+    = f.label :discussion_time, "議論時間 (1~60分)"
     = f.number_field :discussion_time, class: 'form-control'
 
   - if @village.persisted?
     .actions = f.submit "更新", class: 'btn btn-primary'
-    br
-    - if policy(@village).destroy?
-      = button_to '削除', @village, method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger'
   - else
     .actions = f.submit "作成", class: 'btn btn-primary'
+- if @village.persisted? && policy(@village).destroy?
+  br
+  = button_to '削除', @village, method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger'

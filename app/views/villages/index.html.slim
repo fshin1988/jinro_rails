@@ -5,6 +5,7 @@ table class="table table-striped"
     tr
       th 村名
       th 人数
+      th 議論時間
       th 状態
       th.text-center 操作
 
@@ -12,7 +13,8 @@ table class="table table-striped"
     - @villages.each do |village|
       tr
         td = link_to village.name, village_room_path(village, village.room_for_all), data: {turbolinks: "false"}
-        td = village.player_num
+        td = "#{village.player_num} 人"
+        td = "#{village.discussion_time} 分"
         td = t("activerecord.attributes.village.status.#{village.status}")
         td.text-center
           - if policy(village).edit?
