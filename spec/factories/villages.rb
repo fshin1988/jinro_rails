@@ -5,7 +5,6 @@ FactoryGirl.define do
     player_num 13
     day 1
     discussion_time 10
-    status :in_play
 
     factory :village_with_player do
       after(:create) do |v|
