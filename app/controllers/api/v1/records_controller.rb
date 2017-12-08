@@ -1,16 +1,11 @@
 class Api::V1::RecordsController < ApplicationController
-  before_action :set_record, only: :update
-
-  def index
-    records = Record.where(village_id: params[:village])
-    render json: records
-  end
+  before_action :set_record
 
   def update
     if @record.update(record_params)
-      render json: @record, status: 200
+      head :ok
     else
-      render json: {error: @record.errors}, status: 422
+      head :bad_request
     end
   end
 
