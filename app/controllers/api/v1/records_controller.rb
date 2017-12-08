@@ -18,6 +18,7 @@ class Api::V1::RecordsController < ApplicationController
 
   def set_record
     @record = Record.find(params[:id])
+    authorize @record
   end
 
   def record_params
