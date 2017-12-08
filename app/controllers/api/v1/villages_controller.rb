@@ -71,5 +71,6 @@ class Api::V1::VillagesController < ApplicationController
 
   def set_village
     @village = Village.find(params[:id])
+    authorize @village
   end
 end

@@ -56,4 +56,28 @@ class VillagePolicy < ApplicationPolicy
       false
     end
   end
+
+  def remaining_time?
+    true
+  end
+
+  def proceed?
+    true
+  end
+
+  def divine?
+    if record.player_from_user(user)&.fortune_teller? && record.player_from_user(user).alive?
+      true
+    else
+      false
+    end
+  end
+
+  def see_soul?
+    if record.player_from_user(user)&.psychic? && record.player_from_user(user).alive?
+      true
+    else
+      false
+    end
+  end
 end
