@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   end
   namespace :api, format: 'json' do
     namespace :v1 do
-      resources :records, only: [:index, :update]
+      resources :records, only: [:update]
       resources :villages, only: [:show] do
         member do
           get 'remaining_time'
