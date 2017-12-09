@@ -1,4 +1,4 @@
-class Api::V1::RecordsController < ApplicationController
+class Api::V1::RecordsController < Api::V1::ApiController
   before_action :set_record
 
   def vote

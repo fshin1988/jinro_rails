@@ -1,4 +1,4 @@
-class Api::V1::VillagesController < ApplicationController
+class Api::V1::VillagesController < Api::V1::ApiController
   include VillagesHelper
 
   before_action :set_village
