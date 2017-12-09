@@ -1,8 +1,32 @@
 class Api::V1::RecordsController < ApplicationController
   before_action :set_record
 
-  def update
-    if @record.update(record_params)
+  def vote
+    if @record.update(vote_params)
+      head :ok
+    else
+      head :bad_request
+    end
+  end
+
+  def attack
+    if @record.update(attack_params)
+      head :ok
+    else
+      head :bad_request
+    end
+  end
+
+  def divine
+    if @record.update(divine_params)
+      head :ok
+    else
+      head :bad_request
+    end
+  end
+
+  def guard
+    if @record.update(guard_params)
       head :ok
     else
       head :bad_request
@@ -16,7 +40,19 @@ class Api::V1::RecordsController < ApplicationController
     authorize @record
   end
 
-  def record_params
-    params.require(:record).permit(:vote_target_id, :attack_target_id, :divine_target_id, :guard_target_id)
+  def vote_params
+    params.require(:record).permit(:vote_target_id)
+  end
+
+  def attack_params
+    params.require(:record).permit(:attack_target_id)
+  end
+
+  def divine_params
+    params.require(:record).permit(:divine_target_id)
+  end
+
+  def guard_params
+    params.require(:record).permit(:guard_target_id)
   end
 end
