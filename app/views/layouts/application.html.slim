@@ -21,9 +21,13 @@ html lang="ja"
               span class="icon-bar"
               span class="icon-bar"
             - if controller_name == 'rooms'
-              = link_to '戻る', villages_path, class: "navbar-brand"
+              a.navbar-brand[href="#{villages_path}"]
+                i.fa.fa-chevron-left.navbar-back
+                | 戻る
             - else
-              = link_to 'ホーム', root_path, class: "navbar-brand"
+              a.navbar-brand.navbar-home[href="#{root_path}"]
+                i.fa.fa-home.navbar-brand-icon
+                | ホーム
           #navbar class="collapse navbar-collapse navbar-collapse-#{@color_of_navbar}" aria-expanded="false"
             ul class="nav navbar-nav"
               - if controller_name == 'rooms'
@@ -39,10 +43,19 @@ html lang="ja"
                   li = link_to 'ルームへ', village_room_path(@village, @village.room_for_all), data: {turbolinks: "false"}
               - else
                 - if user_signed_in?
-                  li = link_to '設定変更', edit_user_registration_path
-                  li = link_to 'ログアウト', destroy_user_session_path, method: :delete
+                  li
+                    a[href="#{edit_user_registration_path}"]
+                      i.fa.fa-gear.navbar-icon
+                      | 設定変更
+                  li
+                    a[href="#{destroy_user_session_path}" data-method="delete"]
+                      i.fa.fa-sign-out.navbar-icon
+                      | ログアウト
                 - else
-                  li = link_to 'ユーザー登録', new_user_registration_path
+                  li
+                    a[href="#{new_user_registration_path}"]
+                      i.fa.fa-user-plus.navbar-icon
+                      | ユーザー登録
 
       .container.flex-col
         - if notice
