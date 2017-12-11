@@ -51,10 +51,8 @@ class VillagesController < ApplicationController
   end
 
   def start
-    @village.update!(day: 1, status: :in_play, next_update_time: Time.now + @village.discussion_time.minutes)
     @village.assign_role
-    @village.prepare_records
-    @village.prepare_result
+    @village.update_to_next_day
     @village.room_for_all.posts.create!(content: start_message(@village), day: @village.day, owner: :system)
     ReloadBroadcastJob.perform_later(@village)
     redirect_to village_room_path(@village, @village.room_for_all), notice: "#{@village.name} を開始しました"

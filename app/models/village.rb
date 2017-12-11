@@ -107,14 +107,10 @@ class Village < ApplicationRecord
     player
   end
 
-  def prepare_records
-    players.alive.each do |p|
-      records.create!(player: p, day: day)
-    end
-  end
-
-  def prepare_result
-    results.create!(day: day)
+  def update_to_next_day
+    update!(day: day + 1, next_update_time: Time.now + discussion_time.minutes)
+    prepare_records
+    prepare_result
   end
 
   def update_divined_player_of_result
@@ -201,5 +197,15 @@ class Village < ApplicationRecord
 
   def player_num_must_be_greater_than_current_num
     errors.add(:player_num, "は現在のプレイヤー数(#{players.count})以上に設定してください") if player_num < players.count
+  end
+
+  def prepare_records
+    players.alive.each do |p|
+      records.create!(player: p, day: day)
+    end
+  end
+
+  def prepare_result
+    results.create!(day: day)
   end
 end

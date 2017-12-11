@@ -45,9 +45,7 @@ class Api::V1::VillagesController < Api::V1::ApiController
   end
 
   def proceed_to_next_day
-    @village.update!(day: @village.day + 1, next_update_time: Time.now + @village.discussion_time.minutes)
-    @village.prepare_records
-    @village.prepare_result
+    @village.update_to_next_day
     @village.room_for_all.posts.create!(content: morning_message(@village), day: @village.day, owner: :system)
   end
 
