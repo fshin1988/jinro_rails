@@ -105,6 +105,29 @@ RSpec.describe Village, type: :model do
         expect(attacked_player.status).to eq 'alive'
       end
     end
+
+    context 'if bodyguard is voted player and attacked player is same with guarded player' do
+      it 'exclude the most attacked player' do
+        village = create(:village_with_player, player_num: 13, day: 1)
+        village.assign_role
+        village.prepare_result
+        bodyguard = village.players.bodyguard.first
+        village.players.each do |p|
+          create(:record, village: village, player: p, day: 1, vote_target: bodyguard)
+        end
+
+        attacked_player = village.players.villager.first
+        village.players.werewolf.each do |w|
+          create(:record, village: village, player: w, day: 1, attack_target: attacked_player)
+        end
+        create(:record, village: village, player: bodyguard, day: 1, guard_target: attacked_player)
+
+        village.lynch
+        village.attack
+        attacked_player.reload
+        expect(attacked_player.status).to eq 'dead'
+      end
+    end
   end
 
   describe '#judge_end' do

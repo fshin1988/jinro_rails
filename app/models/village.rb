@@ -70,7 +70,12 @@ class Village < ApplicationRecord
     if attacked_players.blank?
       attacked_players = players.alive.select(&:human?)
     end
-    guarded_player = players_from_records(:guard_target).first
+    guarded_player =
+      if players.alive.bodyguard.present?
+        players_from_records(:guard_target).first
+      else
+        nil
+      end
     excluded_player = exclude(attacked_players, guarded_player)
     results_of_today.update!(attacked_player: excluded_player)
   end
