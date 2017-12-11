@@ -362,7 +362,7 @@ RSpec.describe Village, type: :model do
         village = create(:village_with_player, player_num: 13, day: 1)
         village.assign_role # villager:6, werewolf:3, fortune_teller:1, psychic:1, bodyguard:1, madman:1
         village.prepare_result
-        voted_player = village.players.first
+        voted_player = village.players.select(&:human?).first
         village.players.each do |p|
           create(:record, village: village, player: p, day: 1, vote_target: voted_player)
         end
