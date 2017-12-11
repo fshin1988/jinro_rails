@@ -62,6 +62,7 @@ RSpec.describe Village, type: :model do
     it 'excludes the most attacked player' do
       village = create(:village_with_player, player_num: 13, day: 1)
       village.assign_role
+      village.prepare_records
       village.prepare_result
       attacked_player = village.players.villager.first
       village.players.werewolf.each do |w|
@@ -78,6 +79,7 @@ RSpec.describe Village, type: :model do
       it 'excludes one human randomly' do
         village = create(:village_with_player, player_num: 13, day: 1)
         village.assign_role
+        village.prepare_records
         village.prepare_result
         village.players.werewolf.each do |w|
           create(:record, village: village, player: w, day: 1, attack_target: nil)

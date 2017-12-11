@@ -57,25 +57,24 @@ class Village < ApplicationRecord
   end
 
   def lynch
-    voted_players = players_from_records(:vote_target)
-    if voted_players.blank?
-      voted_players = players.alive
-    end
+    voted_players =
+      if vote_target_players.present?
+        vote_target_players
+      else
+        players.alive
+      end
     excluded_player = exclude(voted_players)
     results_of_today.update!(voted_player: excluded_player)
   end
 
   def attack
-    attacked_players = players_from_records(:attack_target)
-    if attacked_players.blank?
-      attacked_players = players.alive.select(&:human?)
-    end
-    guarded_player =
-      if players.alive.bodyguard.present?
-        players_from_records(:guard_target).first
+    attacked_players =
+      if attack_target_players.present?
+        attack_target_players
       else
-        nil
+        players.alive.select(&:human?)
       end
+    guarded_player = guard_target_player
     excluded_player = exclude(attacked_players, guarded_player)
     results_of_today.update!(attacked_player: excluded_player)
   end
@@ -169,8 +168,18 @@ class Village < ApplicationRecord
 
   private
 
-  def players_from_records(target)
-    records.select { |r| r.day == day }.map(&target).compact
+  def vote_target_players
+    records.select { |r| r.day == day }.map(&:vote_target).compact
+  end
+
+  def attack_target_players
+    records.select { |r| r.day == day }.map(&:attack_target).compact
+  end
+
+  def guard_target_player
+    bodyguard = players.alive.bodyguard.first
+    return nil unless bodyguard
+    bodyguard.records.find { |r| r.day == day }.guard_target
   end
 
   def exclude(target_players, guarded_player = nil)
@@ -191,8 +200,6 @@ class Village < ApplicationRecord
   end
 
   def player_num_must_be_greater_than_current_num
-    if player_num < players.count
-      errors.add(:player_num, "は現在のプレイヤー数(#{players.count})以上に設定してください")
-    end
+    errors.add(:player_num, "は現在のプレイヤー数(#{players.count})以上に設定してください") if player_num < players.count
   end
 end
