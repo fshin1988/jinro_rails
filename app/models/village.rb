@@ -141,7 +141,7 @@ class Village < ApplicationRecord
     records.where(player: player_from_user(user), day: day).first
   end
 
-  # 残り時間(秒)を返す
+  # Return remaining time by seconds
   def remaining_time
     time = (next_update_time - Time.now).to_i
     time > 0 ? time : 0
