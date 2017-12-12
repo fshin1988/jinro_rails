@@ -245,31 +245,33 @@ RSpec.describe Village, type: :model do
     end
   end
 
-  describe '#update_divined_player_of_result' do
-    it 'updates divined_player of result' do
-      village = create(:village_with_player, player_num: 13, day: 0)
-      village.assign_role # villager:6, werewolf:3, fortune_teller:1, psychic:1, bodyguard:1, madman:1
-      village.update_to_next_day
-      divined_player = village.players.villager.first
-      fortune_teller = village.players.fortune_teller.first
-      fortune_teller.records.first.update(divine_target: divined_player)
-      village.update_divined_player_of_result
+  describe '#update_results' do
+    describe '#update_divined_player_of_result' do
+      it 'updates divined_player of result' do
+        village = create(:village_with_player, player_num: 13, day: 0)
+        village.assign_role # villager:6, werewolf:3, fortune_teller:1, psychic:1, bodyguard:1, madman:1
+        village.update_to_next_day
+        divined_player = village.players.villager.first
+        fortune_teller = village.players.fortune_teller.first
+        fortune_teller.records.first.update(divine_target: divined_player)
+        village.update_results
 
-      expect(village.results.find_by(day: 1).divined_player).to eq divined_player
+        expect(village.results.find_by(day: 1).divined_player).to eq divined_player
+      end
     end
-  end
 
-  describe '#update_guarded_player_of_result' do
-    it 'updates guarded_player of result' do
-      village = create(:village_with_player, player_num: 13, day: 0)
-      village.assign_role # villager:6, werewolf:3, fortune_teller:1, psychic:1, bodyguard:1, madman:1
-      village.update_to_next_day
-      guarded_player = village.players.villager.first
-      bodyguard = village.players.bodyguard.first
-      bodyguard.records.first.update(guard_target: guarded_player)
-      village.update_guarded_player_of_result
+    describe '#update_guarded_player_of_result' do
+      it 'updates guarded_player of result' do
+        village = create(:village_with_player, player_num: 13, day: 0)
+        village.assign_role # villager:6, werewolf:3, fortune_teller:1, psychic:1, bodyguard:1, madman:1
+        village.update_to_next_day
+        guarded_player = village.players.villager.first
+        bodyguard = village.players.bodyguard.first
+        bodyguard.records.first.update(guard_target: guarded_player)
+        village.update_results
 
-      expect(village.results.find_by(day: 1).guarded_player).to eq guarded_player
+        expect(village.results.find_by(day: 1).guarded_player).to eq guarded_player
+      end
     end
   end
 
@@ -298,7 +300,7 @@ RSpec.describe Village, type: :model do
         divined_player = village.players.villager.first
         fortune_teller = village.players.fortune_teller.first
         fortune_teller.records.first.update(divine_target: divined_player)
-        village.update_divined_player_of_result
+        village.update_results
 
         expect(village.divine_results).to eq(divined_player.username => true)
       end
@@ -312,7 +314,7 @@ RSpec.describe Village, type: :model do
         divined_player = village.players.werewolf.first
         fortune_teller = village.players.fortune_teller.first
         fortune_teller.records.first.update(divine_target: divined_player)
-        village.update_divined_player_of_result
+        village.update_results
 
         expect(village.divine_results).to eq(divined_player.username => false)
       end
@@ -328,13 +330,13 @@ RSpec.describe Village, type: :model do
         fortune_teller = village.players.fortune_teller.first
         record = village.records.find_by(player: fortune_teller, day: village.day)
         record.update(divine_target: divined_player_human)
-        village.update_divined_player_of_result
+        village.update_results
         # second day
         village.update_to_next_day
         divined_player_wolf = village.players.werewolf.first
         record = village.records.find_by(player: fortune_teller, day: village.day)
         record.update(divine_target: divined_player_wolf)
-        village.update_divined_player_of_result
+        village.update_results
 
         result = {divined_player_human.username => true, divined_player_wolf.username => false}
         expect(village.divine_results).to eq result
@@ -348,7 +350,7 @@ RSpec.describe Village, type: :model do
         village.update_to_next_day
         fortune_teller = village.players.fortune_teller.first
         create(:record, village: village, player: fortune_teller, day: 1, divine_target: nil)
-        village.update_divined_player_of_result
+        village.update_results
 
         expect(village.divine_results).to eq({})
       end

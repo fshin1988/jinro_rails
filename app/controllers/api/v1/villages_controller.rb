@@ -31,8 +31,7 @@ class Api::V1::VillagesController < Api::V1::ApiController
 
   def noon_process
     @village.lynch
-    @village.update_divined_player_of_result
-    @village.update_guarded_player_of_result
+    @village.update_results
     @village.room_for_all.posts.create!(content: noon_message(@village), day: @village.day, owner: :system)
     end_process
   end
