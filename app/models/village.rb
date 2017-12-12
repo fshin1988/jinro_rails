@@ -114,14 +114,15 @@ class Village < ApplicationRecord
   end
 
   def update_divined_player_of_result
-    divined_player_id = players.fortune_teller.first.records.find_by(day: day)&.divine_target_id
-    result_of_today.update!(divined_player_id: divined_player_id)
+    return unless players.alive.fortune_teller.present?
+    divine_target = records_of_today.find_by(player: players.fortune_teller.first).divine_target
+    result_of_today.update!(divined_player: divine_target)
   end
 
   def update_guarded_player_of_result
-    return unless players.bodyguard.first
-    guarded_player_id = players.bodyguard.first.records.find_by(day: day)&.guard_target_id
-    result_of_today.update(guarded_player_id: guarded_player_id)
+    return unless players.alive.bodyguard.present?
+    guard_target = records_of_today.find_by(player: players.bodyguard.first).guard_target
+    result_of_today.update(guarded_player: guard_target)
   end
 
   def room_for_all
