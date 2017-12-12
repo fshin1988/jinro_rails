@@ -175,7 +175,7 @@ class Village < ApplicationRecord
   def guard_target_player
     bodyguard = players.alive.bodyguard.first
     return nil unless bodyguard
-    bodyguard.records.find { |r| r.day == day }.guard_target
+    records_of_today.find_by(player: bodyguard).guard_target
   end
 
   def exclude(target_players, guarded_player = nil)
