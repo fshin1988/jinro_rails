@@ -12,6 +12,7 @@ class Api::V1::VillagesController < Api::V1::ApiController
       if @village.next_update_time <= Time.now
         noon_process
         night_process
+        proceed_to_next_day
         ReloadBroadcastJob.perform_later(@village)
       end
     end
@@ -40,11 +41,11 @@ class Api::V1::VillagesController < Api::V1::ApiController
     return if @village.ended?
     @village.attack
     @village.room_for_all.posts.create!(content: night_message(@village), day: @village.day, owner: :system)
-    return if end_process
-    proceed_to_next_day
+    end_process
   end
 
   def proceed_to_next_day
+    return if @village.ended?
     @village.update_to_next_day
     @village.room_for_all.posts.create!(content: morning_message(@village), day: @village.day, owner: :system)
   end
@@ -57,8 +58,6 @@ class Api::V1::VillagesController < Api::V1::ApiController
     when :human_win
       @village.update!(status: :ended, winner: :human_win)
       create_end_message
-    else
-      false
     end
   end
 
