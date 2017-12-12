@@ -36,13 +36,13 @@ module VillagesHelper
         message << "#{record.player.username}は投票しなかった\n"
       end
     end
-    message << "投票の結果、#{village.results_of_today.voted_player.username}は処刑された"
+    message << "投票の結果、#{village.result_of_today.voted_player.username}は処刑された"
   end
 
   def night_message(village)
     message = "夜が明けた\n"
-    if village.results_of_today.attacked_player
-      message << "昨晩の犠牲者は #{village.results_of_today.attacked_player.username} だった"
+    if village.result_of_today.attacked_player
+      message << "昨晩の犠牲者は #{village.result_of_today.attacked_player.username} だった"
     else
       message << "昨晩は犠牲者がいなかったようだ"
     end
