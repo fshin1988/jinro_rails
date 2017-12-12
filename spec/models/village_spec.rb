@@ -214,34 +214,53 @@ RSpec.describe Village, type: :model do
     end
   end
 
-  describe '#prepare_records' do
-    it 'creates reocrds for each players' do
+  describe '#update_to_next_day' do
+    it 'update day to next day' do
       village = create(:village_with_player, player_num: 13, day: 1)
-      village.assign_role # villager:6, werewolf:3, fortune_teller:1, psychic:1, bodyguard:1, madman:1
       village.update_to_next_day
 
-      expect(village.records.count).to be 13
+      expect(village.day).to be 2
     end
 
-    context 'when there is dead player' do
-      it 'creates records except dead player' do
+    it 'update next_update_time' do
+      Timecop.freeze
+      now = Time.now
+      village = create(:village_with_player, player_num: 13, day: 1, next_update_time: now)
+      village.update_to_next_day
+
+      expect(village.next_update_time).to be > now
+      Timecop.return
+    end
+
+    describe '#prepare_records' do
+      it 'creates reocrds for each players' do
         village = create(:village_with_player, player_num: 13, day: 1)
         village.assign_role # villager:6, werewolf:3, fortune_teller:1, psychic:1, bodyguard:1, madman:1
-        dead_player = village.players.first
-        dead_player.update(status: :dead)
         village.update_to_next_day
 
-        expect(village.records.count).to be 12
+        expect(village.records.count).to be 13
+      end
+
+      context 'when there is dead player' do
+        it 'creates records except dead player' do
+          village = create(:village_with_player, player_num: 13, day: 1)
+          village.assign_role # villager:6, werewolf:3, fortune_teller:1, psychic:1, bodyguard:1, madman:1
+          dead_player = village.players.first
+          dead_player.update(status: :dead)
+          village.update_to_next_day
+
+          expect(village.records.count).to be 12
+        end
       end
     end
-  end
 
-  describe '#prepare_result' do
-    it 'preapre result record' do
-      village = create(:village_with_player, player_num: 13, day: 0)
-      village.update_to_next_day
+    describe '#prepare_result' do
+      it 'preapre result record' do
+        village = create(:village_with_player, player_num: 13, day: 0)
+        village.update_to_next_day
 
-      expect(village.results.where(day: 1)).not_to be_nil
+        expect(village.results.where(day: 1)).not_to be_nil
+      end
     end
   end
 
