@@ -11,6 +11,7 @@ class RoomsController < ApplicationController
     @room = Room.find(params[:id])
     authorize @room
     @village = @room.village
+    @record = @village.record_from_user(current_user)
   end
 
   def color_of_navbar

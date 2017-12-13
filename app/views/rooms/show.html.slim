@@ -14,7 +14,7 @@
                            (@village.ended? && @village.player_from_user(current_user)))
     template[v-if="chatDisplay"]
       .panel-footer.chat-area
-        - if @village.in_play?
+        - if policy(@record).vote?
           switch-component[v-on:switch="switchArea"]
         button#btn-chat.btn.btn-warning.btn-sm[type="submit" data-behavior="room_speaker"]
           |  送信
@@ -36,7 +36,7 @@
           button#btn-vote.btn.btn-warning.btn-sm[v-on:click="setVoteTarget"]
             | セット
         / for werewolf
-        - if @village.player_from_user(current_user)&.werewolf?
+        - if policy(@record).attack?
           .form-group
             label 襲撃先
             .row.select-player
@@ -48,7 +48,7 @@
               button#btn-attack.btn.btn-warning.btn-sm[v-on:click="setAttackTarget"]
                 | セット
         / for fortune_teller
-        - if @village.player_from_user(current_user)&.fortune_teller?
+        - if policy(@record).divine?
           .form-group
             label 占い先
             .row.select-player
@@ -64,13 +64,12 @@
               button.btn.btn-info.btn-sm[v-on:click="showDivineResult"]
                 | 占い結果
         / for psychi
-        - if @village.player_from_user(current_user)&.psychic?
-          - if @village.day > 1
-            .form-group
-              button.btn.btn-info.btn-sm[v-on:click="showVoteResult"]
-                | 霊媒結果
+        - if policy(@village).see_soul? && @village.day > 1
+          .form-group
+            button.btn.btn-info.btn-sm[v-on:click="showVoteResult"]
+              | 霊媒結果
         / for bodyguard
-        - if @village.player_from_user(current_user)&.bodyguard?
+        - if policy(@record).guard?
           .form-group
             label 護衛先
             .row.select-player
@@ -83,7 +82,7 @@
                 | セット
 
 javascript:
-  var record = #{@village.record_from_user(current_user).to_json.html_safe}
+  var record = #{@record.to_json.html_safe}
   var village = #{@village.to_json.html_safe}
 
 = javascript_pack_tag 'rooms/show'
