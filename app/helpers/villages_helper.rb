@@ -29,7 +29,7 @@ module VillagesHelper
 
   def noon_message(village)
     message = ""
-    village.records.where(day: village.day).each do |record|
+    village.records.where(day: village.day).includes(:player).each do |record|
       if record.vote_target
         message << "#{record.player.username}は #{record.vote_target.username} に投票した\n"
       else

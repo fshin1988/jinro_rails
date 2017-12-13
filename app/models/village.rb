@@ -163,11 +163,11 @@ class Village < ApplicationRecord
   private
 
   def vote_target_players
-    records_of_today.map(&:vote_target).compact
+    records_of_today.includes(:vote_target).map(&:vote_target).compact
   end
 
   def attack_target_players
-    records_of_today.map(&:attack_target).compact
+    records_of_today.includes(:attack_target).map(&:attack_target).compact
   end
 
   def guard_target_player
