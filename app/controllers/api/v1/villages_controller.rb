@@ -32,21 +32,21 @@ class Api::V1::VillagesController < Api::V1::ApiController
   def noon_process
     @village.lynch
     @village.update_results
-    @village.room_for_all.posts.create!(content: noon_message(@village), day: @village.day, owner: :system)
+    @village.post_system_message(noon_message(@village))
     end_process
   end
 
   def night_process
     return if @village.ended?
     @village.attack
-    @village.room_for_all.posts.create!(content: night_message(@village), day: @village.day, owner: :system)
+    @village.post_system_message(night_message(@village))
     end_process
   end
 
   def proceed_to_next_day
     return if @village.ended?
     @village.update_to_next_day
-    @village.room_for_all.posts.create!(content: morning_message(@village), day: @village.day, owner: :system)
+    @village.post_system_message(morning_message(@village))
   end
 
   def end_process
@@ -61,8 +61,8 @@ class Api::V1::VillagesController < Api::V1::ApiController
   end
 
   def create_end_message
-    @village.room_for_all.posts.create!(content: end_message(@village), day: @village.day, owner: :system)
-    @village.room_for_all.posts.create!(content: reveal_message(@village), day: @village.day, owner: :system)
+    @village.post_system_message(end_message(@village))
+    @village.post_system_message(reveal_message(@village))
   end
 
   def set_village

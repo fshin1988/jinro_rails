@@ -407,4 +407,13 @@ RSpec.describe Village, type: :model do
       end
     end
   end
+
+  describe '#post_system_message' do
+    it 'creates post of room_for_all' do
+      village = create(:village, day: 1)
+      village.post_system_message("Hello world")
+
+      expect(village.room_for_all.posts.count).to eq 1
+    end
+  end
 end

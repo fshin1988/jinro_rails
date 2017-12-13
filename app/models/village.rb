@@ -156,6 +156,10 @@ class Village < ApplicationRecord
     results.find_by(day: day)
   end
 
+  def post_system_message(content)
+    room_for_all.posts.create!(content: content, day: day, owner: :system)
+  end
+
   private
 
   def vote_target_players
