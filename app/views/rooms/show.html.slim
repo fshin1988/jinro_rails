@@ -55,7 +55,7 @@
               .col-xs-9.col-select-box
                 select.form-control.select-player[v-model="divineSelected"]
                   option[disabled value=""] 占い先を選択
-                  - @village.players.alive.each do |p|
+                  - @village.players.alive.where.not(role: :fortune_teller).each do |p|
                     option[value="#{p.id}"] = p.username
               button#btn-divine.btn.btn-warning.btn-sm[v-on:click="setDivineTarget"]
                 | セット
@@ -77,7 +77,7 @@
               .col-xs-9.col-select-box
                 select.form-control.select-player[v-model="guardSelected"]
                   option[disabled value=""] 護衛先を選択
-                  - @village.players.alive.each do |p|
+                  - @village.players.alive.where.not(role: :bodyguard).each do |p|
                     option[value="#{p.id}"] = p.username
               button#btn-guard.btn.btn-warning.btn-sm[v-on:click="setGuardTarget"]
                 | セット
