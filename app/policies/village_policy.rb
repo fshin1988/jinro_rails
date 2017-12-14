@@ -66,7 +66,7 @@ class VillagePolicy < ApplicationPolicy
   end
 
   def divine?
-    if record.player_from_user(user)&.fortune_teller? && record.player_from_user(user).alive?
+    if record.player_from_user(user)&.fortune_teller? && record.player_from_user(user).alive? && record.day > 1
       true
     else
       false
@@ -74,7 +74,7 @@ class VillagePolicy < ApplicationPolicy
   end
 
   def see_soul?
-    if record.player_from_user(user)&.psychic? && record.player_from_user(user).alive?
+    if record.player_from_user(user)&.psychic? && record.player_from_user(user).alive? && record.day > 1
       true
     else
       false

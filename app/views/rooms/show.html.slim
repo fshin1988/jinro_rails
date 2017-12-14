@@ -24,7 +24,7 @@
       .panel-footer.skill-area
         switch-component[v-on:switch="switchArea"]
         p.role
-          = "役職：" + t("activerecord.attributes.player.role_enums.#{@village.player_from_user(current_user)&.role}")
+          = "役職：" + t("activerecord.attributes.player.role_enums.#{@village.player_from_user(current_user).role}")
         label 投票先
         .row.select-player
           .col-xs-9.col-select-box
@@ -59,12 +59,12 @@
                     option[value="#{p.id}"] = p.username
               button#btn-divine.btn.btn-warning.btn-sm[v-on:click="setDivineTarget"]
                 | セット
-          - if @village.day > 1
+          - if policy(@village).divine?
             .form-group
               button.btn.btn-info.btn-sm[v-on:click="showDivineResult"]
                 | 占い結果
         / for psychi
-        - if policy(@village).see_soul? && @village.day > 1
+        - if policy(@village).see_soul?
           .form-group
             button.btn.btn-info.btn-sm[v-on:click="showVoteResult"]
               | 霊媒結果
