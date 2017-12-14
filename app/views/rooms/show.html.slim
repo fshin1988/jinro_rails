@@ -14,7 +14,7 @@
                            (@village.ended? && @village.player_from_user(current_user)))
     template[v-if="chatDisplay"]
       .panel-footer.chat-area
-        - if policy(@record).vote?
+        - if @record && policy(@record).vote?
           switch-component[v-on:switch="switchArea"]
         button#btn-chat.btn.btn-warning.btn-sm[type="submit" data-behavior="room_speaker"]
           |  送信
@@ -36,7 +36,7 @@
           button#btn-vote.btn.btn-warning.btn-sm[v-on:click="setVoteTarget"]
             | セット
         / for werewolf
-        - if policy(@record).attack?
+        - if @record && policy(@record).attack?
           .form-group
             label 襲撃先
             .row.select-player
@@ -48,7 +48,7 @@
               button#btn-attack.btn.btn-warning.btn-sm[v-on:click="setAttackTarget"]
                 | セット
         / for fortune_teller
-        - if policy(@record).divine?
+        - if @record && policy(@record).divine?
           .form-group
             label 占い先
             .row.select-player
@@ -69,7 +69,7 @@
             button.btn.btn-info.btn-sm[v-on:click="showVoteResult"]
               | 霊媒結果
         / for bodyguard
-        - if policy(@record).guard?
+        - if @record && policy(@record).guard?
           .form-group
             label 護衛先
             .row.select-player
