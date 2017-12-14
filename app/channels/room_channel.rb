@@ -4,12 +4,8 @@ class RoomChannel < ApplicationCable::Channel
     @room = Room.find params[:room_id]
   end
 
-  def unsubscribed
-    # Any cleanup needed when channel is unsubscribed
-  end
-
   def speak(data)
-    player = Player.find data['player_id'].to_i
-    post = Post.create!(player: player, room: @room, content: data['message'], day: @room.village.day)
+    player = @room.village.player_from_user(current_user)
+    @room.posts.create!(player: player, content: data['message'], day: @room.village.day)
   end
 end

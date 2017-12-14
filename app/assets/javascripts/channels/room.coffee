@@ -40,14 +40,13 @@ $(document).on 'turbolinks:load', ->
           $('#message-list').append data['message']
           if scroll_flag
             scroll_down()
-      speak: (message, player_id) ->
-        @perform('speak', {message: message, player_id: player_id})
+      speak: (message) ->
+        @perform('speak', {message: message})
 
 $(document).on 'click', '[data-behavior~=room_speaker]', ->
   input = $('#btn-input')
   if input.val() != ''
-    player_id = input.data('player_id')
-    App.room.speak(input.val(), player_id)
+    App.room.speak input.val()
     input.val('')
 
 $(document).on 'keydown', '#btn-input', (event) ->
@@ -55,7 +54,6 @@ $(document).on 'keydown', '#btn-input', (event) ->
     if event.keyCode is 13
       input = $('#btn-input')
       if input.val() != ''
-        player_id = input.data('player_id')
-        App.room.speak(input.val(), player_id)
+        App.room.speak input.val()
         input.val('')
         event.preventDefault()

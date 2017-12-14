@@ -19,7 +19,7 @@
         button#btn-chat.btn.btn-warning.btn-sm[type="submit" data-behavior="room_speaker"]
           |  送信
         .form-group
-          textarea#btn-input.form-control.input-sm[rows="3" data-player_id="#{@village.player_from_user(current_user).id}" placeholder="Shift + Enterで送信"]
+          textarea#btn-input.form-control.input-sm[rows="3" placeholder="Shift + Enterで送信"]
     template[v-else]
       .panel-footer.skill-area
         switch-component[v-on:switch="switchArea"]
