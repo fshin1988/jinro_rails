@@ -1,4 +1,7 @@
-h1 村を探す
+.village-header
+  .pull-right.create-village-button
+    = button_to "新規作成", new_village_path, method: :get, class: 'btn btn-sm btn-primary'
+  h1 村を探す
 
 table class="table table-striped table-villages"
   thead
@@ -22,6 +25,3 @@ table class="table table-striped table-villages"
           - else
             = "-"
 = paginate @villages
-.village-footer
-  .pull-right
-    = button_to "新規作成", new_village_path, method: :get, class: 'btn btn-primary'
