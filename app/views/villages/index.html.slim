@@ -21,7 +21,7 @@ table class="table table-striped"
             = link_to '編集', edit_village_path(village), method: :get
           - else
             = "-"
-
+= paginate @villages
 .village-footer
   .pull-right
     = button_to "新規作成", new_village_path, method: :get, class: 'btn btn-primary'

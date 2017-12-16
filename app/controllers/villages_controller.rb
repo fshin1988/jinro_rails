@@ -5,7 +5,7 @@ class VillagesController < ApplicationController
   before_action :authorize_village, only: %i[index new create]
 
   def index
-    @villages = Village.all
+    @villages = Village.order("created_at DESC").page params[:page]
   end
 
   def new
