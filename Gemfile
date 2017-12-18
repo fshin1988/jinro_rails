@@ -26,6 +26,7 @@ gem 'config'
 gem 'pundit'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'kaminari'
+gem 'sidekiq'
 
 group :development, :test do
   gem 'byebug', platform: :mri
