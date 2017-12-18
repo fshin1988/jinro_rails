@@ -21,6 +21,7 @@
 /public/packs
 /public/packs-test
 /node_modules
+/dump.rdb
 
 config/settings.local.yml
 config/settings/*.local.yml
