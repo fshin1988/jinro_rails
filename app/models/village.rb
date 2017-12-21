@@ -137,19 +137,15 @@ class Village < ApplicationRecord
   end
 
   def divine_results
-    hash = {}
-    results.pluck(:divined_player_id).compact.each do |id|
+    results.pluck(:divined_player_id).compact.each_with_object({}) do |id, hash|
       hash[Player.find(id).username] = Player.find(id).human?
     end
-    hash
   end
 
   def vote_results
-    hash = {}
-    results.pluck(:voted_player_id).compact.each do |id|
+    results.pluck(:voted_player_id).compact.each_with_object({}) do |id, hash|
       hash[Player.find(id).username] = Player.find(id).human?
     end
-    hash
   end
 
   def result_of_today
@@ -192,9 +188,9 @@ class Village < ApplicationRecord
   end
 
   def count_by_id(target_players)
-    hash = Hash.new(0)
-    target_players.each { |p| hash[p.id] += 1 }
-    hash
+    target_players.each_with_object(Hash.new(0)) do |player, hash|
+      hash[player.id] += 1
+    end
   end
 
   def create_rooms
