@@ -72,4 +72,6 @@ Rails.application.configure do
     port:            '2525',
     authentication:  :cram_md5
   }
+
+  config.active_job.queue_adapter = :sidekiq
 end
