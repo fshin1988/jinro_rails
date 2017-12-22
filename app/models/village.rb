@@ -109,6 +109,7 @@ class Village < ApplicationRecord
 
   def update_to_next_day
     update!(day: day + 1, next_update_time: Time.now + discussion_time.minutes)
+    ProceedVillageJob.set(wait: discussion_time.minutes).perform_later(self)
     prepare_records
     prepare_result
   end
