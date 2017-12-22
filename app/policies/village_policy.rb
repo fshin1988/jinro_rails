@@ -61,10 +61,6 @@ class VillagePolicy < ApplicationPolicy
     true
   end
 
-  def proceed?
-    true
-  end
-
   def divine?
     if record.player_from_user(user)&.fortune_teller? && record.player_from_user(user).alive? && record.day > 1
       true

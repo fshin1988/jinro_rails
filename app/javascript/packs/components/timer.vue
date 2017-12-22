@@ -36,14 +36,10 @@ export default {
     countDown: function() {
       if(this.remainingTime <= 0) {
         clearInterval(this.timerId)
-        this.emitFinish()
       } else {
         this.remainingTime = this.remainingTime - 1
       }
-    },
-    emitFinish: function() {
-      this.$emit('finish')
-    },
+    }
   }
 }
 </script>
