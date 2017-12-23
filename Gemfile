@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'dotenv-rails', groups: [:development, :test]
-gem 'rails', '~> 5.1'
+gem 'rails', '5.2.0.beta2'
 gem 'mysql2', '>= 0.3.18', '< 0.5'
 gem 'puma', '~> 3.0'
 gem 'sass-rails'
@@ -28,11 +28,12 @@ gem 'active_model_serializers', '~> 0.10.0'
 gem 'kaminari'
 gem 'sidekiq'
 gem 'redis', '~> 3.0'
+gem 'bootsnap'
 
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'awesome_print'
-  gem 'bullet'
+  # gem 'bullet'
   gem 'factory_girl_rails'
   gem 'pry-rails'
   gem 'pry-byebug'

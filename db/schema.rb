@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171130104625) do
+ActiveRecord::Schema.define(version: 2017_11_30_104625) do
 
-  create_table "players", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "players", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "village_id", null: false
     t.integer "role", null: false
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20171130104625) do
     t.index ["village_id"], name: "index_players_on_village_id"
   end
 
-  create_table "posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "player_id"
     t.bigint "room_id", null: false
     t.text "content", null: false
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20171130104625) do
     t.index ["room_id"], name: "index_posts_on_room_id"
   end
 
-  create_table "records", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "records", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "village_id", null: false
     t.bigint "player_id", null: false
     t.integer "day", null: false
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20171130104625) do
     t.index ["village_id"], name: "index_records_on_village_id"
   end
 
-  create_table "results", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "results", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "village_id", null: false
     t.integer "day", null: false
     t.bigint "voted_player_id"
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 20171130104625) do
     t.index ["village_id"], name: "index_results_on_village_id"
   end
 
-  create_table "rooms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "rooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "village_id", null: false
     t.integer "room_type", null: false
     t.datetime "created_at", null: false
@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 20171130104625) do
     t.index ["village_id"], name: "index_rooms_on_village_id"
   end
 
-  create_table "users", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "users", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "username", null: false
     t.integer "role", default: 0, null: false
@@ -94,7 +94,7 @@ ActiveRecord::Schema.define(version: 20171130104625) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "villages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "villages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "name", null: false
     t.integer "player_num", null: false
