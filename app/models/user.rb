@@ -43,6 +43,7 @@ class User < ApplicationRecord
 
   has_many :villages
   has_many :players
+  has_one_attached :avatar
 
   validates :username, presence: true, length: { in: 1..20 }, uniqueness: true
   validates :role, presence: true

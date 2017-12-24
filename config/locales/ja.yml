@@ -5,6 +5,7 @@ ja:
       user:
         email: メールアドレス
         username: ユーザーネーム
+        avatar: プロフィール画像
         password: パスワード
         password_confirmation: 確認用パスワード
         current_password: 現在のパスワード

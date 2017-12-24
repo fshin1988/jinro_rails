@@ -9,6 +9,14 @@ h2
     = f.label :username
     = f.text_field :username, class: 'form-control'
   .form-group
+    = f.label :avatar
+    - if current_user.avatar.attached?
+      .avatar
+        = image_tag url_for(current_user.avatar)
+        = f.file_field :avatar
+    - else
+      = f.file_field :avatar
+  .form-group
     = f.label :password
     = f.password_field :password, autocomplete: "off", class: 'form-control'
   .form-group
