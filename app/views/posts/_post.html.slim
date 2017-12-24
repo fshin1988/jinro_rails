@@ -1,7 +1,10 @@
 - if post.player?
   li.left.clearfix
     span.chat-img.pull-left
-      i.fa.fa-user-circle-o.default-user-icon
+      - if post.player.user.avatar.attached?
+        = image_tag post.player.user.avatar, class: 'avatar'
+      - else
+        i.fa.fa-user-circle-o.default-user-icon
     .chat-body.clearfix
       .header
         strong.chat-username
