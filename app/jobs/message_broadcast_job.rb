@@ -8,6 +8,6 @@ class MessageBroadcastJob < ApplicationJob
   private
 
   def render_post(post)
-    ApplicationController.renderer.render(partial: 'posts/post', locals: {post: post})
+    ApplicationController.renderer.new.render(partial: 'posts/post', locals: {post: post})
   end
 end
