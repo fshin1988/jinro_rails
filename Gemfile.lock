@@ -199,6 +199,7 @@ GEM
     mail (2.7.0)
       mini_mime (>= 0.1.1)
     method_source (0.9.0)
+    mini_magick (4.8.0)
     mini_mime (0.1.4)
     mini_portile2 (2.3.0)
     minitest (5.10.3)
@@ -372,6 +373,7 @@ DEPENDENCIES
   kaminari
   launchy
   listen (~> 3.0.5)
+  mini_magick
   mysql2 (>= 0.3.18, < 0.5)
   poltergeist
   pry-byebug

@@ -29,6 +29,7 @@ gem 'kaminari'
 gem 'sidekiq'
 gem 'redis', '~> 3.0'
 gem 'bootsnap'
+gem 'mini_magick'
 
 group :development, :test do
   gem 'byebug', platform: :mri
