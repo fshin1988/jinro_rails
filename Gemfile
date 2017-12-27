@@ -7,7 +7,6 @@ end
 
 gem 'dotenv-rails', groups: [:development, :test]
 gem 'rails', '5.2.0.beta2'
-gem 'mysql2', '>= 0.3.18', '< 0.5'
 gem 'puma', '~> 3.0'
 gem 'sass-rails'
 gem 'compass-rails'
@@ -40,6 +39,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'rspec-rails'
+  gem 'mysql2', '>= 0.3.18', '< 0.5'
 end
 
 group :test do
@@ -59,6 +59,10 @@ group :development do
   gem 'annotate'
   gem 'better_errors'
   gem 'html2slim'
+end
+
+group :production do
+    gem 'pg'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
