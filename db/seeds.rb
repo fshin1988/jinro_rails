@@ -18,3 +18,9 @@ user_names = %w[ヴァルター モーリッツ ジムゾン トーマス ニコ
   user = FactoryGirl.create(:user, confirmed_at: Time.now, username: user_names.pop)
   FactoryGirl.create(:player, user: user, village: village)
 end
+
+# Create player for a village which player_num is 5 for test
+village = Village.find_by(player_num: 5)
+User.limit(5).each do |user|
+  FactoryGirl.create(:player, user: user, village: village)
+end

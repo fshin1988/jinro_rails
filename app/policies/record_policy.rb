@@ -33,6 +33,7 @@ class RecordPolicy < ApplicationPolicy
   private
 
   def valid_player?
+    return false unless record.village.in_play?
     if record.player_id == record.village.player_from_user(user).id && record.village.player_from_user(user).alive?
       true
     else
