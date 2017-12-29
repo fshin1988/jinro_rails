@@ -23,8 +23,7 @@
           button#btn-chat.btn.btn-warning.btn-sm.pull-right[type="submit" data-behavior="room_speaker"]
             |  送信
         template[v-if="inputDisplay"]
-          .form-group
-            textarea#btn-input.form-control.input-sm[rows="3" placeholder="Shift + Enterで送信"]
+          textarea#btn-input.form-control.input-sm[rows="3" placeholder="Shift + Enterで送信"]
     template[v-else]
       .panel-footer.skill-area
         switch-component[v-on:switch="switchArea"]
