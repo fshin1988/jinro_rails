@@ -13,15 +13,22 @@
   - if policy(@room).speak?
     template[v-if="chatDisplay"]
       .panel-footer.chat-area
-        - if @record && policy(@record).vote?
-          switch-component[v-on:switch="switchArea"]
-        button#btn-chat.btn.btn-warning.btn-sm[type="submit" data-behavior="room_speaker"]
-          |  送信
-        .form-group
-          textarea#btn-input.form-control.input-sm[rows="3" placeholder="Shift + Enterで送信"]
+        .text-center
+          - if @record && policy(@record).vote?
+            switch-component[v-on:switch="switchArea"]
+          template[v-if="inputDisplay"]
+            i.fa.fa-chevron-down.switch-input[v-on:click="switchInput"]
+          template[v-else]
+            i.fa.fa-chevron-up.switch-input[v-on:click="switchInput"]
+          button#btn-chat.btn.btn-warning.btn-sm.pull-right[type="submit" data-behavior="room_speaker"]
+            |  送信
+        template[v-if="inputDisplay"]
+          .form-group
+            textarea#btn-input.form-control.input-sm[rows="3" placeholder="Shift + Enterで送信"]
     template[v-else]
       .panel-footer.skill-area
         switch-component[v-on:switch="switchArea"]
+        br
         p.role
           = "役職：" + t("activerecord.attributes.player.role_enums.#{@village.player_from_user(current_user).role}")
         label 投票先

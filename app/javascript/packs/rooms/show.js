@@ -11,6 +11,7 @@ new Vue({
   el: '#room-root',
   data: {
     chatDisplay: true,
+    inputDisplay: true,
     noticeDisplay: false,
     noticeMessage: "",
     alertDisplay: false,
@@ -66,6 +67,9 @@ new Vue({
     },
     switchArea: function() {
       this.chatDisplay = !this.chatDisplay
+    },
+    switchInput: function() {
+      this.inputDisplay = !this.inputDisplay
     },
     setNotice: function(message) {
       this.noticeDisplay = true
