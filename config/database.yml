@@ -45,11 +45,7 @@ test:
 #
 # You can use this database configuration with:
 #
-#   production:
-#     url: <%= ENV['DATABASE_URL'] %>
-#
 production:
-  <<: *default
-  database: jinro_rails_production
-  username: jinro_rails
-  password: <%= ENV['JINRO_RAILS_DATABASE_PASSWORD'] %>
+  encoding: utf8
+  pool: 15
+  url: <%= ENV['DATABASE_URL'] %>
