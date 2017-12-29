@@ -69,6 +69,7 @@
       padding: 0 15px 0;
     }
     overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
 }
 
 .chat-username {
