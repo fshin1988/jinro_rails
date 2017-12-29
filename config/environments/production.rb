@@ -93,14 +93,14 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # mail setting
-  config.action_mailer.default_url_options = {host: 'jinro-lite.com'}
+  config.action_mailer.default_url_options = {host: 'www.jinro-lite.com'}
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     user_name:            ENV['SENDGRID_USERNAME'],
     password:             ENV['SENDGRID_PASSWORD'],
-    address:              'jinro-lite.com',
-    domain:               'smtp.sendgrid.net',
+    address:              'smtp.sendgrid.net',
+    domain:               'jinro-lite.com',
     port:                 587,
     authentication:       :plain,
     enable_starttls_auto: true
