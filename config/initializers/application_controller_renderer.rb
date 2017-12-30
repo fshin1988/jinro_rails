@@ -2,6 +2,7 @@
 
 ActiveSupport::Reloader.to_prepare do
   ApplicationController.renderer.defaults.merge!(
-    http_host: ENV["HOST_NAME"]
+    http_host: ENV["HOST_NAME"],
+    https: Rails.env.production?
   )
 end
