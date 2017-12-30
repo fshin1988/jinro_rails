@@ -2,7 +2,7 @@
   li.left.clearfix
     span.chat-img.pull-left
       - if post.player.user.avatar.attached?
-        = image_tag post.player.user.avatar, class: 'avatar'
+        = image_tag post.player.user.avatar.variant(resize: "100x100"), class: 'avatar'
       - else
         i.fa.fa-user-circle-o.default-user-icon
     .chat-body.clearfix
