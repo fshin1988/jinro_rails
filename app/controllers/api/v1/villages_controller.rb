@@ -6,11 +6,11 @@ class Api::V1::VillagesController < Api::V1::ApiController
   end
 
   def divine
-    render json: {messages: messages_of_result(@village.divine_results)}, status: 200
+    render json: {messages: view_context.messages_of_result(@village.divine_results)}, status: 200
   end
 
   def see_soul
-    render json: {messages: messages_of_result(@village.vote_results)}, status: 200
+    render json: {messages: view_context.messages_of_result(@village.vote_results)}, status: 200
   end
 
   private
