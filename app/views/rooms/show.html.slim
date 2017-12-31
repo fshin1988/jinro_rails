@@ -9,7 +9,7 @@
       timer-component[v-bind:initial-remaining-time="initialRemainingTime"]
   .panel-body.chat-body.flex-col
     ul#message-list.chat.flex-col[data-room_id="#{@room.id}"]
-      = render @room.posts.includes(:player)
+      = render @room.posts.order(created_at: :asc).includes(:player)
   - if policy(@room).speak?
     template[v-if="chatDisplay"]
       .panel-footer.chat-area
