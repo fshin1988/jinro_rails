@@ -16,7 +16,7 @@ table class="table table-striped table-villages"
     - @villages.each do |village|
       tr
         td = link_to village.name, village_room_path(village, village.room_for_all), data: {turbolinks: "false"}
-        td = "#{village.player_num} 人"
+        td = "#{village.players.count} / #{village.player_num} 人"
         td = "#{village.discussion_time} 分"
         td = t("activerecord.attributes.village.status.#{village.status}")
         td.text-center
