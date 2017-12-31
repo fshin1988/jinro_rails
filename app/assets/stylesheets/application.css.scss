@@ -17,6 +17,7 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "font-awesome";
+@import url(https://fonts.googleapis.com/css?family=Alegreya+Sans+SC:300);
 
 html,body {
   height: 100%;
@@ -25,6 +26,7 @@ html,body {
 body {
   padding-top: 60px;
   padding-bottom: 10px;
+  font-family: 'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', Meiryo, メイリオ, Osaka, 'MS PGothic', arial, helvetica, sans-serif;
 }
 
 .room_name {
@@ -97,8 +99,10 @@ body {
   font-size: 25px;
 }
 
-.navbar-home {
-  padding-top: 12px;
+.navbar-title {
+  font-size: 26px;
+  padding-top: 15px;
+  font-family: 'Alegreya Sans SC', sans-serif;
 }
 
 .navbar-back {

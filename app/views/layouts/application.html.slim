@@ -2,7 +2,7 @@ doctype html
 html lang="ja"
   head
     title
-      | JinroRails
+      | Jinro Lite
     meta charset="utf-8"
     meta http-equiv="X-UA-Compatible" content="IE=edge"
     meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no"
@@ -20,14 +20,8 @@ html lang="ja"
               span class="icon-bar"
               span class="icon-bar"
               span class="icon-bar"
-            - if controller_name == 'rooms'
-              a.navbar-brand[href="#{villages_path}"]
-                i.fa.fa-chevron-left.navbar-back
-                | 戻る
-            - else
-              a.navbar-brand.navbar-home[href="#{root_path}"]
-                i.fa.fa-home.navbar-brand-icon
-                | ホーム
+            a.navbar-brand.navbar-title[href="#{root_path}"]
+              | Jinro Lite
           #navbar class="collapse navbar-collapse navbar-collapse-#{@color_of_navbar}" aria-expanded="false"
             ul class="nav navbar-nav"
               - if controller_name == 'rooms'
