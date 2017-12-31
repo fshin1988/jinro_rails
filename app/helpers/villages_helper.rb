@@ -24,6 +24,7 @@ module VillagesHelper
       message << "、#{I18n.t("activerecord.attributes.player.role_enums.#{role}")}が#{count}名"
     end
     message << "います\n"
+    message << "初日犠牲者の設定は「#{I18n.t("activerecord.attributes.village.first_day_victim_value.#{@village.first_day_victim}")}」です\n"
     message << "それでは今から、人狼を見つけるために話し合ってください"
   end
 

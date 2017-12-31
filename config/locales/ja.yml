@@ -18,6 +18,10 @@ ja:
           not_started: 募集中
           in_play: 進行中
           ended: 終了
+        first_day_victim: 初日犠牲者
+        first_day_victim_value:
+          "true": あり
+          "false": なし
       player:
         role_enums:
           villager: 村人

@@ -5,7 +5,7 @@ class RecordPolicy < ApplicationPolicy
 
   def attack?
     return false unless valid_player?
-    if record.village.player_from_user(user).werewolf?
+    if record.village.player_from_user(user).werewolf? && record.village.attack_on_today?
       true
     else
       false
