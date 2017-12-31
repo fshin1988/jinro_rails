@@ -9,6 +9,7 @@
 #  day              :integer          default(0), not null
 #  next_update_time :datetime
 #  discussion_time  :integer          not null
+#  first_day_victim :boolean          default(TRUE), not null
 #  status           :integer          default("not_started"), not null
 #  winner           :integer
 #  created_at       :datetime         not null
