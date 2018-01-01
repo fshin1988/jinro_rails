@@ -9,7 +9,7 @@
     ul#message-list.chat.flex-col[data-room_id="#{@room.id}"]
       = render @room.posts.order(created_at: :asc).includes(:player)
   - if policy(@room).speak?
-    .panel-footer.chat-area
+    .panel-footer.footer-area
       .text-center
         - if @record && policy(@record).vote?
           switch-component[v-on:switch="switchArea"]
@@ -25,64 +25,63 @@
         template[v-if="chatDisplay"]
           textarea#btn-input.form-control.input-sm[rows="3" placeholder="Shift + Enterで送信"]
         template[v-else]
-          .panel-footer.skill-area
-            p.role
-              = "役職：" + t("activerecord.attributes.player.role_enums.#{@village.player_from_user(current_user).role}")
-            label 投票先
-            .row.select-player
-              .col-xs-9.col-select-box
-                .form-group
-                  select.form-control[v-model="voteSelected"]
-                    option[disabled value=""] 投票先を選択
-                    - @village.players.alive.each do |p|
+          p.role
+            = "役職：" + t("activerecord.attributes.player.role_enums.#{@village.player_from_user(current_user).role}")
+          label 投票先
+          .row.select-player
+            .col-xs-9.col-select-box
+              .form-group
+                select.form-control[v-model="voteSelected"]
+                  option[disabled value=""] 投票先を選択
+                  - @village.players.alive.each do |p|
+                    option[value="#{p.id}"] = p.username
+            button#btn-vote.btn.btn-warning.btn-sm[v-on:click="setVoteTarget"]
+              | セット
+          / for werewolf
+          - if @record && policy(@record).attack?
+            .form-group
+              label 襲撃先
+              .row.select-player
+                .col-xs-9.col-select-box
+                  select.form-control.select-player[v-model="attackSelected"]
+                    option[disabled value=""] 襲撃先を選択
+                    - @village.players.alive.select(&:human?).each do |p|
                       option[value="#{p.id}"] = p.username
-              button#btn-vote.btn.btn-warning.btn-sm[v-on:click="setVoteTarget"]
-                | セット
-            / for werewolf
-            - if @record && policy(@record).attack?
+                button#btn-attack.btn.btn-warning.btn-sm[v-on:click="setAttackTarget"]
+                  | セット
+          / for fortune_teller
+          - if @record && policy(@record).divine?
+            .form-group
+              label 占い先
+              .row.select-player
+                .col-xs-9.col-select-box
+                  select.form-control.select-player[v-model="divineSelected"]
+                    option[disabled value=""] 占い先を選択
+                    - @village.players.alive.where.not(role: :fortune_teller).each do |p|
+                      option[value="#{p.id}"] = p.username
+                button#btn-divine.btn.btn-warning.btn-sm[v-on:click="setDivineTarget"]
+                  | セット
+            - if policy(@village).divine?
               .form-group
-                label 襲撃先
-                .row.select-player
-                  .col-xs-9.col-select-box
-                    select.form-control.select-player[v-model="attackSelected"]
-                      option[disabled value=""] 襲撃先を選択
-                      - @village.players.alive.select(&:human?).each do |p|
-                        option[value="#{p.id}"] = p.username
-                  button#btn-attack.btn.btn-warning.btn-sm[v-on:click="setAttackTarget"]
-                    | セット
-            / for fortune_teller
-            - if @record && policy(@record).divine?
-              .form-group
-                label 占い先
-                .row.select-player
-                  .col-xs-9.col-select-box
-                    select.form-control.select-player[v-model="divineSelected"]
-                      option[disabled value=""] 占い先を選択
-                      - @village.players.alive.where.not(role: :fortune_teller).each do |p|
-                        option[value="#{p.id}"] = p.username
-                  button#btn-divine.btn.btn-warning.btn-sm[v-on:click="setDivineTarget"]
-                    | セット
-              - if policy(@village).divine?
-                .form-group
-                  button.btn.btn-info.btn-sm[v-on:click="showDivineResult"]
-                    | 占い結果
-            / for psychi
-            - if policy(@village).see_soul?
-              .form-group
-                button.btn.btn-info.btn-sm[v-on:click="showVoteResult"]
-                  | 霊媒結果
-            / for bodyguard
-            - if @record && policy(@record).guard?
-              .form-group
-                label 護衛先
-                .row.select-player
-                  .col-xs-9.col-select-box
-                    select.form-control.select-player[v-model="guardSelected"]
-                      option[disabled value=""] 護衛先を選択
-                      - @village.players.alive.where.not(role: :bodyguard).each do |p|
-                        option[value="#{p.id}"] = p.username
-                  button#btn-guard.btn.btn-warning.btn-sm[v-on:click="setGuardTarget"]
-                    | セット
+                button.btn.btn-info.btn-sm[v-on:click="showDivineResult"]
+                  | 占い結果
+          / for psychi
+          - if policy(@village).see_soul?
+            .form-group
+              button.btn.btn-info.btn-sm[v-on:click="showVoteResult"]
+                | 霊媒結果
+          / for bodyguard
+          - if @record && policy(@record).guard?
+            .form-group
+              label 護衛先
+              .row.select-player
+                .col-xs-9.col-select-box
+                  select.form-control.select-player[v-model="guardSelected"]
+                    option[disabled value=""] 護衛先を選択
+                    - @village.players.alive.where.not(role: :bodyguard).each do |p|
+                      option[value="#{p.id}"] = p.username
+                button#btn-guard.btn.btn-warning.btn-sm[v-on:click="setGuardTarget"]
+                  | セット
 
 javascript:
   var record = #{@record.to_json.html_safe}

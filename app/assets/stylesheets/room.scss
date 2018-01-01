@@ -110,15 +110,9 @@
   padding: 8px;
 }
 
-.panel-footer {
-  &.chat-area {
-    background-color: transparent;
-    padding: 5px 15px 1px;
-  }
-  &.skill-area {
-    background-color: transparent;
-    padding: 5px 15px 1px;
-  }
+.panel-footer.footer-area {
+  background-color: transparent;
+  padding: 5px 15px 1px;
 }
 
 .api-message-enter-active, .api-message-leave-active {
@@ -131,8 +125,8 @@
 #timer {
   float: right;
   color: crimson;
-  margin-top: 4px;
-  margin-right: 8px;
+  margin: 5px 10px;
+  margin-bottom: 10px;
 }
 
 .fa.fa-switch {
