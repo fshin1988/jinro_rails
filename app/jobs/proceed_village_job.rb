@@ -5,9 +5,11 @@ class ProceedVillageJob < ApplicationJob
 
   def perform(village)
     @village = village
-    noon_process
-    night_process
-    proceed_to_next_day
+    ActiveRecord::Base.transaction do
+      noon_process
+      night_process
+      proceed_to_next_day
+    end
     ReloadBroadcastJob.perform_later(@village)
   end
 

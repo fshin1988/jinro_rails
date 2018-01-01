@@ -191,7 +191,7 @@ class Village < ApplicationRecord
     # if there are multiple players who are voted maximum number, choose one player randomly
     excluded_player = players_of_max_number.sample
     return nil if excluded_player == guarded_player || excluded_player.dead?
-    excluded_player.update(status: 'dead')
+    excluded_player.update!(status: 'dead')
     excluded_player
   end
 
