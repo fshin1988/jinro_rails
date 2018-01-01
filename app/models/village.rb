@@ -184,7 +184,7 @@ class Village < ApplicationRecord
     counts = count_by_id(target_players)
     max = counts.values.max
     # if there are multiple players who are voted maximum number, choose one player randomly
-    excluded_player = players_of_max_number(counts, max).sample
+    excluded_player = Player.find(player_ids_of_max_number(counts, max).sample)
     return nil if excluded_player == guarded_player || excluded_player.dead?
     excluded_player.update!(status: 'dead')
     excluded_player
@@ -196,9 +196,9 @@ class Village < ApplicationRecord
     end
   end
 
-  def players_of_max_number(counts, max)
+  def player_ids_of_max_number(counts, max)
     counts.map do |id, count|
-      Player.find id if count == max
+      id if count == max
     end.compact
   end
 
