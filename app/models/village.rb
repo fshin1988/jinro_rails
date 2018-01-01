@@ -183,13 +183,8 @@ class Village < ApplicationRecord
   def exclude(target_players, guarded_player = nil)
     counts = count_by_id(target_players)
     max = counts.values.max
-    players_of_max_number =
-      counts.map do |id, count|
-        next unless count == max
-        Player.find id
-      end
     # if there are multiple players who are voted maximum number, choose one player randomly
-    excluded_player = players_of_max_number.sample
+    excluded_player = players_of_max_number(counts, max).sample
     return nil if excluded_player == guarded_player || excluded_player.dead?
     excluded_player.update!(status: 'dead')
     excluded_player
@@ -199,6 +194,12 @@ class Village < ApplicationRecord
     target_players.each_with_object(Hash.new(0)) do |player, hash|
       hash[player.id] += 1
     end
+  end
+
+  def players_of_max_number(counts, max)
+    counts.map do |id, count|
+      Player.find id if count == max
+    end.compact
   end
 
   def create_rooms
