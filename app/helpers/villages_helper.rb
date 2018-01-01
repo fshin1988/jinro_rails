@@ -16,6 +16,10 @@ module VillagesHelper
     "#{player.username}が退出しました"
   end
 
+  def ready_to_start_message
+    "全ての村人が集まりました\n作成者は「ゲーム開始」を押してください"
+  end
+
   def start_message(village)
     message = "この中には"
     Player.roles.keys.each do |role|
