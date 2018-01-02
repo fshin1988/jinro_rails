@@ -14,12 +14,12 @@
     .panel-footer.footer-area
       .text-center
         - if @record && policy(@record).vote?
-          switch-component[v-on:switch="switchArea"]
+          switch-component[v-on:switch="switchArea" v-show="inputDisplay"]
         template[v-if="inputDisplay"]
           i.fa.fa-chevron-down.switch-input[v-on:click="switchInput"]
         template[v-else]
           i.fa.fa-chevron-up.switch-input[v-on:click="switchInput"]
-        button#btn-chat.btn.btn-warning.btn-sm.pull-right[type="submit" data-behavior="room_speaker" v-show="chatDisplay"]
+        button#btn-chat.btn.btn-warning.btn-sm.pull-right[type="submit" data-behavior="room_speaker" v-show="chatDisplay && inputDisplay"]
           |  送信
         - if @village.in_play?
           timer-component[v-bind:initial-remaining-time="initialRemainingTime"]
