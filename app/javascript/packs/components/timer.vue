@@ -18,7 +18,9 @@ export default {
   watch: {
     initialRemainingTime: function() {
       this.remainingTime = this.initialRemainingTime
-      this.startTimer()
+      if(this.timerId == 0) {
+        this.startTimer()
+      }
     }
   },
   computed: {

@@ -30,6 +30,7 @@ new Vue({
   created: function() {
     if(this.villageStatus === "in_play") {
       this.setInitialRemainingTime()
+      this.setIntervalRemainingTime()
     }
   },
   methods: {
@@ -87,6 +88,9 @@ new Vue({
       this.noticeDisplay = false
       this.alertDisplay = false
       this.infoDisplay = false
+    },
+    setIntervalRemainingTime: function() {
+      setInterval(this.setInitialRemainingTime, 30000)
     },
     setInitialRemainingTime: function() {
       axios.get('/api/v1/villages/' + this.villageId + '/remaining_time')
