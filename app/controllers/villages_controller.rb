@@ -5,7 +5,14 @@ class VillagesController < ApplicationController
   before_action :authorize_village, only: %i[index new create]
 
   def index
-    @villages = Village.order("created_at DESC").page params[:page]
+    villages =
+      if params[:filter] == "ended"
+        @filter = "ended"
+        Village.where(status: "ended")
+      else
+        Village.where(status: %w[not_started in_play])
+      end
+    @villages = villages.order("created_at DESC").page params[:page]
   end
 
   def new

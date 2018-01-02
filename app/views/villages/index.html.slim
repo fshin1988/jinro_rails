@@ -25,3 +25,9 @@ table class="table table-striped table-villages"
           - else
             = "-"
 = paginate @villages
+br
+- if @filter == "ended"
+  = link_to("募集中/進行中の村を表示", villages_path)
+- else
+  = link_to("終了した村を表示", villages_path(filter: "ended"))
+br
