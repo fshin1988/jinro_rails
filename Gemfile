@@ -31,6 +31,7 @@ gem 'redis', '~> 3.0'
 gem 'bootsnap'
 gem 'mini_magick'
 gem 'aws-sdk-s3'
+gem 'redcarpet'
 
 group :development, :test do
   gem 'byebug', platform: :mri
