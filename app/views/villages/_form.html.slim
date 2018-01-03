@@ -1,10 +1,10 @@
 = form_for @village do |f|
   - if @village.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@village.errors.count, "つのエラー")}があります:"
+    .alert.alert-danger
       ul
         - @village.errors.full_messages.each do |message|
           li = message
+
   .form-group
     = f.label :name
     = f.text_field :name, autofocus: true, class: 'form-control'
