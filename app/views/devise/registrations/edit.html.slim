@@ -12,7 +12,7 @@ h2
     = f.label :avatar
     - if current_user.avatar.attached?
       .avatar-form
-        = image_tag current_user.avatar.variant(resize: "100x100")
+        = image_tag url_for(current_user.avatar.variant(resize: "100x100").processed)
     = f.file_field :avatar, accept: 'image/jpeg,image/png'
   .form-group
     = f.label :password
