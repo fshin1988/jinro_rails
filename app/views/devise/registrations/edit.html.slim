@@ -13,7 +13,7 @@ h2
     - if current_user.avatar.attached?
       .avatar-form
         = image_tag url_for(current_user.avatar.variant(resize: "100x100").processed)
-    = f.file_field :avatar, accept: 'image/jpeg,image/png'
+    = f.file_field :avatar, accept: 'image/jpeg,image/png', direct_upload: true
   .form-group
     = f.label :password
     = f.password_field :password, autocomplete: "off", class: 'form-control'
