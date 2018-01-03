@@ -1,9 +1,9 @@
-p#notice = notice
+= markdown(@manual.content)
 
-p
-  strong Content:
-  = @manual.content
-
-= link_to 'Edit', edit_manual_path(@manual)
-'  |
-= link_to 'Back', manuals_path
+br
+- if user_signed_in?
+  - if policy(Manual).update?
+    = button_to '編集', edit_manual_path(@manual), method: :get, class: 'btn btn-primary'
+    br
+  - if policy(Manual).destroy?
+    = button_to '削除', @manual, method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-sm btn-danger'

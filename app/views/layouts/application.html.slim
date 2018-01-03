@@ -50,6 +50,16 @@ html lang="ja"
                     a[href="#{new_user_registration_path}"]
                       i.fa.fa-user-plus.navbar-icon
                       | ユーザー登録
+                - if Manual.count > 0
+                  li
+                    a[href="#{manual_path(Manual.first)}"]
+                      i.fa.fa-book.navbar-icon
+                      | マニュアル
+                - elsif user_signed_in? && policy(Manual).create?
+                  li
+                    a[href="#{new_manual_path}"]
+                      i.fa.fa-book.navbar-icon
+                      | マニュアルを作成
 
       .container.flex-col
         - if notice

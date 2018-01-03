@@ -35,5 +35,5 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :manuals, only: %i[show new edit create update]
+  resources :manuals, only: %i[show new edit create update destroy]
 end

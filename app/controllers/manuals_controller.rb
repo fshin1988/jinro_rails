@@ -1,4 +1,5 @@
 class ManualsController < ApplicationController
+  skip_before_action :authenticate_user!
   before_action :set_manual, only: %i[show edit update destroy]
   before_action :authorize_manual, only: %i[show new create edit update destroy]
 
@@ -32,7 +33,7 @@ class ManualsController < ApplicationController
 
   def destroy
     @manual.destroy
-    redirect_to manuals_url, notice: 'マニュアルを削除しました'
+    redirect_to root_url, notice: 'マニュアルを削除しました'
   end
 
   private
