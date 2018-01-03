@@ -1,0 +1,12 @@
+= form_for @manual do |f|
+  - if @manual.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@manual.errors.count, "error")} prohibited this manual from being saved:"
+      ul
+        - @manual.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :content
+    = f.text_area :content
+  .actions = f.submit

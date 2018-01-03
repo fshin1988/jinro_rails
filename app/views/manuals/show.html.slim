@@ -1,0 +1,9 @@
+p#notice = notice
+
+p
+  strong Content:
+  = @manual.content
+
+= link_to 'Edit', edit_manual_path(@manual)
+'  |
+= link_to 'Back', manuals_path
