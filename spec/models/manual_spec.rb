@@ -1,5 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Manual, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:manual) { create(:manual) }
+
+  it 'has a valid factory' do
+    expect(manual).to be_valid
+  end
 end
