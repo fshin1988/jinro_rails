@@ -13,19 +13,7 @@ html lang="ja"
     .wrapper.flex-col
       nav class="navbar navbar-inverse navbar-fixed-top navbar-bg-#{@color_of_navbar}"
         .container
-          .navbar-header
-            button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"
-              span class="sr-only"
-                | Toggle navigation
-              span class="icon-bar"
-              span class="icon-bar"
-              span class="icon-bar"
-            a.navbar-brand.navbar-title[href="#{root_path}"]
-              | Jinro Lite
-          #navbar class="collapse navbar-collapse navbar-collapse-#{@color_of_navbar}" aria-expanded="false"
-            ul class="nav navbar-nav"
-              = render partial: 'layouts/sidebar'
-
+          = render partial: 'layouts/header'
       .container.flex-col
         - if notice
           .alert.alert-success
