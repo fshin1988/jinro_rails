@@ -7,7 +7,7 @@ feature 'User', type: :feature do
     scenario 'sign up' do
       expect {
         visit root_path
-        click_on 'ユーザー登録'
+        click_on '新規登録'
         fill_in 'メールアドレス', with: 'test@example.co.jp'
         fill_in 'ユーザーネーム', with: 'test_user'
         fill_in 'パスワード', with: 'test1234'
