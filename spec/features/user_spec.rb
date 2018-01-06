@@ -27,7 +27,7 @@ feature 'User', type: :feature do
         visit root_path
         fill_in 'メールアドレス', with: 'test@example.co.jp'
         fill_in 'パスワード', with: 'test1234'
-        click_on 'ログイン'
+        find('.btn').click
 
         expect(current_path).to eq villages_path
       end
