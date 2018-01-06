@@ -107,4 +107,6 @@ Rails.application.configure do
   }
 
   config.active_job.queue_adapter = :sidekiq
+
+  GA.tracker = "UA-112049922-1"
 end
