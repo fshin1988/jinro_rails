@@ -4,6 +4,7 @@ class VillagePolicy < ApplicationPolicy
   end
 
   def create?
+    return false unless user
     true
   end
 
@@ -12,6 +13,7 @@ class VillagePolicy < ApplicationPolicy
   end
 
   def update?
+    return false unless user
     return false unless record.not_started?
     if user.admin?
       true
@@ -25,6 +27,7 @@ class VillagePolicy < ApplicationPolicy
   end
 
   def destroy?
+    return false unless user
     return false unless record.not_started?
     if user.admin?
       true
@@ -34,6 +37,7 @@ class VillagePolicy < ApplicationPolicy
   end
 
   def join?
+    return false unless user
     if record.status == 'not_started' && record.player_from_user(user).nil? && record.players.count < record.player_num
       true
     else
@@ -42,6 +46,7 @@ class VillagePolicy < ApplicationPolicy
   end
 
   def exit?
+    return false unless user
     if record.status == 'not_started' && record.player_from_user(user).present?
       true
     else
@@ -50,6 +55,7 @@ class VillagePolicy < ApplicationPolicy
   end
 
   def start?
+    return false unless user
     if record.user_id == user.id && record.players.count == record.player_num && record.status == 'not_started'
       true
     else
@@ -62,6 +68,7 @@ class VillagePolicy < ApplicationPolicy
   end
 
   def divine?
+    return false unless user
     if record.player_from_user(user)&.fortune_teller? && record.player_from_user(user).alive? && record.day > 1
       true
     else
@@ -70,6 +77,7 @@ class VillagePolicy < ApplicationPolicy
   end
 
   def see_soul?
+    return false unless user
     if record.player_from_user(user)&.psychic? && record.player_from_user(user).alive? && record.day > 1
       true
     else

@@ -1,4 +1,5 @@
 class Api::V1::VillagesController < Api::V1::ApiController
+  skip_before_action :authenticate_user!, only: :remaining_time
   before_action :set_village
 
   def remaining_time

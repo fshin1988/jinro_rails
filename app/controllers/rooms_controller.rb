@@ -1,4 +1,5 @@
 class RoomsController < ApplicationController
+  skip_before_action :authenticate_user!, only: :show
   before_action :set_room, only: :show
   before_action :color_of_navbar
 

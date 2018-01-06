@@ -1,6 +1,7 @@
 class VillagesController < ApplicationController
   include VillagesHelper
 
+  skip_before_action :authenticate_user!, only: :index
   before_action :set_village, only: %i[edit update destroy join exit start]
   before_action :authorize_village, only: %i[index new create]
 

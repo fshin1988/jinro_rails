@@ -1,7 +1,8 @@
 - @page_title = '村を探す'
 .village-header
-  .pull-right.create-village-button
-    = button_to "新規作成", new_village_path, method: :get, class: 'btn btn-sm btn-primary'
+  - if policy(Village).create?
+    .pull-right.create-village-button
+      = button_to "新規作成", new_village_path, method: :get, class: 'btn btn-sm btn-primary'
   h1 村を探す
 
 table class="table table-striped table-villages"
