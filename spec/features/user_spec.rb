@@ -24,7 +24,7 @@ feature 'User', type: :feature do
       end
 
       scenario 'login' do
-        visit root_path
+        visit new_user_session_path
         fill_in 'メールアドレス', with: 'test@example.co.jp'
         fill_in 'パスワード', with: 'test1234'
         find('.btn').click
