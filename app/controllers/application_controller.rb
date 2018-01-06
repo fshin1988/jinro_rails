@@ -18,6 +18,13 @@ class ApplicationController < ActionController::Base
     redirect_to root_url, alert: 'リクエストしたページは存在しません'
   end
 
+  def after_sign_in_path_for(resource)
+    villages_path
+  end
+  def after_sign_out_path_for(resource)
+    new_user_session_path
+  end
+
   private
 
   def color_of_navbar

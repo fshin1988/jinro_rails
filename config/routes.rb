@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root to: 'welcome#welcome'
 
-  devise_for :users
+  devise_for :users, controllers: {registrations: 'registrations'}
   require 'sidekiq/web'
   authenticate :user, lambda { |u| u.admin? } do
     mount Sidekiq::Web => '/sidekiq'
