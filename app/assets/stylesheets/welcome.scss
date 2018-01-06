@@ -1,3 +1,19 @@
-// Place all the styles related to the Welcome controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.welcome-h2 {
+  margin-left: 15px;
+}
+
+.pc-image {
+  height: auto;
+  max-width: 850px;
+  width: 100%;
+  margin-top: 15px;
+  margin-bottom: 40px;
+}
+
+.sp-image {
+  height: auto;
+  max-width: 350px;
+  width: 100%;
+  margin-top: 15px;
+  margin-bottom: 40px;
+}

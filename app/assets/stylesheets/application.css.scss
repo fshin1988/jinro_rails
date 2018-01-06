@@ -24,7 +24,7 @@ html,body {
 }
 
 body {
-  padding-top: 60px;
+  padding-top: 53px;
   padding-bottom: 10px;
   font-family: 'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', Meiryo, メイリオ, Osaka, 'MS PGothic', arial, helvetica, sans-serif;
 }
@@ -118,4 +118,8 @@ body {
 
 .navbar-back {
   margin-right: 7px;
+}
+
+.alert {
+  margin-top: 15px;
 }

@@ -1,0 +1,16 @@
+- @page_title = 'チャットで人狼'
+.jumbotron
+  .container
+    h1 チャットで人狼
+    p
+      | JinroLiteは人狼ゲームが無料で遊べるサービスです。シンプルな操作感なので初心者でも気軽に楽しむことができます。友達同士や見知らぬ人とオンラインで人狼を楽しみましょう。
+    p
+      a.btn.btn-primary.btn-lg[href="#{new_user_registration_path}" role="button"]
+        | 新規登録 »
+.container
+  .row
+    h2.welcome-h2 PCとスマホの両方に対応
+    .col-md-8
+      = image_tag('/images/screenshot_01.png', class: 'pc-image')
+    .col-md-4
+      = image_tag('/images/screenshot_02.png', class: 'sp-image')
