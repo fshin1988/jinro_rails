@@ -63,6 +63,17 @@ body {
     li {
       a {
         color: #cdddeb;
+        &.registration {
+          padding-top: 8px;
+          padding-bottom: 5px;
+        }
+        .registration-button {
+          color: #cdddeb;
+          border-radius: 3px;
+          border: 1px solid #cdddeb;
+          padding: 6px;
+          max-width: 102px;
+        }
       }
     }
   }
