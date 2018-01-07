@@ -112,7 +112,7 @@ body {
 
 .navbar-title {
   font-size: 26px;
-  padding-top: 15px;
+  padding-top: 13px;
   font-family: 'Alegreya Sans SC', sans-serif;
 }
 
@@ -122,4 +122,14 @@ body {
 
 .alert {
   margin-top: 15px;
+}
+
+.navbar-brand {
+  .logo {
+    display: inline;
+    max-width: 30px;
+    height: auto;
+    margin-right: 8px;
+    margin-top: -3px;
+  }
 }
