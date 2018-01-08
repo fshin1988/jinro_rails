@@ -24,3 +24,5 @@ village = Village.find_by(player_num: 5)
 User.limit(5).each do |user|
   FactoryGirl.create(:player, user: user, village: village)
 end
+
+FactoryGirl.create(:manual, content: "#マニュアル")

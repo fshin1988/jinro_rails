@@ -30,3 +30,5 @@ config/environments/*.local.yml
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+public/sitemaps/

@@ -32,6 +32,7 @@ gem 'bootsnap'
 gem 'mini_magick'
 gem 'aws-sdk-s3'
 gem 'redcarpet'
+gem 'sitemap_generator'
 
 group :development, :test do
   gem 'byebug', platform: :mri
