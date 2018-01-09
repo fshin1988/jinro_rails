@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   end
 
   def redirect_to_root
-    redirect_to root_url, alert: 'リクエストしたページは存在しません'
+    redirect_to villages_path, alert: 'リクエストしたページは存在しません'
   end
 
   def after_sign_in_path_for(resource)
