@@ -47,10 +47,10 @@ RSpec.describe VillagesController, type: :controller do
         sign_in(other_user)
       end
 
-      it "redirects to root" do
+      it "redirects to villages" do
         village = Village.create! valid_attributes
         get :edit, params: {id: village.to_param}
-        expect(response).to redirect_to(root_url)
+        expect(response).to redirect_to(villages_url)
       end
     end
   end
@@ -120,10 +120,10 @@ RSpec.describe VillagesController, type: :controller do
         sign_in(other_user)
       end
 
-      it "redirects to root" do
+      it "redirects to villages" do
         village = Village.create! valid_attributes
         put :update, params: {id: village.to_param, village: valid_attributes}
-        expect(response).to redirect_to(root_url)
+        expect(response).to redirect_to(villages_url)
       end
     end
   end
@@ -156,7 +156,7 @@ RSpec.describe VillagesController, type: :controller do
       it "redirects to root" do
         village = Village.create! valid_attributes
         delete :destroy, params: {id: village.to_param}
-        expect(response).to redirect_to(root_url)
+        expect(response).to redirect_to(villages_url)
       end
     end
   end
