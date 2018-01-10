@@ -197,10 +197,10 @@ RSpec.describe Village, type: :model do
   end
 
   context 'after create' do
-    it 'creates two rooms' do
+    it 'creates three rooms' do
       village = build(:village)
       village.save
-      expect(village.rooms.count).to be 2
+      expect(village.rooms.count).to be 3
     end
   end
 

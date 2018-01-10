@@ -129,6 +129,10 @@ class Village < ApplicationRecord
     rooms.for_wolf.first
   end
 
+  def room_for_dead
+    rooms.for_dead.first
+  end
+
   def record_from_user(user)
     records.where(player: player_from_user(user), day: day).first
   end
@@ -205,6 +209,7 @@ class Village < ApplicationRecord
   def create_rooms
     rooms.create!(room_type: :for_all)
     rooms.create!(room_type: :for_wolf)
+    rooms.create!(room_type: :for_dead)
   end
 
   def player_num_must_be_greater_than_current_num

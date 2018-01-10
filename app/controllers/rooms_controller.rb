@@ -18,6 +18,8 @@ class RoomsController < ApplicationController
   def color_of_navbar
     if @room.for_wolf?
       @color_of_navbar = 'black'
+    elsif @room.for_dead?
+      @color_of_navbar = 'green'
     else
       @color_of_navbar = 'red'
     end

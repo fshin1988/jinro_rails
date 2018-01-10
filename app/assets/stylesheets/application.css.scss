@@ -54,6 +54,11 @@ body {
   border-color: #080808;
 }
 
+.navbar-bg-green {
+  background-color: darkgreen;
+  border-color: darkgreen;
+}
+
 .navbar-inverse {
   .navbar-brand {
     color: #cdddeb;
@@ -92,6 +97,10 @@ body {
 
     &.navbar-collapse-black {
       border-color: black;
+    }
+
+    &.navbar-collapse-green {
+      border-color: darkgreen;
     }
   }
 }

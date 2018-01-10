@@ -9,6 +9,15 @@ class RoomPolicy < ApplicationPolicy
       else
         false
       end
+    elsif record.for_dead?
+      case record.village.status
+      when 'in_play'
+        player_of_village&.dead?
+      when 'ended'
+        true
+      else
+        false
+      end
     else
       true
     end
@@ -19,6 +28,13 @@ class RoomPolicy < ApplicationPolicy
       case record.village.status
       when 'in_play'
         player_of_village&.werewolf? && player_of_village&.alive?
+      else
+        false
+      end
+    elsif record.for_dead?
+      case record.village.status
+      when 'in_play'
+        player_of_village&.dead?
       else
         false
       end

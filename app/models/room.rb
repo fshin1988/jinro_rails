@@ -16,7 +16,8 @@
 class Room < ApplicationRecord
   enum room_type: {
     for_all: 0,
-    for_wolf: 1
+    for_wolf: 1,
+    for_dead: 2
   }
 
   belongs_to :village
