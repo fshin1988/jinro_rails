@@ -19,8 +19,10 @@
         li = link_to 'ゲーム開始', start_village_path(@village), data: {turbolinks: "false"}
       - if @room.for_all? && policy(@village.room_for_wolf).show?
         li = link_to '人狼ルームへ', village_room_path(@village, @village.room_for_wolf), data: {turbolinks: "false"}
-      - if @room.for_wolf?
+      - if @room.for_wolf? || @room.for_dead?
         li = link_to 'ルームへ', village_room_path(@village, @village.room_for_all), data: {turbolinks: "false"}
+      - if @room.for_all? && policy(@village.room_for_dead).show?
+        li = link_to '墓場へ', village_room_path(@village, @village.room_for_dead), data: {turbolinks: "false"}
     - else
       li
         a[href="#{villages_path}"]
