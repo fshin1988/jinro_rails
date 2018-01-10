@@ -42,7 +42,8 @@
 
 .chat li.left .chat-body
 {
-    margin-left: 50px;
+  margin-left: 50px;
+  word-break: break-all;
 }
 
 .chat li.right .chat-body
