@@ -36,7 +36,7 @@
               .form-group
                 select.form-control[v-model="voteSelected"]
                   option[disabled value=""] 投票先を選択
-                  - @village.players.alive.each do |p|
+                  - @village.players.alive.where.not(user: current_user).each do |p|
                     option[value="#{p.id}"] = p.username
             button#btn-vote.btn.btn-warning.btn-sm[v-on:click="setVoteTarget"]
               | セット
