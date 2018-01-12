@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       get 'join'
       get 'exit'
       get 'start'
+      get 'ruin'
     end
     resources :rooms, only: [:show]
   end

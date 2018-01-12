@@ -16,6 +16,10 @@ module VillagesHelper
     "#{player.username}が退出しました"
   end
 
+  def ruin_message(village)
+    "#{village.name}は廃村になりました"
+  end
+
   def ready_to_start_message
     "全ての村人が集まりました\n作成者は「ゲーム開始」を押してください"
   end
@@ -28,7 +32,7 @@ module VillagesHelper
       message << "、#{I18n.t("activerecord.attributes.player.role_enums.#{role}")}が#{count}名"
     end
     message << "います\n"
-    message << "初日の襲撃は「#{I18n.t("activerecord.attributes.village.first_day_victim_value.#{@village.first_day_victim}")}」です\n"
+    message << "初日の襲撃は「#{I18n.t("activerecord.attributes.village.first_day_victim_value.#{village.first_day_victim}")}」です\n"
     message << "それでは今から、人狼を見つけるために話し合ってください"
   end
 

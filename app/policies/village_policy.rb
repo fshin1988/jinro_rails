@@ -26,14 +26,12 @@ class VillagePolicy < ApplicationPolicy
     update?
   end
 
+  def ruin?
+    update?
+  end
+
   def destroy?
-    return false unless user
-    return false unless record.not_started?
-    if user.admin?
-      true
-    else
-      record.user_id == user.id
-    end
+    update?
   end
 
   def join?

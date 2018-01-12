@@ -2,14 +2,14 @@ class VillagesController < ApplicationController
   include VillagesHelper
 
   skip_before_action :authenticate_user!, only: :index
-  before_action :set_village, only: %i[edit update destroy join exit start]
+  before_action :set_village, only: %i[edit update destroy join exit start ruin]
   before_action :authorize_village, only: %i[index new create]
 
   def index
     villages =
       if params[:filter] == "ended"
         @filter = "ended"
-        Village.where(status: "ended")
+        Village.where(status: %w[ended ruined])
       else
         Village.where(status: %w[not_started in_play])
       end
@@ -44,6 +44,16 @@ class VillagesController < ApplicationController
   def destroy
     @village.destroy
     redirect_to villages_url, notice: "#{@village.name} が削除されました"
+  end
+
+  def ruin
+    if @village.update(status: :ruined)
+      @village.post_system_message(ruin_message(@village))
+      ReloadBroadcastJob.perform_later(@village)
+      redirect_to village_room_path(@village, @village.room_for_all), notice: "#{@village.name} が廃村になりました"
+    else
+      render :edit
+    end
   end
 
   def join

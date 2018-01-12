@@ -26,7 +26,8 @@ class Village < ApplicationRecord
   enum status: {
     not_started: 0,
     in_play: 1,
-    ended: 2
+    ended: 2,
+    ruined: 3
   }
 
   enum winner: {
