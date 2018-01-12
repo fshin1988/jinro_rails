@@ -35,7 +35,7 @@ class VillagesController < ApplicationController
 
   def update
     if @village.update(village_params)
-      redirect_to villages_path, notice: "#{@village.name} が更新されました"
+      redirect_to village_room_path(@village, @village.room_for_all), notice: "#{@village.name} が更新されました"
     else
       render :edit
     end

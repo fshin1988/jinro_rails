@@ -12,7 +12,6 @@ table class="table table-striped table-villages"
       th 人数
       th 議論時間
       th 状態
-      th.text-center 操作
 
   tbody
     - @villages.each do |village|
@@ -21,11 +20,6 @@ table class="table table-striped table-villages"
         td = "#{village.players.count} / #{village.player_num} 人"
         td = "#{village.discussion_time} 分"
         td = t("activerecord.attributes.village.status.#{village.status}")
-        td.text-center
-          - if policy(village).edit?
-            = link_to '編集', edit_village_path(village), method: :get
-          - else
-            = "-"
 = paginate @villages
 br
 - if @filter == "ended"
