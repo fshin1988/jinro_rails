@@ -99,10 +99,10 @@ RSpec.describe VillagesController, type: :controller do
           expect(village.discussion_time).to be 20
         end
 
-        it "redirects to the village" do
+        it "redirects to the room_for_all" do
           village = Village.create! valid_attributes
           put :update, params: {id: village.to_param, village: valid_attributes}
-          expect(response).to redirect_to(villages_path)
+          expect(response).to redirect_to(village_room_path(village, village.room_for_all))
         end
       end
 
