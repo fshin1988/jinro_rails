@@ -16,6 +16,14 @@ module VillagesHelper
     "#{player.username}が退出しました"
   end
 
+  def update_message(village)
+    message = "作成者により村が更新されました\n"
+    message << "村名: #{village.name}\n"
+    message << "人数: #{village.player_num} 人\n"
+    message << "議論時間: #{village.discussion_time} 分\n"
+    message << "初日の襲撃: #{I18n.t("activerecord.attributes.village.first_day_victim_value.#{village.first_day_victim}")}\n"
+  end
+
   def ruin_message(village)
     "#{village.name}は廃村になりました"
   end
