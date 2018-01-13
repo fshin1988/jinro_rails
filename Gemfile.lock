@@ -220,7 +220,6 @@ GEM
     minitest (5.10.3)
     msgpack (1.2.0)
     multi_json (1.12.2)
-    mysql2 (0.4.9)
     nio4r (2.2.0)
     nokogiri (1.8.1)
       mini_portile2 (~> 2.3.0)
@@ -395,7 +394,6 @@ DEPENDENCIES
   launchy
   listen (~> 3.0.5)
   mini_magick
-  mysql2 (>= 0.3.18, < 0.5)
   pg
   poltergeist
   pry-byebug

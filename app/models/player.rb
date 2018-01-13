@@ -7,7 +7,7 @@
 #  village_id :integer          not null
 #  role       :integer          not null
 #  status     :integer          not null
-#  username   :string(255)      not null
+#  username   :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

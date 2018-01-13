@@ -5,7 +5,7 @@
 #  id         :integer          not null, primary key
 #  player_id  :integer
 #  room_id    :integer          not null
-#  content    :text(65535)      not null
+#  content    :text             not null
 #  day        :integer          not null
 #  owner      :integer          default("player"), not null
 #  created_at :datetime         not null

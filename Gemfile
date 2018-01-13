@@ -33,6 +33,7 @@ gem 'mini_magick'
 gem 'aws-sdk-s3'
 gem 'redcarpet'
 gem 'sitemap_generator'
+gem 'pg'
 
 group :development, :test do
   gem 'byebug', platform: :mri
@@ -42,7 +43,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'rspec-rails'
-  gem 'mysql2', '>= 0.3.18', '< 0.5'
+  # gem 'mysql2', '>= 0.3.18', '< 0.5'
 end
 
 group :test do
@@ -65,7 +66,6 @@ group :development do
 end
 
 group :production do
-  gem 'pg'
   gem 'google-analytics-rails'
 end
 
