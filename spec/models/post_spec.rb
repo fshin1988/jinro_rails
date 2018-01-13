@@ -19,4 +19,22 @@ RSpec.describe Post, type: :model do
       expect(post).to be_valid
     end
   end
+
+  context 'when the length of the content is 500 characters or less' do
+    it 'is saved with all content' do
+      post = build(:post, owner: :player, player: nil)
+      post.content = "あ" * 500
+      post.save
+      expect(post.content.length).to eq 500
+    end
+  end
+
+  context 'when the length of the content is over 500 characters' do
+    it 'is saved with content that is compressed to 500 characters' do
+      post = build(:post, owner: :player, player: nil)
+      post.content = "あ" * 501
+      post.save
+      expect(post.content.length).to eq 500
+    end
+  end
 end
