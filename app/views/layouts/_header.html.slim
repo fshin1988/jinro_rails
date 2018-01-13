@@ -25,6 +25,8 @@
         li = link_to '墓場へ', village_room_path(@village, @village.room_for_dead), data: {turbolinks: "false"}
       - if policy(@village).edit?
         li = link_to '村の編集', edit_village_path(@village), data: {turbolinks: "false"}
+      - if policy(@village).kick?
+        li = link_to 'プレイヤーのキック', edit_village_kick_path(@village), data: {turbolinks: "false"}
     - else
       li
         a[href="#{villages_path}"]

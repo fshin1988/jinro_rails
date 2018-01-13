@@ -1,0 +1,10 @@
+= form_tag(village_kick_path(@village), method: "put") do
+  br
+  .form-group.select-kicked-player
+    = label_tag :player_id, "対象プレイヤー"
+    = collection_select :player, :id, @village.players.where.not(user: current_user), :id, :username, {include_blank: 'プレイヤーを選択'}, {class: 'form-control'}
+  br
+
+  .button-inline
+    = link_to "戻る", village_room_path(@village, @village.room_for_all), class: 'btn btn-default'
+    = submit_tag "キック", class: 'btn btn-primary'

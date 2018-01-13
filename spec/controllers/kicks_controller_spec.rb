@@ -12,7 +12,7 @@ RSpec.describe Villages::KicksController, type: :controller do
     it "kicks the player" do
       village = create(:village_with_player, player_num: 5, user: user)
       kicked_player = village.players.first
-      put :update, params: {village_id: village.id, village: {player_id: kicked_player.id}}
+      put :update, params: {village_id: village.id, player: {id: kicked_player.id}}
       village.reload
       expect(village.players.count).to be 4
     end
