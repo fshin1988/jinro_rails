@@ -7,7 +7,7 @@ class Villages::KicksController < ApplicationController
   end
 
   def update
-    player = Player.find_by(id: player_params[:id])
+    player = @village.players.find_by(id: player_params[:id])
     if player
       @village.kick_player(player)
       @village.post_system_message(kick_message(player))
