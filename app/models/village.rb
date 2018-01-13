@@ -40,6 +40,7 @@ class Village < ApplicationRecord
   has_many :players, dependent: :destroy
   has_many :records
   has_many :results
+  has_many :blacklist_users
 
   validates :name, presence: true, length: {maximum: 50}
   validates :player_num, presence: true,
@@ -112,6 +113,7 @@ class Village < ApplicationRecord
 
   def kick_player(player)
     make_player_exit(player.user)
+    blacklist_users.create!(user: player.user)
   end
 
   def update_to_next_day

@@ -231,11 +231,12 @@ RSpec.describe Village, type: :model do
   end
 
   describe '#kick_player' do
-    it 'excludes a player' do
+    it 'excludes the player and adds the user to blacklist' do
       user = create(:user)
       player = village.create_player(user)
       village.kick_player(player)
       expect(village.players.where(user: user)).to be_empty
+      expect(village.blacklist_users.find_by(user: user).user).to eq user
     end
   end
 
