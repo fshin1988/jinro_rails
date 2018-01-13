@@ -1,7 +1,10 @@
 class Villages::KicksController < ApplicationController
   include VillagesHelper
 
-  before_action :set_village, only: :update
+  before_action :set_village, only: %i[edit update]
+
+  def edit
+  end
 
   def update
     player = @village.kick_player(Player.find(village_params[:player_id]))
@@ -14,7 +17,7 @@ class Villages::KicksController < ApplicationController
 
   def set_village
     @village = Village.find(params[:village_id])
-    authorize @village
+    authorize @village, :kick?
   end
 
   def village_params
