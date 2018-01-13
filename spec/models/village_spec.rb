@@ -230,6 +230,15 @@ RSpec.describe Village, type: :model do
     end
   end
 
+  describe '#kick_player' do
+    it 'excludes a player' do
+      user = create(:user)
+      player = village.create_player(user)
+      village.kick_player(player)
+      expect(village.players.where(user: user)).to be_empty
+    end
+  end
+
   describe '#update_to_next_day' do
     it 'update day to next day' do
       village = create(:village_with_player, player_num: 13, day: 1)

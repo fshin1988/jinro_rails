@@ -34,6 +34,10 @@ class VillagePolicy < ApplicationPolicy
     update?
   end
 
+  def kick?
+    update?
+  end
+
   def join?
     return false unless user
     if record.status == 'not_started' && record.player_from_user(user).nil? && record.players.count < record.player_num

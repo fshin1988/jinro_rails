@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       get 'start'
       get 'ruin'
     end
+    resource :kick, only: [:update], module: "villages"
     resources :rooms, only: [:show]
   end
   namespace :api, format: 'json' do

@@ -16,6 +16,10 @@ module VillagesHelper
     "#{player.username}が退出しました"
   end
 
+  def kick_message(player)
+    "#{player.username}がキックされました"
+  end
+
   def update_message(village)
     message = "作成者により村が更新されました\n"
     message << "村名: #{village.name}\n"
