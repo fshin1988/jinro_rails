@@ -6,6 +6,7 @@ import Notice from '../components/notice.vue';
 import Alert from '../components/alert.vue';
 import Info from '../components/info.vue';
 import Timer from '../components/timer.vue';
+import Post from '../components/post.vue';
 
 new Vue({
   el: '#room-root',
@@ -25,7 +26,8 @@ new Vue({
     voteSelected: record ? record.vote_target_id : "",
     attackSelected: record ? record.attack_target_id : "",
     divineSelected: record ? record.divine_target_id : "",
-    guardSelected: record ? record.guard_target_id : ""
+    guardSelected: record ? record.guard_target_id : "",
+    posts: [{owner: 'system', content: 'test'}, {owner: 'player', username: 'ヤコブ', created_at: '17:35:30', image_src: '/rails/active_storage/variants/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--06952c4d1f613547e0bf6e1a3b828c64e22bb5cb/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCam9MY21WemFYcGxTU0lNTVRBd2VERXdNQVk2QmtWVSIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--264b4a3eb9016a8ded25e5a50a01c5bdb257581a/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202018-01-14%2016.22.36.png', content: 'hello, wolrd!'}]
   },
   created: function() {
     if(this.villageStatus === "in_play") {
@@ -120,6 +122,7 @@ new Vue({
     'notice-component': Notice,
     'info-component': Info,
     'alert-component': Alert,
-    'timer-component': Timer
+    'timer-component': Timer,
+    'post-component': Post
   }
 });
