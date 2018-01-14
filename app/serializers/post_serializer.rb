@@ -1,6 +1,10 @@
 class PostSerializer < ActiveModel::Serializer
   attributes :player_id, :content, :owner, :created_at, :image_src, :username
 
+  def player_id
+    object.player_id || 0
+  end
+
   def content
     object.content
   end
