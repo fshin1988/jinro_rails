@@ -34,6 +34,11 @@ Rails.application.routes.draw do
           get 'see_soul'
         end
       end
+      resources :rooms, only: [:show] do
+        member do
+          get 'posts'
+        end
+      end
     end
   end
 

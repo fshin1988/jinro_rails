@@ -50,6 +50,10 @@ class RoomPolicy < ApplicationPolicy
     end
   end
 
+  def posts?
+    true
+  end
+
   private
 
   def player_of_village
