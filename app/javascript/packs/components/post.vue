@@ -18,12 +18,12 @@
             {{ createdAt }}
           </small>
         </div>
-        {{ content }}
+        <span v-html="content"></span>
       </div>
     </li>
     <li class="system clearfix" v-else>
       <div class="chat-body clearfix">
-        {{ content }}
+        <span v-html="content"></span>
       </div>
     </li>
   </span>

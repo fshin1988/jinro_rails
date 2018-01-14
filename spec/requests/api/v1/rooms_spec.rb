@@ -10,7 +10,7 @@ RSpec.describe 'Rooms API', type: :request do
       expect(response).to have_http_status(200)
       first_post = JSON.parse(response.body).first
       expect(first_post['player_id']).to eq post.player.id
-      expect(first_post['content']).to eq post.content
+      expect(first_post['content']).to eq "<p>#{post.content}</p>"
       expect(first_post['owner']).to eq post.owner
       expect(first_post['created_at']).to eq post.created_at.strftime('%H:%M:%S')
       expect(first_post['image_src']).to eq nil
@@ -27,7 +27,7 @@ RSpec.describe 'Rooms API', type: :request do
       expect(response).to have_http_status(200)
       first_post = JSON.parse(response.body).first
       expect(first_post['player_id']).to eq 0
-      expect(first_post['content']).to eq post.content
+      expect(first_post['content']).to eq "<p>#{post.content}</p>"
       expect(first_post['owner']).to eq post.owner
       expect(first_post['created_at']).to eq post.created_at.strftime('%H:%M:%S')
       expect(first_post['image_src']).to eq nil

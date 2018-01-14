@@ -1,4 +1,6 @@
 class PostSerializer < ActiveModel::Serializer
+  include ActionView::Helpers::TextHelper
+
   attributes :player_id, :content, :owner, :created_at, :image_src, :username
 
   def player_id
@@ -6,7 +8,7 @@ class PostSerializer < ActiveModel::Serializer
   end
 
   def content
-    object.content
+    simple_format(ERB::Util.html_escape(object.content))
   end
 
   def created_at
