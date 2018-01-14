@@ -91,5 +91,6 @@
 javascript:
   var record = #{@record.to_json.html_safe}
   var village = #{@village.to_json.html_safe}
+  var roomId = #{@room.id}
 
 = javascript_pack_tag 'rooms/show'
