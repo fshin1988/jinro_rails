@@ -11,7 +11,7 @@
   .panel-body.chat-body.flex-col
     ul#message-list.chat.flex-col[data-room_id="#{@room.id}"]
       span[v-for="post in posts"]
-        post-component[v-bind:post="post"]
+        post-component[v-bind:post="post" v-bind:player-filter="playerFilter"]
       //= render @room.posts.order(created_at: :asc).includes(:player)
   - if policy(@room).speak?
     .panel-footer.footer-area
