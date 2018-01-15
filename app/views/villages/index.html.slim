@@ -8,10 +8,11 @@
 table class="table table-striped table-villages"
   thead
     tr
-      th.col-xs-6 村名
-      th.col-xs-2 人数
-      th.col-xs-2 議論時間
-      th.col-xs-2 状態
+      th 村名
+      th 人数
+      th 議論
+      th 状態
+      th 開始予定
 
   tbody
     - @villages.each do |village|
@@ -20,6 +21,7 @@ table class="table table-striped table-villages"
         td = "#{village.players.count} / #{village.player_num} 人"
         td = "#{village.discussion_time} 分"
         td = t("activerecord.attributes.village.status.#{village.status}")
+        td = datetime_display(village.start_at)
 = paginate @villages
 br
 - if @filter == "ended"

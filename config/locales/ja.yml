@@ -23,6 +23,7 @@ ja:
         first_day_victim_value:
           "true": あり
           "false": なし
+        start_at: 開始予定
       player:
         role_enums:
           villager: 村人

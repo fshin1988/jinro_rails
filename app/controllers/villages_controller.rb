@@ -91,7 +91,7 @@ class VillagesController < ApplicationController
   end
 
   def village_params
-    params.require(:village).permit(:name, :player_num, :discussion_time, :first_day_victim)
+    params.require(:village).permit(:name, :player_num, :discussion_time, :first_day_victim, :start_at)
   end
 
   def notify_ready_to_start

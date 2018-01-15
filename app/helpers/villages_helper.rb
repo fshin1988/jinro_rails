@@ -1,4 +1,12 @@
 module VillagesHelper
+  def datetime_display(start_at)
+    if start_at
+      start_at.strftime('%-m/%d %H:%M')
+    else
+      '-'
+    end
+  end
+
   def messages_of_result(results)
     return [] unless results
     messages = []
@@ -26,6 +34,7 @@ module VillagesHelper
     message << "人数: #{village.player_num} 人\n"
     message << "議論時間: #{village.discussion_time} 分\n"
     message << "初日の襲撃: #{I18n.t("activerecord.attributes.village.first_day_victim_value.#{village.first_day_victim}")}\n"
+    message << "開始予定: #{datetime_display(village.start_at)}"
   end
 
   def ruin_message(village)

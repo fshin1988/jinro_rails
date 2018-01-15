@@ -23,6 +23,13 @@
       label.radio-inline
         = f.radio_button :first_day_victim, false, checked: !@village.first_day_victim
         = t("activerecord.attributes.village.first_day_victim_value.false")
+  .form-group
+    = f.label :start_at
+    br
+    = f.datetime_select(:start_at,
+      {discard_year: true, use_two_digit_numbers: true, minute_step: 10,
+       date_separator: ' / ', datetime_separator: ' - ', time_separator: ' : '},
+      {class: 'datetime-select form-control'})
   br
 
   - if @village.persisted?
