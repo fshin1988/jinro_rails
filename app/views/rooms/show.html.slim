@@ -5,14 +5,14 @@
     alert-component[v-if="alertDisplay" v-bind:alert-message="alertMessage"]
     info-component[v-if="infoDisplay" v-bind:info-messages="infoMessages"]
   #title-area
-    span.room-title = room_title(@village)
-    - if @village.in_play? && !policy(@room).speak?
-      timer-component[v-bind:initial-remaining-time="initialRemainingTime"]
-    select.form-control[v-model="playerFilter"]
+    select.form-control.player-filter[v-model="playerFilter"]
       option[value="all"] 全表示
       option[value="0"] システム通知
       - @village.players.each do |p|
-        option[value="#{p.id}"] = p.username
+        option[value="#{p.id}"] = "#{p.username}(#{p.alive? ? "生存" : "死亡"})"
+    div.room-title = room_title(@village)
+    - if @village.in_play? && !policy(@room).speak?
+      timer-component[v-bind:initial-remaining-time="initialRemainingTime"]
   .panel-body.chat-body.flex-col
     ul#message-list.chat.flex-col[data-room_id="#{@room.id}"]
       span[v-for="post in posts"]
