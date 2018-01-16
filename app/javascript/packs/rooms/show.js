@@ -28,7 +28,7 @@ new Vue({
     divineSelected: record ? record.divine_target_id : "",
     guardSelected: record ? record.guard_target_id : "",
     posts: [],
-    playerFilter: null,
+    playerFilter: "all",
     roomId: roomId
   },
   created: function() {

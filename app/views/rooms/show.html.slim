@@ -8,11 +8,15 @@
     span.room-title = room_title(@village)
     - if @village.in_play? && !policy(@room).speak?
       timer-component[v-bind:initial-remaining-time="initialRemainingTime"]
+    select.form-control[v-model="playerFilter"]
+      option[value="all"] 全表示
+      option[value="0"] システム通知
+      - @village.players.each do |p|
+        option[value="#{p.id}"] = p.username
   .panel-body.chat-body.flex-col
     ul#message-list.chat.flex-col[data-room_id="#{@room.id}"]
       span[v-for="post in posts"]
         post-component[v-bind:post="post" v-bind:player-filter="playerFilter"]
-      //= render @room.posts.order(created_at: :asc).includes(:player)
   - if policy(@room).speak?
     .panel-footer.footer-area
       .text-center

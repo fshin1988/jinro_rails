@@ -43,7 +43,7 @@ export default {
   },
   computed: {
     postDisplay: function() {
-      if(this.playerFilter == null) {
+      if(this.playerFilter == "all") {
         return true
       } else if(this.post.player_id == this.playerFilter) {
         return true
