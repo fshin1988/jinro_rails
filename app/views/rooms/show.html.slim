@@ -32,7 +32,7 @@
           timer-component[v-bind:initial-remaining-time="initialRemainingTime"]
       .input-area[v-show="inputDisplay"]
         template[v-if="chatDisplay"]
-          textarea#btn-input.form-control.input-sm[v-model="chatMessage" rows="3" placeholder="Shift + Enterで送信"]
+          textarea#btn-input.form-control.input-sm[v-model="chatMessage" v-on:keyup.enter.shift="speakMessage" rows="3" placeholder="Shift + Enterで送信"]
         template[v-else]
           p.role
             = "役職：" + t("activerecord.attributes.player.role_enums.#{@village.player_from_user(current_user).role}")
