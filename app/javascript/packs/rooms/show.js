@@ -29,9 +29,11 @@ new Vue({
     guardSelected: record ? record.guard_target_id : "",
     posts: [],
     playerFilter: "all",
-    roomId: roomId
+    roomId: roomId,
+    channel: null
   },
   created: function() {
+    this.subscribeChannel()
     this.getPosts()
     if(this.villageStatus === "in_play") {
       this.setInitialRemainingTime()
@@ -124,6 +126,22 @@ new Vue({
         .then(res => {
           this.posts = res.data
         });
+    },
+    subscribeChannel: function() {
+      this.channel = App.cable.subscriptions.create(
+        { channel: 'RoomChannel', room_id: this.roomId },
+        { received: this.receiveMessage },
+        { speak: function(message) {
+          this.perform('speak', {message: message})
+        }});
+    },
+    receiveMessage: function(data) {
+      if(data['reload']) {
+        location.reload(true)
+      } else if(data['message']) {
+        var message = JSON.parse(data['message'])
+        this.posts.push(message)
+      }
     }
   },
   components: {
