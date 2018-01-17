@@ -30,7 +30,8 @@ new Vue({
     posts: [],
     playerFilter: "all",
     roomId: roomId,
-    channel: null
+    channel: null,
+    chatMessage: ""
   },
   created: function() {
     this.subscribeChannel()
@@ -130,10 +131,8 @@ new Vue({
     subscribeChannel: function() {
       this.channel = App.cable.subscriptions.create(
         { channel: 'RoomChannel', room_id: this.roomId },
-        { received: this.receiveMessage },
-        { speak: function(message) {
-          this.perform('speak', {message: message})
-        }});
+        { received: this.receiveMessage }
+      );
     },
     receiveMessage: function(data) {
       if(data['reload']) {
@@ -141,6 +140,12 @@ new Vue({
       } else if(data['message']) {
         var message = JSON.parse(data['message'])
         this.posts.push(message)
+      }
+    },
+    speakMessage: function() {
+      if(this.chatMessage) {
+        this.channel.perform('speak', {message: this.chatMessage})
+        this.chatMessage = ""
       }
     }
   },

@@ -14,7 +14,7 @@
     - if @village.in_play? && !policy(@room).speak?
       timer-component[v-bind:initial-remaining-time="initialRemainingTime"]
   .panel-body.chat-body.flex-col
-    ul#message-list.chat.flex-col[data-room_id="#{@room.id}"]
+    ul#message-list.chat.flex-col
       span[v-for="post in posts"]
         post-component[v-bind:post="post" v-bind:player-filter="playerFilter"]
   - if policy(@room).speak?
@@ -26,13 +26,13 @@
           i.fa.fa-chevron-down.switch-input[v-on:click="switchInput"]
         template[v-else]
           i.fa.fa-chevron-up.switch-input[v-on:click="switchInput"]
-        button#btn-chat.btn.btn-warning.btn-sm.pull-right[type="submit" data-behavior="room_speaker" v-show="chatDisplay && inputDisplay"]
+        button#btn-chat.btn.btn-warning.btn-sm.pull-right[v-on:click="speakMessage" v-show="chatDisplay && inputDisplay"]
           |  送信
         - if @village.in_play?
           timer-component[v-bind:initial-remaining-time="initialRemainingTime"]
       .input-area[v-show="inputDisplay"]
         template[v-if="chatDisplay"]
-          textarea#btn-input.form-control.input-sm[rows="3" placeholder="Shift + Enterで送信"]
+          textarea#btn-input.form-control.input-sm[v-model="chatMessage" rows="3" placeholder="Shift + Enterで送信"]
         template[v-else]
           p.role
             = "役職：" + t("activerecord.attributes.player.role_enums.#{@village.player_from_user(current_user).role}")
