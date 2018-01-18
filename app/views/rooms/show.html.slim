@@ -11,8 +11,6 @@
       - @village.players.order(status: :asc).each do |p|
         option[value="#{p.id}"] = "#{p.username}(#{p.alive? ? "生存" : "死亡"})"
     div.room-title = room_title(@village)
-    - if @village.in_play? && !policy(@room).speak?
-      timer-component[v-bind:initial-remaining-time="initialRemainingTime"]
   .panel-body.chat-body.flex-col
     ul#message-list.chat.flex-col
       span[v-for="post in posts"]
@@ -91,6 +89,9 @@
                       option[value="#{p.id}"] = p.username
                 button#btn-guard.btn.btn-warning.btn-sm[v-on:click="setGuardTarget"]
                   | セット
+  - if @village.in_play? && !policy(@room).speak?
+    div
+      timer-component[v-bind:initial-remaining-time="initialRemainingTime"]
 
 javascript:
   var record = #{@record.to_json.html_safe}
