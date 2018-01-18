@@ -31,7 +31,8 @@ new Vue({
     playerFilter: "all",
     roomId: roomId,
     channel: null,
-    chatMessage: ""
+    chatMessage: "",
+    scrollFlag: true
   },
   created: function() {
     this.subscribeChannel()
@@ -39,6 +40,15 @@ new Vue({
     if(this.villageStatus === "in_play") {
       this.setInitialRemainingTime()
       this.setIntervalRemainingTime()
+    }
+  },
+  watch: {
+    posts: function() {
+      if(this.scrollFlag) {
+        this.$nextTick(function () {
+          this.scrollDown()
+        })
+      }
     }
   },
   methods: {
@@ -140,13 +150,8 @@ new Vue({
       } else if(data['message']) {
         var message = JSON.parse(data['message'])
         // If the current position is at the bottom, scroll down
-        var scrollFlag = this.confirmExecuteScroll()
+        this.scrollFlag = this.confirmExecuteScroll()
         this.posts.push(message)
-        if(scrollFlag) {
-          this.$nextTick(function () {
-            this.scrollDown()
-          })
-        }
       }
     },
     speakMessage: function() {
