@@ -139,13 +139,33 @@ new Vue({
         location.reload(true)
       } else if(data['message']) {
         var message = JSON.parse(data['message'])
+        // If the current position is at the bottom, scroll down
+        var scrollFlag = this.confirmExecuteScroll()
         this.posts.push(message)
+        if(scrollFlag) {
+          this.$nextTick(function () {
+            this.scrollDown()
+          })
+        }
       }
     },
     speakMessage: function() {
       if(this.chatMessage) {
         this.channel.perform('speak', {message: this.chatMessage})
         this.chatMessage = ""
+      }
+    },
+    scrollDown: function() {
+      let el = this.$el.getElementsByClassName("chat-body")[0]
+      el.scrollTop = el.scrollHeight
+    },
+    confirmExecuteScroll: function() {
+      let el = this.$el.getElementsByClassName("chat-body")[0]
+      var scrollAvailable = el.scrollHeight - el.offsetHeight
+      if(el.scrollTop == scrollAvailable) {
+        return true
+      } else {
+        return false
       }
     }
   },
