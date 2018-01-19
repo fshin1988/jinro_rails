@@ -64,7 +64,15 @@ class Player < ApplicationRecord
 
   def url_for(image)
     routes = Rails.application.routes
-    routes.default_url_options = {host: ENV["HOST_NAME"]}
+    routes.default_url_options = {host: ENV["HOST_NAME"], protocol: protocol_option}
     routes.url_helpers.url_for(image)
+  end
+
+  def protocol_option
+    if Rails.env.production?
+      'https'
+    else
+      'http'
+    end
   end
 end
