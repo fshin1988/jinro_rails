@@ -10,22 +10,10 @@ class PostSerializer < ActiveModel::Serializer
   end
 
   def image_src
-    if object.player&.user && object.player.user.avatar.attached?
-      url_for(object.player.user.avatar.variant(resize: "100x100"))
-    else
-      nil
-    end
+    object.player&.avatar_image_src
   end
 
   def username
     object.player&.username
-  end
-
-  private
-
-  def url_for(image)
-    routes = Rails.application.routes
-    routes.default_url_options = {host: ENV["HOST_NAME"]}
-    routes.url_helpers.url_for(image)
   end
 end

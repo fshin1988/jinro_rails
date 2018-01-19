@@ -46,10 +46,25 @@ class Player < ApplicationRecord
     villager? || fortune_teller? || psychic? || bodyguard? || madman?
   end
 
+  def avatar_image_src
+    @avatar_image_src ||=
+      if user && user.avatar.attached?
+        url_for(user.avatar.variant(resize: "100x100"))
+      else
+        nil
+      end
+  end
+
   private
 
   # player have username because user can be destroyed and user.username can be changed
   def set_username
     self.username = user.username
+  end
+
+  def url_for(image)
+    routes = Rails.application.routes
+    routes.default_url_options = {host: ENV["HOST_NAME"]}
+    routes.url_helpers.url_for(image)
   end
 end
