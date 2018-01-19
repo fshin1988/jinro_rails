@@ -5,12 +5,17 @@
     alert-component[v-if="alertDisplay" v-bind:alert-message="alertMessage"]
     info-component[v-if="infoDisplay" v-bind:info-messages="infoMessages"]
   #title-area
-    span.room-title = room_title(@village)
-    - if @village.in_play? && !policy(@room).speak?
-      timer-component[v-bind:initial-remaining-time="initialRemainingTime"]
+    - if @village.in_play? || @village.ended?
+      select.form-control.player-filter[v-model="playerFilter"]
+        option[value="all"] 全表示
+        option[value="0"] システム通知
+        - @village.players.order(status: :asc).each do |p|
+          option[value="#{p.id}"] = "#{p.username}(#{p.alive? ? "生存" : "死亡"})"
+    div.room-title = room_title(@village)
   .panel-body.chat-body.flex-col
-    ul#message-list.chat.flex-col[data-room_id="#{@room.id}"]
-      = render @room.posts.order(created_at: :asc).includes(:player)
+    ul#message-list.chat.flex-col
+      span[v-for="post in posts"]
+        post-component[v-bind:post="post" v-bind:player-filter="playerFilter"]
   - if policy(@room).speak?
     .panel-footer.footer-area
       .text-center
@@ -20,13 +25,13 @@
           i.fa.fa-chevron-down.switch-input[v-on:click="switchInput"]
         template[v-else]
           i.fa.fa-chevron-up.switch-input[v-on:click="switchInput"]
-        button#btn-chat.btn.btn-warning.btn-sm.pull-right[type="submit" data-behavior="room_speaker" v-show="chatDisplay && inputDisplay"]
+        button#btn-chat.btn.btn-warning.btn-sm.pull-right[v-on:click="speakMessage" v-show="chatDisplay && inputDisplay"]
           |  送信
         - if @village.in_play?
           timer-component[v-bind:initial-remaining-time="initialRemainingTime"]
       .input-area[v-show="inputDisplay"]
         template[v-if="chatDisplay"]
-          textarea#btn-input.form-control.input-sm[rows="3" placeholder="Shift + Enterで送信"]
+          textarea#btn-input.form-control.input-sm[v-model="chatMessage" v-on:keyup.enter.shift="speakMessage" rows="3" placeholder="Shift + Enterで送信"]
         template[v-else]
           p.role
             = "役職：" + t("activerecord.attributes.player.role_enums.#{@village.player_from_user(current_user).role}")
@@ -85,9 +90,13 @@
                       option[value="#{p.id}"] = p.username
                 button#btn-guard.btn.btn-warning.btn-sm[v-on:click="setGuardTarget"]
                   | セット
+  - if @village.in_play? && !policy(@room).speak?
+    div
+      timer-component[v-bind:initial-remaining-time="initialRemainingTime"]
 
 javascript:
   var record = #{@record.to_json.html_safe}
   var village = #{@village.to_json.html_safe}
+  var roomId = #{@room.id}
 
 = javascript_pack_tag 'rooms/show'

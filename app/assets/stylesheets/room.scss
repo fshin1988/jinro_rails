@@ -1,3 +1,7 @@
+#room-root {
+  min-width: 300px;
+}
+
 #title-area {
   margin-top: 5px;
   margin-bottom: 8px;
@@ -157,4 +161,11 @@
 
 .col-xs-9.col-select-box {
   padding-right: 10px;
+}
+
+.form-control.player-filter {
+  float: right;
+  width: 90px;
+  height: 28px;
+  font-size: 13px;
 }
