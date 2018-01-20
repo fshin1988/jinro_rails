@@ -1,4 +1,4 @@
-class ActiveStorage::VariantsController < ActionController::Base
+module ExtendVariantsController
   def show
     if blob = ActiveStorage::Blob.find_signed(params[:signed_blob_id])
       logger.info "Using customized VariantsController"
@@ -8,4 +8,8 @@ class ActiveStorage::VariantsController < ActionController::Base
       head :not_found
     end
   end
+end
+
+class ActiveStorage::VariantsController < ActionController::Base
+  prepend ExtendVariantsController
 end
