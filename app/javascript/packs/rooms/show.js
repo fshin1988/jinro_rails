@@ -49,6 +49,11 @@ new Vue({
           this.scrollDown()
         })
       }
+    },
+    playerFilter: function() {
+      this.$nextTick(function () {
+        this.scrollDown()
+      })
     }
   },
   methods: {
