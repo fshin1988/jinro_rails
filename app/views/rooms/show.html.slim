@@ -6,11 +6,7 @@
     info-component[v-if="infoDisplay" v-bind:info-messages="infoMessages"]
   #title-area
     - if @village.in_play? || @village.ended?
-      select.form-control.player-filter[v-model="playerFilter"]
-        option[value="all"] 全表示
-        option[value="0"] システム通知
-        - @village.players.order(status: :asc).each do |p|
-          option[value="#{p.id}"] = "#{p.username}(#{p.alive? ? "生存" : "死亡"})"
+      = render(partial: 'player_filter', locals: {room: @room})
     div.room-title = room_title(@village)
   .panel-body.chat-body.flex-col
     ul#message-list.chat.flex-col

@@ -1,0 +1,16 @@
+- if room.for_all?
+  select.form-control.player-filter[v-model="playerFilter"]
+    option[value="all"] 全表示
+    option[value="0"] システム通知
+    - room.village.players.order(status: :asc).each do |p|
+      option[value="#{p.id}"] = "#{p.username}(#{p.alive? ? "生存" : "死亡"})"
+- elsif room.for_wolf?
+  select.form-control.player-filter[v-model="playerFilter"]
+    option[value="all"] 全表示
+    - room.village.players.werewolf.order(status: :asc).each do |p|
+      option[value="#{p.id}"] = "#{p.username}(#{p.alive? ? "生存" : "死亡"})"
+- elsif room.for_dead?
+  select.form-control.player-filter[v-model="playerFilter"]
+    option[value="all"] 全表示
+    - room.village.players.dead.each do |p|
+      option[value="#{p.id}"] = "#{p.username}"
