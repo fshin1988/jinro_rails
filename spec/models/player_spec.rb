@@ -6,17 +6,19 @@ RSpec.describe Player, type: :model do
     expect(player).to be_valid
   end
 
-  context 'when player is human' do
-    it 'returns true' do
-      player = create(:player, role: 'villager')
-      expect(player.human?).to be_truthy
+  describe '#human?' do
+    context 'when player is human' do
+      it 'returns true' do
+        player = create(:player, role: 'villager')
+        expect(player.human?).to be_truthy
+      end
     end
-  end
 
-  context 'when player is werewolf' do
-    it 'returns false' do
-      player = create(:player, role: 'werewolf')
-      expect(player.human?).to be_falsey
+    context 'when player is werewolf' do
+      it 'returns false' do
+        player = create(:player, role: 'werewolf')
+        expect(player.human?).to be_falsey
+      end
     end
   end
 
