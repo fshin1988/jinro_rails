@@ -53,6 +53,7 @@ group :test do
   gem 'poltergeist'
   gem 'launchy'
   gem 'timecop'
+  gem 'simplecov'
 end
 
 group :development do

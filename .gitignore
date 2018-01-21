@@ -32,3 +32,5 @@ config/environments/*.local.yml
 /config/master.key
 
 public/sitemaps/
+
+coverage
