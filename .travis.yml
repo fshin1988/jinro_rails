@@ -21,3 +21,8 @@ before_script:
 
 script:
   - bundle exec rspec spec
+
+notifications:
+  email: false
+  slack:
+    secure: "FVFryyFm3swZeHGWzJe9RxNeHT7TTe3OaLxfi49hkKzWaBySOpeXrV+LQHw3nToYG9Aw+RWH/oSXB+Jx0iTL38mq7tdIYVZ+FFQwzt1WoXWVDGsQsdqtQ2oI8qUNR7ti9frk/yrzvak/QMhlJMGHkgX0GRl+7OeNOpt6/qY0eOxMyFzBlTcxf8qZJS4KeUA0diZPWEg2mrVZ74F8/xGUW+959V44Lz0Ssagcswu5vFhs5yu4NC0PCsb/GhyoDBDrRnAytq4y3adzD7h3BSUbs00nWnLJD/xcri7YgpZgTbDOZqMLwotlaSo5JOJRj1pXkiVRewSNNoBGmIEDATQJeAtVtrVpyeSuqD81T24jGF4voH/npU5Fvf3LW88l5eLoBSR7AUoXwTHCZs7IA7nG8KK/edJUhk2WOhz+BcVUJzjC5Y+Geq7jo9ZY3COjIVPUqckc0Ay3accshA+JXCgjNCpc3nNl3z6faE/Og0BsTxhUZaQzyUPlUA9VW54n1L+Ve79mkhC3I/FcpDSbv+gHN+HLp/rfoNotFZx5JA8CfC53lXI7IkI+5s86H/5v4MvmhzvW/GeFbIvpGy5v6OxQ0O/+T5kOl4Ou5eiG5aYdXJHTYEQ3RDuJRUIDb6QNDXIHtK5zP1kO1p9Fg8NGnUc1R0G8W8ZYFh+JGKQ5Jr7tkWQ="
