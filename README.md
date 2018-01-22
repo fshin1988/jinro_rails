@@ -26,12 +26,10 @@ postgres=# alter role jinro_rails with superuser;
 # run rails server
 git clone https://github.com/fshin1988/jinro_rails.git
 cd jinro_rails
+cp dotenv.sample .env
 bin/setup
 bin/rails s
 bin/webpack-dev-server
-
-# create dotenv
-cp dotenv.sample .env
 
 # run worker
 redis-server &
