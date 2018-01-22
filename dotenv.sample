@@ -1,0 +1,4 @@
+MAILTRAP_USERNAME=''
+MAILTRAP_PASSWORD=''
+REDIS_URL='redis://localhost:6379'
+HOST_NAME='localhost:3000'

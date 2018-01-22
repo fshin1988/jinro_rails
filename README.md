@@ -3,8 +3,8 @@ Jinro Rails is the open source werewolf game application.
 You can play the werewolf game with chat.
 
 ## Screenshots
-![](docs/screenshot_01.png)
-![](docs/screenshot_02.png)
+![](docs/screenshot_pc.png)
+![](docs/screenshot_sp.png)
 
 ## Built with
 Jinro Rails is built with following libraries.
@@ -12,17 +12,30 @@ Jinro Rails is built with following libraries.
 - Ruby
 - Ruby on Rails
 - Vue.js
-- MySQL
+- PostgreSQL
+- Redis
+- Sidekiq
 
 ## Development
-To develop Jinro Rails, you should run servers of Ruby on Rails and Webpack.
-
 ```
-$ git clone https://github.com/fshin1988/jinro_rails.git
-$ cd jinro_rails
-$ bin/setup
-$ bin/rails s
-$ bin/webpack-dev-server
+# create role for jinro_rails
+psql postgres
+postgres=# create role jinro_rails with login password 'jinro_rails';
+postgres=# alter role jinro_rails with superuser;
+
+# run rails server
+git clone https://github.com/fshin1988/jinro_rails.git
+cd jinro_rails
+bin/setup
+bin/rails s
+bin/webpack-dev-server
+
+# create dotenv
+cp dotenv.sample .env
+
+# run worker
+redis-server &
+bundle exec sidekiq &
 ```
 
 To update the application you just run `bin/update`.
