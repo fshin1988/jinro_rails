@@ -177,6 +177,10 @@ class Village < ApplicationRecord
     true
   end
 
+  def number_of_votes
+    count_by_username(vote_target_players)
+  end
+
   private
 
   def vote_target_players
@@ -206,6 +210,12 @@ class Village < ApplicationRecord
   def count_by_id(target_players)
     target_players.each_with_object(Hash.new(0)) do |player, hash|
       hash[player.id] += 1
+    end
+  end
+
+  def count_by_username(target_players)
+    target_players.each_with_object(Hash.new(0)) do |player, hash|
+      hash[player.username] += 1
     end
   end
 

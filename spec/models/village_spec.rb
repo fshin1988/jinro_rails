@@ -442,4 +442,20 @@ RSpec.describe Village, type: :model do
       expect(village.room_for_all.posts.count).to eq 1
     end
   end
+
+  describe '#number_of_votes' do
+    it 'returns the number of votes to each players' do
+      village = create(:village_with_player, player_num: 13, day: 0)
+      village.assign_role
+      village.update_to_next_day
+      voted_player = village.players.first
+      village.players.each do |p|
+        create(:record, village: village, player: p, day: 1, vote_target: voted_player)
+      end
+
+      village.lynch
+      voted_player.reload
+      expect(village.number_of_votes).to match_array({voted_player.username => 13})
+    end
+  end
 end

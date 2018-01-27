@@ -23,6 +23,10 @@ ja:
         first_day_victim_value:
           "true": あり
           "false": なし
+        show_vote_target: 投票先の開示
+        show_vote_target_value:
+          "true": する
+          "false": しない
         start_at: 開始予定
       player:
         role_enums:

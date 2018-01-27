@@ -30,11 +30,16 @@ module VillagesHelper
 
   def update_message(village)
     message = "作成者により村が更新されました\n"
+    add_village_settings(village, message)
+  end
+
+  def add_village_settings(village, message)
     message << "村名: #{village.name}\n"
     message << "人数: #{village.player_num} 人\n"
     message << "議論時間: #{village.discussion_time} 分\n"
     message << "初日の襲撃: #{I18n.t("activerecord.attributes.village.first_day_victim_value.#{village.first_day_victim}")}\n"
-    message << "開始予定: #{datetime_display(village.start_at)}"
+    message << "投票先の開示: #{I18n.t("activerecord.attributes.village.show_vote_target_value.#{village.show_vote_target}")}\n"
+    message << "開始予定: #{datetime_display(village.start_at)}\n"
   end
 
   def ruin_message(village)
@@ -46,19 +51,29 @@ module VillagesHelper
   end
 
   def start_message(village)
-    message = "この中には"
+    message = ""
+    add_village_settings(village, message)
+    message << "この中には"
     Player.roles.keys.each do |role|
       count = role_count(village, role)
       next if count == 0
       message << "、#{I18n.t("activerecord.attributes.player.role_enums.#{role}")}が#{count}名"
     end
     message << "います\n"
-    message << "初日の襲撃は「#{I18n.t("activerecord.attributes.village.first_day_victim_value.#{village.first_day_victim}")}」です\n"
     message << "それでは今から、人狼を見つけるために話し合ってください"
   end
 
   def noon_message(village)
     message = ""
+    if village.show_vote_target
+      add_vote_target(village, message)
+    else
+      add_the_number_of_votes(village, message)
+    end
+    message << "投票の結果、#{village.result_of_today.voted_player.username}は処刑された"
+  end
+
+  def add_vote_target(village, message)
     village.records.where(day: village.day).includes(:player).each do |record|
       if record.vote_target
         message << "#{record.player.username}は #{record.vote_target.username} に投票した\n"
@@ -66,7 +81,12 @@ module VillagesHelper
         message << "#{record.player.username}は投票しなかった\n"
       end
     end
-    message << "投票の結果、#{village.result_of_today.voted_player.username}は処刑された"
+  end
+
+  def add_the_number_of_votes(village, message)
+    village.number_of_votes.each do |username, count|
+      message << "#{username}は #{count}票だった\n"
+    end
   end
 
   def night_message(village)

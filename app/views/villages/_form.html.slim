@@ -24,6 +24,15 @@
         = f.radio_button :first_day_victim, false, checked: !@village.first_day_victim
         = t("activerecord.attributes.village.first_day_victim_value.false")
   .form-group
+    = f.label :show_vote_target, class: 'control-label'
+    div
+      label.radio-inline
+        = f.radio_button :show_vote_target, true, checked: @village.show_vote_target
+        = t("activerecord.attributes.village.show_vote_target_value.true")
+      label.radio-inline
+        = f.radio_button :show_vote_target, false, checked: !@village.show_vote_target
+        = t("activerecord.attributes.village.show_vote_target_value.false")
+  .form-group
     = f.label :start_at
     br
     = f.datetime_select(:start_at,
