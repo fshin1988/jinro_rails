@@ -15,6 +15,7 @@
 #  updated_at       :datetime         not null
 #  first_day_victim :boolean          default(TRUE), not null
 #  start_at         :datetime
+#  show_vote_target :boolean          default(TRUE), not null
 #
 # Indexes
 #

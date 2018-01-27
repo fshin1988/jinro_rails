@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_01_15_121356) do
+ActiveRecord::Schema.define(version: 2018_01_27_113835) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -146,6 +146,7 @@ ActiveRecord::Schema.define(version: 2018_01_15_121356) do
     t.datetime "updated_at", null: false
     t.boolean "first_day_victim", default: true, null: false
     t.datetime "start_at"
+    t.boolean "show_vote_target", default: true, null: false
     t.index ["user_id"], name: "index_villages_on_user_id"
   end
 
