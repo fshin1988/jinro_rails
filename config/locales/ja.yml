@@ -38,3 +38,8 @@ ja:
           madman: 狂人
       manual:
         content: 内容
+  views:
+    pagination:
+      first: "First"
+      last: "Last"
+      truncate: "&hellip;"

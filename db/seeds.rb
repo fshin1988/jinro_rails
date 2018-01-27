@@ -2,7 +2,7 @@
 admin = FactoryGirl.create(:user, role: :admin, email: 'admin@example.co.jp', username: 'admin', confirmed_at: Time.now)
 
 # Village for pagination test
-10.times do |num|
+60.times do |num|
   FactoryGirl.create(:village, name: "テスト村#{num + 1}", user: admin, player_num: 5,
                                day: 0, status: :not_started)
 end
