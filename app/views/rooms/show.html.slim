@@ -27,7 +27,7 @@
           timer-component[v-bind:initial-remaining-time="initialRemainingTime"]
       .input-area[v-show="inputDisplay"]
         template[v-if="chatDisplay"]
-          textarea#btn-input.form-control.input-sm[v-model="chatMessage" v-on:keyup.enter.shift="speakMessage" rows="3" placeholder="Shift + Enterで送信"]
+          textarea#btn-input.form-control.input-sm[v-model="chatMessage" v-on:keydown.shift.enter.prevent="speakMessage" rows="3" placeholder="Shift + Enterで送信"]
         template[v-else]
           = render(partial: 'skill_area', locals: {village: @village, record: @record})
   - if @village.in_play? && !policy(@room).speak?
