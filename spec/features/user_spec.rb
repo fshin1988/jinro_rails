@@ -11,7 +11,7 @@ feature 'User', type: :feature do
         fill_in 'メールアドレス', with: 'test@example.co.jp'
         fill_in 'ユーザーネーム', with: 'test_user'
         fill_in 'パスワード', with: 'test1234'
-        fill_in '確認用パスワード', with: 'test1234'
+        fill_in 'パスワード(確認用)', with: 'test1234'
         click_on '登録'
       }.to change(User, :count).by(1)
 
