@@ -17,3 +17,5 @@ h2
     = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control'
   .actions
     = f.submit "登録", class: 'btn btn-primary'
+br
+= link_to("アカウント確認メールが届かない場合", new_user_confirmation_path)

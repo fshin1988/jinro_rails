@@ -1,11 +1,12 @@
+- @page_title = 'アカウント確認メールの再送信'
 h2
-  | Resend confirmation instructions
+  | アカウント確認メールの再送信
 = form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
   = devise_error_messages!
-  .field
+  p
+    | 登録したメールアドレス宛にアカウント確認メールを再送信します
+  .form-group
     = f.label :email
-    br
-    = f.email_field :email, autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email)
+    = f.email_field :email, autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: 'form-control'
   .actions
-    = f.submit "Resend confirmation instructions"
-= render "devise/shared/links"
+    = f.submit "送信", class: 'btn btn-primary'
