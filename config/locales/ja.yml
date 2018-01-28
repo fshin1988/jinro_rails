@@ -7,7 +7,9 @@ ja:
         username: ユーザーネーム
         avatar: プロフィール画像
         password: パスワード
-        password_confirmation: 確認用パスワード
+        password_confirmation: パスワード(確認用)
+        new_password: 新しいパスワード
+        new_password_confirmation: 新しいパスワード(確認用)
         current_password: 現在のパスワード
         remember_me: パスワードを保存する
       village:

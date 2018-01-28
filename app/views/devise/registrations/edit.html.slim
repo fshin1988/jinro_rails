@@ -16,10 +16,10 @@ h2
         = image_tag url_for(current_user.avatar.variant(resize: "100x100"))
     = f.file_field :avatar, accept: 'image/jpeg,image/png', direct_upload: true
   .form-group
-    = f.label :password
+    = f.label :new_password
     = f.password_field :password, autocomplete: "off", class: 'form-control'
   .form-group
-    = f.label :password_confirmation
+    = f.label :new_password_confirmation
     = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control'
   .form-group
     = f.label :current_password

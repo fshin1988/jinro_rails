@@ -1,11 +1,12 @@
+- @page_title = 'パスワード再設定メールの送信'
 h2
-  | Forgot your password?
+  | パスワード再設定メールの送信
 = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
   = devise_error_messages!
-  .field
+  p
+    | 登録したメールアドレス宛に再設定用のURLを連絡します
+  .form-group
     = f.label :email
-    br
-    = f.email_field :email, autofocus: true
+    = f.email_field :email, autofocus: true, class: 'form-control'
   .actions
-    = f.submit "Send me reset password instructions"
-= render "devise/shared/links"
+    = f.submit "送信", class: 'btn btn-primary'
