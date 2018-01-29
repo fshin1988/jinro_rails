@@ -49,7 +49,13 @@ class Player < ApplicationRecord
   def avatar_image_src
     @avatar_image_src ||=
       if user && user.avatar.attached?
-        url_for(user.avatar.variant(resize: "100x100"))
+        # user.avatar.variant becomes NoMethodError
+        begin
+          url_for(user.avatar.variant(resize: "100x100"))
+        rescue NoMethodError => ex
+          logger.error { ["\n", ex, ex.backtrace, "\n"].join("\n") }
+          nil
+        end
       else
         nil
       end
