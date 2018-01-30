@@ -1,7 +1,7 @@
 default: &default
   adapter: postgresql
   encoding: utf8
-  pool: 5
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: jinro_rails
   password: jinro_rails
   host: localhost
@@ -16,5 +16,5 @@ test:
 
 production:
   encoding: utf8
-  pool: 5
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   url: <%= ENV['DATABASE_URL'] %>
