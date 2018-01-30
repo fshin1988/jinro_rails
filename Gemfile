@@ -38,12 +38,11 @@ gem 'pg'
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'awesome_print'
-  # gem 'bullet'
+  gem 'bullet'
   gem 'factory_girl_rails'
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'rspec-rails'
-  # gem 'mysql2', '>= 0.3.18', '< 0.5'
 end
 
 group :test do
