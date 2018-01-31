@@ -34,6 +34,7 @@ gem 'aws-sdk-s3'
 gem 'redcarpet'
 gem 'sitemap_generator'
 gem 'pg'
+gem 'scout_apm'
 
 group :development, :test do
   gem 'byebug', platform: :mri
