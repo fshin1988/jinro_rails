@@ -1,7 +1,7 @@
 module VillagesHelper
   def datetime_display(start_at)
     if start_at
-      start_at.strftime('%-m/%d %H:%M')
+      start_at.strftime('%-m/%-d %H:%M')
     else
       '-'
     end
