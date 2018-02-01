@@ -64,6 +64,7 @@ group :development do
   gem 'annotate'
   gem 'better_errors'
   gem 'html2slim'
+  gem 'derailed_benchmarks'
 end
 
 group :production do
