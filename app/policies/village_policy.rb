@@ -38,25 +38,6 @@ class VillagePolicy < ApplicationPolicy
     update?
   end
 
-  def join?
-    return false unless user
-    return false if record.blacklist_users.find_by(user: user).present?
-    if record.status == 'not_started' && record.player_from_user(user).nil? && record.players.count < record.player_num
-      true
-    else
-      false
-    end
-  end
-
-  def exit?
-    return false unless user
-    if record.status == 'not_started' && record.player_from_user(user).present?
-      true
-    else
-      false
-    end
-  end
-
   def start?
     return false unless user
     if record.user_id == user.id && record.players.count == record.player_num && record.status == 'not_started'

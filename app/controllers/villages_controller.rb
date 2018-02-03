@@ -57,19 +57,6 @@ class VillagesController < ApplicationController
     end
   end
 
-  def join
-    player = @village.create_player(current_user)
-    @village.post_system_message(join_message(@village, player))
-    notify_ready_to_start if @village.players.count == @village.player_num
-    redirect_to village_room_path(@village, @village.room_for_all), notice: "#{@village.name} に参加しました"
-  end
-
-  def exit
-    player = @village.make_player_exit(current_user)
-    @village.post_system_message(exit_message(player))
-    redirect_to villages_path, notice: "#{@village.name} から退出しました"
-  end
-
   def start
     @village.assign_role
     @village.update_to_next_day
@@ -92,10 +79,5 @@ class VillagesController < ApplicationController
 
   def village_params
     params.require(:village).permit(:name, :player_num, :discussion_time, :first_day_victim, :start_at, :show_vote_target)
-  end
-
-  def notify_ready_to_start
-    @village.post_system_message(ready_to_start_message)
-    ReloadBroadcastJob.perform_later(@village)
   end
 end
