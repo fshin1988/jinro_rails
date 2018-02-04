@@ -40,6 +40,12 @@ workers ENV.fetch("WEB_CONCURRENCY") { 2 }
 #   ActiveRecord::Base.connection_pool.disconnect! if defined?(ActiveRecord)
 # end
 
+before_fork do
+  require 'puma_worker_killer'
+
+  PumaWorkerKiller.enable_rolling_restart # Default is every 6 hours
+end
+
 # The code in the `on_worker_boot` will be called if you are using
 # clustered mode by specifying a number of `workers`. After each worker
 # process is booted, this block will be run. If you are using the `preload_app!`
