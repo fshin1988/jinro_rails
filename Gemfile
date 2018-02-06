@@ -36,6 +36,7 @@ gem 'sitemap_generator'
 gem 'pg'
 gem 'scout_apm'
 gem 'puma_worker_killer'
+gem 'twitter'
 
 group :development, :test do
   gem 'byebug', platform: :mri
