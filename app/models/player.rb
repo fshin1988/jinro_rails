@@ -70,7 +70,7 @@ class Player < ApplicationRecord
 
   def url_for(image)
     routes = Rails.application.routes
-    routes.default_url_options = {host: ENV["HOST_NAME"], protocol: protocol_option}
+    routes.default_url_options = {host: Settings.host_name, protocol: protocol_option}
     routes.url_helpers.url_for(image)
   end
 
