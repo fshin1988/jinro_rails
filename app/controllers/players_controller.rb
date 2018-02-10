@@ -4,7 +4,7 @@ class PlayersController < ApplicationController
   before_action :set_player, only: %i[edit update destroy]
 
   def new
-    @player = Player.new(village_id: params[:village_id])
+    @player = Player.new(village_id: params[:village_id], username: current_user.username)
     authorize @player
   end
 

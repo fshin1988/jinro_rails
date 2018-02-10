@@ -16,7 +16,9 @@
       = link_to "戻る", village_room_path(@player.village, @player.village.room_for_all), class: 'btn btn-default'
       = f.submit "更新", class: 'btn btn-primary'
   - else
-    .actions = f.submit "作成", class: 'btn btn-primary'
+    .button-inline
+      = link_to "戻る", village_room_path(@player.village, @player.village.room_for_all), class: 'btn btn-default'
+      = f.submit "村に入る", class: 'btn btn-primary'
 - if @player.persisted?
   br
   = button_to '村から出る', @player, method: :delete, data: { confirm: '本当に退出しますか？' }, class: 'btn btn-sm btn-danger'

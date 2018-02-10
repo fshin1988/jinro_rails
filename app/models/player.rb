@@ -40,6 +40,7 @@ class Player < ApplicationRecord
   has_many :records
 
   validates :username, presence: true
+  validate :username_must_be_unique_in_village
   validates :role, presence: true
   validates :status, presence: true
 
@@ -80,6 +81,14 @@ class Player < ApplicationRecord
       'https'
     else
       'http'
+    end
+  end
+
+  def username_must_be_unique_in_village
+    # Don't check a player to exit
+    return true if village_id == 0
+    if village.players.where(username: username).where.not(id: id).present?
+      errors.add(:base, "村内で同一ユーザーネームのプレイヤーが存在します")
     end
   end
 end
