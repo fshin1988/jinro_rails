@@ -13,7 +13,7 @@
     - if controller_name == 'rooms'
       - if policy(Player.new(village: @village)).create?
         li = link_to '村に入る', new_player_path(village_id: @village.id), data: {turbolinks: "false"}
-      - if @village.player_from_user(current_user)
+      - if @village.player_from_user(current_user) && policy(@village.player_from_user(current_user)).update?
         li = link_to 'プレイヤーの編集', edit_player_path(@village.player_from_user(current_user)), data: {turbolinks: "false"}
       - if policy(@village).start?
         li = link_to 'ゲーム開始', start_village_path(@village), data: {turbolinks: "false"}
