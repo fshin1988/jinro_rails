@@ -10,7 +10,6 @@ gem 'dotenv-rails', groups: [:development, :test]
 gem 'rails', '5.2.0.beta2'
 gem 'puma', '~> 3.0'
 gem 'sass-rails'
-gem 'compass-rails'
 gem 'bootstrap-sass'
 gem 'font-awesome-rails'
 gem 'slim-rails'

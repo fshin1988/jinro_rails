@@ -18,7 +18,7 @@
 #
 
 class Player < ApplicationRecord
-  before_validation :set_username, on: :create
+  before_validation :set_role_and_status, on: :create
 
   enum role: {
     villager: 0,
@@ -35,10 +35,11 @@ class Player < ApplicationRecord
   }
 
   belongs_to :user
-  belongs_to :village
+  belongs_to :village, optional: true
   has_many :posts
   has_many :records
 
+  validates :username, presence: true
   validates :role, presence: true
   validates :status, presence: true
 
@@ -63,9 +64,9 @@ class Player < ApplicationRecord
 
   private
 
-  # player have username because user can be destroyed and user.username can be changed
-  def set_username
-    self.username = user.username
+  def set_role_and_status
+    self.role = :villager
+    self.status = :alive
   end
 
   def url_for(image)

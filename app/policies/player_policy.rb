@@ -26,13 +26,6 @@ class PlayerPolicy < ApplicationPolicy
   end
 
   def destroy?
-    return false unless user
-
-    village = record.village
-    if village.not_started? && village.player_from_user(user).present?
-      true
-    else
-      false
-    end
+    update?
   end
 end
