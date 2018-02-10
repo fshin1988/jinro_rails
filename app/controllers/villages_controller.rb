@@ -14,6 +14,7 @@ class VillagesController < ApplicationController
         Village.where(status: %w[not_started in_play])
       end
     @villages = villages.order("created_at DESC").page params[:page]
+    ActiveRecord::Precounter.new(@villages).precount(:players)
   end
 
   def new
@@ -27,6 +28,7 @@ class VillagesController < ApplicationController
     @village = current_user.villages.new(village_params)
 
     if @village.save
+      TweetVillageJob.perform_later(@village)
       redirect_to villages_path, notice: "#{@village.name} が作成されました"
     else
       render :new

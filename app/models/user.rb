@@ -30,6 +30,8 @@
 #
 
 class User < ApplicationRecord
+  after_update_commit :upload_variant_avatar
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -47,4 +49,11 @@ class User < ApplicationRecord
 
   validates :username, presence: true, length: { in: 1..20 }, uniqueness: true
   validates :role, presence: true
+
+  private
+
+  def upload_variant_avatar
+    return unless avatar.attached?
+    UploadVariantAvatarJob.perform_later(self)
+  end
 end

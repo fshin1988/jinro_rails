@@ -11,3 +11,8 @@ role_list:
   14: <%= [['villager']*7, ['werewolf']*3, ['fortune_teller']*1, ['psychic']*1, ['bodyguard']*1, ['madman']*1].flatten %>
   15: <%= [['villager']*8, ['werewolf']*3, ['fortune_teller']*1, ['psychic']*1, ['bodyguard']*1, ['madman']*1].flatten %>
   16: <%= [['villager']*9, ['werewolf']*3, ['fortune_teller']*1, ['psychic']*1, ['bodyguard']*1, ['madman']*1].flatten %>
+host_name: <%= ENV['HOST_NAME'] %>
+twitter_key: <%= ENV['TWITTER_KEY'] %>
+twitter_secret: <%= ENV['TWITTER_SECRET'] %>
+twitter_access_token: <%= ENV['TWITTER_ACCESS_TOKEN'] %>
+twitter_access_token_secret: <%= ENV['TWITTER_ACCESS_TOKEN_SECRET'] %>
