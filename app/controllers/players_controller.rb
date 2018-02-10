@@ -49,7 +49,7 @@ class PlayersController < ApplicationController
   end
 
   def player_params
-    params.require(:player).permit(:village_id, :username)
+    params.require(:player).permit(:village_id, :username, :avatar)
   end
 
   def notify_ready_to_start

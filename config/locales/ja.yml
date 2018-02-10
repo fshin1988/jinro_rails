@@ -32,6 +32,7 @@ ja:
         start_at: 開始予定
       player:
         username: ユーザーネーム
+        avatar: プロフィール画像
         role_enums:
           villager: 村人
           werewolf: 人狼
