@@ -5,8 +5,8 @@
 #  id         :integer          not null, primary key
 #  user_id    :integer          not null
 #  village_id :integer          not null
-#  role       :integer          not null
-#  status     :integer          not null
+#  role       :integer          default("villager"), not null
+#  status     :integer          default("alive"), not null
 #  username   :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -18,8 +18,6 @@
 #
 
 class Player < ApplicationRecord
-  before_validation :set_role_and_status, on: :create
-
   enum role: {
     villager: 0,
     werewolf: 1,
@@ -65,11 +63,6 @@ class Player < ApplicationRecord
 
   private
 
-  def set_role_and_status
-    self.role = :villager
-    self.status = :alive
-  end
-
   def url_for(image)
     routes = Rails.application.routes
     routes.default_url_options = {host: ENV["HOST_NAME"], protocol: protocol_option}
@@ -86,7 +79,7 @@ class Player < ApplicationRecord
 
   def username_must_be_unique_in_village
     # Don't check a player to exit
-    return true if village_id == 0
+    return if village_id == 0
     if village.players.where(username: username).where.not(id: id).present?
       errors.add(:base, "村内で同一ユーザーネームのプレイヤーが存在します")
     end
