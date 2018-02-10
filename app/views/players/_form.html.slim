@@ -9,10 +9,11 @@
   .form-group
     = f.label :username
     = f.text_field :username, autofocus: true, class: 'form-control'
-  label プロフィール画像
-  br
-  = link_to "プロフィール画像の編集", edit_avatar_player_path(@player), class: 'btn btn-default'
-  br
+  - if @player.persisted?
+    label プロフィール画像
+    br
+    = link_to "プロフィール画像の設定", edit_avatar_player_path(@player), class: 'btn btn-default'
+    br
   br
 
   - if @player.persisted?

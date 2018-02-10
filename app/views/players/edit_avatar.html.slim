@@ -1,11 +1,14 @@
-h1 = "プロフィール画像を更新"
+h1 = "プロフィール画像の設定"
 = form_for @player do |f|
   - if @player.errors.any?
     .alert.alert-danger
       ul
         - @player.errors.full_messages.each do |message|
           li = message
-  p 村専用のプロフィール画像を追加することができます
+  p
+    | 村専用のプロフィール画像を設定することができます
+    br
+    | 設定しない場合は、アカウントのプロフィール画像が使用されます
   .form-group
     = f.label :avatar
     - if @player.avatar.attached?
