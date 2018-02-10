@@ -204,18 +204,10 @@ RSpec.describe Village, type: :model do
     end
   end
 
-  describe '#create_player' do
-    it 'creates a player of user' do
-      user = create(:user)
-      village.create_player(user)
-      expect(user.players.where(village: village)).not_to be_nil
-    end
-  end
-
   describe '#player_from_user' do
     it 'returns a player of the user' do
       user = create(:user)
-      village.create_player(user)
+      create(:player, user: user, village: village)
 
       expect(village.player_from_user(user)).to eq village.players.find_by(user: user)
     end
@@ -224,7 +216,7 @@ RSpec.describe Village, type: :model do
   describe '#make_player_exit' do
     it 'excludes a player of user' do
       user = create(:user)
-      village.create_player(user)
+      create(:player, user: user, village: village)
       village.make_player_exit(user)
       expect(village.players.where(user: user)).to be_empty
     end
@@ -233,7 +225,7 @@ RSpec.describe Village, type: :model do
   describe '#kick_player' do
     it 'excludes the player and adds the user to blacklist' do
       user = create(:user)
-      player = village.create_player(user)
+      player = create(:player, user: user, village: village)
       village.kick_player(player)
       expect(village.players.where(user: user)).to be_empty
       expect(village.blacklist_users.find_by(user: user).user).to eq user
