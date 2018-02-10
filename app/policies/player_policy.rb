@@ -25,6 +25,10 @@ class PlayerPolicy < ApplicationPolicy
     update?
   end
 
+  def edit_avatar?
+    update?
+  end
+
   def destroy?
     update?
   end

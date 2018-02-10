@@ -1,0 +1,19 @@
+h1 = "プロフィール画像を更新"
+= form_for @player do |f|
+  - if @player.errors.any?
+    .alert.alert-danger
+      ul
+        - @player.errors.full_messages.each do |message|
+          li = message
+  p 村専用のプロフィール画像を追加することができます
+  .form-group
+    = f.label :avatar
+    - if @player.avatar.attached?
+      .avatar-form
+        = image_tag url_for(@player.avatar.variant(resize: "100x100"))
+    = f.file_field :avatar, accept: 'image/jpeg,image/png', direct_upload: true
+  br
+
+  .button-inline
+    = link_to "戻る", edit_player_path(@player), class: 'btn btn-default'
+    = f.submit "更新", class: 'btn btn-primary'

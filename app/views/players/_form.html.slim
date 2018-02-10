@@ -9,12 +9,10 @@
   .form-group
     = f.label :username
     = f.text_field :username, autofocus: true, class: 'form-control'
-  .form-group
-    = f.label :avatar
-    - if @player.avatar.attached?
-      .avatar-form
-        = image_tag url_for(@player.avatar.variant(resize: "100x100"))
-    = f.file_field :avatar, accept: 'image/jpeg,image/png', direct_upload: true
+  label プロフィール画像
+  br
+  = link_to "プロフィール画像の編集", edit_avatar_player_path(@player), class: 'btn btn-default'
+  br
   br
 
   - if @player.persisted?

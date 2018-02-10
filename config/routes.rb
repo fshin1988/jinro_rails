@@ -43,5 +43,9 @@ Rails.application.routes.draw do
   resources :manuals, only: %i[show new edit create update destroy]
   get 'sitemap', to: redirect("https://s3-ap-northeast-1.amazonaws.com/#{ENV['AWS_BUCKET']}/sitemaps/sitemap.xml.gz")
 
-  resources :players, only: %i[new edit create update destroy]
+  resources :players, only: %i[new edit create update destroy] do
+    member do
+      get 'edit_avatar'
+    end
+  end
 end

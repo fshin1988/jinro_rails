@@ -1,7 +1,8 @@
 class PlayersController < ApplicationController
   include VillagesHelper
 
-  before_action :set_player, only: %i[edit update destroy]
+  before_action :set_player, only: %i[edit edit_avatar update destroy]
+  before_action :check_params, only: :update
 
   def new
     @player = Player.new(village_id: params[:village_id], username: current_user.username)
@@ -9,6 +10,9 @@ class PlayersController < ApplicationController
   end
 
   def edit
+  end
+
+  def edit_avatar
   end
 
   def create
@@ -55,5 +59,11 @@ class PlayersController < ApplicationController
   def notify_ready_to_start
     @village.post_system_message(ready_to_start_message)
     ReloadBroadcastJob.perform_later(@village)
+  end
+
+  def check_params
+    return if params[:player]
+    @player.errors.add(:base, "プロフィール画像を選択してください")
+    render :edit_avatar
   end
 end

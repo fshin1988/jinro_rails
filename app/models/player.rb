@@ -40,7 +40,7 @@ class Player < ApplicationRecord
   has_many :records
   has_one_attached :avatar
 
-  validates :username, presence: true
+  validates :username, presence: true, length: { in: 1..20 }
   validate :username_must_be_unique_in_village
   validates :role, presence: true
   validates :status, presence: true
