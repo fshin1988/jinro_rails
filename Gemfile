@@ -37,6 +37,7 @@ gem 'pg'
 gem 'scout_apm'
 gem 'puma_worker_killer'
 gem 'twitter'
+gem 'activerecord-precounter'
 
 group :development, :test do
   gem 'byebug', platform: :mri
