@@ -1,5 +1,4 @@
-h1 = "プロフィール画像の設定"
-= form_for @player do |f|
+= form_tag(player_avatar_path(@player), method: "put") do
   - if @player.errors.any?
     .alert.alert-danger
       ul
@@ -10,13 +9,12 @@ h1 = "プロフィール画像の設定"
     br
     | 設定しない場合は、アカウントのプロフィール画像が使用されます
   .form-group
-    = f.label :avatar
+    = label_tag :avatar, "プロフィール画像"
     - if @player.avatar.attached?
       .avatar-form
         = image_tag url_for(@player.avatar.variant(resize: "100x100"))
-    = f.file_field :avatar, accept: 'image/jpeg,image/png', direct_upload: true
+    = file_field_tag 'player[avatar]', accept: 'image/jpeg,image/png', direct_upload: true
   br
-
   .button-inline
     = link_to "戻る", edit_player_path(@player), class: 'btn btn-default'
-    = f.submit "更新", class: 'btn btn-primary'
+    = submit_tag "更新", class: 'btn btn-primary'
