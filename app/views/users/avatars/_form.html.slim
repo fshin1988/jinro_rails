@@ -1,0 +1,18 @@
+= form_tag(users_avatar_path, method: "put") do
+  - if current_user.errors.any?
+    .alert.alert-danger
+      ul
+        - current_user.errors.full_messages.each do |message|
+          li = message
+  p
+    | アカウントのプロフィール画像を設定することができます
+  .form-group
+    = label_tag :avatar, "プロフィール画像"
+    - if current_user.avatar.attached?
+      .avatar-form
+        = image_tag url_for(current_user.avatar.variant(resize: "100x100"))
+    = file_field_tag 'user[avatar]', accept: 'image/jpeg,image/png', direct_upload: true
+  br
+  .button-inline
+    = link_to "戻る", edit_user_registration_path, class: 'btn btn-default'
+    = submit_tag "更新", class: 'btn btn-primary'

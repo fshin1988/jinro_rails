@@ -7,6 +7,10 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
+  namespace :users do
+    resource :avatar, only: %i[edit update]
+  end
+
   resources :villages, except: :show do
     member do
       get 'start'
