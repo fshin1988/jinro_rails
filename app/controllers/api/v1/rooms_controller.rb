@@ -3,7 +3,7 @@ class Api::V1::RoomsController < Api::V1::ApiController
   before_action :set_room
 
   def posts
-    render json: @room.posts.order(created_at: :asc).includes(player: {user: {avatar_attachment: :blob}}),
+    render json: @room.posts.order(created_at: :asc).includes(player: {avatar_attachment: :blob}),
            each_serializer: PostSerializer
   end
 

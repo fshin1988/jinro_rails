@@ -16,13 +16,13 @@ user_names = %w[ヴァルター モーリッツ ジムゾン トーマス ニコ
                 ペーター アルビン カタリナ オットー ヨアヒム ヤコブ フリーデル]
 13.times do
   user = FactoryGirl.create(:user, confirmed_at: Time.now, username: user_names.pop)
-  FactoryGirl.create(:player, user: user, village: village)
+  FactoryGirl.create(:player, user: user, village: village, username: user.username)
 end
 
 # Create player for a village which player_num is 5 for test
 village = Village.find_by(player_num: 5)
 User.limit(5).each do |user|
-  FactoryGirl.create(:player, user: user, village: village)
+  FactoryGirl.create(:player, user: user, village: village, username: user.username)
 end
 
 FactoryGirl.create(:manual, content: "#マニュアル")

@@ -11,10 +11,10 @@
 #navbar class="collapse navbar-collapse navbar-collapse-#{@color_of_navbar}" aria-expanded="false"
   ul class="nav navbar-nav"
     - if controller_name == 'rooms'
-      - if policy(@village).join?
-        li = link_to '村に入る', join_village_path(@village), data: {turbolinks: "false"}
-      - if policy(@village).exit?
-        li = link_to '村から出る', exit_village_path(@village)
+      - if policy(Player.new(village: @village)).create?
+        li = link_to '村に入る', new_player_path(village_id: @village.id), data: {turbolinks: "false"}
+      - if @village.player_from_user(current_user) && policy(@village.player_from_user(current_user)).update?
+        li = link_to 'プレイヤーの編集', edit_player_path(@village.player_from_user(current_user)), data: {turbolinks: "false"}
       - if policy(@village).start?
         li = link_to 'ゲーム開始', start_village_path(@village), data: {turbolinks: "false"}
       - if @room.for_all? && policy(@village.room_for_wolf).show?

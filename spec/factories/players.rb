@@ -4,5 +4,6 @@ FactoryGirl.define do
     association :village
     role :villager
     status :alive
+    sequence(:username) { |n| "ユーザー#{n}" }
   end
 end

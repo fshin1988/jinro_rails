@@ -1,0 +1,29 @@
+= form_for @player do |f|
+  - if @player.errors.any?
+    .alert.alert-danger
+      ul
+        - @player.errors.full_messages.each do |message|
+          li = message
+
+  = f.hidden_field :village_id
+  .form-group
+    = f.label :username
+    = f.text_field :username, autofocus: true, class: 'form-control'
+  - if @player.persisted?
+    label プロフィール画像
+    br
+    = link_to "プロフィール画像の設定", edit_player_avatar_path(@player), class: 'btn btn-default'
+    br
+  br
+
+  - if @player.persisted?
+    .button-inline
+      = link_to "戻る", village_room_path(@player.village, @player.village.room_for_all), class: 'btn btn-default'
+      = f.submit "更新", class: 'btn btn-primary'
+  - else
+    .button-inline
+      = link_to "戻る", village_room_path(@player.village, @player.village.room_for_all), class: 'btn btn-default'
+      = f.submit "村に入る", class: 'btn btn-primary'
+- if @player.persisted?
+  br
+  = button_to '村から出る', @player, method: :delete, data: { confirm: '本当に退出しますか？' }, class: 'btn btn-sm btn-danger'

@@ -1,0 +1,20 @@
+= form_tag(player_avatar_path(@player), method: "put") do
+  - if @player.errors.any?
+    .alert.alert-danger
+      ul
+        - @player.errors.full_messages.each do |message|
+          li = message
+  p
+    | 村専用のプロフィール画像を設定することができます
+    br
+    | 設定しない場合は、アカウントのプロフィール画像が使用されます
+  .form-group
+    = label_tag :avatar, "プロフィール画像"
+    - if @player.avatar.attached?
+      .avatar-form
+        = image_tag url_for(@player.avatar.variant(resize: "100x100"))
+    = file_field_tag 'player[avatar]', accept: 'image/jpeg,image/png', direct_upload: true
+  br
+  .button-inline
+    = link_to "戻る", edit_player_path(@player), class: 'btn btn-default'
+    = submit_tag "更新", class: 'btn btn-primary'

@@ -7,10 +7,12 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
+  namespace :users do
+    resource :avatar, only: %i[edit update]
+  end
+
   resources :villages, except: :show do
     member do
-      get 'join'
-      get 'exit'
       get 'start'
       get 'ruin'
     end
@@ -44,4 +46,8 @@ Rails.application.routes.draw do
 
   resources :manuals, only: %i[show new edit create update destroy]
   get 'sitemap', to: redirect("https://s3-ap-northeast-1.amazonaws.com/#{ENV['AWS_BUCKET']}/sitemaps/sitemap.xml.gz")
+
+  resources :players, only: %i[new edit create update destroy] do
+    resource :avatar, only: %i[edit update], module: "players"
+  end
 end
