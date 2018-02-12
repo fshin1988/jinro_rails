@@ -20,7 +20,6 @@ class Api::V1::RoomsController < Api::V1::ApiController
   end
 
   def latest_20_posts(room)
-    room.posts.order(created_at: :desc).includes(player: {avatar_attachment: :blob})
-        .limit(20).sort_by(&:created_at)
+    room.posts.order(created_at: :desc).includes(player: {avatar_attachment: :blob}).limit(20).reverse
   end
 end
