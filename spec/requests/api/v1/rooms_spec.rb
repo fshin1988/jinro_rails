@@ -49,14 +49,17 @@ RSpec.describe 'Rooms API', type: :request do
     end
 
     context 'when the number of posts is over 20' do
-      it 'returns only 20 posts' do
+      it 'returns latest 20 posts' do
         village = create(:village_with_player, player_num: 5)
         player = village.players.first
-        21.times { |n| village.room_for_all.posts.create(player: player, content: "post #{n}", day: 0, owner: :player) }
+        30.times { |n| village.room_for_all.posts.create(player: player, content: "post #{n}", day: 0, owner: :player) }
         get "/api/v1/rooms/#{village.room_for_all.id}/posts"
 
         expect(response).to have_http_status(200)
-        expect(JSON.parse(response.body).count).to eq 20
+        res = JSON.parse(response.body)
+        expect(res.count).to eq 20
+        expect(res.first["content"]).to eq "post 10"
+        expect(res.last["content"]).to eq "post 29"
       end
     end
   end
