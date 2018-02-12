@@ -9,6 +9,9 @@
       = render(partial: 'player_filter', locals: {room: @room})
     div.room-title = room_title(@village)
   .panel-body.chat-body.flex-col
+    .text-center[v-show="!haveAllPosts"]
+      button.btn.btn-warning.btn-sm.display-all-posts-btn[v-on:click="getAllPosts"]
+        | 全て表示
     ul#message-list.chat.flex-col
       span[v-for="post in posts"]
         post-component[v-bind:post="post" v-bind:player-filter="playerFilter"]

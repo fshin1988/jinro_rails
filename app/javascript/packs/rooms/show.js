@@ -28,6 +28,7 @@ new Vue({
     divineSelected: record ? record.divine_target_id : "",
     guardSelected: record ? record.guard_target_id : "",
     posts: [],
+    haveAllPosts: true,
     playerFilter: "all",
     roomId: roomId,
     channel: null,
@@ -141,7 +142,18 @@ new Vue({
       axios.get('/api/v1/rooms/' + this.roomId + '/posts')
         .then(res => {
           this.posts = res.data
+          if(this.posts.length == 20) {
+            this.haveAllPosts = false
+          }
         });
+    },
+    getAllPosts: function() {
+      this.posts = []
+      axios.get('/api/v1/rooms/' + this.roomId + '/all_posts')
+        .then(res => {
+          this.posts = res.data
+        });
+      this.haveAllPosts = true
     },
     subscribeChannel: function() {
       this.channel = App.cable.subscriptions.create(
