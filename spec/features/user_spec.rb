@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 feature 'User', type: :feature do
-  subject { page }
-
   context 'when not logged in' do
     scenario 'sign up' do
       expect {
