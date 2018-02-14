@@ -7,7 +7,7 @@ feature 'Room', type: :feature do
         create(:village_with_player, player_num: 5, name: "初心者村")
       end
 
-      scenario 'sign up' do
+      scenario 'show' do
         visit villages_path
         click_link '初心者村'
 
