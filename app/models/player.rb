@@ -59,7 +59,7 @@ class Player < ApplicationRecord
           logger.error("NoMethodError in avatar.variant")
           nil
         end
-      elsif user&.avatar.attached?
+      elsif user && user.avatar.attached?
         # user.avatar.variant may become NoMethodError
         begin
           url_for(user.avatar.variant(resize: "100x100"))
