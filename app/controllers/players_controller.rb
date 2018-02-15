@@ -34,7 +34,7 @@ class PlayersController < ApplicationController
   end
 
   def destroy
-    @player.update!(village_id: 0)
+    @player.exit_from_village
     @village.post_system_message(exit_message(@player))
     redirect_to villages_path, notice: "#{@village.name} から退出しました"
   end

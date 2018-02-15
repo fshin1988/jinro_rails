@@ -72,6 +72,10 @@ class Player < ApplicationRecord
       end
   end
 
+  def exit_from_village
+    update!(village_id: 0)
+  end
+
   private
 
   def url_for(image)

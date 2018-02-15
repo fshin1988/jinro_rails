@@ -36,4 +36,15 @@ RSpec.describe Player, type: :model do
       end
     end
   end
+
+  describe '#exit_from_village' do
+    it 'updates village_id to 0' do
+      user = create(:user)
+      village = create(:village_with_player, player_num: 5, status: :not_started)
+      player = create(:player, user: user, village: village)
+      player.exit_from_village
+
+      expect(player.reload.village_id).to be 0
+    end
+  end
 end
