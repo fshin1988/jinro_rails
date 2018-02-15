@@ -50,6 +50,14 @@ class User < ApplicationRecord
   validates :username, presence: true, length: { in: 1..20 }, uniqueness: true
   validates :role, presence: true
 
+  def joining_in_village?
+    if players.includes(:village).find { |p| p.village && (p.village.not_started? || p.village.in_play?) }
+      true
+    else
+      false
+    end
+  end
+
   private
 
   def upload_variant_avatar
