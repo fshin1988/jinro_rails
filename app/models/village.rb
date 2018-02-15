@@ -99,6 +99,7 @@ class Village < ApplicationRecord
   end
 
   def player_from_user(user)
+    return unless user
     players.includes(:user).find { |p| p.user == user }
   end
 
