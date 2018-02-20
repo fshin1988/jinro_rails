@@ -37,11 +37,19 @@ feature 'Room', type: :feature do
           expect(page).to have_content 'プレイヤーの編集'
           expect(page).to have_content '送信'
         end
+
+        scenario 'collapse input area', js: true do
+          visit villages_path
+          click_link '初心者村'
+
+          find('.switch-input').click
+          expect(page).to_not have_content '送信'
+        end
       end
 
       context 'when the user is creator of the village' do
         before do
-          village = create(:village_with_player, player_num: 5, name: "初心者村", user: user)
+          create(:village_with_player, player_num: 5, name: "初心者村", user: user)
           login_as(user)
         end
 
