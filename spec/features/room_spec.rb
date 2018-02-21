@@ -25,17 +25,19 @@ feature 'Room', type: :feature do
         before do
           village = create(:village_with_player, player_num: 5, name: "初心者村")
           village.update(player_num: 6)
-          create(:player, village: village, user: user)
+          player = create(:player, village: village, user: user)
+          village.room_for_all.posts.create(player: player, content: "はじめまして", day: 0)
           login_as(user)
         end
 
-        scenario 'show' do
+        scenario 'show', js:true do
           visit villages_path
           click_link '初心者村'
 
           expect(page).to have_content '初心者村'
           expect(page).to have_content 'プレイヤーの編集'
           expect(page).to have_content '送信'
+          expect(page).to have_content 'はじめまして'
         end
 
         scenario 'collapse input area', js: true do

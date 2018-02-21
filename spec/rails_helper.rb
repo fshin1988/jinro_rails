@@ -36,7 +36,8 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   Capybara.javascript_driver = :poltergeist
   Capybara.register_driver :poltergeist do |app|
-    Capybara::Poltergeist::Driver.new(app, :js_errors => false)
+    libs_path = Rails.root.join('spec/support/js_libs/')
+    Capybara::Poltergeist::Driver.new(app, extensions: ["#{libs_path}es6-promise.auto.js"])
   end
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
