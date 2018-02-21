@@ -14,6 +14,11 @@ cache:
     - node_modules
   yarn: true
 
+addons:
+  apt:
+    packages:
+      - fonts-ipafont
+
 before_install:
   - gem update --system
   - gem update bundler
