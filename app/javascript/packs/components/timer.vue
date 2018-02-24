@@ -1,6 +1,7 @@
 <template>
   <span id="timer">
     <i class="fa fa-hourglass-2 hourglass-with-timer"></i>
+    <span v-show="remainingHour">{{ remainingHour }}時間</span>
     <span>{{ remainingMin }}分</span>
     <span>{{ remainingSec }}秒</span>
   </span>
@@ -24,8 +25,11 @@ export default {
     }
   },
   computed: {
+    remainingHour: function() {
+      return Math.floor(this.remainingTime / 60 / 60)
+    },
     remainingMin: function() {
-      return Math.floor(this.remainingTime / 60)
+      return Math.floor((this.remainingTime / 60) % 60)
     },
     remainingSec: function() {
       return this.remainingTime % 60
