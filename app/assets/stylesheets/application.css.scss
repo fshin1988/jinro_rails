@@ -33,6 +33,11 @@ body {
   font-size: 20px;
 }
 
+.container.flex-col.room-container {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
 .flex-col {
   display: flex;
   flex-direction: column;
