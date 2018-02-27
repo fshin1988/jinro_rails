@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Player, type: :model do
   let(:player) { create(:player) }
+
   it 'has a valid factory' do
     expect(player).to be_valid
   end
@@ -23,16 +24,26 @@ RSpec.describe Player, type: :model do
   end
 
   describe '#avatar_image_src' do
-    context 'when a user does not have an avatar' do
+    context 'when the user does not have an avatar' do
       it 'returns nil' do
         expect(player.avatar_image_src).to be_nil
       end
     end
 
-    context 'when a user has a avatar' do
-      it 'returns url of avatar' do
+    context 'when the user has an avatar' do
+      before do
         player.user.avatar.attach(io: File.open("#{Rails.root}/spec/factories/data/logo.png"), filename: "logo.png")
-        expect(player.avatar_image_src =~ %r{^http://.*/rails/active_storage/variants/.*/logo\.png$}).not_to be_nil
+      end
+
+      it 'returns url of avatar of user' do
+        expect(player.avatar_image_src).to match(%r{^http://.*/rails/active_storage/variants/.*/logo\.png$})
+      end
+
+      context 'when the player has an avatar' do
+        it 'returns url of avatar of player' do
+          player.avatar.attach(io: File.open("#{Rails.root}/spec/factories/data/logo.png"), filename: "player.png")
+          expect(player.avatar_image_src).to match(%r{^http://.*/rails/active_storage/variants/.*/player\.png$})
+        end
       end
     end
   end
@@ -46,5 +57,14 @@ RSpec.describe Player, type: :model do
 
       expect(player.reload.village_id).to be 0
     end
+  end
+
+  it 'is invalid with username which is not unique in the village' do
+    village = create(:village)
+    player = create(:player, village: village, username: 'james')
+    other_player = build(:player, village: village, username: 'james')
+    other_player.valid?
+
+    expect(other_player.errors.messages[:base]).to include('村内で同一ユーザーネームのプレイヤーが存在します')
   end
 end
