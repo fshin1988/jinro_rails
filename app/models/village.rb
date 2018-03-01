@@ -177,6 +177,12 @@ class Village < ApplicationRecord
     count_by_username(vote_target_players)
   end
 
+  def start!
+    assign_role
+    update_to_next_day
+    update!(status: :in_play)
+  end
+
   private
 
   def vote_target_players

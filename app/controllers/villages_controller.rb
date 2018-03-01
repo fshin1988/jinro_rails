@@ -60,9 +60,7 @@ class VillagesController < ApplicationController
   end
 
   def start
-    @village.assign_role
-    @village.update_to_next_day
-    @village.update(status: :in_play)
+    @village.start!
     @village.post_system_message(start_message(@village))
     ReloadBroadcastJob.perform_later(@village)
     redirect_to village_room_path(@village, @village.room_for_all), notice: "#{@village.name} を開始しました"
