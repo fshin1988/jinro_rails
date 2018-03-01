@@ -34,6 +34,7 @@ ActiveRecord::Migration.maintain_test_schema!
 RSpec.configure do |config|
   config.include Warden::Test::Helpers
   config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include RequestSpecHelper, type: :request
   config.include FactoryGirl::Syntax::Methods
   Capybara.javascript_driver = :poltergeist
   Capybara.register_driver :poltergeist do |app|
