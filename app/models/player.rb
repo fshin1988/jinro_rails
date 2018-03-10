@@ -51,10 +51,19 @@ class Player < ApplicationRecord
 
   def avatar_image_src
     @avatar_image_src ||=
+      # if blob is invalid for ImageMagick, ActiveStorage::InvariableError occurs in `avatar.variant`
       if avatar.attached?
-        url_for(avatar.variant(resize: "100x100"))
+        begin
+          url_for(avatar.variant(resize: "100x100"))
+        rescue ActiveStorage::InvariableError
+          nil
+        end
       elsif user && user.avatar.attached?
-        url_for(user.avatar.variant(resize: "100x100"))
+        begin
+          url_for(user.avatar.variant(resize: "100x100"))
+        rescue ActiveStorage::InvariableError
+          nil
+        end
       else
         nil
       end
