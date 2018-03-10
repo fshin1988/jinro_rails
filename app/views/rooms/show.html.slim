@@ -1,5 +1,5 @@
 - @page_title = @village.name
-#room-root.flex-col[v-on:click="resetMessage"]
+#room-root.flex[v-on:click="resetMessage"]
   transition[name="api-message"]
     notice-component[v-if="noticeDisplay" v-bind:notice-message="noticeMessage"]
     alert-component[v-if="alertDisplay" v-bind:alert-message="alertMessage"]
@@ -8,11 +8,11 @@
     - if @village.in_play? || @village.ended?
       = render(partial: 'player_filter', locals: {room: @room})
     div.room-title = room_title(@village)
-  .panel-body.chat-body.flex-col
+  .panel-body.chat-body.flex
     .text-center[v-show="!haveAllPosts"]
       button.btn.btn-warning.btn-sm.display-all-posts-btn[v-on:click="getAllPosts"]
         | 全て表示
-    ul#message-list.chat.flex-col
+    ul#message-list.chat.max-height
       span[v-for="post in posts"]
         post-component[v-bind:post="post" v-bind:player-filter="playerFilter"]
   - if policy(@room).speak?

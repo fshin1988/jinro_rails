@@ -33,14 +33,18 @@ body {
   font-size: 20px;
 }
 
-.container.flex-col.room-container {
+.container.room-container {
   padding-left: 8px;
   padding-right: 8px;
 }
 
-.flex-col {
+.flex {
   display: flex;
   flex-direction: column;
+  height: 100%;
+}
+
+.max-height {
   height: 100%;
 }
 
