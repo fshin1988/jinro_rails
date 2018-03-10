@@ -19,7 +19,7 @@ html lang="ja"
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = favicon_link_tag('favicon.ico')
   body
-    .wrapper.flex-col
+    .wrapper.max-height
       nav class="navbar navbar-inverse navbar-fixed-top navbar-bg-#{@color_of_navbar}"
         .container
           = render partial: 'layouts/header'
