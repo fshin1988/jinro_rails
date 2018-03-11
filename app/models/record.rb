@@ -13,11 +13,6 @@
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #
-# Indexes
-#
-#  index_records_on_player_id   (player_id)
-#  index_records_on_village_id  (village_id)
-#
 
 class Record < ApplicationRecord
   belongs_to :village

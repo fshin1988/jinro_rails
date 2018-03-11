@@ -8,10 +8,6 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-# Indexes
-#
-#  index_rooms_on_village_id  (village_id)
-#
 
 class Room < ApplicationRecord
   enum room_type: {

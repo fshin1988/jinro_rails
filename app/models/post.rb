@@ -11,11 +11,6 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-# Indexes
-#
-#  index_posts_on_player_id  (player_id)
-#  index_posts_on_room_id    (room_id)
-#
 
 class Post < ApplicationRecord
   before_validation :compress_content_size

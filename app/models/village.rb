@@ -17,10 +17,6 @@
 #  start_at         :datetime
 #  show_vote_target :boolean          default(TRUE), not null
 #
-# Indexes
-#
-#  index_villages_on_user_id  (user_id)
-#
 
 class Village < ApplicationRecord
   after_create :create_rooms

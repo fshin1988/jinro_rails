@@ -12,10 +12,6 @@
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #
-# Indexes
-#
-#  index_results_on_village_id  (village_id)
-#
 
 class Result < ApplicationRecord
   belongs_to :village

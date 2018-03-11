@@ -8,11 +8,6 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-# Indexes
-#
-#  index_blacklist_users_on_user_id     (user_id)
-#  index_blacklist_users_on_village_id  (village_id)
-#
 
 class BlacklistUser < ApplicationRecord
   belongs_to :village
