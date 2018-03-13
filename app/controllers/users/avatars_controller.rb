@@ -5,7 +5,7 @@ class Users::AvatarsController < ApplicationController
   end
 
   def update
-    if current_user.update(user_params)
+    if current_user.avatar.attach(params[:user][:avatar])
       redirect_to villages_path, notice: "アカウントが更新されました"
     else
       render :edit
@@ -13,10 +13,6 @@ class Users::AvatarsController < ApplicationController
   end
 
   private
-
-  def user_params
-    params.require(:user).permit(:avatar)
-  end
 
   def check_params
     return if params[:user][:avatar].present?
