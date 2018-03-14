@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :manual do
     content "MyText"
   end

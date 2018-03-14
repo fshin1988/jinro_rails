@@ -42,7 +42,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'awesome_print'
   gem 'bullet'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'rspec-rails'

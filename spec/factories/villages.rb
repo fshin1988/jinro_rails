@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :village do
     association :user
     name '初心者村'

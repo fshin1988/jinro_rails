@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :blacklist_user do
     association :village
     association :user

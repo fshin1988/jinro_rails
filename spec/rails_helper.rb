@@ -35,7 +35,7 @@ RSpec.configure do |config|
   config.include Warden::Test::Helpers
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include RequestSpecHelper, type: :request
-  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
   Capybara.javascript_driver = :poltergeist
   Capybara.register_driver :poltergeist do |app|
     libs_path = Rails.root.join('spec/support/js_libs/')
