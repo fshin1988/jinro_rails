@@ -5,7 +5,7 @@ class VillagePolicy < ApplicationPolicy
 
   def create?
     return false unless user
-    true
+    user.villages.where(status: %i[not_started in_play]).empty?
   end
 
   def new?
