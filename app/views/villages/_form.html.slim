@@ -39,6 +39,10 @@
       {discard_year: true, use_two_digit_numbers: true, minute_step: 10,
        date_separator: ' / ', datetime_separator: ' - ', time_separator: ' : '},
       {class: 'datetime-select form-control'})
+  .form-group
+    = f.label :access_password
+    = f.text_field :access_password, class: 'form-control'
+    p ※設定しない場合は未入力
   br
 
   - if @village.persisted?

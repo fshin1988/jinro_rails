@@ -78,6 +78,9 @@ class VillagesController < ApplicationController
   end
 
   def village_params
-    params.require(:village).permit(:name, :player_num, :discussion_time, :first_day_victim, :start_at, :show_vote_target)
+    params.require(:village).permit(
+      :name, :player_num, :discussion_time, :first_day_victim, :start_at,
+      :show_vote_target, :access_password
+    )
   end
 end

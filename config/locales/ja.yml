@@ -30,6 +30,7 @@ ja:
           "true": する
           "false": しない
         start_at: 開始予定
+        access_password: アクセスコード
       player:
         username: ユーザーネーム
         avatar: プロフィール画像
