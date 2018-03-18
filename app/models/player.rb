@@ -15,6 +15,8 @@
 class Player < ApplicationRecord
   after_update_commit :upload_variant_avatar
 
+  attr_accessor :access_password
+
   enum role: {
     villager: 0,
     werewolf: 1,
@@ -35,10 +37,11 @@ class Player < ApplicationRecord
   has_many :records
   has_one_attached :avatar
 
-  validates :username, presence: true, length: { in: 1..20 }
+  validates :username, presence: true, length: {in: 1..20}
   validate :username_must_be_unique_in_village
   validates :role, presence: true
   validates :status, presence: true
+  validate :check_access_password, if: :need_access_password?, on: :create
 
   def human?
     villager? || fortune_teller? || psychic? || bodyguard? || madman?
@@ -87,13 +90,21 @@ class Player < ApplicationRecord
   def username_must_be_unique_in_village
     # Don't check a player to exit
     return if village_id == 0
-    if village.players.where(username: username).where.not(id: id).present?
-      errors.add(:base, "村内で同一ユーザーネームのプレイヤーが存在します")
-    end
+    return unless village.players.where(username: username).where.not(id: id).present?
+    errors.add(:base, "村内で同一ユーザーネームのプレイヤーが存在します")
   end
 
   def upload_variant_avatar
     return unless avatar.attached?
     UploadVariantAvatarJob.perform_later(self)
+  end
+
+  def check_access_password
+    return if access_password == village.access_password
+    errors.add(:base, "アクセスコードが誤っています")
+  end
+
+  def need_access_password?
+    village.access_password.present?
   end
 end

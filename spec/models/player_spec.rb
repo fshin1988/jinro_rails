@@ -61,10 +61,29 @@ RSpec.describe Player, type: :model do
 
   it 'is invalid with username which is not unique in the village' do
     village = create(:village)
-    player = create(:player, village: village, username: 'james')
+    create(:player, village: village, username: 'james')
     other_player = build(:player, village: village, username: 'james')
     other_player.valid?
 
     expect(other_player.errors.messages[:base]).to include('村内で同一ユーザーネームのプレイヤーが存在します')
+  end
+
+  context 'if the village has a access password' do
+    let(:village) { create(:village, access_password: "12345") }
+
+    it 'is valid with a valid access password' do
+      player = build(:player, village: village)
+      player.access_password = "12345"
+
+      expect(player).to be_valid
+    end
+
+    it 'is invalid with a invalid access password' do
+      player = build(:player, village: village)
+      player.access_password = "12349"
+      player.valid?
+
+      expect(player.errors.messages[:base]).to include('アクセスコードが誤っています')
+    end
   end
 end
