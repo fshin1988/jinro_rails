@@ -71,6 +71,10 @@ class Player < ApplicationRecord
     update!(village_id: 0)
   end
 
+  def need_access_password?
+    village.access_password.present?
+  end
+
   private
 
   def url_for(image)
@@ -102,9 +106,5 @@ class Player < ApplicationRecord
   def check_access_password
     return if access_password == village.access_password
     errors.add(:base, "アクセスコードが誤っています")
-  end
-
-  def need_access_password?
-    village.access_password.present?
   end
 end

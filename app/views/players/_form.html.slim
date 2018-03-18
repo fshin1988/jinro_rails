@@ -14,6 +14,10 @@
     br
     = link_to "プロフィール画像の設定", edit_player_avatar_path(@player), class: 'btn btn-default'
     br
+  - if @player.new_record? && @player.need_access_password?
+    .form-group
+      = f.label :access_password
+      = f.text_field :access_password, class: 'form-control'
   br
 
   - if @player.persisted?
