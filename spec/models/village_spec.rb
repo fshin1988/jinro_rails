@@ -7,6 +7,16 @@ RSpec.describe Village, type: :model do
     expect(village).to be_valid
   end
 
+  it 'is valid with access_password' do
+    village.access_password = "12345"
+    expect(village).to be_valid
+  end
+
+  it 'is invalid with access_password longer than 20 characters' do
+    village.access_password = "123456789012345678901"
+    expect(village).to be_invalid
+  end
+
   describe '#assign_role' do
     context 'when player_num is 5(minimum)' do
       it 'assigns role to players' do

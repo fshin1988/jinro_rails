@@ -16,6 +16,7 @@
 #  first_day_victim :boolean          default(TRUE), not null
 #  start_at         :datetime
 #  show_vote_target :boolean          default(TRUE), not null
+#  access_password  :string
 #
 
 class Village < ApplicationRecord
@@ -48,6 +49,7 @@ class Village < ApplicationRecord
   validates :discussion_time, presence: true,
                               numericality: {only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 1440}
   validates :status, presence: true
+  validates :access_password, length: {maximum: 20}, if: :access_password
 
   def assign_role
     roles = Settings.role_list[player_num].shuffle
