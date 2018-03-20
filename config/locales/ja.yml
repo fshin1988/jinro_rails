@@ -21,10 +21,6 @@ ja:
           in_play: 進行中
           ended: 終了
           ruined: 廃村
-        first_day_victim: 初日の襲撃
-        first_day_victim_value:
-          "true": あり
-          "false": なし
         show_vote_target: 投票先の開示
         show_vote_target_value:
           "true": する

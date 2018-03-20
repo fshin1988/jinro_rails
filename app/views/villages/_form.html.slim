@@ -15,15 +15,6 @@
     = f.label :discussion_time, "議論時間 (1~1440分)"
     = f.number_field :discussion_time, class: 'form-control'
   .form-group
-    = f.label :first_day_victim, class: 'control-label'
-    div
-      label.radio-inline
-        = f.radio_button :first_day_victim, true, checked: @village.first_day_victim
-        = t("activerecord.attributes.village.first_day_victim_value.true")
-      label.radio-inline
-        = f.radio_button :first_day_victim, false, checked: !@village.first_day_victim
-        = t("activerecord.attributes.village.first_day_victim_value.false")
-  .form-group
     = f.label :show_vote_target, class: 'control-label'
     div
       label.radio-inline

@@ -37,7 +37,6 @@ module VillagesHelper
     message << "村名: #{village.name}\n"
     message << "人数: #{village.player_num} 人\n"
     message << "議論時間: #{village.discussion_time} 分\n"
-    message << "初日の襲撃: #{I18n.t("activerecord.attributes.village.first_day_victim_value.#{village.first_day_victim}")}\n"
     message << "投票先の開示: #{I18n.t("activerecord.attributes.village.show_vote_target_value.#{village.show_vote_target}")}\n"
     message << "開始予定: #{datetime_display(village.start_at)}\n"
   end

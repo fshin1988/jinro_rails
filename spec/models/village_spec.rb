@@ -138,22 +138,6 @@ RSpec.describe Village, type: :model do
         expect(attacked_player.status).to eq 'dead'
       end
     end
-
-    context 'if first day victim is false' do
-      it 'does not exclude any players' do
-        village = create(:village_with_player, player_num: 13, day: 0, first_day_victim: false)
-        village.assign_role
-        village.update_to_next_day
-        attacked_player = village.players.villager.first
-        village.players.werewolf.each do |w|
-          w.records.first.update(attack_target: attacked_player)
-        end
-
-        village.attack
-        attacked_player.reload
-        expect(attacked_player.status).to eq 'alive'
-      end
-    end
   end
 
   describe '#judge_end' do

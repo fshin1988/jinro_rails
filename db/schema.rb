@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_03_18_114133) do
+ActiveRecord::Schema.define(version: 2018_03_20_111511) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -144,7 +144,6 @@ ActiveRecord::Schema.define(version: 2018_03_18_114133) do
     t.integer "winner"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "first_day_victim", default: true, null: false
     t.datetime "start_at"
     t.boolean "show_vote_target", default: true, null: false
     t.string "access_password"

@@ -13,7 +13,6 @@
 #  winner           :integer
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
-#  first_day_victim :boolean          default(TRUE), not null
 #  start_at         :datetime
 #  show_vote_target :boolean          default(TRUE), not null
 #  access_password  :string
@@ -71,7 +70,6 @@ class Village < ApplicationRecord
   end
 
   def attack
-    return unless attack_on_today?
     attacked_players =
       if attack_target_players.present?
         attack_target_players
@@ -164,11 +162,6 @@ class Village < ApplicationRecord
 
   def post_system_message(content)
     room_for_all.posts.create!(content: content, day: day, owner: :system)
-  end
-
-  def attack_on_today?
-    return false if first_day_victim == false && day == 1
-    true
   end
 
   def number_of_votes
