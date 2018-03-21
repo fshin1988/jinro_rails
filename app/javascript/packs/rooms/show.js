@@ -9,7 +9,7 @@ import Timer from '../components/timer.vue';
 import Post from '../components/post.vue';
 
 new Vue({
-  el: '#room-root',
+  el: '#app-root',
   data: {
     chatDisplay: true,
     inputDisplay: true,
