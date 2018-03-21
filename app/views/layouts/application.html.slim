@@ -27,3 +27,10 @@ html lang="ja"
         = yield
       - else
         = render partial: 'layouts/content'
+    - if controller_name == 'rooms' && action_name == 'show'
+      javascript:
+        var record = #{@record.to_json.html_safe}
+        var villageId = #{@village.id}
+        var villageStatus = "#{@village.status}"
+        var roomId = #{@room.id}
+      = javascript_pack_tag 'rooms/show'

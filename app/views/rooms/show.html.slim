@@ -36,11 +36,3 @@
   - if @village.in_play? && !policy(@room).speak?
     div
       timer-component[v-bind:initial-remaining-time="initialRemainingTime"]
-
-javascript:
-  var record = #{@record.to_json.html_safe}
-  var villageId = #{@village.id}
-  var villageStatus = "#{@village.status}"
-  var roomId = #{@room.id}
-
-= javascript_pack_tag 'rooms/show'
