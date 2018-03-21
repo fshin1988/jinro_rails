@@ -77,4 +77,15 @@ RSpec.describe 'Rooms API', type: :request do
       end
     end
   end
+
+  describe 'show API' do
+    it 'returns information of room' do
+      village = create(:village_with_player, player_num: 5, name: "初心者村", day: 0)
+      get "/api/v1/rooms/#{village.room_for_all.id}"
+
+      expect(response).to have_http_status(200)
+      res = JSON.parse(response.body)
+      expect(res['title']).to eq "初心者村 プロローグ"
+    end
+  end
 end

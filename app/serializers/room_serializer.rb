@@ -1,3 +1,8 @@
 class RoomSerializer < ActiveModel::Serializer
-  attributes :id, :room_type
+  include RoomsHelper
+  attributes :title
+
+  def title
+    room_title(object.village)
+  end
 end

@@ -1,6 +1,10 @@
 class Api::V1::RoomsController < Api::V1::ApiController
-  skip_before_action :authenticate_user!, only: %i[posts all_posts]
+  skip_before_action :authenticate_user!, only: %i[show posts all_posts]
   before_action :set_room
+
+  def show
+    render json: @room
+  end
 
   def posts
     render json: latest_20_posts(@room),

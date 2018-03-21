@@ -30,6 +30,7 @@ new Vue({
     posts: [],
     haveAllPosts: true,
     playerFilter: "all",
+    room: {},
     roomId: roomId,
     channel: null,
     chatMessage: "",
@@ -37,6 +38,7 @@ new Vue({
   },
   created: function() {
     this.subscribeChannel()
+    this.getRoomInfo()
     this.getPosts()
     if(this.villageStatus === "in_play") {
       this.setInitialRemainingTime()
@@ -58,6 +60,12 @@ new Vue({
     }
   },
   methods: {
+    getRoomInfo: function() {
+      axios.get('/api/v1/rooms/' + this.roomId)
+        .then(res => {
+          this.room = res.data
+        });
+    },
     setVoteTarget: function() {
       axios.put('/api/v1/records/' + this.recordId + '/vote', { record: { vote_target_id: this.voteSelected } })
         .then(res => {

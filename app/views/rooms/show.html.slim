@@ -7,7 +7,7 @@
   #title-area
     - if @village.in_play? || @village.ended?
       = render(partial: 'player_filter', locals: {room: @room})
-    div.room-title = room_title(@village)
+    div.room-title = "{{ room.title }}"
   .panel-body.chat-body.flex
     .text-center[v-show="!haveAllPosts"]
       button.btn.btn-warning.btn-sm.display-all-posts-btn[v-on:click="getAllPosts"]
