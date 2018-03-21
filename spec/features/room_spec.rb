@@ -9,7 +9,7 @@ feature 'Room', type: :feature do
         create(:village_with_player, player_num: 5, name: "初心者村")
       end
 
-      scenario 'show' do
+      scenario 'show', js: true do
         visit villages_path
         click_link '初心者村'
 
@@ -55,7 +55,7 @@ feature 'Room', type: :feature do
           login_as(user)
         end
 
-        scenario 'show' do
+        scenario 'show', js: true do
           visit villages_path
           click_link '初心者村'
 
