@@ -36,13 +36,13 @@ RSpec.describe Player, type: :model do
       end
 
       it 'returns url of avatar of user' do
-        expect(player.avatar_image_src).to match(%r{^http://.*/rails/active_storage/variants/.*/logo\.png$})
+        expect(player.avatar_image_src).to match(%r{^http://.*/rails/active_storage/representations/.*/logo\.png$})
       end
 
       context 'when the player has an avatar' do
         it 'returns url of avatar of player' do
           player.avatar.attach(io: File.open("#{Rails.root}/spec/factories/data/logo.png"), filename: "player.png")
-          expect(player.avatar_image_src).to match(%r{^http://.*/rails/active_storage/variants/.*/player\.png$})
+          expect(player.avatar_image_src).to match(%r{^http://.*/rails/active_storage/representations/.*/player\.png$})
         end
       end
     end
