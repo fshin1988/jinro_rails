@@ -6,11 +6,8 @@ class Players::AvatarsController < ApplicationController
   end
 
   def update
-    if @player.avatar.attach(params[:player][:avatar])
-      redirect_to village_room_path(@village, @village.room_for_all), notice: "#{@player.username} を更新しました"
-    else
-      render :edit
-    end
+    @player.avatar.attach(params[:player][:avatar])
+    redirect_to village_room_path(@village, @village.room_for_all), notice: "#{@player.username} を更新しました"
   end
 
   private
