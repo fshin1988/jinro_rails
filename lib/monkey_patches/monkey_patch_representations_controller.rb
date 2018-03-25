@@ -10,6 +10,11 @@ class ActiveStorage::RepresentationsController < ActionController::Base
       sleep 1
       count += 1
     end
-    redirect_to representation.processed.service_url(expires_in: 120.minutes, disposition: params[:disposition])
+
+    if count > 10
+      head :not_found
+    else
+      redirect_to representation.service_url(expires_in: 120.minutes, disposition: params[:disposition])
+    end
   end
 end
