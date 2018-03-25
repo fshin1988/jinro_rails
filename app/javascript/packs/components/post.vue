@@ -18,12 +18,12 @@
             {{ createdAt }}
           </small>
         </div>
-        <p class="post">{{ content  }}</p>
+        <p class="post">{{ content }}</p>
       </div>
     </li>
     <li class="system clearfix" v-else>
       <div class="chat-body clearfix">
-        <p class="post">{{ content  }}</p>
+        <p class="post">{{ content }}</p>
       </div>
     </li>
   </span>
