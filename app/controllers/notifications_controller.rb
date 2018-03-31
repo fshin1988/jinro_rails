@@ -5,6 +5,7 @@ class NotificationsController < ApplicationController
 
   def index
     @notifications = Notification.all.order("created_at DESC")
+    @notifications = @notifications.page params[:page]
   end
 
   def show
@@ -37,7 +38,7 @@ class NotificationsController < ApplicationController
 
   def destroy
     @notification.destroy
-    redirect_to root_url, notice: 'お知らせを削除しました'
+    redirect_to notifications_path, notice: 'お知らせを削除しました'
   end
 
   private

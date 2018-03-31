@@ -1,0 +1,11 @@
+= form_for @notification do |f|
+  .form-group
+    = f.label :title
+    = f.text_field :title, autofocus: true, class: 'form-control'
+  .form-group
+    = f.label :content
+    = f.text_area :content, class: 'form-control manual-content'
+  - if @notification.persisted?
+    .actions = f.submit "更新", class: 'btn btn-primary'
+  - else
+    .actions = f.submit "作成", class: 'btn btn-primary'

@@ -30,6 +30,10 @@
         a[href="#{villages_path}"]
           i.fa.fa-search.navbar-icon
           | 村を探す
+      li
+        a[href="#{notifications_path}"]
+          i.fa.fa-bell.navbar-icon
+          | お知らせ
       - if Manual.count > 0
         li
           a[href="#{manual_path(Manual.first)}"]

@@ -1,0 +1,20 @@
+- @page_title = 'お知らせ'
+.notification-header
+  - if policy(Notification).create?
+    .pull-right.create-notification-button
+      = button_to "新規作成", new_notification_path, method: :get, class: 'btn btn-sm btn-primary'
+  h1 お知らせ
+
+table class="table table-striped"
+  thead
+    tr
+      th タイトル
+      th 投稿日時
+
+  tbody
+    - @notifications.each do |notification|
+      tr
+        td
+          = link_to(notification.title, notification_path(notification))
+        td = datetime_display(notification.created_at)
+= paginate @notifications

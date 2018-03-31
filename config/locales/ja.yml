@@ -40,6 +40,9 @@ ja:
         access_password: アクセスコード
       manual:
         content: 内容
+      notification:
+        title: タイトル
+        content: 内容
   views:
     pagination:
       first: "First"

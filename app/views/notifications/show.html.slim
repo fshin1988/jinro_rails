@@ -1,0 +1,10 @@
+- @page_title = @notification.title
+h1 = @notification.title
+= markdown(@notification.content)
+
+br
+- if policy(Notification).update?
+  = button_to '編集', edit_notification_path(@notification), method: :get, class: 'btn btn-primary'
+  br
+- if policy(Notification).destroy?
+  = button_to '削除', @notification, method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-sm btn-danger'
