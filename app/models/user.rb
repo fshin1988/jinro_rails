@@ -21,6 +21,7 @@
 #  updated_at             :datetime         not null
 #  username               :string           not null
 #  role                   :integer          default("normal"), not null
+#  locked_at              :datetime
 #
 
 class User < ApplicationRecord
@@ -30,7 +31,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :confirmable
+         :confirmable, :lockable
 
   enum role: {
     normal: 0,
