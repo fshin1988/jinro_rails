@@ -1,4 +1,4 @@
-class ActiveStorage::RepresentationsController < ActionController::Base
+class ActiveStorage::RepresentationsController < ActiveStorage::BaseController
   include ActiveStorage::SetBlob
 
   def show
