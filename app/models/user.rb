@@ -59,6 +59,21 @@ class User < ApplicationRecord
     p.count
   end
 
+  def winned_village_count(role: nil)
+    human_win_players = players.joins(:village).where(villages: {winner: :human_win})
+                               .where(role: %i[villager fortune_teller psychic bodyguard])
+    wolf_win_players = players.joins(:village).where(villages: {winner: :werewolf_win})
+                              .where(role: %i[werewolf madman])
+    case role
+    when "villager", "fortune_teller", "psychic", "bodyguard"
+      human_win_players.where(role: role).count
+    when "werewolf", "madman"
+      wolf_win_players.where(role: role).count
+    else
+      human_win_players.count + wolf_win_players.count
+    end
+  end
+
   private
 
   def upload_variant_avatar
