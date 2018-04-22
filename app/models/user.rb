@@ -42,7 +42,7 @@ class User < ApplicationRecord
   has_many :players
   has_one_attached :avatar
 
-  validates :username, presence: true, length: { in: 1..20 }, uniqueness: true
+  validates :username, presence: true, length: {in: 1..20}, uniqueness: true
   validates :role, presence: true
 
   def joining_in_village?
@@ -54,7 +54,9 @@ class User < ApplicationRecord
   end
 
   def joined_village_count(role: nil)
-    players.joins(:village).where("villages.status = ?", Village.statuses["ended"]).count
+    p = players.joins(:village).where(villages: {status: :ended})
+    p = p.where(role: role) if role
+    p.count
   end
 
   private

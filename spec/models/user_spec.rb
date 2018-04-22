@@ -94,5 +94,27 @@ RSpec.describe User, type: :model do
         end
       end
     end
+
+    context 'when the argument of role is werewolf' do
+      context 'when there is the village that the user joined' do
+        context 'when the role of the player is werewolf' do
+          it 'returns the number of villages' do
+            village = create(:village_with_player, player_num: 5, status: :ended, winner: :human_win)
+            create(:player, user: user, village: village, role: :werewolf)
+
+            expect(user.joined_village_count(role: "werewolf")).to eq 1
+          end
+        end
+
+        context 'when the role of the player is not werewolf' do
+          it 'does not counts the villages' do
+            village = create(:village_with_player, player_num: 5, status: :ended, winner: :human_win)
+            create(:player, user: user, village: village, role: :villager)
+
+            expect(user.joined_village_count(role: "werewolf")).to eq 0
+          end
+        end
+      end
+    end
   end
 end
