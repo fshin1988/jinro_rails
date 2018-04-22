@@ -60,21 +60,26 @@ class User < ApplicationRecord
   end
 
   def winned_village_count(role: nil)
-    human_win_players = players.joins(:village).where(villages: {winner: :human_win})
-                               .where(role: %i[villager fortune_teller psychic bodyguard])
-    wolf_win_players = players.joins(:village).where(villages: {winner: :werewolf_win})
-                              .where(role: %i[werewolf madman])
     case role
     when "villager", "fortune_teller", "psychic", "bodyguard"
-      human_win_players.where(role: role).count
+      human_winned_village_players.where(role: role).count
     when "werewolf", "madman"
-      wolf_win_players.where(role: role).count
+      werewolf_winned_village_players.where(role: role).count
     else
-      human_win_players.count + wolf_win_players.count
+      human_winned_village_players.where(role: %i[villager fortune_teller psychic bodyguard]).count +
+        werewolf_winned_village_players.where(role: %i[werewolf madman]).count
     end
   end
 
   private
+
+  def human_winned_village_players
+    players.joins(:village).where(villages: {winner: :human_win})
+  end
+
+  def werewolf_winned_village_players
+    players.joins(:village).where(villages: {winner: :werewolf_win})
+  end
 
   def upload_variant_avatar
     return unless avatar.attached?
