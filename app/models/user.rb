@@ -60,14 +60,13 @@ class User < ApplicationRecord
   end
 
   def winned_village_count(role: nil)
-    case role
-    when "villager", "fortune_teller", "psychic", "bodyguard"
+    if role.in?(Player.human_side_roles)
       human_winned_village_players.where(role: role).count
-    when "werewolf", "madman"
+    elsif role.in?(Player.werewolf_side_roles)
       werewolf_winned_village_players.where(role: role).count
     else
-      human_winned_village_players.where(role: %i[villager fortune_teller psychic bodyguard]).count +
-        werewolf_winned_village_players.where(role: %i[werewolf madman]).count
+      human_winned_village_players.where(role: Player.human_side_roles).count +
+        werewolf_winned_village_players.where(role: Player.werewolf_side_roles).count
     end
   end
 
