@@ -13,7 +13,7 @@ RSpec.describe 'Rooms API', type: :request do
         expect(first_post['player_id']).to eq post.player.id
         expect(first_post['content']).to eq post.content
         expect(first_post['owner']).to eq post.owner
-        expect(first_post['created_at']).to eq post.created_at.strftime('%H:%M:%S')
+        expect(first_post['created_at']).to eq post.created_at.strftime('%-m/%-d %H:%M:%S')
         expect(first_post['image_src']).to eq nil
         expect(first_post['username']).to eq post.player.username
       end
@@ -30,7 +30,7 @@ RSpec.describe 'Rooms API', type: :request do
         expect(first_post['player_id']).to eq 0
         expect(first_post['content']).to eq post.content
         expect(first_post['owner']).to eq post.owner
-        expect(first_post['created_at']).to eq post.created_at.strftime('%H:%M:%S')
+        expect(first_post['created_at']).to eq post.created_at.strftime('%-m/%-d %H:%M:%S')
         expect(first_post['image_src']).to eq nil
         expect(first_post['username']).to eq nil
       end

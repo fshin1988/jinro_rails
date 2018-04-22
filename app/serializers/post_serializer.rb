@@ -6,7 +6,7 @@ class PostSerializer < ActiveModel::Serializer
   end
 
   def created_at
-    object.created_at.strftime('%H:%M:%S')
+    object.created_at.strftime('%-m/%-d %H:%M:%S')
   end
 
   def image_src
