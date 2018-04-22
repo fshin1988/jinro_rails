@@ -53,6 +53,10 @@ class User < ApplicationRecord
     end
   end
 
+  def joined_village_count(role: nil)
+    players.joins(:village).where("villages.status = ?", Village.statuses["ended"]).count
+  end
+
   private
 
   def upload_variant_avatar
