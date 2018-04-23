@@ -1,0 +1,15 @@
+= form_for(@profile, url: users_profile_path) do |f|
+  - if @profile.errors.any?
+    .alert.alert-danger
+      ul
+        - @profile.errors.full_messages.each do |message|
+          li = message
+
+  .form-group
+    = f.label :comment
+    = f.text_area :comment, size: "20x5", class: 'form-control'
+  br
+
+  .button-inline
+    = link_to "戻る", users_profile_path(@profile), class: 'btn btn-default'
+    = f.submit "更新", class: 'btn btn-primary'

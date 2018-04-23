@@ -1,0 +1,6 @@
+h1 = @profile.user.username
+br
+= simple_format(@profile.comment, class: 'profile-comment')
+br
+- if policy(@profile).update?
+  = button_to '編集', edit_users_profile_path(@profile), method: :get, class: 'btn btn-primary'

@@ -43,6 +43,8 @@ ja:
       notification:
         title: タイトル
         content: 内容
+      profile:
+        comment: コメント
   views:
     pagination:
       first: "First"
