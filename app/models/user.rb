@@ -26,6 +26,7 @@
 
 class User < ApplicationRecord
   after_update_commit :upload_variant_avatar
+  after_create_commit :create_profile!
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -41,6 +42,7 @@ class User < ApplicationRecord
   has_many :villages
   has_many :players
   has_one_attached :avatar
+  has_one :profile, dependent: :destroy
 
   validates :username, presence: true, length: {in: 1..20}, uniqueness: true
   validates :role, presence: true
