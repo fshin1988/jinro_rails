@@ -43,6 +43,14 @@ class Player < ApplicationRecord
   validates :status, presence: true
   validate :check_access_password, if: :need_access_password?, on: :create
 
+  def self.human_side_roles
+    %w[villager fortune_teller psychic bodyguard]
+  end
+
+  def self.werewolf_side_roles
+    %w[werewolf madman]
+  end
+
   def human?
     villager? || fortune_teller? || psychic? || bodyguard? || madman?
   end

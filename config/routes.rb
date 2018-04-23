@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   namespace :users do
     resource :avatar, only: %i[edit update]
-    resources :profiles, only: %i[index show edit update]
+    resources :profiles, only: %i[show edit update]
   end
 
   resources :villages, except: :show do
