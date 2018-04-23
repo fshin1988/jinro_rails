@@ -26,6 +26,7 @@
 
 class User < ApplicationRecord
   after_update_commit :upload_variant_avatar
+  after_create_commit :create_profile!
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -41,8 +42,9 @@ class User < ApplicationRecord
   has_many :villages
   has_many :players
   has_one_attached :avatar
+  has_one :profile, dependent: :destroy
 
-  validates :username, presence: true, length: { in: 1..20 }, uniqueness: true
+  validates :username, presence: true, length: {in: 1..20}, uniqueness: true
   validates :role, presence: true
 
   def joining_in_village?
@@ -53,7 +55,32 @@ class User < ApplicationRecord
     end
   end
 
+  def joined_village_count(role: nil)
+    p = players.joins(:village).where(villages: {status: :ended})
+    p = p.where(role: role) if role
+    p.count
+  end
+
+  def winned_village_count(role: nil)
+    if role.in?(Player.human_side_roles)
+      human_winned_village_players.where(role: role).count
+    elsif role.in?(Player.werewolf_side_roles)
+      werewolf_winned_village_players.where(role: role).count
+    else
+      human_winned_village_players.where(role: Player.human_side_roles).count +
+        werewolf_winned_village_players.where(role: Player.werewolf_side_roles).count
+    end
+  end
+
   private
+
+  def human_winned_village_players
+    players.joins(:village).where(villages: {winner: :human_win})
+  end
+
+  def werewolf_winned_village_players
+    players.joins(:village).where(villages: {winner: :werewolf_win})
+  end
 
   def upload_variant_avatar
     return unless avatar.attached?

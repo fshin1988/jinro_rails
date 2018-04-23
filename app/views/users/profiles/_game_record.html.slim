@@ -1,0 +1,24 @@
+table class="table table-striped"
+  thead
+    tr
+      th 役職
+      th 勝利数
+      th 対戦数
+      th 勝率
+
+  tbody
+    - Player.roles.keys.each do |role|
+      tr
+        - winned_count = user.winned_village_count(role: role)
+        - joined_count = user.joined_village_count(role: role)
+        td = I18n.t("activerecord.attributes.player.role_enums.#{role}")
+        td = "#{winned_count} 回"
+        td = "#{joined_count} 回"
+        td = winning_percentage(winned_count, joined_count)
+    tr
+      - winned_count = user.winned_village_count
+      - joined_count = user.joined_village_count
+      td = "合計"
+      td = "#{winned_count} 回"
+      td = "#{joined_count} 回"
+      td = winning_percentage(winned_count, joined_count)

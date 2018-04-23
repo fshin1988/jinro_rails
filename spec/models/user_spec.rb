@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   let(:user) { create(:user) }
+
   it 'has a valid factory' do
     expect(user).to be_valid
   end
@@ -61,6 +62,126 @@ RSpec.describe User, type: :model do
         player.exit_from_village
 
         expect(user.joining_in_village?).to be false
+      end
+    end
+  end
+
+  describe '#joined_village_count' do
+    context 'when there is no argument' do
+      it 'returns the number of villages that the user joined' do
+        village = create(:village_with_player, player_num: 5, status: :ended, winner: :human_win)
+        create(:player, user: user, village: village, role: :villager)
+
+        expect(user.joined_village_count).to eq 1
+      end
+
+      context 'when the user is joinning a village in play' do
+        it 'does not return the number of villages that is not ended' do
+          village_in_play = create(:village_with_player, player_num: 5, status: :in_play)
+          create(:player, user: user, village: village_in_play, role: :villager)
+
+          expect(user.joined_village_count).to eq 0
+        end
+      end
+
+      context 'when there is an ended village that the user exit from' do
+        it 'does not return the number of villages that the user exit from' do
+          village = create(:village_with_player, player_num: 5, status: :ended, winner: :human_win)
+          player = create(:player, user: user, village: village, role: :villager)
+          player.exit_from_village
+
+          expect(user.joined_village_count).to eq 0
+        end
+      end
+    end
+
+    context 'when role of the argument is werewolf' do
+      context 'when there is the village that the user joined' do
+        context 'when the role of the player is werewolf' do
+          it 'returns the number of villages' do
+            village = create(:village_with_player, player_num: 5, status: :ended, winner: :human_win)
+            create(:player, user: user, village: village, role: :werewolf)
+
+            expect(user.joined_village_count(role: "werewolf")).to eq 1
+          end
+        end
+
+        context 'when the role of the player is not werewolf' do
+          it 'does not counts the villages' do
+            village = create(:village_with_player, player_num: 5, status: :ended, winner: :human_win)
+            create(:player, user: user, village: village, role: :villager)
+
+            expect(user.joined_village_count(role: "werewolf")).to eq 0
+          end
+        end
+      end
+    end
+  end
+
+  describe '#winned_village_count' do
+    context 'when there is no argument' do
+      it 'returns the number of villages that the user winned' do
+        village = create(:village_with_player, player_num: 5, status: :ended, winner: :human_win)
+        create(:player, user: user, village: village, role: :villager)
+        village2 = create(:village_with_player, player_num: 5, status: :ended, winner: :werewolf_win)
+        create(:player, user: user, village: village2, role: :werewolf)
+
+        expect(user.winned_village_count).to eq 2
+      end
+
+      context 'when there is a village that the user lost' do
+        it 'does not counts the village' do
+          village = create(:village_with_player, player_num: 5, status: :ended, winner: :werewolf_win)
+          create(:player, user: user, village: village, role: :villager)
+          village2 = create(:village_with_player, player_num: 5, status: :ended, winner: :human_win)
+          create(:player, user: user, village: village2, role: :werewolf)
+
+          expect(user.winned_village_count).to eq 0
+        end
+      end
+    end
+
+    context 'when role of the argument is werewolf' do
+      context 'when there is the village that the user winned' do
+        context 'when the role of the player is werewolf' do
+          it 'returns the number of villages' do
+            village = create(:village_with_player, player_num: 5, status: :ended, winner: :werewolf_win)
+            create(:player, user: user, village: village, role: :werewolf)
+
+            expect(user.winned_village_count(role: "werewolf")).to eq 1
+          end
+        end
+
+        context 'when the role of the player is not werewolf' do
+          it 'does not return the number of villages' do
+            village = create(:village_with_player, player_num: 5, status: :ended, winner: :human_win)
+            create(:player, user: user, village: village, role: :villager)
+
+            expect(user.winned_village_count(role: "werewolf")).to eq 0
+          end
+        end
+      end
+    end
+
+    context 'when role of the argument is madman' do
+      context 'when there is the village that the user winned' do
+        context 'when the role of the player is madman' do
+          it 'returns the number of villages' do
+            village = create(:village_with_player, player_num: 5, status: :ended, winner: :werewolf_win)
+            create(:player, user: user, village: village, role: :madman)
+
+            expect(user.winned_village_count(role: "madman")).to eq 1
+          end
+        end
+
+        context 'when the role of the player is not madman' do
+          it 'does not return the number of villages' do
+            village = create(:village_with_player, player_num: 5, status: :ended, winner: :werewolf_win)
+            create(:player, user: user, village: village, role: :werewolf)
+
+            expect(user.winned_village_count(role: "madman")).to eq 0
+          end
+        end
       end
     end
   end
