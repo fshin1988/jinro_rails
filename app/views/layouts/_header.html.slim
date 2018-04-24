@@ -46,6 +46,10 @@
             | マニュアルを作成
       - if user_signed_in?
         li
+          a[href="#{users_profile_path(current_user.profile)}"]
+            i.fa.fa-user-circle-o.navbar-icon
+            | プロフィール
+        li
           a[href="#{edit_user_registration_path}"]
             i.fa.fa-gear.navbar-icon
             | 設定変更
