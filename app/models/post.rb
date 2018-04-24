@@ -13,7 +13,7 @@
 #
 
 class Post < ApplicationRecord
-  before_validation :compress_content_size
+  before_validation :compress_content_size, if: :player?
   after_create_commit { MessageBroadcastJob.perform_later self }
 
   enum owner: {
