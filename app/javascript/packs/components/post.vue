@@ -23,7 +23,7 @@
     </li>
     <li class="system clearfix" v-else>
       <div class="chat-body clearfix">
-        <p class="post">{{ content }}</p>
+        <p v-html="content" class="post"></p>
       </div>
     </li>
   </span>
