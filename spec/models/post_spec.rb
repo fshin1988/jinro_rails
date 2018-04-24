@@ -36,5 +36,14 @@ RSpec.describe Post, type: :model do
       post.save
       expect(post.content.length).to eq 500
     end
+
+    context 'when owner is system' do
+      it 'is not compressed to 500 characters' do
+        post = build(:post, owner: :system, player: nil)
+        post.content = "あ" * 501
+        post.save
+        expect(post.content.length).to eq 501
+      end
+    end
   end
 end
