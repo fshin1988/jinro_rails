@@ -38,12 +38,7 @@
 
   - if @village.persisted?
     .button-inline
-      = link_to "戻る", village_room_path(@village, @village.room_for_all), class: 'btn btn-default'
+      = link_to "戻る", village_path(@village), class: 'btn btn-default'
       = f.submit "更新", class: 'btn btn-primary'
   - else
     .actions = f.submit "作成", class: 'btn btn-primary'
-- if @village.persisted?
-  br
-  = button_to '廃村にする', ruin_village_path(@village), method: :get, data: { confirm: '本当に廃村にしますか？' }, class: 'btn btn-sm btn-danger'
-  br
-  = button_to '削除', @village, method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-sm btn-danger'
