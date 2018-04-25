@@ -21,8 +21,8 @@
         li = link_to '人狼ルームへ', village_room_path(@village, @village.room_for_wolf), data: {turbolinks: "false"}, target: '_blank'
       - if @room.for_all? && @village.room_for_dead.present? && policy(@village.room_for_dead).show?
         li = link_to '墓場へ', village_room_path(@village, @village.room_for_dead), data: {turbolinks: "false"}, target: '_blank'
-      - if policy(@village).edit?
-        li = link_to '村の編集', edit_village_path(@village), data: {turbolinks: "false"}
+      - if policy(@village).show?
+        li = link_to '村の詳細', village_path(@village), data: {turbolinks: "false"}
       - if policy(@village).kick?
         li = link_to 'プレイヤーのキック', edit_village_kick_path(@village), data: {turbolinks: "false"}
     - else
