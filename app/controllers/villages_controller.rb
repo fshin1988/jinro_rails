@@ -13,7 +13,7 @@ class VillagesController < ApplicationController
       else
         Village.where(status: %w[not_started in_play])
       end
-    @villages = villages.order("created_at DESC").page params[:page]
+    @villages = villages.order("updated_at DESC").page params[:page]
     ActiveRecord::Precounter.new(@villages).precount(:players)
   end
 
