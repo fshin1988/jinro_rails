@@ -7,6 +7,11 @@ module VillagesHelper
     end
   end
 
+  def link_to_profile(player)
+    return "-" unless player.user
+    link_to(player.user.username, users_profile_path(player.user.profile), target: "_blank")
+  end
+
   def messages_of_result(results)
     return [] unless results
     messages = []
@@ -119,8 +124,7 @@ module VillagesHelper
   def reveal_message(village)
     message = "プレイヤーの役職は以下の通りでした\n"
     village.players.each do |player|
-      profile_link = "<a target=\"_blank\" href=\"#{users_profile_path(player.user.profile)}\">#{player.user.username}</a>"
-      message << "#{player.username}(#{profile_link}) : #{I18n.t("activerecord.attributes.player.role_enums.#{player.role}")}\n"
+      message << "#{player.username} : #{I18n.t("activerecord.attributes.player.role_enums.#{player.role}")}\n"
     end
     message
   end

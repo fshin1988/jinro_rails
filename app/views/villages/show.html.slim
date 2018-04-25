@@ -1,0 +1,60 @@
+h1 = "#{@village.name} の詳細"
+
+table class="table table-striped table-village-show"
+  thead
+    tr
+      th.col-md-4 項目
+      th.col-md-8 設定
+
+  tbody
+    tr
+      td = t("activerecord.attributes.village.name")
+      td = @village.name
+    tr
+      td = t("activerecord.attributes.village.player_num")
+      td = "#{@village.players.count} / #{@village.player_num} 人"
+    tr
+      td = t("activerecord.attributes.village.discussion_time")
+      td = "#{@village.discussion_time} 分"
+    tr
+      td = "状態"
+      td = t("activerecord.attributes.village.status.#{@village.status}")
+    tr
+      td = t("activerecord.attributes.village.show_vote_target")
+      td = t("activerecord.attributes.village.show_vote_target_value.#{@village.show_vote_target}")
+    tr
+      td = t("activerecord.attributes.village.start_at")
+      td = datetime_display(@village.start_at)
+    tr
+      td = t("activerecord.attributes.village.access_password")
+      td = @village.access_password.present? ? "あり" : "なし"
+
+h4 参加者一覧
+table class="table table-striped table-village-show"
+  thead
+    tr
+      th プレイヤー
+      th 状態
+      - if @village.ended?
+        th 役職
+        th プロフィール
+  tbody
+    - players = @village.ended? ? @village.players.includes(user: :profile) : @village.players
+    - players.each do |player|
+      tr
+        td = player.username
+        td = player.alive? ? "生存" : "死亡"
+        - if @village.ended?
+          td = I18n.t("activerecord.attributes.player.role_enums.#{player.role}")
+          td = link_to_profile(player)
+
+.button-inline
+  = link_to "戻る", village_room_path(@village, @village.room_for_all), class: 'btn btn-default'
+  - if policy(@village).update?
+    = link_to "編集", edit_village_path(@village), class: 'btn btn-primary'
+- if policy(@village).ruin?
+  br
+  = button_to '廃村にする', ruin_village_path(@village), method: :get, data: { confirm: '本当に廃村にしますか？' }, class: 'btn btn-sm btn-danger'
+  br
+- if policy(@village).destroy?
+  = button_to '削除', @village, method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-sm btn-danger'

@@ -1,8 +1,8 @@
 class VillagesController < ApplicationController
   include VillagesHelper
 
-  skip_before_action :authenticate_user!, only: :index
-  before_action :set_village, only: %i[edit update destroy start ruin]
+  skip_before_action :authenticate_user!, only: %i[index show]
+  before_action :set_village, only: %i[show edit update destroy start ruin]
   before_action :authorize_village, only: %i[index new create]
 
   def index
@@ -13,8 +13,11 @@ class VillagesController < ApplicationController
       else
         Village.where(status: %w[not_started in_play])
       end
-    @villages = villages.order("created_at DESC").page params[:page]
+    @villages = villages.order("updated_at DESC").page params[:page]
     ActiveRecord::Precounter.new(@villages).precount(:players)
+  end
+
+  def show
   end
 
   def new
@@ -38,7 +41,7 @@ class VillagesController < ApplicationController
   def update
     if @village.update(village_params)
       @village.post_system_message(update_message(@village))
-      redirect_to village_room_path(@village, @village.room_for_all), notice: "#{@village.name} が更新されました"
+      redirect_to village_path(@village), notice: "#{@village.name} が更新されました"
     else
       render :edit
     end
@@ -53,7 +56,7 @@ class VillagesController < ApplicationController
     if @village.update(status: :ruined)
       @village.post_system_message(ruin_message(@village))
       ReloadBroadcastJob.perform_later(@village)
-      redirect_to village_room_path(@village, @village.room_for_all), notice: "#{@village.name} が廃村になりました"
+      redirect_to village_path(@village), notice: "#{@village.name} が廃村になりました"
     else
       render :edit
     end

@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     resources :profiles, only: %i[show edit update]
   end
 
-  resources :villages, except: :show do
+  resources :villages do
     member do
       get 'start'
       get 'ruin'

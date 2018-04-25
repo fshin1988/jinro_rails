@@ -61,7 +61,7 @@ feature 'Room', type: :feature do
 
           expect(page).to have_content '初心者村'
           expect(page).to have_content 'ゲーム開始'
-          expect(page).to have_content '村の編集'
+          expect(page).to have_content '村の詳細'
           expect(page).to have_content 'プレイヤーのキック'
         end
       end

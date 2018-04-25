@@ -3,6 +3,10 @@ class VillagePolicy < ApplicationPolicy
     true
   end
 
+  def show?
+    true
+  end
+
   def create?
     return false unless user
     user.villages.where(status: %i[not_started in_play]).empty?
