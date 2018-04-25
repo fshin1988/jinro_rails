@@ -119,8 +119,7 @@ module VillagesHelper
   def reveal_message(village)
     message = "プレイヤーの役職は以下の通りでした\n"
     village.players.each do |player|
-      profile_link = "<a target=\"_blank\" href=\"#{users_profile_path(player.user.profile)}\">#{player.user.username}</a>"
-      message << "#{player.username}(#{profile_link}) : #{I18n.t("activerecord.attributes.player.role_enums.#{player.role}")}\n"
+      message << "#{player.username} : #{I18n.t("activerecord.attributes.player.role_enums.#{player.role}")}\n"
     end
     message
   end

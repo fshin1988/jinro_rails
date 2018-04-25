@@ -1,6 +1,5 @@
 class ProceedVillageJob < ApplicationJob
   include VillagesHelper
-  include Rails.application.routes.url_helpers
 
   queue_as :default
 
