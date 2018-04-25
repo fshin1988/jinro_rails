@@ -7,6 +7,11 @@ module VillagesHelper
     end
   end
 
+  def link_to_profile(player)
+    return "-" unless player.user
+    link_to(player.user.username, users_profile_path(player.user.profile), target: "_blank")
+  end
+
   def messages_of_result(results)
     return [] unless results
     messages = []
