@@ -102,7 +102,7 @@ RSpec.describe VillagesController, type: :controller do
         it "redirects to the room_for_all" do
           village = Village.create! valid_attributes
           put :update, params: {id: village.to_param, village: valid_attributes}
-          expect(response).to redirect_to(village_room_path(village, village.room_for_all))
+          expect(response).to redirect_to(village_path(village))
         end
       end
 
