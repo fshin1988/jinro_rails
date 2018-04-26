@@ -2,7 +2,8 @@ class ActiveStorage::RepresentationsController < ActiveStorage::BaseController
   include ActiveStorage::SetBlob
 
   def show
-    expires_in 120.minutes
+    expires_in ActiveStorage::Blob.service.url_expires_in
+
     representation = @blob.representation(params[:variation_key])
     # Wait until UploadVariantAvatarJob finishes
     count = 0
@@ -14,7 +15,7 @@ class ActiveStorage::RepresentationsController < ActiveStorage::BaseController
     if count > 10
       head :not_found
     else
-      redirect_to representation.service_url(expires_in: 120.minutes, disposition: params[:disposition])
+      redirect_to representation.service_url(disposition: params[:disposition])
     end
   end
 end
