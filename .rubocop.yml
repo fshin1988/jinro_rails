@@ -1,0 +1,46 @@
+LineLength:
+  Max: 128
+
+MethodLength:
+  Enabled: false
+
+AsciiComments:
+  Enabled: false
+
+Style/StringLiterals:
+  Enabled: false
+
+Style/FormatStringToken:
+  EnforcedStyle: template
+  Enabled: false
+
+SpaceInsideHashLiteralBraces:
+  EnforcedStyle: no_space
+  EnforcedStyleForEmptyBraces: no_space
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/ClassLength:
+  Max: 150
+
+Metrics/BlockLength:
+  Enabled: false
+
+Style/BlockDelimiters:
+  Enabled: false
+
+Style/NumericLiterals:
+  Enabled: false
+
+AllCops:
+  TargetRubyVersion: 2.4
+
+Style/EmptyMethod:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/NumericPredicate:
+  Enabled: false
