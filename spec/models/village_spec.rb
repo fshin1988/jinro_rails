@@ -69,73 +69,75 @@ RSpec.describe Village, type: :model do
   end
 
   describe 'attack' do
-    it 'excludes the most attacked player' do
-      village = create(:village_with_player, player_num: 13, day: 0)
+    let(:village) { create(:village_with_player, player_num: 13, day: 0) }
+    let(:attacked_player) { village.players.villager.first }
+
+    before do
       village.assign_role
       village.update_to_next_day
-      attacked_player = village.players.villager.first
+    end
+
+    it 'excludes the attacked player' do
       village.players.werewolf.each do |w|
-        create(:record, village: village, player: w, day: 1, attack_target: attacked_player)
+        w.records.first.update(attack_target: attacked_player)
       end
 
       village.attack
-      attacked_player.reload
-      expect(attacked_player.status).to eq 'dead'
+      expect(attacked_player.reload.status).to eq 'dead'
       expect(village.results.find_by(day: 1).attacked_player).to eq attacked_player
+    end
+
+    context 'if there are multiple attacked players' do
+      let(:last_attacked_player) { village.players.villager.last }
+
+      before do
+        village.players.werewolf.each do |w|
+          w.records.first.update(attack_target: attacked_player)
+        end
+        village.players.werewolf.last.records.first.update(attack_target: last_attacked_player)
+      end
+
+      it 'excludes last attacked player' do
+        village.attack
+        expect(last_attacked_player.reload.status).to eq 'dead'
+        expect(village.results.find_by(day: 1).attacked_player).to eq last_attacked_player
+      end
     end
 
     context 'if all attack_target are not setted' do
       it 'excludes one human randomly' do
-        village = create(:village_with_player, player_num: 13, day: 0)
-        village.assign_role
-        village.update_to_next_day
-        village.players.werewolf.each do |w|
-          create(:record, village: village, player: w, day: 1, attack_target: nil)
-        end
-
         village.attack
         expect(village.players.alive.select(&:human?).count).to eq 9
       end
     end
 
     context 'if attacked player is same with guarded player' do
-      it 'does not exclude the most attacked player' do
-        village = create(:village_with_player, player_num: 13, day: 0)
-        village.assign_role
-        village.update_to_next_day
-        attacked_player = village.players.villager.first
+      before do
         village.players.werewolf.each do |w|
           w.records.first.update(attack_target: attacked_player)
         end
         bodyguard = village.players.bodyguard.first
         bodyguard.records.first.update(guard_target: attacked_player)
+      end
 
+      it 'does not exclude the most attacked player' do
         village.attack
-        attacked_player.reload
-        expect(attacked_player.status).to eq 'alive'
+        expect(attacked_player.reload.status).to eq 'alive'
       end
     end
 
     context 'if bodyguard is voted player and attacked player is same with guarded player' do
-      it 'exclude the most attacked player' do
-        village = create(:village_with_player, player_num: 13, day: 0)
-        village.assign_role
-        village.update_to_next_day
+      before do
         bodyguard = village.players.bodyguard.first
-        village.players.each do |p|
-          create(:record, village: village, player: p, day: 1, vote_target: bodyguard)
-        end
+        village.players.each { |p| p.records.first.update(vote_target: bodyguard) }
+        village.players.werewolf.each { |w| w.records.first.update(attack_target: attacked_player) }
+        bodyguard.records.first.update(guard_target: attacked_player)
+      end
 
-        attacked_player = village.players.villager.first
-        village.players.werewolf.each do |w|
-          create(:record, village: village, player: w, day: 1, attack_target: attacked_player)
-        end
-        create(:record, village: village, player: bodyguard, day: 1, guard_target: attacked_player)
-
+      it 'exclude the most attacked player' do
         village.lynch
         village.attack
-        attacked_player.reload
-        expect(attacked_player.status).to eq 'dead'
+        expect(attacked_player.reload.status).to eq 'dead'
       end
     end
   end

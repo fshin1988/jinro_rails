@@ -70,15 +70,10 @@ class Village < ApplicationRecord
   end
 
   def attack
-    attacked_players =
-      if attack_target_players.present?
-        attack_target_players
-      else
-        players.alive.select(&:human?)
-      end
-    guarded_player = guard_target_player
-    excluded_player = exclude(attacked_players, guarded_player)
-    result_of_today.update!(attacked_player: excluded_player)
+    attacked_player = attack_target_player || players.alive.select(&:human?).sample
+    return if attacked_player == guard_target_player || attacked_player.dead?
+    attacked_player.update!(status: 'dead')
+    result_of_today.update!(attacked_player: attacked_player)
   end
 
   def judge_end
@@ -164,6 +159,10 @@ class Village < ApplicationRecord
     room_for_all.posts.create!(content: content, day: day, owner: :system)
   end
 
+  def post_system_message_for_wolf(content)
+    room_for_wolf.posts.create!(content: content, day: day, owner: :system)
+  end
+
   def number_of_votes
     count_by_username(vote_target_players)
   end
@@ -180,8 +179,8 @@ class Village < ApplicationRecord
     records_of_today.includes(:vote_target).map(&:vote_target).compact
   end
 
-  def attack_target_players
-    records_of_today.includes(:attack_target).map(&:attack_target).compact
+  def attack_target_player
+    records_of_today.where.not(attack_target_id: nil).order("updated_at DESC").first&.attack_target
   end
 
   def guard_target_player
@@ -190,12 +189,11 @@ class Village < ApplicationRecord
     records_of_today.find_by(player: bodyguard).guard_target
   end
 
-  def exclude(target_players, guarded_player = nil)
+  def exclude(target_players)
     counts = count_by_id(target_players)
     max = counts.values.max
     # if there are multiple players who are voted maximum number, choose one player randomly
     excluded_player = Player.find(player_ids_of_max_number(counts, max).sample)
-    return nil if excluded_player == guarded_player || excluded_player.dead?
     excluded_player.update!(status: 'dead')
     excluded_player
   end
