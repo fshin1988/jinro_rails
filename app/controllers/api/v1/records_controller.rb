@@ -1,4 +1,6 @@
 class Api::V1::RecordsController < Api::V1::ApiController
+  include RecordsHelper
+
   before_action :set_record
 
   def vote
@@ -11,6 +13,7 @@ class Api::V1::RecordsController < Api::V1::ApiController
 
   def attack
     if @record.update(attack_params)
+      @record.village.post_system_message_for_wolf(attack_target_set_message(@record))
       head :ok
     else
       head :bad_request

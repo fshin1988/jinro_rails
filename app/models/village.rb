@@ -159,6 +159,10 @@ class Village < ApplicationRecord
     room_for_all.posts.create!(content: content, day: day, owner: :system)
   end
 
+  def post_system_message_for_wolf(content)
+    room_for_wolf.posts.create!(content: content, day: day, owner: :system)
+  end
+
   def number_of_votes
     count_by_username(vote_target_players)
   end
