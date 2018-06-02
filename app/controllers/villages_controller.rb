@@ -63,7 +63,9 @@ class VillagesController < ApplicationController
   end
 
   def start
-    @village.start!
+    @village.with_lock do
+      @village.start!
+    end
     @village.post_system_message(start_message(@village))
     ReloadBroadcastJob.perform_later(@village)
     redirect_to village_room_path(@village, @village.room_for_all), notice: "#{@village.name} を開始しました"
