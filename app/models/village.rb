@@ -168,6 +168,7 @@ class Village < ApplicationRecord
   end
 
   def start!
+    return unless not_started?
     assign_role
     update_to_next_day
     update!(status: :in_play)
