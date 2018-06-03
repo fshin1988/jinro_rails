@@ -446,4 +446,43 @@ RSpec.describe Village, type: :model do
       expect(village.number_of_votes).to match_array({voted_player.username => 13})
     end
   end
+
+  describe '#start!' do
+    it 'assigns role to players' do
+      village = create(:village_with_player, player_num: 5)
+
+      village.start!
+      expect(village.players.map(&:role)).to match_array Settings.role_list[5]
+    end
+
+    it 'updates status to in_play' do
+      village = create(:village_with_player, player_num: 5)
+
+      village.start!
+      expect(village.status).to eq 'in_play'
+    end
+
+    it 'increments day' do
+      village = create(:village_with_player, player_num: 5, day: 0)
+
+      village.start!
+      expect(village.day).to eq 1
+    end
+
+    context 'if status is not not_started' do
+      it 'does not update status' do
+        village = create(:village_with_player, player_num: 5, day: 0, status: :ended)
+
+        village.start!
+        expect(village.status).not_to eq 'in_play'
+      end
+
+      it 'does not increment day' do
+        village = create(:village_with_player, player_num: 5, day: 0, status: :in_play)
+
+        village.start!
+        expect(village.day).not_to eq 1
+      end
+    end
+  end
 end
