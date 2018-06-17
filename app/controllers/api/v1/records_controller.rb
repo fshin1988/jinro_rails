@@ -12,13 +12,14 @@ class Api::V1::RecordsController < Api::V1::ApiController
   end
 
   def attack
-    @record.updated_at = Time.now
-    if @record.update(attack_params)
+    ActiveRecord::Base.transaction do
+      @record.updated_at = Time.now
+      @record.update!(attack_params)
       @record.village.post_system_message_for_wolf(attack_target_set_message(@record))
-      head :ok
-    else
-      head :bad_request
     end
+    head :ok
+  rescue # rubocop:disable Style/RescueStandardError
+    head :bad_request
   end
 
   def divine
