@@ -4,7 +4,7 @@ class RoomPolicy < ApplicationPolicy
       case record.village.status
       when 'in_play'
         player_of_village&.werewolf?
-      when 'ended'
+      when 'ended', 'ruined'
         true
       else
         false
@@ -13,7 +13,7 @@ class RoomPolicy < ApplicationPolicy
       case record.village.status
       when 'in_play'
         player_of_village&.dead?
-      when 'ended'
+      when 'ended', 'ruined'
         true
       else
         false

@@ -31,7 +31,13 @@ class VillagePolicy < ApplicationPolicy
   end
 
   def ruin?
-    update?
+    return false unless user
+    return false unless record.not_started? || record.in_play?
+    if user.admin?
+      true
+    else
+      record.user_id == user.id
+    end
   end
 
   def destroy?

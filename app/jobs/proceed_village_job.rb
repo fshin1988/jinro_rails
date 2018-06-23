@@ -5,6 +5,7 @@ class ProceedVillageJob < ApplicationJob
 
   def perform(village)
     @village = village
+    return unless @village.in_play?
     ActiveRecord::Base.transaction do
       noon_process
       night_process
