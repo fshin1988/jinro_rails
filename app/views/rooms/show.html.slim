@@ -1,4 +1,5 @@
 - @page_title = @village.name
+- @maxChatMessageLength = 500
 #room-root.flex[v-on:click="resetMessage"]
   transition[name="api-message"]
     notice-component[v-if="noticeDisplay" v-bind:notice-message="noticeMessage"]
@@ -30,7 +31,9 @@
           timer-component[v-bind:initial-remaining-time="initialRemainingTime"]
       .input-area[v-show="inputDisplay"]
         template[v-if="chatDisplay"]
-          textarea#btn-input.form-control.input-sm[v-model="chatMessage" v-on:keydown.shift.enter.prevent="speakMessage" rows="3" placeholder="Shift + Enterで送信"]
+          div.text-muted
+            | {{chatMessage.length}}/#{@maxChatMessageLength}文字
+          textarea#btn-input.form-control.input-sm[v-model="chatMessage" v-on:keydown.shift.enter.prevent="speakMessage" rows="3" placeholder="Shift + Enterで送信" maxlength="#{@maxChatMessageLength}"]
         template[v-else]
           = render(partial: 'skill_area', locals: {village: @village, record: @record})
   - if @village.in_play? && !policy(@room).speak?
