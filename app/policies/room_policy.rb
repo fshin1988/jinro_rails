@@ -51,7 +51,7 @@ class RoomPolicy < ApplicationPolicy
   end
 
   def posts?
-    true
+    show?
   end
 
   def all_posts?
