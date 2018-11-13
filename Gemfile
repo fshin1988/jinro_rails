@@ -37,6 +37,7 @@ gem 'scout_apm'
 gem 'puma_worker_killer'
 gem 'twitter'
 gem 'activerecord-precounter'
+gem 'loofah', '>= 2.2.3'
 
 group :development, :test do
   gem 'byebug', platform: :mri
