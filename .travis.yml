@@ -22,7 +22,7 @@ addons:
 before_install:
   - gem update --system
   - gem update bundler
-  - nvm install --lts
+  - nvm install 8.10.0
   - node -v
   - npm i -g yarn
   - yarn
