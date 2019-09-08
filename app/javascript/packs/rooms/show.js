@@ -62,7 +62,8 @@ new Vue({
       axios.put('/api/v1/records/' + this.recordId + '/vote', { record: { vote_target_id: this.voteSelected } })
         .then(res => {
           this.setNotice("投票先をセットしました")
-        }, (error) => {
+        })
+        .catch(error => {
           this.setAlert("エラーが発生しました")
         });
     },
@@ -70,7 +71,8 @@ new Vue({
       axios.put('/api/v1/records/' + this.recordId + '/attack', { record: { attack_target_id: this.attackSelected } })
         .then(res => {
           this.setNotice("襲撃先をセットしました")
-        }, (error) => {
+        })
+        .catch(error => {
           this.setAlert("エラーが発生しました")
         });
     },
@@ -78,7 +80,8 @@ new Vue({
       axios.put('/api/v1/records/' + this.recordId + '/divine', { record: { divine_target_id: this.divineSelected } })
         .then(res => {
           this.setNotice("占い先をセットしました")
-        }, (error) => {
+        })
+        .catch(error => {
           this.setAlert("エラーが発生しました")
         });
     },
@@ -86,7 +89,8 @@ new Vue({
       axios.put('/api/v1/records/' + this.recordId + '/guard', { record: { guard_target_id: this.guardSelected } })
         .then(res => {
           this.setNotice("護衛先をセットしました")
-        }, (error) => {
+        })
+        .catch(error => {
           this.setAlert("エラーが発生しました")
         });
     },
@@ -126,7 +130,8 @@ new Vue({
       axios.get('/api/v1/villages/' + this.villageId + '/divine')
         .then(res => {
           this.setInfo(res.data.messages)
-        }, (error) => {
+        })
+        .catch(error => {
           this.setAlert("エラーが発生しました")
         });
     },
@@ -134,7 +139,8 @@ new Vue({
       axios.get('/api/v1/villages/' + this.villageId + '/see_soul')
         .then(res => {
           this.setInfo(res.data.messages)
-        }, (error) => {
+        })
+        .catch(error => {
           this.setAlert("エラーが発生しました")
         });
     },
