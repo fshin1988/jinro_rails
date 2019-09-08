@@ -178,10 +178,13 @@ new Vue({
       }
     },
     speakMessage: function() {
-      if(this.chatMessage) {
-        this.channel.perform('speak', {message: this.chatMessage})
-        this.chatMessage = ""
-      }
+      axios.post('/api/v1/rooms/' + this.roomId + '/speak', { room: { message: this.chatMessage } })
+        .then(res => {
+          this.chatMessage = ""
+        })
+        .catch(error => {
+          this.setAlert("エラーが発生しました")
+        });
     },
     scrollDown: function() {
       let el = this.$el.getElementsByClassName("chat-body")[0]

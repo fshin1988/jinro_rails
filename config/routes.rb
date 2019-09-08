@@ -39,6 +39,7 @@ Rails.application.routes.draw do
       end
       resources :rooms, only: [:show] do
         member do
+          post 'speak'
           get 'posts'
           get 'all_posts'
         end
