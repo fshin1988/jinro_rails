@@ -38,6 +38,7 @@ gem 'puma_worker_killer'
 gem 'twitter'
 gem 'activerecord-precounter'
 gem 'loofah', '>= 2.2.3'
+gem "mimemagic", "~> 0.3.10"
 
 group :development, :test do
   gem 'byebug', platform: :mri
