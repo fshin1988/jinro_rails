@@ -1,0 +1,13 @@
+version: '2'
+services:
+  storage-postgres:
+    image: busybox
+    volumes:
+      - /var/lib/postgres
+  postgres:
+    image: postgres:13.9
+    volumes_from:
+      - storage-postgres
+    environment:
+      POSTGRES_PASSWORD: "jinro_rails"
+      POSTGRES_USER: "jinro_rails"
