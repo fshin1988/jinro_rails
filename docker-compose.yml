@@ -11,3 +11,5 @@ services:
     environment:
       POSTGRES_PASSWORD: "jinro_rails"
       POSTGRES_USER: "jinro_rails"
+  redis:
+    image: redis:6.2.8
