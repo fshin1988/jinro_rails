@@ -19,6 +19,7 @@ Jinro Rails is built with following libraries.
 ## Development
 ```
 # prepare for middlewares
+cp docker-compose.override.yml.sample docker-compose.override.yml
 docker-compose up
 
 # run rails server
