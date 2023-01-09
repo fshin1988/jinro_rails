@@ -18,21 +18,16 @@ Jinro Rails is built with following libraries.
 
 ## Development
 ```
-# create role for jinro_rails
-psql postgres
-postgres=# create role jinro_rails with login password 'jinro_rails';
-postgres=# alter role jinro_rails with superuser;
+# prepare for middlewares
+docker-compose up
 
 # run rails server
-git clone https://github.com/fshin1988/jinro_rails.git
-cd jinro_rails
 cp dotenv.sample .env
 bin/setup
 bin/rails s
 bin/webpack-dev-server
 
 # run worker
-redis-server &
 bundle exec sidekiq &
 ```
 
