@@ -31,7 +31,7 @@ class VillagesController < ApplicationController
     @village = current_user.villages.new(village_params)
 
     if @village.save
-      TweetVillageJob.perform_later(@village)
+      # TweetVillageJob.perform_later(@village)
       redirect_to villages_path, notice: "#{@village.name} が作成されました"
     else
       render :new
