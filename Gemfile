@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.7.8'
+ruby '3.0.7'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -38,7 +38,7 @@ gem 'puma_worker_killer'
 gem 'twitter'
 gem 'activerecord-precounter'
 gem 'loofah', '>= 2.2.3'
-gem "mimemagic", "~> 0.3.10"
+gem 'mimemagic', '0.3.8'
 
 group :development, :test do
   gem 'byebug', platform: :mri
@@ -68,7 +68,6 @@ group :development do
   gem 'annotate'
   gem 'better_errors'
   gem 'html2slim'
-  gem 'derailed_benchmarks'
 end
 
 group :production do
