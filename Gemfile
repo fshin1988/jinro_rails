@@ -7,7 +7,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'dotenv-rails', groups: [:development, :test]
-gem 'rails', '5.2.1.1'
+gem 'rails', '~> 6.1.7'
 gem 'puma', '~> 3.0'
 gem 'sass-rails'
 gem 'bootstrap-sass'
@@ -19,7 +19,7 @@ gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'rails-i18n'
-gem 'devise'
+gem 'devise', '~> 4.7.0'
 gem 'webpacker', '~> 3.0'
 gem 'config', '~> 2.2.3'
 gem 'pundit'
