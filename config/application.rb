@@ -21,6 +21,6 @@ module JinroRails
     config.i18n.default_locale = :ja
     config.time_zone = 'Tokyo'
 
-    ActiveStorage::Service.url_expires_in = 120.minutes
+    config.active_storage.service_urls_expire_in = 120.minutes
   end
 end
