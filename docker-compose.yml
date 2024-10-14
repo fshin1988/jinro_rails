@@ -12,4 +12,8 @@ services:
       POSTGRES_PASSWORD: "jinro_rails"
       POSTGRES_USER: "jinro_rails"
   redis:
-    image: redis:6.2.8
+    image: redis:7.2.6
+networks:
+  default:
+    name: jinro_rails_default
+    external: true
