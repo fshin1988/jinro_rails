@@ -20,7 +20,7 @@ Jinro Rails is built with following libraries.
 ```
 # prepare for middlewares
 cp docker-compose.override.yml.sample docker-compose.override.yml
-docker-compose up
+docker compose up
 
 # run rails server
 cp dotenv.sample .env
@@ -29,7 +29,7 @@ bin/rails s
 bin/webpack-dev-server
 
 # run worker
-bundle exec sidekiq &
+bundle exec sidekiq
 ```
 
 To update the application you just run `bin/update`.
