@@ -1,6 +1,7 @@
 development:
   adapter: redis
   url: <%= ENV["REDIS_URL"] %>
+  ssl_params: { verify_mode: <%= OpenSSL::SSL::VERIFY_NONE %> }
 
 test:
   adapter: async
@@ -9,3 +10,4 @@ production:
   adapter: redis
   url: <%= ENV["REDIS_URL"] %>
   channel_prefix: jinro_rails_production
+  ssl_params: { verify_mode: <%= OpenSSL::SSL::VERIFY_NONE %> }
