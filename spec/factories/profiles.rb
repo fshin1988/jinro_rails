@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :profile do
     association :user
-    comment "MyText"
+    comment { "MyText" }
   end
 end

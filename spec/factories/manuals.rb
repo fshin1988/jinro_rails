@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :manual do
-    content "MyText"
+    content { "MyText" }
   end
 end
