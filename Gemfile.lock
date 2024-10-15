@@ -398,7 +398,6 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
-    scout_apm (2.4.21)
     sidekiq (6.5.12)
       connection_pool (>= 2.2.5, < 3)
       rack (~> 2.0)
@@ -525,7 +524,6 @@ DEPENDENCIES
   rspec-rails (~> 5.0.0)
   rubocop
   sass-rails
-  scout_apm
   sidekiq (~> 6.5)
   simplecov
   sitemap_generator
