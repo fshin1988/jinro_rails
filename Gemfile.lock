@@ -133,7 +133,7 @@ GEM
     config (2.2.3)
       deep_merge (~> 1.2, >= 1.2.1)
       dry-validation (~> 1.0, >= 1.0.0)
-    connection_pool (2.2.2)
+    connection_pool (2.4.1)
     crass (1.0.6)
     database_cleaner (1.7.0)
     date (3.3.4)
@@ -308,8 +308,6 @@ GEM
       activesupport (>= 3.0.0)
     racc (1.8.1)
     rack (2.2.10)
-    rack-protection (2.0.4)
-      rack
     rack-proxy (0.6.5)
       rack
     rack-test (2.1.0)
@@ -401,10 +399,10 @@ GEM
       sprockets-rails
       tilt
     scout_apm (2.4.21)
-    sidekiq (5.2.3)
-      connection_pool (~> 2.2, >= 2.2.2)
-      rack-protection (>= 1.5.0)
-      redis (>= 3.3.5, < 5)
+    sidekiq (6.5.12)
+      connection_pool (>= 2.2.5, < 3)
+      rack (~> 2.0)
+      redis (>= 4.5.0, < 5)
     simple_oauth (0.3.1)
     simplecov (0.16.1)
       docile (~> 1.1)
@@ -527,7 +525,7 @@ DEPENDENCIES
   rubocop
   sass-rails
   scout_apm
-  sidekiq
+  sidekiq (~> 6.5)
   simplecov
   sitemap_generator
   slim-rails
