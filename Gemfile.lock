@@ -187,10 +187,10 @@ GEM
     equalizer (0.0.11)
     erubi (1.13.0)
     execjs (2.7.0)
-    factory_bot (6.5.0)
+    factory_bot (6.2.1)
       activesupport (>= 5.0.0)
-    factory_bot_rails (6.4.3)
-      factory_bot (~> 6.4)
+    factory_bot_rails (6.2.0)
+      factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
     ffi (1.17.0)
     font-awesome-rails (4.7.0.8)
@@ -360,14 +360,14 @@ GEM
     rspec-mocks (3.13.2)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.13.0)
-    rspec-rails (6.1.5)
-      actionpack (>= 6.1)
-      activesupport (>= 6.1)
-      railties (>= 6.1)
-      rspec-core (~> 3.13)
-      rspec-expectations (~> 3.13)
-      rspec-mocks (~> 3.13)
-      rspec-support (~> 3.13)
+    rspec-rails (5.0.3)
+      actionpack (>= 5.2)
+      activesupport (>= 5.2)
+      railties (>= 5.2)
+      rspec-core (~> 3.10)
+      rspec-expectations (~> 3.10)
+      rspec-mocks (~> 3.10)
+      rspec-support (~> 3.10)
     rspec-support (3.13.1)
     rubocop (0.61.1)
       jaro_winkler (~> 1.5.1)
@@ -492,7 +492,7 @@ DEPENDENCIES
   database_cleaner
   devise (~> 4.7.0)
   dotenv-rails
-  factory_bot_rails
+  factory_bot_rails (~> 6.2.0)
   font-awesome-rails
   google-analytics-rails
   html2slim
@@ -515,7 +515,7 @@ DEPENDENCIES
   rails-i18n
   redcarpet
   redis (~> 4.0)
-  rspec-rails
+  rspec-rails (~> 5.0.0)
   rubocop
   sass-rails
   scout_apm
