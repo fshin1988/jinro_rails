@@ -39,6 +39,7 @@ gem 'twitter'
 gem 'activerecord-precounter'
 gem 'loofah', '>= 2.2.3'
 gem 'mimemagic', '0.3.8'
+gem 'image_processing', '~> 1.12.0'
 
 group :development, :test do
   gem 'byebug', platform: :mri
